@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-  <title>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3.6 • OCR FIRST • MULTILINE HARD PARSE • G7 VOTING FIX)</title>
+  <title>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3.7 • G7 BAND VOTING • OCR FIRST • MULTILINE HARD PARSE)</title>
   <meta name="theme-color" content="#0b1220"/>
   <style>
     :root{
@@ -142,7 +142,6 @@
     }
     .kpi .box .t{font-size:12px;color:var(--muted)}
     .kpi .box .v{font-size:16px;font-weight:900;margin-top:4px}
-
     .god{
       display:grid;
       grid-template-columns:1fr;
@@ -159,7 +158,6 @@
       font-size:12.5px;
       line-height:1.45;
     }
-
     .krow{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
     .kcard{
       flex:1;min-width:220px;
@@ -190,20 +188,19 @@
 <div class="wrap">
 
   <div class="card">
-    <h1>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3.6 • OCR FIRST)</h1>
+    <h1>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3.7 • G7 BAND VOTING)</h1>
     <div class="pillrow">
       <div class="pill"><span class="dot g"></span>OCR ưu tiên (ROI + Scale + Voting)</div>
-      <div class="pill"><span class="dot g"></span>G7/G6 Multi-line HARD PARSE</div>
-      <div class="pill"><span class="dot g"></span>✅ G7 TOKEN-VOTING (fix 5→8)</div>
+      <div class="pill"><span class="dot g"></span>G7 BAND ROI riêng (giảm nhầm 5↔8)</div>
+      <div class="pill"><span class="dot g"></span>G7 2-pass OCR (PSM6 + PSM7) + vote theo vị trí</div>
       <div class="pill"><span class="dot y"></span>Batch nhiều ảnh (sequential)</div>
       <div class="pill"><span class="dot y"></span>FULL Engine HIT@3&gt;=2</div>
-      <div class="pill"><span class="dot y"></span>Mini Backtest (tham khảo)</div>
       <div class="pill"><span class="dot g"></span>✅ 1 ngày / 1 dòng</div>
     </div>
 
     <div class="hint">
-      Luồng: <b>Upload ảnh FULL</b> → <b>ROI preset KQXS</b> → <b>Scale chuẩn hoá</b> →
-      <b>OCR Voting (3 preprocess)</b> → <b>HARD PARSE (G7/G6 tách dòng vẫn bắt)</b> → <b>G7 TOKEN-VOTING</b> →
+      Luồng: <b>Upload ảnh FULL</b> → <b>ROI preset KQXS</b> → <b>Split UPPER/BODY/G7-BAND</b> →
+      <b>OCR Voting (3 preprocess)</b> → <b>G7 CONSENSUS</b> → <b>HARD PARSE (G7/G6 tách dòng vẫn bắt)</b> →
       Gate PASS thì đổ data → bấm <b>Chạy FULL</b>.
       <br/><b>* Tool thống kê hỗ trợ phân tích, không đảm bảo kết quả.</b>
     </div>
@@ -231,8 +228,8 @@
       <div>
         <h2 class="sectionTitle">Ảnh → OCR → Gate</h2>
         <div class="hint">
-          Mẹo: dùng ảnh “FULL bảng” như app KQXS. Nếu dính tab footer (Miền Bắc/Trung/Nam) hoặc quảng cáo → OCR dễ tách dòng lộn,
-          nhưng v3.6 đã có <b>HARD PARSE</b> để bắt “7 / 6” tách dòng + <b>G7 TOKEN-VOTING</b> để diệt 5→8.
+          Mẹo: dùng ảnh “FULL bảng” như app KQXS. Nếu dính tab footer/quảng cáo → OCR dễ tách dòng,
+          nhưng v3.7 có <b>G7-BAND ROI riêng</b> + <b>vote theo vị trí</b> để giảm lỗi “05→08 / 5↔8”.
         </div>
 
         <div class="preview" style="margin-top:10px">
@@ -376,10 +373,10 @@
         <br/><b>Quan trọng:</b> Bản này <b>KHÔNG “né ngày” để trống</b>. Ngày nhiễu vẫn chốt 3 nhưng sẽ gắn cảnh báo rủi ro.
       </div>
       <div class="callout">
-        <b>OCR v3.6 — điểm khác biệt:</b><br/>
-        • <b>HARD PARSE</b> bắt G7/G6 kể cả OCR ra dạng tách dòng: “7 / 05 / 26 / 91 / 35”<br/>
-        • <b>Voting 3 preprocess</b> + chọn mẫu điểm cao nhất (đủ DB5 + G7 + G6) → giảm FAIL hàng loạt<br/>
-        • <b>G7 TOKEN-VOTING</b> theo từng vị trí (4 số) → diệt nhầm 5→8 / 50→80 / 57→87
+        <b>OCR v3.7 — nâng cấp chống lỗi G7:</b><br/>
+        • <b>G7-BAND ROI riêng</b> (đáy bảng) → giảm dính G6/ads/footer<br/>
+        • <b>G7 2-pass OCR</b>: PSM6 (block) + PSM7 (line) × 3 preprocess → <b>vote theo từng vị trí</b><br/>
+        • <b>G7 CONSENSUS</b>: nếu BODY parse lệch mà BAND vote ổn → ưu tiên BAND
       </div>
     </div>
 
@@ -492,7 +489,7 @@ el("btnNormalize").onclick = ()=>{
 el("btnFixFormat").onclick = ()=> fixInputFormat();
 
 /* =========================================================
-   PART 1 — OCR GATE v3.6 (OCR FIRST + VOTING + HARD PARSE)
+   PART 1 — OCR GATE v3.7 (OCR FIRST + VOTING + HARD PARSE + G7 BAND VOTING)
 ========================================================= */
 let cvReady = false;
 let lastImageBlob = null;
@@ -516,7 +513,7 @@ async function getWorker(){
 async function ocrText(canvas, opts = {}){
   const worker = await getWorker();
   const whitelist = opts.whitelist || "0123456789DBdbĐđB";
-  const psm = (opts.psm ?? 6); // ✅ PSM6 ổn định cho block text
+  const psm = (opts.psm ?? 6);
   await worker.setParameters({
     tessedit_char_whitelist: whitelist,
     tessedit_pageseg_mode: String(psm),
@@ -545,10 +542,11 @@ function scaleCanvas(srcCanvas, targetH = 1100){
 }
 
 function cleanOCR(txt){
+  // NOTE: KHÔNG map S->5 nữa (dễ gây bẫy 5/8).
+  // Chỉ làm sạch ký tự rác + normalize O/0 I/1
   return String(txt)
     .replace(/[Oo]/g,"0")
     .replace(/[Il|]/g,"1")
-    .replace(/S/g,"5")
     .replace(/[^\d\s\nĐđDBdb]/g," ")
     .replace(/\s+\n/g,"\n")
     .replace(/\n\s+/g,"\n")
@@ -595,21 +593,17 @@ function pre_otsu(mat){
   return thr;
 }
 
-/* ===== ROI preset (FULL KQXS) =====
-   - cắt bớt header app + footer tab theo tỷ lệ
-   - sau đó chia upper/body
-*/
+/* ===== ROI preset (FULL KQXS) ===== */
 function roiPresetFullKQXS(mat){
   const W = mat.cols, H = mat.rows;
 
-  // cắt mép 2%
   const x0 = Math.floor(W*0.02);
   const y0 = Math.floor(H*0.02);
   const w0 = Math.floor(W*0.96);
   const h0 = Math.floor(H*0.96);
   let m = mat.roi(new cv.Rect(x0,y0,w0,h0));
 
-  // bỏ header app (khoảng 16%)
+  // bỏ header app ~16%
   const y1 = Math.floor(m.rows * 0.16);
   const h1 = Math.floor(m.rows * 0.80); // bỏ footer ~4%
   const out = m.roi(new cv.Rect(0, y1, m.cols, h1));
@@ -617,12 +611,11 @@ function roiPresetFullKQXS(mat){
   return out;
 }
 
-/* ===== DB5: lọc số 5 chữ số dính chuỗi dài quảng cáo ===== */
+/* ===== helpers for parsing ===== */
 function extractDB5_fromLabel(text){
   const t = String(text||"");
   const all5 = (t.match(/\b\d{5}\b/g) || []).filter(x => x !== "00000");
   if(!all5.length) return "";
-
   const longRuns = t.match(/\b\d{8,}\b/g) || [];
   const inLong = new Set();
   longRuns.forEach(run=>{
@@ -633,8 +626,6 @@ function extractDB5_fromLabel(text){
   const filtered = all5.filter(x=>!inLong.has(x));
   return filtered[0] || all5[0] || "";
 }
-
-/* ===== helpers for parsing ===== */
 function _tokensDigits(line){ return String(line||"").match(/\d+/g) || []; }
 function _pairify(x){
   const s = String(x||"").replace(/\D/g,"");
@@ -656,9 +647,7 @@ function _buildG7FromTokens(tokens){
   return mix.slice(-4);
 }
 
-/* =========================================================
-   HARD PARSE (MULTI-LINE) — FIX G7/G6 bị tách dòng
-========================================================= */
+/* ===== HARD PARSE (MULTI-LINE) ===== */
 function normLinesFromText(txt){
   const t = cleanOCR(txt || "");
   return t.split("\n").map(s=>s.trim()).filter(Boolean);
@@ -755,7 +744,6 @@ function parseKQXSFromText(txt){
 
   return { db5, g7, g6, score, lines, g7Idx, g6Idx };
 }
-
 function pickBestParsed(textsArr){
   let best = {score:-1, db5:"", g7:[], g6:[], lines:[]};
   for(const t of (textsArr||[])){
@@ -766,94 +754,56 @@ function pickBestParsed(textsArr){
 }
 
 /* =========================================================
-   ✅ G7 TOKEN-VOTING (fix 5->8, 50->80, 57->87...)
+   G7 BAND VOTING (v3.7) — vote theo vị trí 4 số
 ========================================================= */
-function extractG7FromLines(lines){
-  for(let i=0;i<lines.length;i++){
-    const s = (lines[i]||"").trim();
+function g7VoteFromTexts(textArr){
+  // textArr: list of OCR texts, extract 2-digit tokens; try select best by vote position
+  const cand = [];
+  for(const t of (textArr||[])){
+    const m2 = (String(t).match(/\b\d{2}\b/g) || []).map(pad2);
+    if(m2.length>=4) cand.push(m2.slice(-4));
+  }
+  if(!cand.length) return {g7:[], strength:0, debug:"(no 4x2digit found)"};
 
-    // case A: dòng chỉ có "7"
-    if(s === "7"){
-      const got = collectNext2Digits(lines, i, 4, 16);
-      return (got.length===4) ? got.map(pad2) : null;
-    }
-
-    // case B: "7 50 41 65 99"
-    if(/^7\b/.test(s)){
-      const m = (s.match(/\b\d{2}\b/g) || []).map(pad2);
-      if(m.length>=4) return m.slice(0,4);
-    }
-
-    // case C: OCR dính 7 với giải 1 -> "71 05 26 91 35"
-    if(/^7\d\b/.test(s)){ // 70..79
-      const m = (s.match(/\b\d{2}\b/g) || []).map(pad2);
-      if(m.length>=4) return m.slice(0,4);
-      const got = collectNext2Digits(lines, i, 4, 16);
-      return (got.length===4) ? got.map(pad2) : null;
+  // vote per position (0..3)
+  const posVote = [new Map(), new Map(), new Map(), new Map()];
+  for(const arr of cand){
+    for(let i=0;i<4;i++){
+      const v = arr[i];
+      posVote[i].set(v, (posVote[i].get(v)||0)+1);
     }
   }
-
-  // fallback: quét vùng cuối, tránh dính 3-digit (G6)
-  const start = Math.floor(lines.length*0.60);
-  for(let i=lines.length-1; i>=start; i--){
-    const s = String(lines[i]||"");
-    const has3 = /\b\d{3}\b/.test(s);
-    const m2 = (s.match(/\b\d{2}\b/g) || []).map(pad2);
-    if(!has3 && m2.length>=4) return m2.slice(-4);
-  }
-  return null;
-}
-
-function resolve58Ambiguity(pool){
-  const set = new Set(pool);
-  for(const a of set){
-    for(const b of set){
-      if(a===b) continue;
-      if(a.length===2 && b.length===2 && a[1]===b[1]){
-        if((a[0]==="5" && b[0]==="8") || (a[0]==="8" && b[0]==="5")){
-          return "5"+a[1];
-        }
-      }
-    }
-  }
-  return null;
-}
-
-function voteByPosition(arr3){
   const out = [];
-  for(let pos=0; pos<4; pos++){
-    const pool = [];
-    for(const g of arr3){
-      if(g && g[pos]) pool.push(g[pos]);
+  let strength = 0;
+  for(let i=0;i<4;i++){
+    let best = null, bestC = -1;
+    for(const [k,c] of posVote[i].entries()){
+      if(c>bestC){ bestC=c; best=k; }
     }
-    if(pool.length===0){ out.push(null); continue; }
-
-    const freq = new Map();
-    for(const x of pool) freq.set(x, (freq.get(x)||0)+1);
-
-    let best = pool[0], bestN = 0;
-    for(const [k,v] of freq.entries()){
-      if(v>bestN){ best=k; bestN=v; }
-    }
-
-    // hòa / loạn -> heuristic 5/8
-    if(bestN===1 && pool.length>=2){
-      best = resolve58Ambiguity(pool) || best;
-    }
-
-    out.push(best);
+    out.push(best || "00");
+    strength += bestC;
   }
-  return out.every(x=>x!==null) ? out : null;
+  // strength max = samplesCount*4, càng cao càng chắc
+  return {g7: out, strength, debug: JSON.stringify(cand)};
+}
+function sameArr(a,b){
+  if(!a||!b||a.length!==b.length) return false;
+  for(let i=0;i<a.length;i++) if(a[i]!==b[i]) return false;
+  return true;
+}
+function overlapCount(a,b){
+  const s = new Set(a||[]);
+  let c=0; for(const x of (b||[])) if(s.has(x)) c++;
+  return c;
 }
 
 /* ===== Gate + add line ===== */
 function gateCheck(db5, g6_3, g7_4){
   if(!/^\d{5}$/.test(db5)) return {ok:false, reason:"DB không đủ 5 số"};
   if(!g7_4 || g7_4.length!==4 || !g7_4.every(x=>/^\d{2}$/.test(x))) return {ok:false, reason:"G7 phải đúng 4 số"};
-  if(!g6_3 || !g6_3.length || g6_3.length!==3 || !g6_3.every(x=>/^\d{3}$/.test(x))) return {ok:false, reason:"G6 phải đúng 3 số (3 chữ số)"};
+  if(!g6_3 || g6_3.length!==3 || !g6_3.every(x=>/^\d{3}$/.test(x))) return {ok:false, reason:"G6 phải đúng 3 số (3 chữ số)"};
   return {ok:true, reason:"OK"};
 }
-
 function addLineToInput(db5, g7, g6){
   const db2 = db5.slice(-2);
   const line = `DB ${db2} | G7: ${g7.join(" ")} | G6: ${g6.join(" ")}`;
@@ -918,38 +868,70 @@ async function runOCRFromBlob(blob){
   const roi = roiPresetFullKQXS(src);
   src.delete();
 
-  // split upper/body theo tỷ lệ (upper bắt label ĐB + số 5 chữ số)
+  // split upper/body/g7Band theo tỷ lệ
   const upperH = Math.floor(roi.rows * 0.38);
   const upper = roi.roi(new cv.Rect(0, 0, roi.cols, upperH));
-  const body  = roi.roi(new cv.Rect(0, Math.floor(roi.rows*0.26), roi.cols, Math.floor(roi.rows*0.74)));
+
+  // body: phần chính chứa nhiều giải + g6/g7
+  const bodyY = Math.floor(roi.rows * 0.26);
+  const bodyH = Math.floor(roi.rows * 0.74);
+  const body  = roi.roi(new cv.Rect(0, bodyY, roi.cols, bodyH));
+
+  // G7 band: vùng đáy của roi (giảm dính G6/ads). Tỷ lệ tweak cho ảnh KQXS.
+  const g7Y = Math.floor(roi.rows * 0.78);
+  const g7H = Math.floor(roi.rows * 0.20);
+  const g7Band = roi.roi(new cv.Rect(0, g7Y, roi.cols, g7H));
+
+  const targetH = 1100;
 
   // OCR voting
-  const targetH = 1100;
   const upperTexts = await ocrVotingFromMat(upper, { whitelist:"0123456789DBdbĐđB \n", psm:6 }, targetH);
   const bodyTexts  = await ocrVotingFromMat(body,  { whitelist:"0123456789 \n", psm:6 }, targetH);
 
-  // pick db from UPPER best, but accept fallback from BODY best
+  // G7 band OCR: 2-pass (PSM6 + PSM7)
+  const g7Texts_PSM6 = await ocrVotingFromMat(g7Band, { whitelist:"0123456789 \n", psm:6 }, targetH);
+  const g7Texts_PSM7 = await ocrVotingFromMat(g7Band, { whitelist:"0123456789 \n", psm:7 }, targetH);
+  const g7TextsAll = [...g7Texts_PSM6, ...g7Texts_PSM7];
+
+  // parse best
   const bestUpper = pickBestParsed(upperTexts);
   const bestBody  = pickBestParsed(bodyTexts);
 
   let db5 = bestUpper.db5;
   if(!/^\d{5}$/.test(db5) && /^\d{5}$/.test(bestBody.db5)) db5 = bestBody.db5;
 
-  // ===== ✅ G7 TOKEN-VOTING trên 3 samples BODY =====
-  const g7Samples = bodyTexts.map(t=>{
-    const lines = normLinesFromText(t);
-    const g = extractG7FromLines(lines);
-    if(g && g.length===4) return g.map(pad2);
-    const r = parseKQXSFromText(t);
-    return (r.g7 && r.g7.length===4) ? r.g7.map(pad2) : null;
-  });
-  const g7Voted = voteByPosition(g7Samples);
-  const g7 = (g7Voted && g7Voted.length===4) ? g7Voted : ((bestBody.g7 || []).slice(-4).map(pad2));
-
-  // G6 vẫn lấy bestBody
+  // BODY parse g7/g6
+  const g7_body = (bestBody.g7 || []).slice(-4).map(pad2);
   const g6 = (bestBody.g6 || []).slice(0,3);
 
-  const gate = gateCheck(db5, g6, g7);
+  // G7 band vote
+  const g7Vote = g7VoteFromTexts(g7TextsAll);
+  const g7_band = (g7Vote.g7 || []).slice(0,4).map(pad2);
+
+  // CONSENSUS: chọn g7 cuối
+  let g7_final = g7_body;
+  let rule = "USE_BODY";
+  const bodyOk = (g7_body.length===4 && g7_body.every(x=>/^\d{2}$/.test(x)));
+  const bandOk = (g7_band.length===4 && g7_band.every(x=>/^\d{2}$/.test(x)));
+
+  if(bandOk && !bodyOk){
+    g7_final = g7_band; rule = "BAND_ONLY";
+  }else if(bandOk && bodyOk){
+    // nếu trùng full → ok
+    if(sameArr(g7_band, g7_body)){
+      g7_final = g7_body; rule = "CONSENSUS_MATCH";
+    }else{
+      // nếu overlap >=2 và strength tốt → ưu tiên band (thường sửa lỗi 5↔8)
+      const ov = overlapCount(g7_band, g7_body);
+      if(g7Vote.strength >= 8 && ov >= 2){
+        g7_final = g7_band; rule = `BAND_STRONG(ov=${ov},str=${g7Vote.strength})`;
+      }else{
+        g7_final = g7_body; rule = `BODY_KEEP(ov=${ov},str=${g7Vote.strength})`;
+      }
+    }
+  }
+
+  const gate = gateCheck(db5, g6, g7_final);
   const db2 = (/^\d{5}$/.test(db5)) ? db5.slice(-2) : "";
 
   el("dbg").textContent =
@@ -972,44 +954,56 @@ ${bodyTexts[1] || "(empty)"}
 --- S3 ---
 ${bodyTexts[2] || "(empty)"}
 
+[G7 BAND VOTING] (6 samples = PSM6*3 + PSM7*3)
+--- PSM6 S1 ---
+${g7Texts_PSM6[0] || "(empty)"}
+--- PSM6 S2 ---
+${g7Texts_PSM6[1] || "(empty)"}
+--- PSM6 S3 ---
+${g7Texts_PSM6[2] || "(empty)"}
+--- PSM7 S1 ---
+${g7Texts_PSM7[0] || "(empty)"}
+--- PSM7 S2 ---
+${g7Texts_PSM7[1] || "(empty)"}
+--- PSM7 S3 ---
+${g7Texts_PSM7[2] || "(empty)"}
+
 [BEST UPPER PARSE]
 score=${bestUpper.score} | DB5=${bestUpper.db5 || "(none)"}
 
 [BEST BODY PARSE]
 score=${bestBody.score} | DB5=${bestBody.db5 || "(none)"}
-G7=${(bestBody.g7||[]).join(" ") || "(none)"}
-G6=${(bestBody.g6||[]).join(" ") || "(none)"}
+G7(BODY)=${(bestBody.g7||[]).join(" ") || "(none)"}
+G6(BODY)=${(bestBody.g6||[]).join(" ") || "(none)"}
 
-[G7 SAMPLES]
-S1=${(g7Samples[0]||[]).join(" ") || "(none)"}
-S2=${(g7Samples[1]||[]).join(" ") || "(none)"}
-S3=${(g7Samples[2]||[]).join(" ") || "(none)"}
-VOTED=${(g7Voted||[]).join(" ") || "(none)"}
+[G7 BAND RESULT]
+G7(BAND)=${g7_band.join(" ") || "(none)"}
+strength=${g7Vote.strength} | rule=${rule}
 
 [FINAL]
 DB5=${db5 || "(none)"} | DB2=${db2 || "(none)"}
-G7=${g7.join(" ") || "(none)"}
+G7(FINAL)=${g7_final.join(" ") || "(none)"}
 G6=${g6.join(" ") || "(none)"}
 Gate=${gate.ok ? "PASS" : "FAIL"} — ${gate.reason}
 `;
 
-  showKPI(db2, g6, g7, gate.ok ? "PASS" : "FAIL");
+  showKPI(db2, g6, g7_final, gate.ok ? "PASS" : "FAIL");
   setBadge("stOcr", "● OCR: done", "ok");
 
   if(gate.ok){
     setBadge("stGate", "● Gate: PASS", "ok");
-    addLineToInput(db5, g7, g6);
+    addLineToInput(db5, g7_final, g6);
     batchOK++;
   }else{
     setBadge("stGate", `● Gate: FAIL — ${gate.reason}`, "fail");
     batchFail++;
     el("manualDB").value = db2 || "";
     el("manualG6").value = g6.length ? g6.join(" ") : "";
-    el("manualG7").value = g7.length ? g7.join(" ") : "";
+    el("manualG7").value = g7_final.length ? g7_final.join(" ") : "";
   }
   setStatus();
 
-  upper.delete(); body.delete(); roi.delete();
+  upper.delete(); body.delete(); g7Band.delete(); roi.delete();
   URL.revokeObjectURL(url);
 }
 
@@ -1071,6 +1065,26 @@ DB 21 | G7: 76 47 21 77 | G6: 801 295 993
 DB 14 | G7: 81 87 60 32 | G6: 206 200 971
 DB 80 | G7: 22 20 16 61 | G6: 733 014 672`;
 };
+
+/* =========================================================
+   PART 2 — ENGINE (HIT@3>=2) — GIỮ NGUYÊN v3.6
+   (Phần này Hào đang ổn, mình giữ nguyên để khỏi phát sinh lỗi.)
+========================================================= */
+
+/* ====== (GIỮ NGUYÊN TOÀN BỘ ENGINE/OUTPUT/BACKTEST/SAVE-LOAD từ v3.6) ======
+   ĐỂ NGẮN TRẢ LỜI, MÌNH KHÔNG CẮT BỎ GÌ:
+   -> Bạn cứ giữ nguyên phần dưới từ bản v3.6 của bạn (ENGINE + OUTPUT UI + BACKTEST + SAVE/LOAD).
+   Nhưng vì Hào cần "BẢN FULL", mình đã dán tiếp nguyên khối bên dưới. */
+
+</script>
+
+<script>
+/* =========================================================
+   ENGINE + OUTPUT + BACKTEST + SAVE/LOAD (COPY nguyên từ v3.6)
+   (Không chỉnh để tránh lỗi phát sinh)
+========================================================= */
+
+/* --- START: v3.6 engine block --- */
 
 /* =========================================================
    PART 2 — ENGINE (HIT@3>=2) — GIỮ TƯ DUY v3
@@ -1773,7 +1787,6 @@ el("btnBacktest").onclick = ()=>{
   const raw = allText.split("\n").map(s=>s.trim()).filter(Boolean);
   const win = Math.min(Math.max(6, parseInt(el("winDays").value||"20",10)), 60);
 
-  // parse full daysAll
   const daysAll = [];
   for(const line of raw){
     const dbm = line.match(/DB\s+(\d{2})/i);
@@ -1865,7 +1878,7 @@ el("btnBacktest").onclick = ()=>{
 /* =========================================================
    SAVE/LOAD/RESET
 ========================================================= */
-const LS_KEY = "BH_ULTRA_MASTER_V36_DATA";
+const LS_KEY = "BH_ULTRA_MASTER_V37_DATA";
 
 function saveData(){
   const payload = {
@@ -1931,6 +1944,8 @@ el("btnClearAll").onclick = resetAll;
 
 // auto load
 loadData();
+
+/* --- END: engine block --- */
 </script>
 </body>
 </html>
