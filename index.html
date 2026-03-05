@@ -3,35 +3,52 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-  <title>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3.5 • OCR FIRST)</title>
+  <title>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3.6 • OCR FIRST • MULTILINE HARD PARSE)</title>
   <meta name="theme-color" content="#0b1220"/>
   <style>
     :root{
-      --bg:#07101d; --card:#0b1730; --card2:#0a1427; --text:#e8f0ff; --muted:#a8b7d6;
-      --line:rgba(255,255,255,.08); --good:#32d583; --warn:#fdb022; --bad:#ff4d4f;
-      --btn:#1e5eff; --btn2:#1a3fa8;
+      --bg:#07101d;
+      --card:#0b1730;
+      --card2:#0a1427;
+      --text:#e8f0ff;
+      --muted:#a8b7d6;
+      --line:rgba(255,255,255,.08);
+      --good:#32d583;
+      --warn:#fdb022;
+      --bad:#ff4d4f;
+      --btn:#1e5eff;
+      --btn2:#1a3fa8;
     }
     *{box-sizing:border-box}
     body{
-      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       background:
         radial-gradient(1200px 600px at 10% -20%, rgba(30,94,255,.25), transparent 60%),
         radial-gradient(900px 500px at 110% 10%, rgba(50,213,131,.18), transparent 55%),
         linear-gradient(180deg, #06101f, #050b16 45%, #050a13);
-      color:var(--text); padding:18px;
+      color:var(--text);
+      padding:18px;
     }
     .wrap{max-width:980px;margin:0 auto}
     .card{
       background:linear-gradient(180deg,var(--card),var(--card2));
-      border:1px solid var(--line); border-radius:18px; padding:16px;
-      box-shadow:0 10px 30px rgba(0,0,0,.35); margin-bottom:14px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      margin-bottom:14px;
     }
     h1{margin:0 0 8px;font-size:22px;letter-spacing:.2px}
     .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
     .pill{
-      padding:7px 10px; border-radius:999px;
-      background:rgba(255,255,255,.06); border:1px solid var(--line);
-      color:var(--muted); font-size:12px; white-space:nowrap;
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
     }
     .dot{display:inline-block;width:8px;height:8px;border-radius:99px;margin-right:6px;vertical-align:middle}
     .g{background:var(--good)} .y{background:var(--warn)} .r{background:var(--bad)}
@@ -44,54 +61,128 @@
       box-shadow:0 10px 18px rgba(30,94,255,.25);
     }
     .btn:active{transform:translateY(1px)}
-    .btn.ghost{background:rgba(255,255,255,.06); border:1px solid var(--line); box-shadow:none; color:var(--text)}
-    .btn.danger{background:linear-gradient(180deg,#ff4d4f,#b42318); box-shadow:0 10px 18px rgba(255,77,79,.18)}
+    .btn.ghost{
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      box-shadow:none;
+      color:var(--text);
+    }
+    .btn.danger{
+      background:linear-gradient(180deg,#ff4d4f,#b42318);
+      box-shadow:0 10px 18px rgba(255,77,79,.18);
+    }
     .hint{color:var(--muted);line-height:1.45;font-size:13px;margin-top:6px}
     .small{font-size:12px;color:var(--muted)}
     .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
     @media(min-width:860px){ .grid{grid-template-columns:1.2fr .8fr} }
-    .preview{width:100%; border-radius:16px; border:1px solid var(--line); background:#060b13; overflow:hidden;}
+    .preview{
+      width:100%;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:#060b13;
+      overflow:hidden;
+    }
     canvas, img{display:block;width:100%;height:auto}
     .status{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
     .badge{
-      padding:8px 10px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(255,255,255,.06);font-weight:800;font-size:12px
+      padding:8px 10px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      font-weight:800;font-size:12px
     }
-    .badge.ok{color:var(--good)} .badge.fail{color:var(--bad)} .badge.warn{color:var(--warn)}
+    .badge.ok{color:var(--good)}
+    .badge.fail{color:var(--bad)}
+    .badge.warn{color:var(--warn)}
     .sectionTitle{font-size:18px;margin:0 0 6px}
     .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      font-size:12.5px;color:#d7e2ff;background:rgba(0,0,0,.25);
-      border:1px solid var(--line);border-radius:14px;padding:12px;overflow:auto;white-space:pre-wrap;word-break:break-word;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12.5px;
+      color:#d7e2ff;
+      background:rgba(0,0,0,.25);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      overflow:auto;
+      white-space:pre-wrap;
+      word-break:break-word;
     }
     .inputs{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
     @media(min-width:700px){ .inputs{grid-template-columns:1fr 1fr} }
-    .field{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:10px}
+    .field{
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px;
+    }
     .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
-    .field input,.field textarea,.field select{width:100%;border:0;outline:none;background:transparent;color:var(--text);font-size:14px;padding:6px 0}
+    .field input, .field textarea, .field select{
+      width:100%;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      font-size:14px;
+      padding:6px 0;
+    }
     textarea{min-height:150px;resize:vertical}
     .split{display:flex;gap:10px;flex-wrap:wrap}
     .split .field{flex:1;min-width:180px}
-    .kpi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
+    .kpi{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:10px;
+    }
     @media(min-width:700px){ .kpi{grid-template-columns:repeat(4,minmax(0,1fr))} }
-    .kpi .box{border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:14px;padding:10px}
+    .kpi .box{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      border-radius:14px;
+      padding:10px;
+    }
     .kpi .box .t{font-size:12px;color:var(--muted)}
     .kpi .box .v{font-size:16px;font-weight:900;margin-top:4px}
-    .god{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+
+    .god{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-top:10px;
+    }
     @media(min-width:860px){ .god{grid-template-columns:1fr 1fr} }
-    .callout{border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.22);border-radius:14px;padding:10px;color:var(--muted);font-size:12.5px;line-height:1.45}
+    .callout{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.22);
+      border-radius:14px;
+      padding:10px;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.45;
+    }
+
     .krow{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-    .kcard{flex:1;min-width:220px;border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:14px;padding:12px}
+    .kcard{
+      flex:1;min-width:220px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      border-radius:14px;
+      padding:12px;
+    }
     .khead{font-weight:900;font-size:12px;color:var(--muted);letter-spacing:.2px}
     .kbig{font-size:22px;font-weight:1000;margin-top:6px}
     .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .chip{border:1px solid var(--line);background:rgba(0,0,0,.18);border-radius:999px;padding:7px 10px;font-weight:900;font-size:14px}
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      border-radius:999px;
+      padding:7px 10px;
+      font-weight:900;
+      font-size:14px;
+    }
     .warnList{margin:10px 0 0;padding-left:18px;color:var(--text)}
     .warnList li{margin:6px 0}
     .sep{height:1px;background:var(--line);margin:12px 0}
     .metaLine{color:var(--muted);font-size:12px;line-height:1.45}
-    .miniKpi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
-    @media(min-width:700px){ .miniKpi{grid-template-columns:repeat(4,minmax(0,1fr))} }
   </style>
 </head>
 
@@ -99,19 +190,20 @@
 <div class="wrap">
 
   <div class="card">
-    <h1>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3.5 • OCR FIRST)</h1>
+    <h1>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3.6 • OCR FIRST)</h1>
     <div class="pillrow">
       <div class="pill"><span class="dot g"></span>OCR ưu tiên (ROI + Scale + Voting)</div>
-      <div class="pill"><span class="dot g"></span>G7/G6 Anchor + Rescue đáy</div>
+      <div class="pill"><span class="dot g"></span>G7/G6 Multi-line HARD PARSE</div>
       <div class="pill"><span class="dot y"></span>Batch nhiều ảnh (sequential)</div>
-      <div class="pill"><span class="dot y"></span>FULL Engine HIT@3>=2</div>
+      <div class="pill"><span class="dot y"></span>FULL Engine HIT@3&gt;=2</div>
       <div class="pill"><span class="dot y"></span>Mini Backtest (tham khảo)</div>
       <div class="pill"><span class="dot g"></span>✅ 1 ngày / 1 dòng</div>
     </div>
 
     <div class="hint">
-      Luồng: <b>Upload nhiều ảnh FULL</b> → <b>ROI preset KQXS</b> → <b>Scale chuẩn hóa</b> →
-      OCR (Voting 3 preprocess) → Gate PASS thì tự đổ data → bấm <b>Chạy FULL</b>.
+      Luồng: <b>Upload ảnh FULL</b> → <b>ROI preset KQXS</b> → <b>Scale chuẩn hoá</b> →
+      <b>OCR Voting (3 preprocess)</b> → <b>HARD PARSE (G7/G6 tách dòng vẫn bắt)</b> → Gate PASS thì đổ data →
+      bấm <b>Chạy FULL</b>.
       <br/><b>* Tool thống kê hỗ trợ phân tích, không đảm bảo kết quả.</b>
     </div>
 
@@ -120,12 +212,8 @@
       <button class="btn ghost" id="btnCam">📷 Camera</button>
       <button class="btn ghost" id="btnSample">Dán mẫu</button>
       <button class="btn danger" id="btnClearAll">RESET SẠCH</button>
-
-      <!-- Android: không dùng hidden để multi-select ổn hơn -->
-      <input id="fileMulti" type="file" accept="image/*" multiple
-        style="position:absolute;left:-9999px;opacity:0;width:1px;height:1px" />
-      <input id="fileCam" type="file" accept="image/*" capture="environment"
-        style="position:absolute;left:-9999px;opacity:0;width:1px;height:1px" />
+      <input id="fileMulti" type="file" accept="image/*" multiple hidden />
+      <input id="fileCam" type="file" accept="image/*" capture="environment" hidden />
     </div>
 
     <div class="status">
@@ -142,8 +230,8 @@
       <div>
         <h2 class="sectionTitle">Ảnh → OCR → Gate</h2>
         <div class="hint">
-          Ảnh FULL khuyến nghị: crop sát bảng (từ “ĐB” tới “7”), tránh dính footer tab.
-          <br/>Nếu Gate fail: dùng Manual (để tránh nhầm im lặng).
+          Mẹo: dùng ảnh “FULL bảng” như app KQXS. Nếu dính tab footer (Miền Bắc/Trung/Nam) hoặc quảng cáo → OCR dễ tách dòng lộn,
+          nhưng v3.6 đã có <b>HARD PARSE</b> để bắt “7 / 6” tách dòng.
         </div>
 
         <div class="preview" style="margin-top:10px">
@@ -160,22 +248,6 @@
 
         <div class="inputs">
           <div class="field">
-            <label>Preset ảnh (OCR ROI)</label>
-            <select id="roiPreset">
-              <option value="full_kqxs" selected>FULL (KQXS — né header/footer)</option>
-              <option value="full_safe">FULL (SAFE — rộng hơn)</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Scale mục tiêu ROI (px chiều cao)</label>
-            <select id="scaleTarget">
-              <option value="900">900 (máy yếu)</option>
-              <option value="1000" selected>1000 (khuyến nghị)</option>
-              <option value="1150">1150 (máy khỏe)</option>
-            </select>
-          </div>
-
-          <div class="field">
             <label>Manual (khi Gate fail) — DB (2 số)</label>
             <input id="manualDB" placeholder="VD: 57" />
           </div>
@@ -185,7 +257,7 @@
           </div>
           <div class="field">
             <label>Manual — G7 (4 số 2 chữ số)</label>
-            <input id="manualG7" placeholder="VD: 45 61 98 00" />
+            <input id="manualG7" placeholder="VD: 05 26 91 35" />
           </div>
           <div class="field">
             <label>Hành động</label>
@@ -201,22 +273,27 @@
       <div>
         <h2 class="sectionTitle">Debug OCR</h2>
         <div class="mono" id="dbg">Chưa có OCR.</div>
-
-        <div class="sep"></div>
-        <div class="khead">Mini Backtest (tham khảo)</div>
-        <div class="hint">Chạy trên dữ liệu bạn đã nhập (không phải “đảm bảo”). Kết quả để so engine & weight.</div>
-        <div class="row">
-          <button class="btn ghost" id="btnBacktest">🧪 Backtest</button>
-        </div>
-        <div class="miniKpi">
-          <div class="box"><div class="t">Số lượt test</div><div class="v" id="btN">--</div></div>
-          <div class="box"><div class="t">Hit≥2 (3 số)</div><div class="v" id="btH2">--</div></div>
-          <div class="box"><div class="t">Tỉ lệ Hit≥2</div><div class="v" id="btR">--</div></div>
-          <div class="box"><div class="t">Chuỗi trượt max</div><div class="v" id="btMaxMiss">--</div></div>
-        </div>
-        <div class="mono" id="btLog" style="margin-top:10px">Chưa backtest.</div>
       </div>
     </div>
+  </div>
+
+  <div class="card">
+    <h2 class="sectionTitle">Mini Backtest (tham khảo)</h2>
+    <div class="hint">Chạy trên dữ liệu bạn đã nhập (không phải “đảm bảo”). Kết quả để so engine & weight.</div>
+
+    <div class="row" style="margin-top:10px">
+      <button class="btn ghost" id="btnBacktest">🧪 Backtest</button>
+      <span class="small" id="btHint"></span>
+    </div>
+
+    <div class="kpi">
+      <div class="box"><div class="t">Số lượt test</div><div class="v" id="btN">--</div></div>
+      <div class="box"><div class="t">Hit≥2 (3 số)</div><div class="v" id="btHit2">--</div></div>
+      <div class="box"><div class="t">Tỉ lệ Hit≥2</div><div class="v" id="btRate">--</div></div>
+      <div class="box"><div class="t">Chuỗi trượt max</div><div class="v" id="btMaxMiss">--</div></div>
+    </div>
+
+    <div class="mono" id="btLog" style="margin-top:10px">Chưa backtest.</div>
   </div>
 
   <div class="card">
@@ -238,7 +315,7 @@
     <div class="split" style="margin-top:10px">
       <div class="field">
         <label>Cửa sổ ngày (khuyến nghị 20)</label>
-        <input id="winDays" type="number" value="20" min="6" max="120" />
+        <input id="winDays" type="number" value="20" min="6" max="60" />
       </div>
       <div class="field">
         <label>Top hiển thị (tham khảo)</label>
@@ -268,7 +345,7 @@
       </div>
       <div class="field">
         <label>K đọc pha (ngày gần nhất)</label>
-        <input id="phaseK" type="number" value="9" min="5" max="25" />
+        <input id="phaseK" type="number" value="9" min="5" max="20" />
       </div>
       <div class="field">
         <label>Trọng số Hot</label>
@@ -294,14 +371,13 @@
     <div class="god">
       <div class="callout">
         <b>GOD MODE (MASTER+++):</b><br/>
-        App sẽ <b>ĐỌC PHA trước</b> → chọn hướng trọng số → rồi mới <b>CHỐT 3 SỐ</b> theo mục tiêu <b>HIT@3>=2</b>.
-        <br/><b>Quan trọng:</b> Bản này <b>KHÔNG “né ngày” để trống</b>. Ngày nhiễu vẫn chốt 3 nhưng gắn cảnh báo rủi ro.
+        App sẽ <b>ĐỌC PHA trước</b> → chọn hướng trọng số → rồi mới <b>CHỐT 3 SỐ</b> theo mục tiêu <b>HIT@3&gt;=2</b>.
+        <br/><b>Quan trọng:</b> Bản này <b>KHÔNG “né ngày” để trống</b>. Ngày nhiễu vẫn chốt 3 nhưng sẽ gắn cảnh báo rủi ro.
       </div>
       <div class="callout">
-        <b>Mẹo dữ liệu:</b><br/>
-        • OCR hay làm vỡ dòng → bấm <b>🧹 Chuẩn hoá 1 ngày/1 dòng</b><br/>
-        • Nếu G6 hay gây nhiễu → chọn <b>CHỈ ngày mới nhất</b> hoặc <b>TẮT G6</b><br/>
-        • Backtest chỉ để <b>so engine</b> (không phải đảm bảo trúng)
+        <b>OCR v3.6 — điểm khác biệt:</b><br/>
+        • <b>HARD PARSE</b> bắt G7/G6 kể cả OCR ra dạng tách dòng: “7 / 05 / 26 / 91 / 35”<br/>
+        • <b>Voting 3 preprocess</b> + chọn mẫu điểm cao nhất (đủ DB5 + G7 + G6) → giảm FAIL hàng loạt
       </div>
     </div>
 
@@ -338,6 +414,7 @@
 
 </div>
 
+<!-- Load libs -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script async src="https://docs.opencv.org/4.x/opencv.js" onload="onOpenCvReady()"></script>
 
@@ -347,7 +424,6 @@
 ========================================================= */
 const el = (id)=>document.getElementById(id);
 function pad2(n){ return String(n).padStart(2,"0"); }
-function clamp(x,a,b){ return Math.max(a, Math.min(b, x)); }
 function setBadge(id, text, cls){
   const e = el(id);
   e.textContent = text;
@@ -356,8 +432,8 @@ function setBadge(id, text, cls){
 }
 function showKPI(db2, g6, g7, gate){
   el("kDB").textContent = db2 || "--";
-  el("kG6").textContent = (g6?.length ? g6.join(" ") : "--");
-  el("kG7").textContent = (g7?.length ? g7.join(" ") : "--");
+  el("kG6").textContent = g6?.length ? g6.join(" ") : "--";
+  el("kG7").textContent = g7?.length ? g7.join(" ") : "--";
   el("kGate").textContent = gate;
 }
 
@@ -401,7 +477,10 @@ function normalizeRecordByDigits(line){
 
 function fixInputFormat(){
   const merged = normalizeInputToOneDayOneLine(el("inputData").value);
-  const fixed = merged.split("\n").map(s=>normalizeRecordByDigits(s)).join("\n");
+  const fixed = merged
+    .split("\n")
+    .map(s=>normalizeRecordByDigits(s))
+    .join("\n");
   el("inputData").value = fixed.trim();
 }
 
@@ -411,7 +490,7 @@ el("btnNormalize").onclick = ()=>{
 el("btnFixFormat").onclick = ()=> fixInputFormat();
 
 /* =========================================================
-   PART 1 — OCR GATE (OCR FIRST)
+   PART 1 — OCR GATE v3.6 (OCR FIRST + VOTING + HARD PARSE)
 ========================================================= */
 let cvReady = false;
 let lastImageBlob = null;
@@ -424,39 +503,7 @@ function setStatus(){
 function onOpenCvReady(){ cvReady = true; setStatus(); }
 setStatus();
 
-/* ===== ROI preset (FULL) ===== */
-function getROIPreset(W, H){
-  const p = (el("roiPreset")?.value || "full_kqxs");
-  if(p === "full_kqxs"){
-    // FULL KQXS: né header + footer tab
-    const x = Math.floor(W * 0.04);
-    const y = Math.floor(H * 0.18);
-    const w = Math.floor(W * 0.92);
-    const h = Math.floor(H * 0.66);
-    return { x, y, w, h };
-  }
-  const x = Math.floor(W * 0.02);
-  const y = Math.floor(H * 0.14);
-  const w = Math.floor(W * 0.96);
-  const h = Math.floor(H * 0.72);
-  return { x, y, w, h };
-}
-
-/* ===== Scale normalize (đưa ROI về targetH) ===== */
-function scaleCanvasToTargetH(srcCanvas, targetH){
-  const h = srcCanvas.height || 1;
-  let scale = targetH / h;
-  scale = clamp(scale, 0.8, 2.8);
-  const c = document.createElement("canvas");
-  c.width = Math.round(srcCanvas.width * scale);
-  c.height = Math.round(srcCanvas.height * scale);
-  const g = c.getContext("2d");
-  g.imageSmoothingEnabled = (scale < 1.1); // scale up thì off để nét "cứng"
-  g.drawImage(srcCanvas, 0, 0, c.width, c.height);
-  return c;
-}
-
-/* ====== Tesseract Worker reuse ====== */
+/* ====== Tesseract Worker reuse (FAST) ====== */
 let __worker = null;
 async function getWorker(){
   if(__worker) return __worker;
@@ -466,8 +513,8 @@ async function getWorker(){
 }
 async function ocrText(canvas, opts = {}){
   const worker = await getWorker();
-  const whitelist = opts.whitelist || "0123456789";
-  const psm = (opts.psm ?? 6);
+  const whitelist = opts.whitelist || "0123456789DBdbĐđB";
+  const psm = (opts.psm ?? 6); // ✅ v3.6: PSM6 ổn định cho block text
   await worker.setParameters({
     tessedit_char_whitelist: whitelist,
     tessedit_pageseg_mode: String(psm),
@@ -484,116 +531,246 @@ function canvasFromMat(mat){
   return canvas;
 }
 
-/* ===== preprocess variants (Voting) ===== */
-function preprocessAdaptive(mat){
-  const gray = new cv.Mat(); cv.cvtColor(mat, gray, cv.COLOR_RGBA2GRAY, 0);
-  const blur = new cv.Mat(); cv.GaussianBlur(gray, blur, new cv.Size(3,3), 0, 0, cv.BORDER_DEFAULT);
-  const thr = new cv.Mat();
-  cv.adaptiveThreshold(blur, thr, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 31, 8);
-  const kernel = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(2,2));
-  const closed = new cv.Mat();
-  cv.morphologyEx(thr, closed, cv.MORPH_CLOSE, kernel);
-  gray.delete(); blur.delete(); thr.delete(); kernel.delete();
-  return closed;
-}
-function preprocessOtsu(mat){
-  const gray = new cv.Mat(); cv.cvtColor(mat, gray, cv.COLOR_RGBA2GRAY, 0);
-  const blur = new cv.Mat(); cv.GaussianBlur(gray, blur, new cv.Size(3,3), 0, 0, cv.BORDER_DEFAULT);
-  const thr = new cv.Mat();
-  cv.threshold(blur, thr, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU);
-  const kernel = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(2,2));
-  const closed = new cv.Mat();
-  cv.morphologyEx(thr, closed, cv.MORPH_CLOSE, kernel);
-  gray.delete(); blur.delete(); thr.delete(); kernel.delete();
-  return closed;
-}
-function invertMat(m){
-  const inv = new cv.Mat(); cv.bitwise_not(m, inv); return inv;
+function scaleCanvas(srcCanvas, targetH = 1100){
+  const scale = targetH / Math.max(1, srcCanvas.height);
+  const c = document.createElement("canvas");
+  c.width = Math.round(srcCanvas.width * scale);
+  c.height = Math.round(srcCanvas.height * scale);
+  const g = c.getContext("2d");
+  g.imageSmoothingEnabled = false;
+  g.drawImage(srcCanvas, 0, 0, c.width, c.height);
+  return c;
 }
 
 function cleanOCR(txt){
   return String(txt)
-    .replace(/[Oo]/g,"0").replace(/[Il|]/g,"1").replace(/S/g,"5")
-    .replace(/[^\d\s\n]/g," ")
-    .replace(/\s+\n/g,"\n").replace(/\n\s+/g,"\n")
-    .replace(/[ \t]+/g," ").trim();
+    .replace(/[Oo]/g,"0")
+    .replace(/[Il|]/g,"1")
+    .replace(/S/g,"5")
+    .replace(/[^\d\s\nĐđDBdb]/g," ")
+    .replace(/\s+\n/g,"\n")
+    .replace(/\n\s+/g,"\n")
+    .replace(/[ \t]+/g," ")
+    .trim();
 }
 
-/* ===== token helpers ===== */
-function _tokensDigits(line){ return String(line||"").match(/\d+/g) || []; }
-function fixG7Digits(arr){
-  return (arr||[])
-    .map(x=>String(x).replace(/\D/g,""))
-    .filter(Boolean)
-    .map(s=>pad2(s.slice(-2)));
+/* ===== preprocess set (3 mẫu) ===== */
+function toGray(mat){
+  const gray = new cv.Mat();
+  cv.cvtColor(mat, gray, cv.COLOR_RGBA2GRAY, 0);
+  return gray;
 }
-function _buildG7FromTokens(tokens){
-  const t = tokens.slice(1);
-  const nums2 = t.filter(x=>String(x).length===2).map(x=>pad2(String(x).slice(-2)));
-  if(nums2.length>=4) return nums2.slice(-4);
-
-  const singles = t.filter(x=>String(x).length===1).map(x=>String(x));
-  const built = [];
-  for(let i=0;i<singles.length-1;i+=2) built.push(singles[i]+singles[i+1]);
-  const mix = [...built, ...nums2].map(x=>pad2(String(x).slice(-2))).filter(x=>/^\d{2}$/.test(x));
-  return mix.slice(-4);
+function pre_adaptive(mat){
+  const gray = toGray(mat);
+  const blur = new cv.Mat();
+  cv.GaussianBlur(gray, blur, new cv.Size(3,3), 0, 0, cv.BORDER_DEFAULT);
+  const thr = new cv.Mat();
+  cv.adaptiveThreshold(
+    blur, thr, 255,
+    cv.ADAPTIVE_THRESH_GAUSSIAN_C,
+    cv.THRESH_BINARY, 31, 8
+  );
+  const kernel = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(2,2));
+  const closed = new cv.Mat();
+  cv.morphologyEx(thr, closed, cv.MORPH_CLOSE, kernel);
+  gray.delete(); blur.delete(); thr.delete(); kernel.delete();
+  return closed;
 }
-function findG7Line(lines){
-  for(let i=lines.length-1;i>=0;i--){
-    const line = String(lines[i]||"").trim();
-    const tokens = _tokensDigits(line);
-    if(!tokens.length) continue;
-    if(tokens[0]==="7"){
-      const g7Raw = _buildG7FromTokens(tokens);
-      if(g7Raw.length>=4) return {arr: g7Raw.slice(-4), idx:i, line};
-    }
-  }
-  const start = Math.floor(lines.length * 0.7);
-  for(let i=lines.length-1;i>=start;i--){
-    const line = String(lines[i]||"").trim();
-    const nums2 = (line.match(/\b\d{2}\b/g) || []);
-    const has3 = /\b\d{3}\b/.test(line);
-    if(nums2.length >= 4 && !has3) return {arr: nums2.slice(-4).map(pad2), idx:i, line};
-  }
-  return {arr:[], idx:-1, line:""};
+function pre_adaptive_inv(mat){
+  const bin = pre_adaptive(mat);
+  const inv = new cv.Mat();
+  cv.bitwise_not(bin, inv);
+  bin.delete();
+  return inv;
 }
-function findG6Line(lines, g7Index){
-  for(let i=g7Index-1;i>=0;i--){
-    const tokens = _tokensDigits(lines[i]);
-    if(tokens[0]==="7") continue;
-    const nums3 = (String(lines[i]).match(/\b\d{3}\b/g) || []);
-    if(nums3.length >= 3) return {arr: nums3.slice(0,3), idx:i, line:lines[i]};
-  }
-  for(let i=lines.length-1;i>=0;i--){
-    const tokens = _tokensDigits(lines[i]);
-    if(tokens[0]==="7") continue;
-    const nums3 = (String(lines[i]).match(/\b\d{3}\b/g) || []);
-    if(nums3.length >= 3) return {arr: nums3.slice(0,3), idx:i, line:lines[i]};
-  }
-  return {arr:[], idx:-1, line:""};
+function pre_otsu(mat){
+  const gray = toGray(mat);
+  const blur = new cv.Mat();
+  cv.GaussianBlur(gray, blur, new cv.Size(3,3), 0, 0, cv.BORDER_DEFAULT);
+  const thr = new cv.Mat();
+  cv.threshold(blur, thr, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU);
+  gray.delete(); blur.delete();
+  return thr;
 }
 
-/* ===== DB5: lấy 5 số hợp lệ, né chuỗi dài quảng cáo ===== */
-function extractDB5(text){
+/* ===== ROI preset (FULL KQXS) =====
+   - cắt bớt header app + footer tab theo tỷ lệ
+   - sau đó chia upper/body
+*/
+function roiPresetFullKQXS(mat){
+  const W = mat.cols, H = mat.rows;
+
+  // cắt mép 2%
+  const x0 = Math.floor(W*0.02);
+  const y0 = Math.floor(H*0.02);
+  const w0 = Math.floor(W*0.96);
+  const h0 = Math.floor(H*0.96);
+  let m = mat.roi(new cv.Rect(x0,y0,w0,h0));
+
+  // bỏ header app (khoảng 16%)
+  const y1 = Math.floor(m.rows * 0.16);
+  const h1 = Math.floor(m.rows * 0.80); // bỏ footer ~4%
+  const out = m.roi(new cv.Rect(0, y1, m.cols, h1));
+  m.delete();
+  return out;
+}
+
+/* ===== DB5: lọc số 5 chữ số dính chuỗi dài quảng cáo ===== */
+function extractDB5_fromLabel(text){
   const t = String(text||"");
   const all5 = (t.match(/\b\d{5}\b/g) || []).filter(x => x !== "00000");
   if(!all5.length) return "";
+
   const longRuns = t.match(/\b\d{8,}\b/g) || [];
   const inLong = new Set();
   longRuns.forEach(run=>{
-    for(const x of all5) if(run.includes(x)) inLong.add(x);
+    for(const x of all5){
+      if(run.includes(x)) inLong.add(x);
+    }
   });
   const filtered = all5.filter(x=>!inLong.has(x));
   return filtered[0] || all5[0] || "";
 }
 
-/* ===== Gate ===== */
+/* ===== helpers for parsing ===== */
+function _tokensDigits(line){ return String(line||"").match(/\d+/g) || []; }
+function _pairify(x){
+  const s = String(x||"").replace(/\D/g,"");
+  if(!s) return "";
+  if(s.length===1) return "0"+s;
+  return s.slice(-2);
+}
+function _buildG7FromTokens(tokens){
+  const t = tokens.slice(1);
+  const nums2 = t.filter(x=>String(x).length===2).map(_pairify);
+  if(nums2.length>=4) return nums2.slice(-4);
+
+  const singles = t.filter(x=>String(x).length===1).map(x=>String(x));
+  const built = [];
+  for(let i=0;i<singles.length-1;i+=2){
+    built.push(singles[i]+singles[i+1]);
+  }
+  const mix = [...built, ...nums2].map(_pairify).filter(x=>/^\d{2}$/.test(x));
+  return mix.slice(-4);
+}
+
+/* =========================================================
+   HARD PARSE (MULTI-LINE) — FIX G7/G6 bị tách dòng
+========================================================= */
+function normLinesFromText(txt){
+  const t = cleanOCR(txt || "");
+  return t.split("\n").map(s=>s.trim()).filter(Boolean);
+}
+function collectNext2Digits(lines, i, need=4, maxLook=14){
+  const out = [];
+  for(let k=i+1; k<lines.length && out.length<need && k<=i+maxLook; k++){
+    const s = String(lines[k]||"").trim();
+    const m2 = s.match(/\b\d{2}\b/g) || [];
+    for(const x of m2){
+      out.push(pad2(x));
+      if(out.length>=need) break;
+    }
+  }
+  return out;
+}
+function collectNext3Digits(lines, i, need=3, maxLook=14){
+  const out = [];
+  for(let k=i+1; k<lines.length && out.length<need && k<=i+maxLook; k++){
+    const s = String(lines[k]||"").trim();
+    const m3 = s.match(/\b\d{3}\b/g) || [];
+    for(const x of m3){
+      out.push(x);
+      if(out.length>=need) break;
+    }
+  }
+  return out;
+}
+function pickDB5(lines){
+  for(const ln of lines){
+    if(/(^|\s)(DB|ĐB)\b/i.test(ln)){
+      const m = ln.match(/\b\d{5}\b/g) || [];
+      if(m.length) return m[0];
+    }
+  }
+  const head = lines.slice(0, Math.min(20, lines.length)).join(" ");
+  const all5 = head.match(/\b\d{5}\b/g) || [];
+  if(all5.length) return all5[0];
+  const t = lines.join("\n");
+  return extractDB5_fromLabel(t);
+}
+function parseKQXSFromText(txt){
+  const lines = normLinesFromText(txt);
+  const db5 = pickDB5(lines);
+
+  // G7
+  let g7 = [];
+  let g7Idx = -1;
+  for(let i=lines.length-1; i>=0; i--){
+    const tokens = _tokensDigits(lines[i]);
+    if(!tokens.length) continue;
+
+    if(tokens.length===1 && tokens[0]==="7"){
+      const got = collectNext2Digits(lines, i, 4);
+      if(got.length===4){ g7 = got; g7Idx=i; break; }
+    }
+    if(tokens[0]==="7"){
+      const got = _buildG7FromTokens(tokens).slice(-4).map(pad2);
+      if(got.length===4){ g7 = got; g7Idx=i; break; }
+    }
+  }
+  if(g7.length!==4){
+    const start = Math.floor(lines.length*0.60);
+    for(let i=lines.length-1; i>=start; i--){
+      const s = String(lines[i]||"");
+      const has3 = /\b\d{3}\b/.test(s);
+      const m2 = (s.match(/\b\d{2}\b/g) || []).map(pad2);
+      if(!has3 && m2.length>=4){ g7 = m2.slice(-4); g7Idx=i; break; }
+    }
+  }
+
+  // G6
+  let g6 = [];
+  let g6Idx = -1;
+  for(let i=lines.length-1; i>=0; i--){
+    const tokens = _tokensDigits(lines[i]);
+    if(tokens.length===1 && tokens[0]==="6"){
+      const got = collectNext3Digits(lines, i, 3);
+      if(got.length===3){ g6 = got; g6Idx=i; break; }
+    }
+  }
+  if(g6.length!==3){
+    const from = (g7Idx>0) ? g7Idx-1 : lines.length-1;
+    for(let i=from; i>=0; i--){
+      const m3 = (String(lines[i]).match(/\b\d{3}\b/g) || []);
+      if(m3.length>=3){ g6 = m3.slice(0,3); g6Idx=i; break; }
+    }
+  }
+
+  let score = 0;
+  if(/^\d{5}$/.test(db5)) score += 3;
+  if(g7.length===4 && g7.every(x=>/^\d{2}$/.test(x))) score += 4;
+  if(g6.length===3 && g6.every(x=>/^\d{3}$/.test(x))) score += 3;
+
+  return { db5, g7, g6, score, lines, g7Idx, g6Idx };
+}
+
+function pickBestParsed(textsArr){
+  let best = {score:-1, db5:"", g7:[], g6:[], lines:[]};
+  for(const t of (textsArr||[])){
+    const r = parseKQXSFromText(t);
+    if(r.score > best.score) best = r;
+  }
+  return best;
+}
+
+/* ===== Gate + add line ===== */
 function gateCheck(db5, g6_3, g7_4){
   if(!/^\d{5}$/.test(db5)) return {ok:false, reason:"DB không đủ 5 số"};
   if(!g7_4 || g7_4.length!==4 || !g7_4.every(x=>/^\d{2}$/.test(x))) return {ok:false, reason:"G7 phải đúng 4 số"};
   if(!g6_3 || g6_3.length!==3 || !g6_3.every(x=>/^\d{3}$/.test(x))) return {ok:false, reason:"G6 phải đúng 3 số (3 chữ số)"};
   return {ok:true, reason:"OK"};
 }
+
 function addLineToInput(db5, g7, g6){
   const db2 = db5.slice(-2);
   const line = `DB ${db2} | G7: ${g7.join(" ")} | G6: ${g6.join(" ")}`;
@@ -602,71 +779,30 @@ function addLineToInput(db5, g7, g6){
   el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
 }
 
-/* ===== OCR helpers: voting ===== */
+/* ===== voting runner: preprocess 3 mẫu + OCR ===== */
 async function ocrVotingFromMat(mat, ocrOpts, targetH){
-  const candTexts = [];
-  const a = preprocessAdaptive(mat);
-  const o = preprocessOtsu(mat);
-  const ai = invertMat(a);
-  const oi = invertMat(o);
+  const mats = [];
+  try{
+    mats.push(pre_adaptive(mat));
+    mats.push(pre_adaptive_inv(mat));
+    mats.push(pre_otsu(mat));
 
-  const mats = [a,o,ai,oi];
-  for(const m of mats){
-    const c = canvasFromMat(m);
-    const sc = scaleCanvasToTargetH(c, targetH);
-    const t = cleanOCR(await ocrText(sc, ocrOpts));
-    if(t) candTexts.push(t);
-    m.delete();
-  }
-  return candTexts;
-}
-
-function pickBestDB5(texts){
-  for(const t of texts){
-    const db5 = extractDB5(t);
-    if(/^\d{5}$/.test(db5)) return {db5, src:t};
-  }
-  // fallback: gộp lại
-  const merged = texts.join("\n");
-  const db5 = extractDB5(merged);
-  return {db5, src:merged};
-}
-
-function pickBestG7G6(texts){
-  // đánh điểm: ưu tiên có dòng bắt đầu 7 và có >=4 số 2 chữ số
-  let best = {score:-1, g7:{arr:[],idx:-1,line:""}, g6:{arr:[],idx:-1,line:""}, src:""};
-  for(const t of texts){
-    const lines = String(t||"").split("\n").map(s=>s.trim()).filter(Boolean);
-    const g7 = findG7Line(lines);
-    const g6 = findG6Line(lines, g7.idx);
-    const g7ok = (g7.arr?.length===4);
-    const g6ok = (g6.arr?.length===3);
-    let score = 0;
-    if(g7ok) score += 5;
-    if(g6ok) score += 3;
-    if(g7.line && /^\s*7\b/.test(g7.line)) score += 2;
-    score += Math.min(3, (lines.length/8)); // có nhiều line cũng tốt
-    if(score > best.score){
-      best = {score, g7, g6, src:t};
+    const texts = [];
+    for(let i=0;i<mats.length;i++){
+      const c = canvasFromMat(mats[i]);
+      const s = scaleCanvas(c, targetH);
+      const t = await ocrText(s, ocrOpts);
+      texts.push(cleanOCR(t));
     }
+    return texts;
+  } finally {
+    for(const m of mats){ try{ m.delete(); }catch(e){} }
   }
-  // chuẩn hóa
-  best.g7.arr = fixG7Digits(best.g7.arr).slice(-4);
-  return best;
 }
 
-/* ===== Bottom rescue (đáy) — vẫn giữ, nhưng có voting ===== */
-async function ocrBottomRescueVoting(matSrc, startFrac, targetH){
-  const y = Math.floor(matSrc.rows * startFrac);
-  const h = Math.max(10, Math.floor(matSrc.rows * (1 - startFrac)));
-  const bottom = matSrc.roi(new cv.Rect(0, y, matSrc.cols, h));
-  const texts = await ocrVotingFromMat(bottom, { whitelist:"0123456789 \n", psm: 11 }, targetH);
-  bottom.delete();
-  const best = pickBestG7G6(texts);
-  return {texts, best};
-}
-
+/* ===== main OCR pipeline ===== */
 let cvReadyOnceAlerted = false;
+
 async function runOCRFromBlob(blob){
   if(!cvReady){
     if(!cvReadyOnceAlerted){
@@ -694,73 +830,68 @@ async function runOCRFromBlob(blob){
   ctx2d.drawImage(img,0,0);
 
   let src = cv.imread(canvas);
-  const W = src.cols, H = src.rows;
 
-  // ROI preset
-  const roi = getROIPreset(W, H);
-  const crop = src.roi(new cv.Rect(roi.x, roi.y, roi.w, roi.h));
-  src.delete(); src = crop;
+  // ROI preset FULL KQXS
+  const roi = roiPresetFullKQXS(src);
+  src.delete();
 
-  // split: upper (DB zone) + body (G6/G7 zone)
-  const upH = Math.floor(src.rows * 0.55);
-  const upper = src.roi(new cv.Rect(0,0, src.cols, upH));
-  const body  = src.roi(new cv.Rect(0, Math.floor(src.rows*0.35), src.cols, Math.floor(src.rows*0.65)));
+  // split upper/body theo tỷ lệ (upper bắt label ĐB + số 5 chữ số)
+  const upperH = Math.floor(roi.rows * 0.38);
+  const upper = roi.roi(new cv.Rect(0, 0, roi.cols, upperH));
+  const body  = roi.roi(new cv.Rect(0, Math.floor(roi.rows*0.26), roi.cols, Math.floor(roi.rows*0.74)));
 
-  const targetH = parseInt(el("scaleTarget").value||"1000",10);
+  // OCR voting
+  const targetH = 1100;
 
-  // DB5 voting
-  const upperTexts = await ocrVotingFromMat(upper, { whitelist:"0123456789 \n", psm: 6 }, targetH);
-  const pickedDB = pickBestDB5(upperTexts);
-  const db5 = pickedDB.db5;
+  const upperTexts = await ocrVotingFromMat(upper, { whitelist:"0123456789DBdbĐđB \n", psm:6 }, targetH);
+  const bodyTexts  = await ocrVotingFromMat(body,  { whitelist:"0123456789 \n", psm:6 }, targetH);
 
-  // BODY voting
-  const bodyTexts = await ocrVotingFromMat(body, { whitelist:"0123456789 \n", psm: 11 }, targetH);
-  let picked = pickBestG7G6(bodyTexts);
+  // pick db from UPPER best, but accept fallback from BODY best
+  const bestUpper = pickBestParsed(upperTexts);
+  const bestBody  = pickBestParsed(bodyTexts);
 
-  // If G7 not ok => rescue bottom (0.60 then 0.78)
-  let rescueLog = "";
-  if(picked.g7.arr.length !== 4){
-    const r1 = await ocrBottomRescueVoting(body, 0.60, targetH);
-    rescueLog += `\n--- RESCUE ROI 0.60 (best score=${r1.best.score}) ---\n${(r1.best.src||"").slice(0,1200)}`;
-    if(r1.best.g7.arr.length===4) picked = r1.best;
-  }
-  if(picked.g7.arr.length !== 4){
-    const r2 = await ocrBottomRescueVoting(body, 0.78, targetH);
-    rescueLog += `\n--- RESCUE ROI 0.78 (best score=${r2.best.score}) ---\n${(r2.best.src||"").slice(0,1200)}`;
-    if(r2.best.g7.arr.length===4) picked = r2.best;
-  }
+  let db5 = bestUpper.db5;
+  if(!/^\d{5}$/.test(db5) && /^\d{5}$/.test(bestBody.db5)) db5 = bestBody.db5;
 
-  const g7 = fixG7Digits(picked.g7.arr).slice(-4);
-  const g6 = (picked.g6.arr||[]);
-
-  upper.delete(); body.delete(); src.delete();
-  URL.revokeObjectURL(url);
+  const g7 = (bestBody.g7 || []).slice(-4).map(pad2);
+  const g6 = (bestBody.g6 || []).slice(0,3);
 
   const gate = gateCheck(db5, g6, g7);
   const db2 = (/^\d{5}$/.test(db5)) ? db5.slice(-2) : "";
 
   el("dbg").textContent =
-`[ROI PRESET]
-preset=${el("roiPreset").value} | roi=${JSON.stringify(roi)} | targetH=${targetH}
+`[ROI preset]
+full_kqxs | targetH=${targetH}
 
-[DB VOTING] (first 2 samples)
-1) ${upperTexts[0] ? upperTexts[0].slice(0,300) : "(empty)"}
-2) ${upperTexts[1] ? upperTexts[1].slice(0,300) : "(empty)"}
+[UPPER VOTING] (3 samples)
+--- S1 ---
+${upperTexts[0] || "(empty)"}
+--- S2 ---
+${upperTexts[1] || "(empty)"}
+--- S3 ---
+${upperTexts[2] || "(empty)"}
 
-[DB_5DIG]
-${db5 || "(none)"}
+[BODY VOTING] (3 samples)
+--- S1 ---
+${bodyTexts[0] || "(empty)"}
+--- S2 ---
+${bodyTexts[1] || "(empty)"}
+--- S3 ---
+${bodyTexts[2] || "(empty)"}
 
-[BODY VOTING] (best sample)
-${(picked.src||"(empty)").slice(0,1800)}
+[BEST UPPER PARSE]
+score=${bestUpper.score} | DB5=${bestUpper.db5 || "(none)"}
 
-[G7_LINE]
-${picked.g7.line || "(none)"}
+[BEST BODY PARSE]
+score=${bestBody.score} | DB5=${bestBody.db5 || "(none)"}
+G7=${(bestBody.g7||[]).join(" ") || "(none)"}
+G6=${(bestBody.g6||[]).join(" ") || "(none)"}
 
-[G6_LINE]
-${picked.g6.line || "(none)"}
-
-[RESCUE LOG]
-${rescueLog || "(none)"}
+[FINAL]
+DB5=${db5 || "(none)"} | DB2=${db2 || "(none)"}
+G7=${g7.join(" ") || "(none)"}
+G6=${g6.join(" ") || "(none)"}
+Gate=${gate.ok ? "PASS" : "FAIL"} — ${gate.reason}
 `;
 
   showKPI(db2, g6, g7, gate.ok ? "PASS" : "FAIL");
@@ -778,6 +909,9 @@ ${rescueLog || "(none)"}
     el("manualG7").value = g7.length ? g7.join(" ") : "";
   }
   setStatus();
+
+  upper.delete(); body.delete(); roi.delete();
+  URL.revokeObjectURL(url);
 }
 
 /* manual */
@@ -807,12 +941,6 @@ el("fileMulti").addEventListener("change", async (e)=>{
   const files = [...(e.target.files || [])];
   if(!files.length) return;
 
-  const MAX = 12; // chống đơ máy
-  if(files.length > MAX){
-    alert(`Chọn tối đa ${MAX} ảnh/lần để tránh đơ máy. Bạn đang chọn ${files.length}.`);
-    return;
-  }
-
   setBadge("stOcr","● OCR: batch running…","warn");
   batchOK = 0; batchFail = 0;
   setStatus();
@@ -837,32 +965,42 @@ el("btnRetryLast").onclick = async ()=>{
 
 el("btnSample").onclick = ()=>{
   el("inputData").value =
-`DB 77 | G7: 03 82 85 81 | G6: 392 255 854
+`DB 19 | G7: 05 26 91 35 | G6: 895 439 658
+DB 09 | G7: 99 40 14 61 | G6: 331 968 885
+DB 77 | G7: 03 82 85 81 | G6: 392 255 854
 DB 21 | G7: 76 47 21 77 | G6: 801 295 993
 DB 14 | G7: 81 87 60 32 | G6: 206 200 971
-DB 80 | G7: 22 20 16 61 | G6: 733 014 672
-DB 45 | G7: 18 62 05 74 | G6: 615 901 330
-DB 09 | G7: 90 11 27 63 | G6: 402 578 119`;
+DB 80 | G7: 22 20 16 61 | G6: 733 014 672`;
 };
 
 /* =========================================================
-   PART 2 — ENGINE (giữ logic chính + patch gan∞ nhẹ)
+   PART 2 — ENGINE (HIT@3>=2) — GIỮ TƯ DUY v3
 ========================================================= */
-function parseLinesAll(){
+function parseLines(){
   el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
 
-  const raw = el("inputData").value.trim().split("\n").map(s=>s.trim()).filter(Boolean);
+  const raw = el("inputData").value
+    .trim()
+    .split("\n")
+    .map(s=>s.trim())
+    .filter(Boolean);
+
+  const win = Math.min(Math.max(6, parseInt(el("winDays").value||"20",10)), 60);
+  const slice = raw.slice(0, win);
   const days = [];
+
   const g6Mode = el("g6Scope").value;
 
-  for(let idx=0; idx<raw.length; idx++){
-    const line = raw[idx];
+  for(let idx=0; idx<slice.length; idx++){
+    const line = slice[idx];
+
     const dbm = line.match(/DB\s+(\d{2})/i);
     const g7m = line.match(/G7:\s*([0-9 ]+)/i);
     const g6m = line.match(/G6:\s*([0-9 ]+)/i);
     if(!dbm || !g7m) continue;
 
     const db2 = pad2(dbm[1]);
+
     const g7All = (g7m[1].match(/\b\d{2}\b/g)||[]).map(pad2);
     const g7 = g7All.slice(-4);
 
@@ -870,19 +1008,15 @@ function parseLinesAll(){
     if(g6Mode !== "off" && g6m){
       g6 = (g6m[1].match(/\b\d{3}\b/g)||[]).slice(0,3);
     }
-    if(g6Mode === "newest_only" && idx>0) g6 = [];
+    if(g6Mode === "newest_only" && idx>0){
+      g6 = [];
+    }
 
     const g6_2 = g6.map(x=>pad2(String(x).slice(-2)));
     const pool = [db2, ...g7, ...g6_2];
     days.push({db2, g7, g6_2, pool});
   }
-  return days; // newest -> older
-}
-
-function parseLinesWindow(){
-  const all = parseLinesAll();
-  const win = Math.min(Math.max(6, parseInt(el("winDays").value||"20",10)), 120);
-  return all.slice(0, win);
+  return days;
 }
 
 function buildHeadTail(days, K){
@@ -996,7 +1130,9 @@ function detectPhase(days){
     pha = (ganRatio>=0.25) ? "P6" : "P2";
     dir = (pha==="P6") ? "TRUC_MO" : "TRUC_GAN";
     conf = Math.min(0.92, 0.68 + trucRatio + ganRatio);
-    note = (pha==="P6") ? "MỞ TRỤC – ưu tiên TRỤC + xác nhận gan." : "TRỤC + GAN – ưu tiên trục nổi, tránh bám G7 thuần.";
+    note = (pha==="P6")
+      ? "MỞ TRỤC – ưu tiên TRỤC + xác nhận gan."
+      : "TRỤC + GAN – ưu tiên trục nổi, tránh bám G7 thuần.";
     return {pha,dir,conf,note,metrics:{trucRatio,ganRatio,g7Ratio,noise}, headTop, tailTop};
   }
   if(g7Ratio>=0.22 && trucRatio<0.20){
@@ -1079,7 +1215,6 @@ function scoreCandidates(days, phaObj, weights){
     const hot = (freq[n]||0);
     const g = gan[n];
 
-    // gan∞ phạt nhẹ (-1), gan 2–9 thưởng
     let ganFeat = 0;
     if(g===999) ganFeat = -1;
     else if(g===0) ganFeat = -1;
@@ -1128,16 +1263,18 @@ function buildWarnings(phaObj, meta){
   const hotVals = Object.values(meta.freq).sort((a,b)=>b-a);
   const topHot = hotVals[0] || 0;
   if(topHot>=5 && phaObj.dir!=="TRUC_MO") warn.push("⚠️ BẪY CỤM/HOT: hot dày → tránh all-in.");
+  if(warn.length<3) warn.push("✅ OK: chưa thấy bẫy quá rõ (vẫn giữ kỷ luật tiền).");
   if(warn.length<3) warn.push("✅ OK: ưu tiên số giao thoa ≥2 tiêu chí.");
-  if(warn.length<3) warn.push("✅ OK: giữ kỷ luật tiền, test nhẹ khi noise cao.");
   return warn.slice(0,3);
 }
 
 /* =========================================================
-   HIT@3>=2 (giữ)
+   HIT@3>=2 PATCH
 ========================================================= */
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 const sigmoid = (z) => 1 / (1 + Math.exp(-z));
 const to2 = (n) => String(n).padStart(2, "0");
+
 function entropyFromCounts(countsObj) {
   const vals = Object.values(countsObj);
   const sum = vals.reduce((a, b) => a + b, 0) || 1;
@@ -1154,8 +1291,10 @@ function jaccard(aSet, bSet) {
   const union = aSet.size + bSet.size - inter;
   return union === 0 ? 0 : inter / union;
 }
+
 function computeProbabilities(ctx, weights) {
   const { candidates, hotRank, ganScore, pasScore, trucScore, g7Lead, cumConfirm } = ctx;
+
   const maxHot = Math.max(...candidates.map(n => hotRank.get(n) ?? 0), 1);
   const maxTruc = Math.max(...candidates.map(n => trucScore.get(n) ?? 0), 1);
   const maxGan = Math.max(...candidates.map(n => ganScore.get(n) ?? 0), 1);
@@ -1186,6 +1325,7 @@ function computeProbabilities(ctx, weights) {
   }
   return probs;
 }
+
 function deriveGate(ctx) {
   const Hh = entropyFromCounts(ctx.headCount || {});
   const Ht = entropyFromCounts(ctx.tailCount || {});
@@ -1214,8 +1354,10 @@ function deriveGate(ctx) {
 
   return { noise, isDaoXa, isTrucMo, isTrucGan, aT, aG, aP };
 }
+
 function computeEnsembleProb(ctx) {
   const gate = deriveGate(ctx);
+
   const wT = { base:-2.25, wHot:1.05, wTruc:1.65, wG7:0.85, wPas:0.45, wGan:0.35, wCum:0.20 };
   const wG = { base:-2.20, wHot:0.95, wTruc:1.05, wG7:0.45, wPas:0.35, wGan:0.95, wCum:0.20 };
   const wP = { base:-2.30, wHot:0.90, wTruc:0.95, wG7:0.35, wPas:1.05, wGan:0.35, wCum:0.55 };
@@ -1226,22 +1368,29 @@ function computeEnsembleProb(ctx) {
 
   const p = new Map();
   for (const n of ctx.candidates) {
-    const v = gate.aT * (pT.get(n) || 0) + gate.aG * (pG.get(n) || 0) + gate.aP * (pP.get(n) || 0);
+    const v =
+      gate.aT * (pT.get(n) || 0) +
+      gate.aG * (pG.get(n) || 0) +
+      gate.aP * (pP.get(n) || 0);
     p.set(n, v);
   }
   return { p, gate };
 }
+
 function buildNumberProfile(ctx, n) {
   const head = parseInt(n[0], 10);
   const tail = parseInt(n[1], 10);
+  const trucTier = (ctx.trucScore.get(n) ?? 0) >= (ctx.trucThreshold ?? 4) ? "T" : "t";
   const cum = ctx.cumConfirm?.has(n) ? "C" : "c";
   const g7 = ctx.g7Lead?.has(n) ? "G" : "g";
   const pas = (ctx.pasScore.get(n) ?? 0) ? "P" : "p";
-  const feat = new Set([`H${head}`, `D${tail}`, `CU${cum}`, `G7${g7}`, `PA${pas}`]);
+  const feat = new Set([`H${head}`, `D${tail}`, `TR${trucTier}`, `CU${cum}`, `G7${g7}`, `PA${pas}`]);
   return { head, tail, feat };
 }
+
 function pickTop3WithDiversity(ctx, pMap) {
-  const arr = [...pMap.entries()].sort((a, b) => b[1] - a[1])
+  const arr = [...pMap.entries()]
+    .sort((a, b) => b[1] - a[1])
     .map(([n, p]) => ({ n, p, prof: buildNumberProfile(ctx, n) }));
 
   const picked = [];
@@ -1250,6 +1399,7 @@ function pickTop3WithDiversity(ctx, pMap) {
   for (let i = 0; i < maxTry && picked.length < 3; i++) {
     const cand = arr[i];
     if (picked.length === 0) { picked.push(cand); continue; }
+
     let ok = true;
     for (const pk of picked) {
       const sameTail = cand.prof.tail === pk.prof.tail;
@@ -1259,6 +1409,7 @@ function pickTop3WithDiversity(ctx, pMap) {
     }
     if (ok) picked.push(cand);
   }
+
   if (picked.length < 3) {
     for (let i = 0; i < maxTry && picked.length < 3; i++) {
       const cand = arr[i];
@@ -1268,17 +1419,25 @@ function pickTop3WithDiversity(ctx, pMap) {
   }
   return picked.slice(0, 3);
 }
+
 function MASTER_HIT2OF3(ctx) {
   if (!ctx.candidates || ctx.candidates.length === 0) {
     ctx.candidates = Array.from({ length: 100 }, (_, i) => to2(i));
   }
+  ctx.trucThreshold = ctx.trucThreshold ?? 4;
+
   const { p, gate } = computeEnsembleProb(ctx);
 
-  const top10 = [...p.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10).map(([n, prob]) => ({ n, prob }));
+  const top10 = [...p.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([n, prob]) => ({ n, prob }));
+
   const chot3 = pickTop3WithDiversity(ctx, p).map(x => x.n);
 
   const phaseConf = ctx.phaseHint?.tinCay ?? 0.75;
   const trust = clamp(0.55 + 0.35 * (1 - gate.noise) + 0.20 * (phaseConf - 0.75), 0.40, 0.92);
+
   const risk = (gate.noise >= 0.65 && phaseConf < 0.80) ? "RISK: noise cao + pha chưa chắc" :
                (gate.isDaoXa && gate.noise >= 0.55) ? "RISK: pha đảo/xả + noise" : "OK";
 
@@ -1323,7 +1482,11 @@ function renderOutputUI(payload){
   }
   chipsHtml += `</div>`;
 
-  const warnHtml = `<ul class="warnList">${warnings.map(w=>`<li>${esc(w)}</li>`).join("")}</ul>`;
+  const warnHtml = `
+    <ul class="warnList">
+      ${warnings.map(w=>`<li>${esc(w)}</li>`).join("")}
+    </ul>
+  `;
 
   const explainHtml = `
     <div class="sep"></div>
@@ -1361,15 +1524,28 @@ function renderOutputUI(payload){
   `;
 
   const topBlock = (VIEW_MODE==="pro")
-    ? `<div class="sep"></div><div class="khead">TOP + % (THAM KHẢO)</div><div class="chips">${pctLineArr.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>`
+    ? `<div class="sep"></div>
+       <div class="khead">TOP + % (THAM KHẢO)</div>
+       <div class="chips">${pctLineArr.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>`
     : "";
 
-  el("outHtml").innerHTML = `<div class="krow">${left}${right}</div>${topBlock}${explainHtml}`;
+  el("outHtml").innerHTML = `
+    <div class="krow">${left}${right}</div>
+    ${topBlock}
+    ${explainHtml}
+  `;
   el("outRaw").textContent = rawText || "";
 }
 
-function runFULLwithDays(days){
-  if(days.length < 6) return null;
+function runFULL(){
+  el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
+
+  const days = parseLines();
+  if(days.length < 6){
+    el("outHtml").textContent = "❌ Thiếu dữ liệu: cần ≥6 ngày (khuyến nghị 20).";
+    el("outRaw").textContent = "❌ Thiếu dữ liệu.";
+    return;
+  }
 
   const phaObj = detectPhase(days);
   const weights = lockWeightsByPhase(phaObj);
@@ -1396,10 +1572,16 @@ function runFULLwithDays(days){
   }));
 
   const ctxPatch = {
-    candidates, hotRank, ganScore, pasScore, trucScore,
+    candidates,
+    hotRank,
+    ganScore,
+    pasScore,
+    trucScore,
     g7Lead: meta.g7Lead,
     cumConfirm: new Set(meta.cumList || []),
-    headCount: ht.h, tailCount: ht.t,
+    headCount: ht.h,
+    tailCount: ht.t,
+    trucThreshold: Math.min(Math.max(2, parseInt(el("trucThreshold").value||"4",10)), 10),
     phaseHint: { pha: phaObj.pha, huong: phaObj.dir, tinCay: phaObj.conf }
   };
 
@@ -1425,7 +1607,8 @@ function runFULLwithDays(days){
     return `${i+1}) ${n} | hot:${f.hot||0} | gan:${ganTag} | truc:${f.truc?"Y":"-"} | g7:${f.g7?"Y":"-"} | pas:${f.pas?"Y":"-"} | cum:${cum?"Y":"-"} | dau:${dau?"Y":"-"} | duoi:${duoi?"Y":"-"}`;
   });
 
-  const extraNote = `✅ MODE: HIT@3>=2 • trust ${(patchOut.trust*100).toFixed(0)}% • noise ${(patchOut.gate.noise*100).toFixed(0)}% • ${patchOut.risk}`;
+  const extraNote =
+    `✅ MODE: HIT@3>=2 • trust ${(patchOut.trust*100).toFixed(0)}% • noise ${(patchOut.gate.noise*100).toFixed(0)}% • ${patchOut.risk}`;
 
   const out =
 `===== KẾT QUẢ FULL (HIT@3>=2 — LUÔN CHỐT 3) =====
@@ -1438,7 +1621,7 @@ Nhận định: ${phaObj.note}
 TOP ${topN} (tham khảo) + %:
 ${pctLineArr.join("  ")}
 
-CHỐT 3:
+CHỐT 3 (mục tiêu HIT@3>=2):
 🎯 Chính: ${pick[0]}
 🛡️ Phụ:  ${pick[1]}
 ➕ Kèm:  ${pick[2]}
@@ -1453,32 +1636,21 @@ ${extraNote}
 
 GIẢI THÍCH:
 ${explainLines.join("\n")}
+
+WEIGHTS:
+wHot=${weights.wHot} | wGan=${weights.wGan} | wPas=${weights.wPas} | wTruc=${weights.wTruc} | wG7=${weights.wG7}
 `;
 
-  return {phaObj, weights, meta, pick, pctLineArr, warnings, explainLines, out, extraNote, patchOut};
-}
-
-function runFULL(){
-  const days = parseLinesWindow();
-  if(days.length < 6){
-    el("outHtml").textContent = "❌ Thiếu dữ liệu: cần ≥6 ngày (khuyến nghị 20).";
-    el("outRaw").textContent = "❌ Thiếu dữ liệu.";
-    return;
-  }
-
-  const r = runFULLwithDays(days);
-  if(!r) return;
-
   window.__lastRender = ()=>renderOutputUI({
-    phaObj: r.phaObj,
-    pick: r.pick,
-    pctLineArr: r.pctLineArr,
-    warnings: r.warnings,
-    explainLines: r.explainLines,
-    weights: r.weights,
+    phaObj,
+    pick,
+    pctLineArr,
+    warnings,
+    explainLines,
+    weights,
     daysLen: days.length,
-    rawText: r.out,
-    extraNote: r.extraNote
+    rawText: out,
+    extraNote
   });
   window.__lastRender();
 }
@@ -1486,58 +1658,128 @@ el("btnFull").onclick = runFULL;
 
 /* =========================================================
    MINI BACKTEST (tham khảo)
-   - Chuyển dữ liệu về chronological (oldest->newest)
-   - Mỗi ngày t: dùng window trước đó để dự đoán -> so hit với pool ngày t
+   - rolling: dùng i..i+win-1 để dự đoán ngày i-1
+   - hit>=2 nếu trong pool của ngày thật (DB + G7 + (G6 last2))
 ========================================================= */
-function runBacktest(){
-  const allNewest = parseLinesAll(); // newest->older
-  if(allNewest.length < 12){
-    el("btLog").textContent = "Thiếu dữ liệu để backtest (khuyến nghị >= 12 dòng).";
+function computeHit2(pick3, dayObj){
+  const s = new Set(dayObj.pool || []);
+  let hit = 0;
+  for(const n of pick3){ if(s.has(n)) hit++; }
+  return hit >= 2;
+}
+el("btnBacktest").onclick = ()=>{
+  const allText = normalizeInputToOneDayOneLine(el("inputData").value).trim();
+  if(!allText){
+    el("btLog").textContent = "Chưa có dữ liệu.";
+    return;
+  }
+  const raw = allText.split("\n").map(s=>s.trim()).filter(Boolean);
+  const win = Math.min(Math.max(6, parseInt(el("winDays").value||"20",10)), 60);
+
+  // dựng days theo parseLines nhưng không cắt win ở đầu (để rolling)
+  const daysAll = [];
+  const g6ModeSaved = el("g6Scope").value;
+  el("g6Scope").value = "full";
+  el("inputData").value = raw.join("\n");
+  const tmp = parseLines(); // parse 0..win hiện tại (newest first)
+  // restore
+  el("g6Scope").value = g6ModeSaved;
+  el("inputData").value = raw.join("\n");
+
+  // parseLines hiện tại chỉ lấy slice(0,win). Backtest cần full -> tự parse lại:
+  for(const line of raw){
+    const dbm = line.match(/DB\s+(\d{2})/i);
+    const g7m = line.match(/G7:\s*([0-9 ]+)/i);
+    const g6m = line.match(/G6:\s*([0-9 ]+)/i);
+    if(!dbm || !g7m) continue;
+    const db2 = pad2(dbm[1]);
+    const g7All = (g7m[1].match(/\b\d{2}\b/g)||[]).map(pad2);
+    const g7 = g7All.slice(-4);
+    const g6 = g6m ? (g6m[1].match(/\b\d{3}\b/g)||[]).slice(0,3) : [];
+    const g6_2 = g6.map(x=>pad2(String(x).slice(-2)));
+    const pool = [db2, ...g7, ...g6_2];
+    daysAll.push({db2,g7,g6_2,pool});
+  }
+
+  // newest ở trên → index 0 là mới nhất. Backtest chạy từ i=win .. end-1 (dự đoán i-1)
+  if(daysAll.length < win + 1){
+    el("btLog").textContent = "Thiếu dữ liệu để backtest (cần nhiều hơn cửa sổ).";
     return;
   }
 
-  const chrono = [...allNewest].reverse(); // oldest -> newest
-  const win = Math.min(Math.max(6, parseInt(el("winDays").value||"20",10)), 120);
+  let N = 0, hit2 = 0, maxMiss = 0, curMiss = 0;
+  let log = [];
+  for(let i=win; i<daysAll.length; i++){
+    const train = daysAll.slice(i-win, i); // i-win..i-1 (cũ hơn -> mới hơn trong khung)
+    const target = daysAll[i-1];          // ngày ngay trước i (theo dòng chảy)
+    // đảo lại để train[0] = newest trong khung (giống engine)
+    const daysTrain = train.slice().reverse();
 
-  let N=0, hit2=0;
-  let missStreak=0, maxMiss=0;
-  const logLines = [];
+    const phaObj = detectPhase(daysTrain);
+    const weights = lockWeightsByPhase(phaObj);
+    const meta = scoreCandidates(daysTrain, phaObj, weights);
 
-  for(let t=win; t<chrono.length; t++){
-    const windowDays = chrono.slice(t-win, t).reverse(); // engine expects newest-first
-    const res = runFULLwithDays(windowDays);
-    if(!res) continue;
+    const candidates = Array.from({length:100},(_,k)=>pad2(k));
+    const hotRank = new Map(candidates.map(n => [n, meta.freq[n] || 0]));
+    const ganScore = new Map(candidates.map(n => {
+      const v = meta.gan[n];
+      if(v === 999) return [n, 0];
+      return [n, Math.min(v, 20)];
+    }));
+    const pasScore = new Map(candidates.map(n => [n, meta.pas.has(n) ? 1 : 0]));
 
-    const pred = res.pick || [];
-    const actualPool = new Set(chrono[t].pool);
-    const hits = pred.filter(x=>actualPool.has(x)).length;
+    const Kp = Math.min(Math.max(5, parseInt(el("phaseK").value||"9",10)), daysTrain.length);
+    const ht = buildHeadTail(daysTrain, Kp);
+    const headPower = new Map(Object.entries(ht.h).map(([k,v])=>[k,v]));
+    const tailPower = new Map(Object.entries(ht.t).map(([k,v])=>[k,v]));
+    const trucScore = new Map(candidates.map(n=>{
+      const hp = headPower.get(n[0]) || 0;
+      const tp = tailPower.get(n[1]) || 0;
+      const bonus = meta.trucSet.has(n) ? 2 : 0;
+      return [n, hp + tp + bonus];
+    }));
 
+    const ctxPatch = {
+      candidates,
+      hotRank,
+      ganScore,
+      pasScore,
+      trucScore,
+      g7Lead: meta.g7Lead,
+      cumConfirm: new Set(meta.cumList || []),
+      headCount: ht.h,
+      tailCount: ht.t,
+      trucThreshold: Math.min(Math.max(2, parseInt(el("trucThreshold").value||"4",10)), 10),
+      phaseHint: { pha: phaObj.pha, huong: phaObj.dir, tinCay: phaObj.conf }
+    };
+    const patchOut = MASTER_HIT2OF3(ctxPatch);
+    const pick = patchOut.chot3 || [];
+
+    const ok = computeHit2(pick, target);
     N++;
-    const ok = (hits>=2);
     if(ok){
       hit2++;
-      missStreak=0;
+      curMiss = 0;
+      log.push(`✅ #${N} pick=${pick.join(" ")} hit>=2 | target(DB+G7+G6)= ${target.pool.join(" ")}`);
     }else{
-      missStreak++;
-      maxMiss = Math.max(maxMiss, missStreak);
+      curMiss++;
+      maxMiss = Math.max(maxMiss, curMiss);
+      log.push(`❌ #${N} pick=${pick.join(" ")} miss | target= ${target.pool.join(" ")}`);
     }
-
-    logLines.push(`${pad2(t)} | actual DB=${chrono[t].db2} | pred=${pred.join(" ")} | hit=${hits}`);
-    if(logLines.length>60) logLines.shift();
+    if(log.length>120) log.shift();
   }
 
   el("btN").textContent = String(N);
-  el("btH2").textContent = String(hit2);
-  el("btR").textContent = (N ? ((hit2/N)*100).toFixed(1)+"%" : "--");
+  el("btHit2").textContent = String(hit2);
+  el("btRate").textContent = (N ? ((hit2/N)*100).toFixed(0)+"%" : "--");
   el("btMaxMiss").textContent = String(maxMiss);
-  el("btLog").textContent = logLines.join("\n") || "Backtest xong nhưng log trống.";
-}
-el("btnBacktest").onclick = runBacktest;
+  el("btLog").textContent = log.join("\n");
+};
 
 /* =========================================================
    SAVE/LOAD/RESET
 ========================================================= */
-const LS_KEY = "BH_ULTRA_MASTER_V35_DATA";
+const LS_KEY = "BH_ULTRA_MASTER_V36_DATA";
 
 function saveData(){
   const payload = {
@@ -1552,8 +1794,6 @@ function saveData(){
       wHot: el("wHot").value,
       wGan: el("wGan").value,
       wPas: el("wPas").value,
-      roiPreset: el("roiPreset").value,
-      scaleTarget: el("scaleTarget").value
     },
     ts: Date.now()
   };
@@ -1576,8 +1816,6 @@ function loadData(){
     if(s.wHot!=null) el("wHot").value = s.wHot;
     if(s.wGan!=null) el("wGan").value = s.wGan;
     if(s.wPas!=null) el("wPas").value = s.wPas;
-    if(s.roiPreset!=null) el("roiPreset").value = s.roiPreset;
-    if(s.scaleTarget!=null) el("scaleTarget").value = s.scaleTarget;
     setBadge("stSave","● Save: loaded","ok");
     el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
   }catch(e){
@@ -1599,8 +1837,6 @@ function resetAll(){
   setBadge("stSave","● Save: --","warn");
   setStatus();
   localStorage.removeItem(LS_KEY);
-  el("btN").textContent="--"; el("btH2").textContent="--"; el("btR").textContent="--"; el("btMaxMiss").textContent="--";
-  el("btLog").textContent="Chưa backtest.";
 }
 el("btnSave").onclick = saveData;
 el("btnLoad").onclick = loadData;
