@@ -1,0 +1,1283 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+  <title>Bùi Hào — Lotto ULTRA (Fixed • AutoSort • DateSanity • GAN DB • GAN Lõi • RED LIGHT)</title>
+  <meta name="theme-color" content="#0b1220"/>
+
+  <style>
+    :root{
+      --bg:#07101d; --card:#0b1730; --text:#e8f0ff; --muted:#a8b7d6; --line:rgba(255,255,255,.10);
+      --good:#32d583; --warn:#fdb022; --bad:#ff4d4f; --btn:#1e5eff; --btn2:#123a9b;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background: radial-gradient(1200px 600px at 10% -20%, rgba(30,94,255,.35), transparent 60%),
+                  radial-gradient(900px 500px at 110% 10%, rgba(50,213,131,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    .wrap{max-width:1180px; margin:0 auto; padding:14px}
+    .top{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:12px}
+    .brand{display:flex; flex-direction:column; gap:2px}
+    .brand b{font-size:16px}
+    .brand span{font-size:12px; color:var(--muted)}
+    .controls{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    input[type="file"]{display:none}
+    .btn{
+      appearance:none; border:none; cursor:pointer;
+      background: linear-gradient(180deg, var(--btn), var(--btn2));
+      color:#fff; padding:10px 12px; border-radius:12px;
+      font-weight:800; font-size:13px;
+    }
+    .btn.secondary{background:rgba(255,255,255,.07); border:1px solid var(--line)}
+    .btn.danger{background:rgba(255,77,79,.15); border:1px solid rgba(255,77,79,.35)}
+    .btn:disabled{opacity:.55; cursor:not-allowed}
+    .row{display:grid; grid-template-columns: 1.25fr .75fr; gap:12px}
+    @media (max-width: 980px){ .row{grid-template-columns:1fr} }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    }
+    .card h3{margin:0 0 10px 0; font-size:14px; color:var(--muted); font-weight:700}
+    .imgbox{
+      position:relative; background: rgba(0,0,0,.25);
+      border:1px solid var(--line); border-radius:16px; overflow:hidden;
+      min-height:260px; display:flex; align-items:center; justify-content:center;
+    }
+    canvas{display:block; max-width:100%; width:100%; height:auto}
+    .overlay{position:absolute; inset:0; pointer-events:none}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    @media (max-width: 560px){ .grid2{grid-template-columns:1fr} }
+    .box{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:10px;
+    }
+    .box b{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+    .big{font-size:18px; font-weight:900}
+    .hr{height:1px; background:var(--line); margin:10px 0}
+    .small{font-size:12px; color:var(--muted); line-height:1.35}
+    .tag{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px;
+      background: rgba(255,255,255,.06); border:1px solid var(--line); font-size:12px; color:var(--muted)}
+    .tag i{width:10px; height:10px; border-radius:50%; display:inline-block; background:var(--warn)}
+    .tag.good i{background:var(--good)}
+    .tag.bad i{background:var(--bad)}
+    .cols{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    @media (max-width: 560px){ .cols{grid-template-columns:1fr} }
+    .list{display:flex; flex-direction:column; gap:8px}
+    .item{
+      display:flex; justify-content:space-between; gap:10px; align-items:center;
+      padding:8px 10px; border-radius:12px;
+      background: rgba(255,255,255,.04); border:1px solid var(--line);
+    }
+    .item .l{display:flex; flex-direction:column; gap:2px}
+    .item .l b{margin:0; color:var(--text); font-size:13px}
+    .item .l span{font-size:11px; color:var(--muted)}
+    .pill{padding:4px 8px; border-radius:999px; border:1px solid var(--line); background:rgba(0,0,0,.2)}
+    .warnTxt{color:var(--warn)}
+    .badTxt{color:var(--bad)}
+    .goodTxt{color:var(--good)}
+    .kbd{
+      display:inline-flex; gap:6px; align-items:center;
+      padding:3px 8px; border-radius:10px;
+      background: rgba(0,0,0,.25); border:1px solid var(--line);
+      font-size:12px; color:var(--muted)
+    }
+    textarea{
+      width:100%; min-height:120px; resize:vertical;
+      border-radius:14px; border:1px solid var(--line);
+      background: rgba(0,0,0,.25); color:var(--text);
+      padding:10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size:12px; line-height:1.35;
+    }
+    table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden}
+    th,td{padding:8px 8px; font-size:12px; border-bottom:1px solid var(--line)}
+    th{color:var(--muted); text-align:left}
+    tr:last-child td{border-bottom:none}
+    .center{text-align:center}
+    .switchRow{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .switchRow label{display:flex; gap:8px; align-items:center; font-size:12px; color:var(--muted)}
+    .mini{font-size:11px}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <b>Bùi Hào — Lotto ULTRA (Fixed layout)</b>
+        <span>Auto-crop: Header/ĐB/G6/G7 → OCR → AutoSort History → DateSanity (lệch ngày) → GAN ĐB + GAN Lõi → Anti-hit RED LIGHT → Checklist 6 dòng</span>
+      </div>
+
+      <div class="controls">
+        <label class="btn" for="file">📷 Chọn ảnh KQ</label>
+        <input id="file" type="file" accept="image/*"/>
+        <button id="btnOCR" class="btn secondary" disabled>⚡ OCR & phân tích</button>
+        <button id="btnSave" class="btn secondary" disabled>💾 Lưu vào history</button>
+        <button id="btnExport" class="btn secondary">⬇️ Export JSON</button>
+        <button id="btnClear" class="btn danger">🧨 Xoá history</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- LEFT -->
+      <div class="card">
+        <h3>Ảnh gốc + vùng crop cố định</h3>
+
+        <div class="imgbox">
+          <canvas id="mainCanvas"></canvas>
+          <canvas id="overlay" class="overlay"></canvas>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <div class="grid2">
+          <div class="box">
+            <b>Header auto (tỉnh/ngày) <span class="kbd">fallback sửa tay</span></b>
+            <div class="cols">
+              <div>
+                <div class="small">Tỉnh (OCR)</div>
+                <div class="mono big" id="prov">—</div>
+              </div>
+              <div>
+                <div class="small">Ngày (dd/mm/yyyy)</div>
+                <div class="mono big" id="date">—</div>
+              </div>
+            </div>
+            <div class="hr"></div>
+            <div class="small mono" id="headerRaw">Header raw: —</div>
+            <div class="small" id="headerConf">Độ tin cậy: —</div>
+          </div>
+
+          <div class="box">
+            <b>Đèn trạng thái (RED LIGHT)</b>
+            <div class="tag" id="stopTag"><i></i><span id="stopTxt">Chưa có dữ liệu anti</span></div>
+            <div class="hr"></div>
+            <div class="small" id="stopReason">—</div>
+          </div>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <div class="box">
+          <b>DateSanity (cảnh báo lệch ngày)</b>
+          <div class="tag" id="dateTag"><i></i><span id="dateTxt">Chưa kiểm tra</span></div>
+          <div class="hr"></div>
+          <div class="small" id="dateReason">—</div>
+          <div class="hr"></div>
+          <div class="small mini">
+            Quy tắc: nếu ngày OCR < ngày cuối history, hoặc lệch quá 1 ngày so với “ngày kỳ vọng” → cảnh báo lộn chuỗi.
+          </div>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <div class="box">
+          <b>Trạng thái OCR</b>
+          <div class="tag" id="statusTag"><i></i><span id="statusTxt">Chọn ảnh để bắt đầu</span></div>
+          <div class="hr"></div>
+          <div class="small mono" id="log">—</div>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <div class="box">
+          <b>Crop ratios (fixed)</b>
+          <div class="small mono" id="ratioText">Chưa có ảnh.</div>
+          <div class="hr"></div>
+          <div class="small">
+            Layout chuẩn như ảnh bạn gửi là chạy. Nếu 1 máy bị lệch, nhắn mình “ĐB lệch lên/xuống” mình chỉnh ratio 1 lần.
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="card">
+        <h3>Kết quả parse + GAN + Checklist 6 dòng</h3>
+
+        <div class="cols">
+          <div class="box">
+            <b>ĐB (raw OCR)</b>
+            <div class="mono" id="dbRaw">—</div>
+          </div>
+          <div class="box">
+            <b>ĐB 2 số</b>
+            <div class="mono big" id="db2">—</div>
+          </div>
+        </div>
+
+        <div class="cols">
+          <div class="box">
+            <b>G6 2 số (3 con)</b>
+            <div class="mono big" id="g6List">—</div>
+            <div class="small mono" id="g6Raw">—</div>
+          </div>
+          <div class="box">
+            <b>G7 (4 con)</b>
+            <div class="mono big" id="g7List">—</div>
+            <div class="small mono" id="g7Raw">—</div>
+          </div>
+        </div>
+
+        <div class="box">
+          <b>Anti-bẫy (tự cảnh báo)</b>
+          <div class="small" id="antiBox">—</div>
+        </div>
+
+        <div class="box">
+          <b>Checklist 6 dòng (auto sinh)</b>
+          <textarea id="check6" placeholder="OCR xong sẽ tự sinh checklist 6 dòng…"></textarea>
+          <div class="small">
+            Quy tắc: <span class="kbd">tối đa 6 dòng</span> • <span class="kbd">chốt trước</span> • <span class="kbd">giải thích sau</span>
+          </div>
+        </div>
+
+        <div class="box">
+          <b>GAN ĐB (đầu/đuôi/2 số) — tính theo history đã AutoSort</b>
+          <div class="small" id="ganHint">—</div>
+          <div class="hr"></div>
+          <div class="cols">
+            <div class="box">
+              <b>GAN theo ĐẦU (0–9)</b>
+              <div id="ganHead"></div>
+            </div>
+            <div class="box">
+              <b>GAN theo ĐUÔI (0–9)</b>
+              <div id="ganTail"></div>
+            </div>
+          </div>
+          <div style="height:10px"></div>
+          <div class="box">
+            <b>Top GAN ĐB2 (00–99)</b>
+            <div class="small mono" id="ganDB2">—</div>
+          </div>
+        </div>
+
+        <div class="box">
+          <b>GAN LÕI = (đuôi ĐB + lõi G7)</b>
+          <div class="switchRow">
+            <label><input type="checkbox" id="coreReverse"/> Tính cả combo đảo (lõiG7 + đuôiĐB)</label>
+            <label><input type="checkbox" id="coreUseUnique" checked/> Lõi G7 lấy theo “đuôi” (unique)</label>
+          </div>
+          <div class="hr"></div>
+          <div class="small" id="coreExplain">—</div>
+          <div class="hr"></div>
+          <div class="box">
+            <b>Top GAN Lõi (2 số)</b>
+            <div class="small mono" id="ganCore2">—</div>
+          </div>
+        </div>
+
+        <div class="box">
+          <b>Stats nhanh (hit-set: ĐB+G7+G6)</b>
+          <div class="small" id="statsBox">—</div>
+        </div>
+
+        <div class="box">
+          <b>History gần nhất (đã sắp theo ngày)</b>
+          <div class="list" id="historyList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tesseract.js -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+  <script>
+    // ========= FIXED CROP (layout như ảnh bạn gửi) =========
+    const CROP = {
+      HEADER: { x1: 0.05, y1: 0.07, x2: 0.95, y2: 0.20 },
+      DB:     { x1: 0.18, y1: 0.30, x2: 0.96, y2: 0.41 },
+      G6:     { x1: 0.10, y1: 0.75, x2: 0.96, y2: 0.86 },
+      G7:     { x1: 0.10, y1: 0.86, x2: 0.96, y2: 0.95 }
+    };
+
+    const $ = (id)=>document.getElementById(id);
+
+    const mainCanvas = $("mainCanvas");
+    const overlay = $("overlay");
+    const ctx = mainCanvas.getContext("2d");
+    const octx = overlay.getContext("2d");
+
+    let img = new Image();
+    let hasImage = false;
+    let worker = null;
+
+    let lastParsed = {
+      headerRaw:"",
+      province:"unknown",
+      date:"unknown",
+      db5:"", db2:"",
+      g6raw:"", g6:[],
+      g7raw:"", g7:[]
+    };
+
+    function setStatus(type, text){
+      const tag = $("statusTag");
+      tag.classList.remove("good","bad");
+      if(type==="good") tag.classList.add("good");
+      if(type==="bad") tag.classList.add("bad");
+      $("statusTxt").textContent = text;
+    }
+    function setStopLight(type, text, reason){
+      const tag = $("stopTag");
+      tag.classList.remove("good","bad");
+      if(type==="good") tag.classList.add("good");
+      if(type==="bad") tag.classList.add("bad");
+      $("stopTxt").textContent = text;
+      $("stopReason").innerHTML = reason || "—";
+    }
+    function setDateSanity(type, text, reason){
+      const tag = $("dateTag");
+      tag.classList.remove("good","bad");
+      if(type==="good") tag.classList.add("good");
+      if(type==="bad") tag.classList.add("bad");
+      $("dateTxt").textContent = text;
+      $("dateReason").innerHTML = reason || "—";
+    }
+    function log(t){ $("log").textContent = t; }
+
+    function fitCanvasToImage(image){
+      const maxW = 1200;
+      const scale = Math.min(1, maxW / image.naturalWidth);
+      mainCanvas.width = Math.round(image.naturalWidth * scale);
+      mainCanvas.height = Math.round(image.naturalHeight * scale);
+      overlay.width = mainCanvas.width;
+      overlay.height = mainCanvas.height;
+
+      ctx.clearRect(0,0,mainCanvas.width, mainCanvas.height);
+      ctx.drawImage(image, 0, 0, mainCanvas.width, mainCanvas.height);
+
+      drawOverlay();
+
+      $("ratioText").textContent =
+        `HEADER x:${CROP.HEADER.x1}-${CROP.HEADER.x2} y:${CROP.HEADER.y1}-${CROP.HEADER.y2}\n`+
+        `DB     x:${CROP.DB.x1}-${CROP.DB.x2} y:${CROP.DB.y1}-${CROP.DB.y2}\n`+
+        `G6     x:${CROP.G6.x1}-${CROP.G6.x2} y:${CROP.G6.y1}-${CROP.G6.y2}\n`+
+        `G7     x:${CROP.G7.x1}-${CROP.G7.x2} y:${CROP.G7.y1}-${CROP.G7.y2}`;
+    }
+
+    function rectPx(box){
+      const w = overlay.width, h = overlay.height;
+      const x = Math.round(box.x1*w);
+      const y = Math.round(box.y1*h);
+      const rw = Math.round((box.x2-box.x1)*w);
+      const rh = Math.round((box.y2-box.y1)*h);
+      return {x,y,rw,rh};
+    }
+
+    function drawOverlay(){
+      octx.clearRect(0,0,overlay.width, overlay.height);
+      if(!hasImage) return;
+
+      const boxes = [
+        {name:"HDR", box:CROP.HEADER, color:"rgba(168,183,214,.90)"},
+        {name:"ĐB",  box:CROP.DB,     color:"rgba(253,176,34,.90)"},
+        {name:"G6",  box:CROP.G6,     color:"rgba(50,213,131,.90)"},
+        {name:"G7",  box:CROP.G7,     color:"rgba(30,94,255,.90)"},
+      ];
+
+      boxes.forEach(b=>{
+        const r = rectPx(b.box);
+        octx.lineWidth = 3;
+        octx.strokeStyle = b.color;
+        octx.fillStyle = "rgba(0,0,0,.18)";
+        octx.fillRect(r.x, r.y, r.rw, r.rh);
+        octx.strokeRect(r.x, r.y, r.rw, r.rh);
+
+        octx.font = "bold 15px system-ui";
+        octx.fillStyle = b.color;
+        octx.fillText(b.name, r.x+8, r.y+20);
+      });
+    }
+
+    function cropToCanvas(box){
+      const r = rectPx(box);
+      const c = document.createElement("canvas");
+      c.width = r.rw;
+      c.height = r.rh;
+      const cctx = c.getContext("2d");
+      cctx.drawImage(mainCanvas, r.x, r.y, r.rw, r.rh, 0,0, r.rw, r.rh);
+      return c;
+    }
+
+    function onlyDigitsAndSpace(s){
+      return (s||"").replace(/[^\d]/g, " ").replace(/\s+/g, " ").trim();
+    }
+    function last2(n){
+      const s = String(n||"").replace(/[^\d]/g,"");
+      if(!s) return "";
+      return s.slice(-2).padStart(2,"0");
+    }
+    function pickDB5(text){
+      const cleaned = onlyDigitsAndSpace(text);
+      const parts = cleaned.split(" ").filter(Boolean);
+      let best = "";
+      for(const p of parts){
+        if(p.length >= 5){ best = p.slice(0,5); break; }
+      }
+      if(!best && parts.length) best = parts[0].padStart(5,"0").slice(0,5);
+      return best;
+    }
+    function pickG7(text){
+      const cleaned = onlyDigitsAndSpace(text);
+      let parts = cleaned.split(" ").filter(Boolean);
+
+      if(parts.length === 1 && parts[0].length >= 8){
+        const s = parts[0].slice(-8);
+        parts = [s.slice(0,2), s.slice(2,4), s.slice(4,6), s.slice(6,8)];
+      }
+      parts = parts.map(p => p.slice(-2).padStart(2,"0"));
+      if(parts.length > 4) parts = parts.slice(-4);
+      while(parts.length < 4) parts.push("??");
+      return parts;
+    }
+    function pickG6(text){
+      const cleaned = onlyDigitsAndSpace(text);
+      let parts = cleaned.split(" ").filter(Boolean);
+
+      if(parts.length === 1 && parts[0].length >= 9){
+        const s = parts[0].slice(-9);
+        parts = [s.slice(0,3), s.slice(3,6), s.slice(6,9)];
+      }
+      if(parts.length > 3) parts = parts.slice(0,3);
+      const out = parts.map(p => last2(p));
+      while(out.length < 3) out.push("??");
+      return out;
+    }
+
+    function normalizeHeaderText(s){
+      return (s||"").replace(/[\r\n]+/g, " ").replace(/\s+/g, " ").trim();
+    }
+    function parseDateFromHeader(raw){
+      const m = raw.match(/(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})/);
+      if(!m) return {date:"unknown", conf:0};
+      const dd = m[1].padStart(2,"0");
+      const mm = m[2].padStart(2,"0");
+      const yy = m[3];
+      return {date:`${dd}/${mm}/${yy}`, conf:0.9};
+    }
+    function parseProvinceFromHeader(raw){
+      const m = raw.match(/\(([^)]+)\)/);
+      if(!m) return {province:"unknown", conf:0};
+      let p = m[1].trim();
+      p = p.replace(/[^A-Za-zÀ-ỹ\s\-]/g, " ").replace(/\s+/g," ").trim();
+      if(p.length < 2) return {province:"unknown", conf:0.2};
+      return {province:p, conf:0.65};
+    }
+
+    async function initWorker(){
+      if(worker) return worker;
+      setStatus("", "Đang tải OCR engine…");
+      log("Loading Tesseract worker…");
+
+      worker = await Tesseract.createWorker({
+        logger: m => {
+          if(m && m.status){
+            const pct = (m.progress!=null) ? ` ${(m.progress*100).toFixed(0)}%` : "";
+            log(`${m.status}${pct}`);
+          }
+        }
+      });
+
+      await worker.loadLanguage("eng");
+      await worker.initialize("eng");
+      await worker.setParameters({
+        tessedit_char_whitelist: "0123456789/()ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯưÝýỲỳỶỷỸỹ -",
+        preserve_interword_spaces: "1"
+      });
+
+      setStatus("good","OCR sẵn sàng");
+      log("Ready.");
+      return worker;
+    }
+
+    async function ocrCanvas(c, mode){
+      const w = await initWorker();
+      if(mode === "digits"){
+        await w.setParameters({ tessedit_char_whitelist: "0123456789" });
+      }else{
+        await w.setParameters({
+          tessedit_char_whitelist: "0123456789/()ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯưÝýỲỳỶỷỸỹ -"
+        });
+      }
+      const { data } = await w.recognize(c);
+      return (data && data.text) ? data.text : "";
+    }
+
+    // ========= HISTORY (AutoSort) =========
+    const KEY = "BUIHAO_LOTTO_HISTORY_V4";
+
+    function parseDateToKey(ddmmyyyy){
+      const m = String(ddmmyyyy||"").match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+      if(!m) return -1;
+      const dd = m[1], mm = m[2], yy = m[3];
+      return parseInt(`${yy}${mm}${dd}`, 10);
+    }
+
+    function keyToDateObj(dateKey){
+      // dateKey yyyymmdd -> Date
+      if(!Number.isFinite(dateKey) || dateKey < 0) return null;
+      const s = String(dateKey);
+      if(s.length !== 8) return null;
+      const yy = +s.slice(0,4), mm = +s.slice(4,6), dd = +s.slice(6,8);
+      const d = new Date(yy, mm-1, dd);
+      if(d.getFullYear()!==yy || (d.getMonth()+1)!==mm || d.getDate()!==dd) return null;
+      return d;
+    }
+
+    function dateObjToKey(d){
+      if(!(d instanceof Date)) return -1;
+      const yy = String(d.getFullYear());
+      const mm = String(d.getMonth()+1).padStart(2,"0");
+      const dd = String(d.getDate()).padStart(2,"0");
+      return parseInt(`${yy}${mm}${dd}`, 10);
+    }
+
+    function diffDays(aKey, bKey){
+      // b - a (days)
+      const a = keyToDateObj(aKey), b = keyToDateObj(bKey);
+      if(!a || !b) return null;
+      const ms = b.getTime() - a.getTime();
+      return Math.round(ms / (24*3600*1000));
+    }
+
+    function normalizeHistory(arr){
+      const clean = (arr||[]).filter(x=>x && typeof x === "object");
+      clean.forEach(x=>{
+        x.dateKey = (x.dateKey != null) ? x.dateKey : parseDateToKey(x.date);
+        x.ts = x.ts || Date.now();
+        x.g6 = Array.isArray(x.g6) ? x.g6 : [];
+        x.g7 = Array.isArray(x.g7) ? x.g7 : [];
+      });
+      clean.sort((a,b)=>{
+        const ak = (a.dateKey ?? -1), bk = (b.dateKey ?? -1);
+        if(ak !== bk) return ak - bk;
+        return (a.ts||0) - (b.ts||0);
+      });
+      return clean;
+    }
+
+    function loadHistory(){
+      try{
+        const arr = JSON.parse(localStorage.getItem(KEY) || "[]");
+        return normalizeHistory(arr);
+      }catch(e){ return []; }
+    }
+    function saveHistory(arr){
+      const norm = normalizeHistory(arr);
+      localStorage.setItem(KEY, JSON.stringify(norm));
+      return norm;
+    }
+
+    // ========= DATE SANITY =========
+    function evaluateDateSanity(his, candidateDateKey){
+      if(!Number.isFinite(candidateDateKey) || candidateDateKey < 0){
+        return {level:"bad", text:"Ngày OCR không hợp lệ", reason:"Không đọc được ngày đúng định dạng dd/mm/yyyy → khi lưu nhớ sửa tay."};
+      }
+      if(!his.length){
+        return {level:"good", text:"OK (chưa có history)", reason:"Chưa có history → không thể so lệch chuỗi. Lưu ngày này làm mốc."};
+      }
+
+      const last = his[his.length-1];
+      const lastKey = last.dateKey ?? -1;
+      if(lastKey < 0){
+        return {level:"warn", text:"History có bản ghi ngày lỗi", reason:"Bản ghi cuối history thiếu/ sai ngày → nên sửa hoặc xoá bản ghi lỗi."};
+      }
+
+      if(candidateDateKey < lastKey){
+        const d = diffDays(candidateDateKey, lastKey);
+        return {
+          level:"bad",
+          text:"CẢNH BÁO: Lộn ngày / lệch chuỗi",
+          reason:`Ngày OCR < ngày cuối history (${last.date || "?"}). Nhiều khả năng bạn đang mở ảnh cũ hoặc history bị lộn.<br>Chênh khoảng: <b class="mono">${d ?? "?"}</b> ngày (history đang “đi sau” ngày OCR).`
+        };
+      }
+
+      // expected next = last + 1 day (cho phép lệch 0/1: có thể OCR lại đúng ngày đã lưu)
+      const expected = keyToDateObj(lastKey);
+      const expectedNextKey = expected ? dateObjToKey(new Date(expected.getFullYear(), expected.getMonth(), expected.getDate()+1)) : -1;
+
+      const deltaFromLast = diffDays(lastKey, candidateDateKey);
+      const deltaFromExpected = diffDays(expectedNextKey, candidateDateKey);
+
+      // allowed: 0 (trùng ngày), 1 (đúng next). Warning if >1 (nhảy nhiều ngày)
+      if(deltaFromLast === 0){
+        return {level:"warn", text:"Trùng ngày với history", reason:"Ngày OCR trùng với ngày cuối history → nếu đang nhập lại KQ cùng ngày thì OK, còn không thì coi chừng lộn ảnh."};
+      }
+      if(deltaFromLast === 1){
+        return {level:"good", text:"OK (đúng nhịp ngày)", reason:"Ngày OCR đúng +1 so với ngày cuối history → chuỗi hợp lệ."};
+      }
+      if(deltaFromLast > 1){
+        return {
+          level:"bad",
+          text:"CẢNH BÁO: Nhảy ngày bất thường",
+          reason:`Ngày OCR nhảy <b class="mono">${deltaFromLast}</b> ngày so với ngày cuối history (${last.date}). Có thể thiếu dữ liệu giữa chuỗi hoặc lộn ảnh.<br>Ngày kỳ vọng: <b class="mono">${String(expectedNextKey).slice(6,8)}/${String(expectedNextKey).slice(4,6)}/${String(expectedNextKey).slice(0,4)}</b> (xấp xỉ).`
+        };
+      }
+
+      // fallback
+      return {level:"warn", text:"Chưa chắc", reason:"Không đủ điều kiện để kết luận."};
+    }
+
+    // ========= STATS / GAN =========
+    function calcStatsFromHistory(his){
+      const freq = Array(100).fill(0);
+      const lastIdx = Array(100).fill(-1);
+
+      his.forEach((d, idx)=>{
+        const set = new Set([d.db2, ...(d.g7||[]), ...(d.g6||[])].filter(x=>x && x!=="??"));
+        set.forEach(x=>{
+          const n = parseInt(x,10);
+          if(Number.isFinite(n) && n>=0 && n<=99){
+            freq[n] += 1;
+            lastIdx[n] = idx;
+          }
+        });
+      });
+
+      const totalDays = his.length;
+      const gan = Array(100).fill(totalDays);
+      for(let n=0;n<100;n++){
+        gan[n] = (lastIdx[n] === -1) ? totalDays : (totalDays - 1 - lastIdx[n]);
+      }
+
+      const topFreq = [...Array(100).keys()]
+        .sort((a,b)=>freq[b]-freq[a])
+        .slice(0,10)
+        .map(n=>({n, f:freq[n]}));
+
+      const topGan = [...Array(100).keys()]
+        .sort((a,b)=>gan[b]-gan[a])
+        .slice(0,10)
+        .map(n=>({n, g:gan[n]}));
+
+      const head = Array(10).fill(0);
+      const tail = Array(10).fill(0);
+      his.forEach(d=>{
+        if(!d.db2 || d.db2.length<2) return;
+        head[+d.db2[0]]++;
+        tail[+d.db2[1]]++;
+      });
+
+      const headTop = head.map((v,i)=>({i,v})).sort((a,b)=>b.v-a.v).slice(0,3);
+      const tailTop = tail.map((v,i)=>({i,v})).sort((a,b)=>b.v-a.v).slice(0,3);
+
+      return {freq, gan, topFreq, topGan, headTop, tailTop};
+    }
+
+    function calcGanDB(his){
+      const n = his.length;
+      const lastDB2 = Array(100).fill(-1);
+      const lastHead = Array(10).fill(-1);
+      const lastTail = Array(10).fill(-1);
+
+      his.forEach((d, idx)=>{
+        if(!d.db2 || d.db2.length<2) return;
+        const dbn = parseInt(d.db2,10);
+        if(Number.isFinite(dbn)) lastDB2[dbn] = idx;
+        const h = parseInt(d.db2[0],10), t = parseInt(d.db2[1],10);
+        if(Number.isFinite(h)) lastHead[h] = idx;
+        if(Number.isFinite(t)) lastTail[t] = idx;
+      });
+
+      const ganDB2 = lastDB2.map((li, num)=>({num, g: (li<0)? n : (n-1-li)}));
+      const ganHead = lastHead.map((li, digit)=>({digit, g: (li<0)? n : (n-1-li)}));
+      const ganTail = lastTail.map((li, digit)=>({digit, g: (li<0)? n : (n-1-li)}));
+
+      ganDB2.sort((a,b)=>b.g-a.g);
+      ganHead.sort((a,b)=>b.g-a.g);
+      ganTail.sort((a,b)=>b.g-a.g);
+
+      return {ganDB2, ganHead, ganTail, n};
+    }
+
+    // ========= GAN LÕI =========
+    function g7CoreDigitsFromDay(day, useUnique=true){
+      const g7 = (day.g7||[]).filter(x=>x && x!=="??" && x.length>=2);
+      const digits = g7.map(x=>x[1]); // lấy "đuôi" G7 làm lõi
+      if(!useUnique) return digits;
+      return [...new Set(digits)];
+    }
+
+    function buildCorePairsFromDay(day, useReverse=false, useUnique=true){
+      if(!day.db2 || day.db2.length<2) return [];
+      const tailDB = day.db2[1];
+      const coreDigits = g7CoreDigitsFromDay(day, useUnique);
+      const out = new Set();
+
+      // thuận: (đuôi ĐB + lõi G7) => tens = tailDB, units = digit
+      coreDigits.forEach(d=>{
+        out.add(`${tailDB}${d}`);
+      });
+
+      if(useReverse){
+        // đảo: (lõi G7 + đuôi ĐB)
+        coreDigits.forEach(d=>{
+          out.add(`${d}${tailDB}`);
+        });
+      }
+
+      return [...out].filter(x=>/^\d{2}$/.test(x));
+    }
+
+    function calcGanForSet2(his, targetSet){
+      // gan tính theo "db2-only" timeline (mỗi ngày 1 DB2). Gan = số ngày từ lần cuối target xuất hiện trong DB2.
+      const n = his.length;
+      const lastIdx = {};
+      targetSet.forEach(x=> lastIdx[x] = -1);
+
+      his.forEach((d, idx)=>{
+        const db2 = d.db2;
+        if(lastIdx.hasOwnProperty(db2)) lastIdx[db2] = idx;
+      });
+
+      const result = Object.keys(lastIdx).map(k=>{
+        const li = lastIdx[k];
+        const g = (li<0) ? n : (n-1-li);
+        return {k, g};
+      });
+
+      result.sort((a,b)=>b.g-a.g);
+      return result;
+    }
+
+    // ========= Anti-bẫy + Checklist =========
+    function zoneByHead(h){
+      if(h<=2) return "thấp (0–2)";
+      if(h<=6) return "trung (3–6)";
+      return "cao (7–9)";
+    }
+
+    function antiSignals(his){
+      if(his.length < 2) return {anti:"Chưa đủ history để bật anti-bẫy (cần >=2 ngày).", flags:[]};
+
+      const a = his[his.length-2];
+      const b = his[his.length-1];
+
+      const flags = [];
+
+      const ha = parseInt(a.db2?.[0]||"0",10);
+      const hb = parseInt(b.db2?.[0]||"0",10);
+      const za = zoneByHead(ha), zb = zoneByHead(hb);
+
+      if((ha<=2 && hb>=7) || (ha>=7 && hb<=2)){
+        flags.push(`⚠️ Bung biên mạnh: đầu ĐB ${a.db2} → ${b.db2} (thấp↔cao)`);
+      }else if(za !== zb){
+        flags.push(`⚠️ Nhảy vùng: ${za} → ${zb} (dễ bẫy nếu vội ép trục)`);
+      }
+
+      const prevCore = new Set([a.db2, ...(a.g7||[]), ...(a.g6||[])].filter(x=>x && x!=="??"));
+      const g7Now = new Set((b.g7||[]).filter(x=>x && x!=="??"));
+      const g6Now = new Set((b.g6||[]).filter(x=>x && x!=="??"));
+
+      const g7Hit = [...g7Now].some(x=>prevCore.has(x));
+      const g6Hit = [...g6Now].some(x=>prevCore.has(x));
+
+      if(!g7Hit && !g6Hit){
+        flags.push(`🚫 Mất neo lõi: G7 & G6 hôm nay không dính lõi hôm qua → ưu tiên DỪNG/đi nhẹ.`);
+      }else if(g7Hit && g6Hit){
+        flags.push(`✅ Còn nhịp: G7 dính lõi + G6 còn neo → có thể bám hướng.`);
+      }else{
+        flags.push(`⚠️ Nửa nhịp: chỉ 1 trong (G7/G6) dính lõi → coi chừng bẫy hồi.`);
+      }
+
+      if(ha>=7 && (hb===5 || hb===6)){
+        flags.push(`⚠️ Hồi 5–6 sau vùng cao: dễ là "hồi giả" → chờ xác nhận 2 kỳ.`);
+      }
+
+      return {anti: flags.join(" • "), flags};
+    }
+
+    function bong2(s){
+      const map = [5,6,7,8,9,0,1,2,3,4];
+      const a = parseInt(s?.[0]||"0",10);
+      const b = parseInt(s?.[1]||"0",10);
+      if(!Number.isFinite(a) || !Number.isFinite(b)) return "??";
+      return `${map[a]}${map[b]}`;
+    }
+
+    function chooseOnePair(his){
+      const last = his[his.length-1];
+      const prev = his.length>=2 ? his[his.length-2] : null;
+
+      const tailDB = last.db2?.[1] || "";
+      const g7 = (last.g7||[]).filter(x=>x && x!=="??");
+
+      let cand = g7.find(x=>x[1]===tailDB);
+      if(!cand && prev){
+        const prevSet = new Set([prev.db2, ...(prev.g7||[]), ...(prev.g6||[])].filter(Boolean));
+        cand = g7.find(x=>prevSet.has(x));
+      }
+      if(!cand) cand = g7[0] || last.db2 || "??";
+
+      return {main:cand, anti: bong2(cand)};
+    }
+
+    function hitSet(day){
+      return new Set([day.db2, ...(day.g7||[]), ...(day.g6||[])].filter(x=>x && x!=="??"));
+    }
+
+    function computeRedLight(his){
+      if(his.length < 2){
+        return {level:"warn", text:"Chưa đủ dữ liệu", reason:"Cần tối thiểu 2 ngày history để bật đèn."};
+      }
+      const prev = his[his.length-2];
+      const cur = his[his.length-1];
+
+      const prevPick = chooseOnePair(his.slice(0, his.length-1));
+      const antiPrev = prevPick.anti;
+      const setCur = hitSet(cur);
+
+      const flags = antiSignals(his).flags;
+      const hasBungBien = flags.some(x=>x.includes("Bung biên"));
+      const hasMatNeo = flags.some(x=>x.includes("Mất neo"));
+
+      const antiHit = (antiPrev && antiPrev!=="??" && setCur.has(antiPrev));
+
+      if(antiHit){
+        return {
+          level:"bad",
+          text:"ĐÈN ĐỎ: ANTI HIT",
+          reason:`🚫 Anti hôm trước <b class="mono">${antiPrev}</b> đã “về” trong hit-set hôm nay → cơ chế dừng bắt buộc.`
+        };
+      }
+      if(hasBungBien || hasMatNeo){
+        return {
+          level:"bad",
+          text:"ĐÈN ĐỎ: DỪNG",
+          reason:`⚠️ ${hasBungBien ? "Bung biên" : ""}${hasBungBien && hasMatNeo ? " + " : ""}${hasMatNeo ? "Mất neo lõi" : ""} → ưu tiên DỪNG/đi cực nhẹ.`
+        };
+      }
+      const half = flags.some(x=>x.includes("Nửa nhịp"));
+      if(half){
+        return { level:"warn", text:"ĐÈN VÀNG: Coi chừng bẫy", reason:"⚠️ Nửa nhịp → không ép trục, chờ xác nhận." };
+      }
+      return { level:"good", text:"ĐÈN XANH: Còn nhịp", reason:"✅ Không có anti-hit/bung biên/mất neo → có thể bám hướng theo checklist." };
+    }
+
+    function checklist6Lines(his){
+      if(his.length < 2){
+        return [
+          "PHA: M1 (thiếu dữ liệu, chưa khóa pha)",
+          "HƯỚNG: chưa xác định",
+          "G6–G7: cần thêm 1 kỳ để đọc neo",
+          "QUYẾT ĐỊNH: DỪNG",
+          "CHỐT: —",
+          "TIN CẬY: 35%"
+        ].join("\n");
+      }
+
+      const a = his[his.length-2];
+      const b = his[his.length-1];
+
+      const ha = parseInt(a.db2?.[0]||"0",10);
+      const hb = parseInt(b.db2?.[0]||"0",10);
+      const za = zoneByHead(ha), zb = zoneByHead(hb);
+
+      let pha = "M2 (chạy)";
+      if((ha<=2 && hb>=7) || (ha>=7 && hb<=2)) pha = "M3 (đảo/xả mạnh)";
+      else if(za !== zb) pha = "M1 (mở/nhảy pha)";
+      else pha = "M2 (chạy/neo)";
+
+      let huong = `giữ vùng ${zb}`;
+      if(za !== zb) huong = `đang chuyển ${za} → ${zb}`;
+      if((ha<=2 && hb>=7) || (ha>=7 && hb<=2)) huong = `bung biên (đổi cực)`;
+
+      const anti = antiSignals(his);
+      let role = "G7 làm lõi, G6 kiểm neo";
+      if(anti.flags.some(x=>x.includes("Mất neo"))) role = "G7/G6 đang lỏng (nhiễu)";
+      if(anti.flags.some(x=>x.includes("Còn nhịp"))) role = "G7 dính lõi + G6 còn neo (còn nhịp)";
+
+      const red = computeRedLight(his);
+      let qd = "CHƠI NHẸ";
+      if(red.level === "bad") qd = "DỪNG";
+
+      const pick = chooseOnePair(his);
+      const chot = (qd==="DỪNG") ? "—" : `${pick.main} (anti: ${pick.anti})`;
+
+      let pct = 58;
+      if(qd==="DỪNG") pct = 42;
+      if(anti.flags.some(x=>x.includes("Còn nhịp"))) pct = 66;
+      if(anti.flags.some(x=>x.includes("Bung biên"))) pct = 45;
+      if(red.level === "bad") pct = Math.min(pct, 45);
+
+      return [
+        `PHA: ${pha}`,
+        `HƯỚNG: ${huong}`,
+        `G6–G7: ${role}`,
+        `QUYẾT ĐỊNH: ${qd}`,
+        `CHỐT: ${chot}`,
+        `TIN CẬY: ${pct}%`
+      ].join("\n");
+    }
+
+    // ========= UI RENDER =========
+    function renderHistory(){
+      const list = $("historyList");
+      const his = loadHistory();
+
+      if(!his.length){
+        list.innerHTML = `<div class="small">Chưa có history.</div>`;
+        $("statsBox").textContent = "Chưa có history.";
+        $("antiBox").textContent = "—";
+        $("ganHint").textContent = "Chưa có history để tính GAN.";
+        $("ganHead").innerHTML = "—";
+        $("ganTail").innerHTML = "—";
+        $("ganDB2").textContent = "—";
+        $("ganCore2").textContent = "—";
+        $("coreExplain").textContent = "—";
+        setStopLight("", "Chưa có dữ liệu anti", "—");
+        setDateSanity("", "Chưa kiểm tra", "—");
+        return;
+      }
+
+      const view = his.slice().reverse().slice(0,12);
+      list.innerHTML = view.map(x=>{
+        const prov = x.province || "—";
+        const date = x.date || "—";
+        return `
+          <div class="item">
+            <div class="l">
+              <b>${date} <span class="pill mono">ĐB2 ${x.db2 || "—"}</span> <span class="pill mono">${prov}</span></b>
+              <span class="mono">G7: ${(x.g7||[]).join(" ")} | G6: ${(x.g6||[]).join(" ")}</span>
+            </div>
+            <div class="r mono">${new Date(x.ts).toLocaleString()}</div>
+          </div>
+        `;
+      }).join("");
+
+      updateStatsGanAndStopLight();
+    }
+
+    function updateStatsGanAndStopLight(){
+      const his = loadHistory();
+      if(!his.length) return;
+
+      // anti + stop light based on LAST TWO days
+      const anti = antiSignals(his);
+      $("antiBox").innerHTML = anti.anti || "—";
+
+      const red = computeRedLight(his);
+      if(red.level === "good") setStopLight("good", red.text, red.reason);
+      else if(red.level === "bad") setStopLight("bad", red.text, red.reason);
+      else setStopLight("", red.text, red.reason);
+
+      $("check6").value = checklist6Lines(his);
+
+      // stats hit-set
+      const st = calcStatsFromHistory(his);
+      const fmt2 = (n)=>String(n).padStart(2,"0");
+      const topFreq = st.topFreq.map(x=>`${fmt2(x.n)}(${x.f})`).join(" ");
+      const topGan = st.topGan.map(x=>`${fmt2(x.n)}(${x.g})`).join(" ");
+      const headTop = st.headTop.map(x=>`${x.i}(${x.v})`).join(" ");
+      const tailTop = st.tailTop.map(x=>`${x.i}(${x.v})`).join(" ");
+
+      $("statsBox").innerHTML =
+        `Ngày có dữ liệu: <b class="mono">${his.length}</b> • ` +
+        `Head ĐB mạnh: <b class="mono">${headTop}</b> • Tail ĐB mạnh: <b class="mono">${tailTop}</b><br>` +
+        `Top tần suất (hit-set): <b class="mono">${topFreq}</b><br>` +
+        `Top gan (hit-set): <b class="mono warnTxt">${topGan}</b>`;
+
+      // GAN DB
+      const g = calcGanDB(his);
+      $("ganHint").innerHTML = `Tính GAN theo chuỗi <b class="mono">${g.n}</b> ngày (AutoSort). GAN = số ngày kể từ lần cuối “về”.`;
+
+      function tableTop5(arr, label){
+        const top = arr.slice(0,5);
+        return `
+          <table>
+            <thead><tr><th>${label}</th><th class="center">GAN</th></tr></thead>
+            <tbody>
+              ${top.map(x=>`
+                <tr>
+                  <td class="mono">${x.digit != null ? x.digit : String(x.num).padStart(2,"0")}</td>
+                  <td class="center mono ${x.g>=7 ? "badTxt" : (x.g>=4 ? "warnTxt" : "goodTxt")}">${x.g}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+      }
+      $("ganHead").innerHTML = tableTop5(g.ganHead, "Đầu");
+      $("ganTail").innerHTML = tableTop5(g.ganTail, "Đuôi");
+
+      const topDB2 = g.ganDB2.slice(0,12).map(x=>`${String(x.num).padStart(2,"0")}(${x.g})`).join(" ");
+      $("ganDB2").textContent = topDB2 || "—";
+
+      // GAN Lõi (dựa ngày cuối history)
+      renderCoreGan(his);
+    }
+
+    function renderCoreGan(his){
+      if(!his.length){
+        $("ganCore2").textContent = "—";
+        $("coreExplain").textContent = "—";
+        return;
+      }
+      const last = his[his.length-1];
+
+      const useReverse = $("coreReverse").checked;
+      const useUnique = $("coreUseUnique").checked;
+
+      const tailDB = last.db2?.[1] ?? "?";
+      const coreDigits = g7CoreDigitsFromDay(last, useUnique);
+      const corePairs = buildCorePairsFromDay(last, useReverse, useUnique);
+
+      $("coreExplain").innerHTML =
+        `Đuôi ĐB hôm nay: <b class="mono">${tailDB}</b> • Lõi G7 (đuôi các số G7): <b class="mono">${coreDigits.join(" ") || "—"}</b><br>`+
+        `Tập “lõi 2 số” tạo ra: <b class="mono">${corePairs.join(" ") || "—"}</b>`;
+
+      const ganCore = calcGanForSet2(his, new Set(corePairs));
+      const top = ganCore.slice(0, 16).map(x=>`${x.k}(${x.g})`).join(" ");
+      $("ganCore2").textContent = top || "—";
+    }
+
+    // ========= EXPORT / CLEAR / SAVE =========
+    function exportJSON(){
+      const data = loadHistory();
+      const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "BuiHao_Lotto_History.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function clearHistory(){
+      if(!confirm("Xoá toàn bộ history?")) return;
+      localStorage.removeItem(KEY);
+      renderHistory();
+    }
+
+    function saveCurrentToHistory(){
+      if(!lastParsed.db2) return;
+
+      let date = lastParsed.date || "unknown";
+      let province = lastParsed.province || "unknown";
+
+      const dateIn = prompt("Xác nhận ngày (dd/mm/yyyy). Nếu đúng bấm OK:", date);
+      if(dateIn != null && dateIn.trim()) date = dateIn.trim();
+
+      const provIn = prompt("Xác nhận tỉnh (nếu OCR sai có thể sửa):", province);
+      if(provIn != null && provIn.trim()) province = provIn.trim();
+
+      const his = loadHistory();
+      const candidateKey = parseDateToKey(date);
+
+      // DateSanity before save
+      const sanity = evaluateDateSanity(his, candidateKey);
+      if(sanity.level === "bad"){
+        if(!confirm(`⚠️ DateSanity báo NGUY CƠ LỆCH NGÀY.\n\n${sanity.text}\n\nBạn vẫn muốn LƯU?`)){
+          return;
+        }
+      }else if(sanity.level === "warn"){
+        if(!confirm(`⚠️ DateSanity cảnh báo.\n\n${sanity.text}\n\nBạn vẫn muốn LƯU?`)){
+          return;
+        }
+      }
+
+      const item = {
+        ts: Date.now(),
+        date,
+        dateKey: candidateKey,
+        province,
+        db2: lastParsed.db2,
+        db5: lastParsed.db5,
+        g6: lastParsed.g6,
+        g7: lastParsed.g7
+      };
+
+      const dupe = his.find(x => x.dateKey === item.dateKey && x.db2 === item.db2);
+      if(dupe){
+        if(!confirm("Trùng ngày & ĐB2 với 1 bản ghi cũ. Vẫn lưu thêm bản ghi mới?")) return;
+      }
+
+      saveHistory(his.concat([item]));
+      renderHistory();
+      setStatus("good","Đã lưu history (AutoSort + DateSanity)");
+    }
+
+    // ========= OCR pipeline =========
+    async function runOCR(){
+      if(!hasImage) return;
+
+      $("btnOCR").disabled = true;
+      $("btnSave").disabled = true;
+
+      setStatus("", "Đang OCR & phân tích…");
+      log("Start OCR…");
+
+      try{
+        const cH = cropToCanvas(CROP.HEADER);
+        const cDB = cropToCanvas(CROP.DB);
+        const cG6 = cropToCanvas(CROP.G6);
+        const cG7 = cropToCanvas(CROP.G7);
+
+        const [tH, tDB, tG6, tG7] = await Promise.all([
+          ocrCanvas(cH, "mixed"),
+          ocrCanvas(cDB, "digits"),
+          ocrCanvas(cG6, "digits"),
+          ocrCanvas(cG7, "digits")
+        ]);
+
+        const headerRaw = normalizeHeaderText(tH);
+        const d = parseDateFromHeader(headerRaw);
+        const p = parseProvinceFromHeader(headerRaw);
+
+        lastParsed.headerRaw = headerRaw;
+        lastParsed.date = d.date;
+        lastParsed.province = p.province;
+
+        $("headerRaw").textContent = `Header raw: ${headerRaw || "—"}`;
+        const conf = Math.min(0.95, (d.conf + p.conf) / 2);
+        $("headerConf").textContent = `Độ tin cậy: ${(conf*100).toFixed(0)}% (ngày thường rất chuẩn; tỉnh có thể sai dấu → sửa tay khi lưu)`;
+
+        $("date").textContent = lastParsed.date;
+        $("prov").textContent = lastParsed.province;
+
+        $("dbRaw").textContent = (tDB||"").trim() || "—";
+        $("g6Raw").textContent = (tG6||"").trim() || "—";
+        $("g7Raw").textContent = (tG7||"").trim() || "—";
+
+        const db5 = pickDB5(tDB);
+        const db2 = last2(db5);
+        const g6 = pickG6(tG6);
+        const g7 = pickG7(tG7);
+
+        lastParsed.db5 = db5;
+        lastParsed.db2 = db2;
+        lastParsed.g6raw = tG6;
+        lastParsed.g6 = g6;
+        lastParsed.g7raw = tG7;
+        lastParsed.g7 = g7;
+
+        $("db2").textContent = db2 || "—";
+        $("g6List").textContent = g6.join(" ");
+        $("g7List").textContent = g7.join(" ");
+
+        const his = loadHistory();
+
+        // DateSanity preview
+        const candKey = parseDateToKey(lastParsed.date);
+        const sanity = evaluateDateSanity(his, candKey);
+        if(sanity.level === "good") setDateSanity("good", sanity.text, sanity.reason);
+        else if(sanity.level === "bad") setDateSanity("bad", sanity.text, sanity.reason);
+        else setDateSanity("", sanity.text, sanity.reason);
+
+        // preview pipeline as if appended (NOT saved)
+        const preview = normalizeHistory(his.concat([{
+          ts: Date.now(),
+          date: lastParsed.date,
+          dateKey: candKey,
+          province: lastParsed.province,
+          db2: lastParsed.db2,
+          db5: lastParsed.db5,
+          g6: lastParsed.g6,
+          g7: lastParsed.g7
+        }]));
+
+        $("antiBox").innerHTML = antiSignals(preview).anti || "—";
+        const red = computeRedLight(preview);
+        if(red.level === "good") setStopLight("good", red.text, red.reason);
+        else if(red.level === "bad") setStopLight("bad", red.text, red.reason);
+        else setStopLight("", red.text, red.reason);
+
+        $("check6").value = checklist6Lines(preview);
+
+        // preview GAN/Stats + GAN lõi
+        const gdb = calcGanDB(preview);
+        $("ganHint").innerHTML = `Preview GAN theo <b class="mono">${gdb.n}</b> ngày (kể cả ngày vừa OCR).`;
+        function tableTop5(arr, label){
+          const top = arr.slice(0,5);
+          return `
+            <table>
+              <thead><tr><th>${label}</th><th class="center">GAN</th></tr></thead>
+              <tbody>
+                ${top.map(x=>`
+                  <tr>
+                    <td class="mono">${x.digit != null ? x.digit : String(x.num).padStart(2,"0")}</td>
+                    <td class="center mono ${x.g>=7 ? "badTxt" : (x.g>=4 ? "warnTxt" : "goodTxt")}">${x.g}</td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          `;
+        }
+        $("ganHead").innerHTML = tableTop5(gdb.ganHead, "Đầu");
+        $("ganTail").innerHTML = tableTop5(gdb.ganTail, "Đuôi");
+        $("ganDB2").textContent = gdb.ganDB2.slice(0,12).map(x=>`${String(x.num).padStart(2,"0")}(${x.g})`).join(" ");
+
+        const st = calcStatsFromHistory(preview);
+        const fmt2 = (n)=>String(n).padStart(2,"0");
+        $("statsBox").innerHTML =
+          `Preview ngày dữ liệu: <b class="mono">${preview.length}</b><br>` +
+          `Top tần suất (hit-set): <b class="mono">${st.topFreq.map(x=>`${fmt2(x.n)}(${x.f})`).join(" ")}</b><br>` +
+          `Top gan (hit-set): <b class="mono warnTxt">${st.topGan.map(x=>`${fmt2(x.n)}(${x.g})`).join(" ")}</b>`;
+
+        // GAN lõi preview: dựa ngày cuối preview (tức ngày vừa OCR)
+        renderCoreGan(preview);
+
+        setStatus("good","OCR xong (đã phân tích + preview)");
+        log("Done.");
+        $("btnOCR").disabled = false;
+        $("btnSave").disabled = false;
+
+      }catch(e){
+        console.error(e);
+        setStatus("bad","OCR lỗi");
+        log(String(e));
+        $("btnOCR").disabled = false;
+      }
+    }
+
+    // ========= EVENTS =========
+    $("file").addEventListener("change", (e)=>{
+      const f = e.target.files && e.target.files[0];
+      if(!f) return;
+
+      const url = URL.createObjectURL(f);
+      img = new Image();
+      img.onload = ()=>{
+        hasImage = true;
+        fitCanvasToImage(img);
+        $("btnOCR").disabled = false;
+        setStatus("good","Đã nạp ảnh (sẵn sàng OCR)");
+        setDateSanity("", "Chưa kiểm tra", "Bấm OCR để kiểm tra lệch ngày.");
+        log("Image loaded.");
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
+    });
+
+    $("btnOCR").addEventListener("click", runOCR);
+    $("btnSave").addEventListener("click", saveCurrentToHistory);
+    $("btnExport").addEventListener("click", exportJSON);
+    $("btnClear").addEventListener("click", clearHistory);
+
+    $("coreReverse").addEventListener("change", ()=> renderCoreGan(loadHistory().length ? loadHistory() : []));
+    $("coreUseUnique").addEventListener("change", ()=> renderCoreGan(loadHistory().length ? loadHistory() : []));
+
+    window.addEventListener("resize", ()=>{ if(hasImage) drawOverlay(); });
+
+    // init
+    renderHistory();
+    setStatus("", "Chọn ảnh để bắt đầu");
+    setStopLight("", "Chưa có dữ liệu anti", "—");
+    setDateSanity("", "Chưa kiểm tra", "—");
+    log("—");
+  </script>
+</body>
+</html>
