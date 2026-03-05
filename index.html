@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-  <title>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3.7 • G7 BAND VOTING • OCR FIRST • MULTILINE HARD PARSE)</title>
+  <title>Bùi Hào — Lotto ULTRA MASTER (OCR Gate v3.8 • GOD MODE)</title>
   <meta name="theme-color" content="#0b1220"/>
+
   <style>
     :root{
       --bg:#07101d;
@@ -18,19 +19,19 @@
       --bad:#ff4d4f;
       --btn:#1e5eff;
       --btn2:#1a3fa8;
+      --chip:rgba(0,0,0,.18);
     }
     *{box-sizing:border-box}
     body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       background:
         radial-gradient(1200px 600px at 10% -20%, rgba(30,94,255,.25), transparent 60%),
         radial-gradient(900px 500px at 110% 10%, rgba(50,213,131,.18), transparent 55%),
         linear-gradient(180deg, #06101f, #050b16 45%, #050a13);
       color:var(--text);
-      padding:18px;
+      padding:16px;
     }
-    .wrap{max-width:980px;margin:0 auto}
+    .wrap{max-width:1080px;margin:0 auto}
     .card{
       background:linear-gradient(180deg,var(--card),var(--card2));
       border:1px solid var(--line);
@@ -40,15 +41,14 @@
       margin-bottom:14px;
     }
     h1{margin:0 0 8px;font-size:22px;letter-spacing:.2px}
+    h2{margin:0 0 8px;font-size:18px}
     .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
     .pill{
-      padding:7px 10px;
-      border-radius:999px;
+      padding:7px 10px;border-radius:999px;
       background:rgba(255,255,255,.06);
       border:1px solid var(--line);
       color:var(--muted);
-      font-size:12px;
-      white-space:nowrap;
+      font-size:12px;white-space:nowrap;
     }
     .dot{display:inline-block;width:8px;height:8px;border-radius:99px;margin-right:6px;vertical-align:middle}
     .g{background:var(--good)} .y{background:var(--warn)} .r{background:var(--bad)}
@@ -56,7 +56,7 @@
     .btn{
       appearance:none;border:0;cursor:pointer;
       background:linear-gradient(180deg,var(--btn),var(--btn2));
-      color:white;font-weight:800;
+      color:white;font-weight:900;
       padding:12px 14px;border-radius:14px;
       box-shadow:0 10px 18px rgba(30,94,255,.25);
     }
@@ -74,13 +74,10 @@
     .hint{color:var(--muted);line-height:1.45;font-size:13px;margin-top:6px}
     .small{font-size:12px;color:var(--muted)}
     .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
-    @media(min-width:860px){ .grid{grid-template-columns:1.2fr .8fr} }
+    @media(min-width:900px){ .grid{grid-template-columns:1.25fr .75fr} }
     .preview{
-      width:100%;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:#060b13;
-      overflow:hidden;
+      width:100%;border-radius:16px;border:1px solid var(--line);
+      background:#060b13;overflow:hidden;
     }
     canvas, img{display:block;width:100%;height:auto}
     .status{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
@@ -88,26 +85,20 @@
       padding:8px 10px;border-radius:999px;
       border:1px solid var(--line);
       background:rgba(255,255,255,.06);
-      font-weight:800;font-size:12px
+      font-weight:900;font-size:12px
     }
     .badge.ok{color:var(--good)}
     .badge.fail{color:var(--bad)}
     .badge.warn{color:var(--warn)}
-    .sectionTitle{font-size:18px;margin:0 0 6px}
     .mono{
-      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size:12.5px;
-      color:#d7e2ff;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size:12.5px;color:#d7e2ff;
       background:rgba(0,0,0,.25);
       border:1px solid var(--line);
       border-radius:14px;
-      padding:12px;
-      overflow:auto;
-      white-space:pre-wrap;
-      word-break:break-word;
+      padding:12px;overflow:auto;
+      white-space:pre-wrap;word-break:break-word;
     }
-    .inputs{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
-    @media(min-width:700px){ .inputs{grid-template-columns:1fr 1fr} }
     .field{
       background:rgba(255,255,255,.06);
       border:1px solid var(--line);
@@ -116,71 +107,54 @@
     }
     .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
     .field input, .field textarea, .field select{
-      width:100%;
-      border:0;
-      outline:none;
-      background:transparent;
-      color:var(--text);
-      font-size:14px;
-      padding:6px 0;
+      width:100%;border:0;outline:none;background:transparent;color:var(--text);
+      font-size:14px;padding:6px 0;
     }
-    textarea{min-height:150px;resize:vertical}
+    textarea{min-height:160px;resize:vertical}
     .split{display:flex;gap:10px;flex-wrap:wrap}
     .split .field{flex:1;min-width:180px}
     .kpi{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:10px;
-      margin-top:10px;
+      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;margin-top:10px;
     }
-    @media(min-width:700px){ .kpi{grid-template-columns:repeat(4,minmax(0,1fr))} }
+    @media(min-width:760px){ .kpi{grid-template-columns:repeat(4,minmax(0,1fr))} }
     .kpi .box{
       border:1px solid var(--line);
       background:rgba(255,255,255,.06);
-      border-radius:14px;
-      padding:10px;
+      border-radius:14px;padding:10px;
     }
     .kpi .box .t{font-size:12px;color:var(--muted)}
-    .kpi .box .v{font-size:16px;font-weight:900;margin-top:4px}
-    .god{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:10px;
-      margin-top:10px;
-    }
-    @media(min-width:860px){ .god{grid-template-columns:1fr 1fr} }
-    .callout{
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.22);
-      border-radius:14px;
-      padding:10px;
-      color:var(--muted);
-      font-size:12.5px;
-      line-height:1.45;
+    .kpi .box .v{font-size:16px;font-weight:1000;margin-top:4px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{
+      border:1px solid var(--line);
+      background:var(--chip);
+      border-radius:999px;
+      padding:7px 10px;
+      font-weight:950;
+      font-size:14px;
     }
     .krow{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
     .kcard{
-      flex:1;min-width:220px;
+      flex:1;min-width:260px;
       border:1px solid var(--line);
       background:rgba(255,255,255,.06);
       border-radius:14px;
       padding:12px;
     }
-    .khead{font-weight:900;font-size:12px;color:var(--muted);letter-spacing:.2px}
-    .kbig{font-size:22px;font-weight:1000;margin-top:6px}
-    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .chip{
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      border-radius:999px;
-      padding:7px 10px;
-      font-weight:900;
-      font-size:14px;
-    }
-    .warnList{margin:10px 0 0;padding-left:18px;color:var(--text)}
-    .warnList li{margin:6px 0}
+    .khead{font-weight:950;font-size:12px;color:var(--muted);letter-spacing:.2px}
+    .kbig{font-size:22px;font-weight:1100;margin-top:6px}
     .sep{height:1px;background:var(--line);margin:12px 0}
-    .metaLine{color:var(--muted);font-size:12px;line-height:1.45}
+    .warnList{margin:8px 0 0;padding-left:18px;color:var(--text)}
+    .warnList li{margin:6px 0}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .tab{padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);font-weight:950;font-size:12px;cursor:pointer;color:var(--muted)}
+    .tab.active{color:var(--text);box-shadow:0 8px 18px rgba(0,0,0,.25)}
+    .twoCol{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:900px){ .twoCol{grid-template-columns:1fr 1fr} }
+    .heatWrap{display:grid;grid-template-columns:1fr;gap:10px}
+    @media(min-width:760px){ .heatWrap{grid-template-columns:1fr 1fr} }
+    .miniTitle{font-weight:950;color:var(--muted);font-size:12px;margin-bottom:6px}
   </style>
 </head>
 
@@ -188,20 +162,20 @@
 <div class="wrap">
 
   <div class="card">
-    <h1>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3.7 • G7 BAND VOTING)</h1>
+    <h1>Bùi Hào — Lotto ULTRA MASTER (OCR Gate v3.8 • GOD MODE)</h1>
+
     <div class="pillrow">
       <div class="pill"><span class="dot g"></span>OCR ưu tiên (ROI + Scale + Voting)</div>
-      <div class="pill"><span class="dot g"></span>G7 BAND ROI riêng (giảm nhầm 5↔8)</div>
-      <div class="pill"><span class="dot g"></span>G7 2-pass OCR (PSM6 + PSM7) + vote theo vị trí</div>
-      <div class="pill"><span class="dot y"></span>Batch nhiều ảnh (sequential)</div>
-      <div class="pill"><span class="dot y"></span>FULL Engine HIT@3&gt;=2</div>
-      <div class="pill"><span class="dot g"></span>✅ 1 ngày / 1 dòng</div>
+      <div class="pill"><span class="dot g"></span>HARD PARSE G7/G6 multi-line</div>
+      <div class="pill"><span class="dot g"></span>Fix “G7 BAND rác 26 36” (consensus + band-ROI)</div>
+      <div class="pill"><span class="dot y"></span>Heatmap TRỤC (10×10) + Head/Tail power</div>
+      <div class="pill"><span class="dot y"></span>Pascal 36 tầng (seed ĐB)</div>
+      <div class="pill"><span class="dot g"></span>GOD MODE: Pha → Anti-bẫy → HIT@3>=2</div>
     </div>
 
     <div class="hint">
-      Luồng: <b>Upload ảnh FULL</b> → <b>ROI preset KQXS</b> → <b>Split UPPER/BODY/G7-BAND</b> →
-      <b>OCR Voting (3 preprocess)</b> → <b>G7 CONSENSUS</b> → <b>HARD PARSE (G7/G6 tách dòng vẫn bắt)</b> →
-      Gate PASS thì đổ data → bấm <b>Chạy FULL</b>.
+      Luồng: <b>Upload ảnh FULL</b> → <b>ROI preset</b> → <b>Voting 3 preprocess</b> → <b>Gate PASS</b> → đổ data →
+      bấm <b>Chạy GOD MODE</b>.
       <br/><b>* Tool thống kê hỗ trợ phân tích, không đảm bảo kết quả.</b>
     </div>
 
@@ -220,16 +194,17 @@
       <div class="badge warn" id="stGate">● Gate: waiting</div>
       <div class="badge warn" id="stBatch">● Batch: 0</div>
       <div class="badge warn" id="stSave">● Save: --</div>
+      <div class="badge warn" id="stPha">● Pha: --</div>
     </div>
   </div>
 
   <div class="card">
     <div class="grid">
       <div>
-        <h2 class="sectionTitle">Ảnh → OCR → Gate</h2>
+        <h2>Ảnh → OCR → Gate</h2>
         <div class="hint">
-          Mẹo: dùng ảnh “FULL bảng” như app KQXS. Nếu dính tab footer/quảng cáo → OCR dễ tách dòng,
-          nhưng v3.7 có <b>G7-BAND ROI riêng</b> + <b>vote theo vị trí</b> để giảm lỗi “05→08 / 5↔8”.
+          Mẹo: ảnh “FULL bảng” (app KQXS). Nếu dính footer/tab/ads → OCR dễ lộn dòng,
+          nhưng v3.8 có <b>HARD PARSE</b> + <b>G7 band-ROI consensus</b>.
         </div>
 
         <div class="preview" style="margin-top:10px">
@@ -244,7 +219,7 @@
           <div class="box"><div class="t">Gate</div><div class="v" id="kGate">--</div></div>
         </div>
 
-        <div class="inputs">
+        <div class="twoCol" style="margin-top:10px">
           <div class="field">
             <label>Manual (khi Gate fail) — DB (2 số)</label>
             <input id="manualDB" placeholder="VD: 57" />
@@ -269,41 +244,24 @@
       </div>
 
       <div>
-        <h2 class="sectionTitle">Debug OCR</h2>
+        <h2>Debug OCR</h2>
         <div class="mono" id="dbg">Chưa có OCR.</div>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <h2 class="sectionTitle">Mini Backtest (tham khảo)</h2>
-    <div class="hint">Chạy trên dữ liệu bạn đã nhập (không phải “đảm bảo”). Kết quả để so engine & weight.</div>
-
-    <div class="row" style="margin-top:10px">
-      <button class="btn ghost" id="btnBacktest">🧪 Backtest</button>
-      <span class="small" id="btHint"></span>
-    </div>
-
-    <div class="kpi">
-      <div class="box"><div class="t">Số lượt test</div><div class="v" id="btN">--</div></div>
-      <div class="box"><div class="t">Hit≥2 (3 số)</div><div class="v" id="btHit2">--</div></div>
-      <div class="box"><div class="t">Tỉ lệ Hit≥2</div><div class="v" id="btRate">--</div></div>
-      <div class="box"><div class="t">Chuỗi trượt max</div><div class="v" id="btMaxMiss">--</div></div>
-    </div>
-
-    <div class="mono" id="btLog" style="margin-top:10px">Chưa backtest.</div>
-  </div>
-
-  <div class="card">
-    <h2 class="sectionTitle">Dữ liệu đầu vào (mỗi dòng = 1 ngày)</h2>
+    <h2>Dữ liệu đầu vào (mỗi dòng = 1 ngày)</h2>
     <div class="hint">
       Format chuẩn: <b>DB xx | G7: a b c d | G6: xxx yyy zzz</b> (newest ở trên).
-      <br/>✅ Tool sẽ tự <b>gom 1 ngày / 1 dòng</b> trước khi chạy FULL.
+      <br/>✅ Tool tự <b>gom 1 ngày/1 dòng</b> trước khi chạy.
     </div>
 
     <div class="row" style="margin-top:10px">
       <button class="btn ghost" id="btnNormalize">🧹 Chuẩn hoá 1 ngày/1 dòng</button>
-      <button class="btn ghost" id="btnFixFormat">🛠️ Sửa format (DB/G7/G6) theo số</button>
+      <button class="btn ghost" id="btnFixFormat">🛠️ Sửa format theo số</button>
+      <button class="btn ghost" id="btnHeat">🔥 Vẽ Heatmap TRỤC</button>
+      <button class="btn ghost" id="btnPas36">🔺 Pascal 36</button>
     </div>
 
     <div class="field" style="margin-top:10px">
@@ -313,23 +271,23 @@
     <div class="split" style="margin-top:10px">
       <div class="field">
         <label>Cửa sổ ngày (khuyến nghị 20)</label>
-        <input id="winDays" type="number" value="20" min="6" max="60" />
+        <input id="winDays" type="number" value="20" min="6" max="90" />
       </div>
       <div class="field">
         <label>Top hiển thị (tham khảo)</label>
-        <input id="topN" type="number" value="10" min="4" max="15" />
+        <input id="topN" type="number" value="10" min="4" max="20" />
       </div>
       <div class="field">
         <label>AI giám sát</label>
         <select id="aiSup">
-          <option value="on" selected>ON (khóa theo pha)</option>
+          <option value="on" selected>ON (GOD MODE)</option>
           <option value="off">OFF</option>
         </select>
       </div>
       <div class="field">
-        <label>Thu hẹp G6 (trong tính toán)</label>
+        <label>G6 trong tính toán</label>
         <select id="g6Scope">
-          <option value="full" selected>FULL (G6 mọi ngày)</option>
+          <option value="full" selected>FULL</option>
           <option value="newest_only">CHỈ ngày mới nhất</option>
           <option value="off">TẮT G6</option>
         </select>
@@ -339,11 +297,11 @@
     <div class="split" style="margin-top:10px">
       <div class="field">
         <label>Ngưỡng TRỤC nổi (>=)</label>
-        <input id="trucThreshold" type="number" value="4" min="2" max="10" />
+        <input id="trucThreshold" type="number" value="4" min="2" max="12" />
       </div>
       <div class="field">
         <label>K đọc pha (ngày gần nhất)</label>
-        <input id="phaseK" type="number" value="9" min="5" max="20" />
+        <input id="phaseK" type="number" value="9" min="5" max="25" />
       </div>
       <div class="field">
         <label>Trọng số Hot</label>
@@ -353,47 +311,32 @@
         <label>Trọng số Gan</label>
         <input id="wGan" type="number" value="1.5" step="0.5" />
       </div>
-    </div>
-
-    <div class="split" style="margin-top:10px">
       <div class="field">
         <label>Trọng số Pascal</label>
         <input id="wPas" type="number" value="2" step="0.5" />
       </div>
       <div class="field">
-        <label>(ghi nhớ) Newest luôn ở trên</label>
+        <label>Newest luôn ở trên</label>
         <input value="OK" disabled />
       </div>
     </div>
 
-    <div class="god">
-      <div class="callout">
-        <b>GOD MODE (MASTER+++):</b><br/>
-        App sẽ <b>ĐỌC PHA trước</b> → chọn hướng trọng số → rồi mới <b>CHỐT 3 SỐ</b> theo mục tiêu <b>HIT@3&gt;=2</b>.
-        <br/><b>Quan trọng:</b> Bản này <b>KHÔNG “né ngày” để trống</b>. Ngày nhiễu vẫn chốt 3 nhưng sẽ gắn cảnh báo rủi ro.
-      </div>
-      <div class="callout">
-        <b>OCR v3.7 — nâng cấp chống lỗi G7:</b><br/>
-        • <b>G7-BAND ROI riêng</b> (đáy bảng) → giảm dính G6/ads/footer<br/>
-        • <b>G7 2-pass OCR</b>: PSM6 (block) + PSM7 (line) × 3 preprocess → <b>vote theo từng vị trí</b><br/>
-        • <b>G7 CONSENSUS</b>: nếu BODY parse lệch mà BAND vote ổn → ưu tiên BAND
-      </div>
-    </div>
-
     <div class="row">
-      <button class="btn" id="btnFull">🚀 Chạy FULL (Pha → HIT@3>=2 → Anti-bẫy)</button>
-      <button class="btn ghost" id="btnSave">💾 Lưu dữ liệu</button>
-      <button class="btn ghost" id="btnLoad">📥 Tải dữ liệu</button>
-      <button class="btn ghost" id="btnClearData">🧹 Clear input/output</button>
+      <button class="btn" id="btnGod">🚀 Chạy GOD MODE (Pha → Anti-bẫy → HIT@3>=2)</button>
+      <button class="btn ghost" id="btnBacktest">🧪 Backtest</button>
+      <button class="btn ghost" id="btnSave">💾 Lưu</button>
+      <button class="btn ghost" id="btnLoad">📥 Tải</button>
+      <button class="btn ghost" id="btnClearData">🧹 Clear</button>
     </div>
   </div>
 
   <div class="card">
-    <h2 class="sectionTitle">KẾT QUẢ FULL</h2>
+    <h2>KẾT QUẢ GOD MODE</h2>
 
-    <div class="row" style="margin-top:6px">
-      <button class="btn ghost" id="btnViewSimple">SIMPLE</button>
-      <button class="btn ghost" id="btnViewPro">PRO</button>
+    <div class="tabs">
+      <div class="tab active" id="tabSimple">SIMPLE (6 dòng)</div>
+      <div class="tab" id="tabPro">PRO</div>
+      <div class="tab" id="tabGod">GOD (Heatmap + Pascal)</div>
       <span class="small" id="viewHint" style="opacity:.85"></span>
     </div>
 
@@ -402,9 +345,24 @@
     </div>
 
     <details id="detailBox" style="margin-top:10px">
-      <summary class="pill" style="cursor:pointer">Xem chi tiết FULL PRO</summary>
+      <summary class="pill" style="cursor:pointer">Xem raw log</summary>
       <div class="mono" id="outRaw" style="margin-top:10px">Chưa có dữ liệu.</div>
     </details>
+  </div>
+
+  <div class="card">
+    <h2>Heatmap / Pascal</h2>
+    <div class="heatWrap">
+      <div class="kcard">
+        <div class="miniTitle">Heatmap TRỤC (Head×Tail)</div>
+        <canvas id="cvHeat" height="360"></canvas>
+        <div class="small" id="heatHint"></div>
+      </div>
+      <div class="kcard">
+        <div class="miniTitle">Pascal 36 (seed từ 2 kỳ ĐB gần nhất)</div>
+        <div class="mono" id="pasOut">Chưa chạy.</div>
+      </div>
+    </div>
   </div>
 
   <div class="card">
@@ -413,7 +371,7 @@
 
 </div>
 
-<!-- Load libs -->
+<!-- libs -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script async src="https://docs.opencv.org/4.x/opencv.js" onload="onOpenCvReady()"></script>
 
@@ -422,7 +380,10 @@
    UTIL
 ========================================================= */
 const el = (id)=>document.getElementById(id);
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const sigmoid=(z)=>1/(1+Math.exp(-z));
 function pad2(n){ return String(n).padStart(2,"0"); }
+function esc(s){ return String(s).replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]||m)); }
 function setBadge(id, text, cls){
   const e = el(id);
   e.textContent = text;
@@ -437,82 +398,88 @@ function showKPI(db2, g6, g7, gate){
 }
 
 /* =========================================================
+   VIEW
+========================================================= */
+let VIEW_MODE="simple";
+function setView(m){
+  VIEW_MODE=m;
+  el("tabSimple").classList.toggle("active", m==="simple");
+  el("tabPro").classList.toggle("active", m==="pro");
+  el("tabGod").classList.toggle("active", m==="god");
+  el("detailBox").open = (m!=="simple");
+  el("viewHint").textContent =
+    m==="simple" ? "SIMPLE: đúng format 6 dòng" :
+    m==="pro" ? "PRO: thêm TOP + anti-bẫy chi tiết" :
+    "GOD: thêm Heatmap + Pascal 36";
+  if(window.__lastRender) window.__lastRender();
+}
+el("tabSimple").onclick=()=>setView("simple");
+el("tabPro").onclick=()=>setView("pro");
+el("tabGod").onclick=()=>setView("god");
+setView("simple");
+
+/* =========================================================
    INPUT NORMALIZE — 1 NGÀY / 1 DÒNG
 ========================================================= */
 function normalizeInputToOneDayOneLine(rawText){
-  const lines = String(rawText||"")
-    .replace(/\r/g,"")
-    .split("\n")
-    .map(s=>s.trim())
-    .filter(Boolean);
+  const lines = String(rawText||"").replace(/\r/g,"").split("\n")
+    .map(s=>s.trim()).filter(Boolean);
 
-  const out = [];
+  const out=[];
   for(const ln of lines){
     const isNew = /(^|\s)(DB|ĐB)\s*\d{1,2}\b/i.test(ln);
     const hasG7 = /\bG7\s*:/i.test(ln);
     const hasG6 = /\bG6\s*:/i.test(ln);
 
-    if(isNew && (hasG7 || hasG6)){
-      out.push(ln);
-    }else{
+    if(isNew && (hasG7 || hasG6)) out.push(ln);
+    else{
       if(out.length===0) out.push(ln);
-      else out[out.length-1] = (out[out.length-1] + " " + ln).replace(/\s+/g," ").trim();
+      else out[out.length-1] = (out[out.length-1]+" "+ln).replace(/\s+/g," ").trim();
     }
   }
   return out.join("\n");
 }
-
 function normalizeRecordByDigits(line){
   const db2 = (line.match(/DB\s*([0-9]{1,2})/i)?.[1] || "").replace(/\D/g,"").slice(-2);
   const g7 = (line.match(/G7\s*:\s*([^|]+)/i)?.[1] || "").match(/\b\d{2}\b/g) || [];
   const g6 = (line.match(/G6\s*:\s*([^|]+)/i)?.[1] || "").match(/\b\d{3}\b/g) || [];
-
-  if(db2.length!==2 || g7.length<4 || g6.length<3){
-    return line.replace(/\s+/g," ").trim();
-  }
+  if(db2.length!==2 || g7.length<4 || g6.length<3) return line.replace(/\s+/g," ").trim();
   const g7Last4 = g7.slice(-4).map(pad2);
   return `DB ${pad2(db2)} | G7: ${g7Last4.join(" ")} | G6: ${g6.slice(0,3).join(" ")}`;
 }
-
 function fixInputFormat(){
   const merged = normalizeInputToOneDayOneLine(el("inputData").value);
-  const fixed = merged
-    .split("\n")
-    .map(s=>normalizeRecordByDigits(s))
-    .join("\n");
+  const fixed = merged.split("\n").map(s=>normalizeRecordByDigits(s)).join("\n");
   el("inputData").value = fixed.trim();
 }
-
-el("btnNormalize").onclick = ()=>{
-  el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
-};
-el("btnFixFormat").onclick = ()=> fixInputFormat();
+el("btnNormalize").onclick=()=>{ el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim(); };
+el("btnFixFormat").onclick=()=>fixInputFormat();
 
 /* =========================================================
-   PART 1 — OCR GATE v3.7 (OCR FIRST + VOTING + HARD PARSE + G7 BAND VOTING)
+   OCR GATE v3.8 (ROI + Voting + HARD PARSE + BAND CONSENSUS)
 ========================================================= */
-let cvReady = false;
-let lastImageBlob = null;
-let batchOK = 0, batchFail = 0;
+let cvReady=false;
+let lastImageBlob=null;
+let batchOK=0, batchFail=0;
 
 function setStatus(){
   setBadge("stCv", `● OpenCV: ${cvReady ? "OK" : "loading…"}`, cvReady ? "ok" : "warn");
   setBadge("stBatch", `● Batch: OK ${batchOK} | FAIL ${batchFail}`, (batchFail>0) ? "warn" : "ok");
 }
-function onOpenCvReady(){ cvReady = true; setStatus(); }
+function onOpenCvReady(){ cvReady=true; setStatus(); }
 setStatus();
 
-/* ====== Tesseract Worker reuse (FAST) ====== */
-let __worker = null;
+/* Tesseract worker reuse */
+let __worker=null;
 async function getWorker(){
   if(__worker) return __worker;
   __worker = await Tesseract.createWorker("eng");
   await __worker.setParameters({ preserve_interword_spaces: "1" });
   return __worker;
 }
-async function ocrText(canvas, opts = {}){
+async function ocrText(canvas, opts={}){
   const worker = await getWorker();
-  const whitelist = opts.whitelist || "0123456789DBdbĐđB";
+  const whitelist = opts.whitelist || "0123456789DBdbĐđB \n";
   const psm = (opts.psm ?? 6);
   await worker.setParameters({
     tessedit_char_whitelist: whitelist,
@@ -522,141 +489,112 @@ async function ocrText(canvas, opts = {}){
   return (data?.text || "");
 }
 
-function canvasFromMat(mat){
-  const canvas = document.createElement("canvas");
-  canvas.width = mat.cols;
-  canvas.height = mat.rows;
-  cv.imshow(canvas, mat);
-  return canvas;
-}
-
-function scaleCanvas(srcCanvas, targetH = 1100){
-  const scale = targetH / Math.max(1, srcCanvas.height);
-  const c = document.createElement("canvas");
-  c.width = Math.round(srcCanvas.width * scale);
-  c.height = Math.round(srcCanvas.height * scale);
-  const g = c.getContext("2d");
-  g.imageSmoothingEnabled = false;
-  g.drawImage(srcCanvas, 0, 0, c.width, c.height);
-  return c;
-}
-
 function cleanOCR(txt){
-  // NOTE: KHÔNG map S->5 nữa (dễ gây bẫy 5/8).
-  // Chỉ làm sạch ký tự rác + normalize O/0 I/1
   return String(txt)
     .replace(/[Oo]/g,"0")
     .replace(/[Il|]/g,"1")
+    .replace(/S/g,"5")
     .replace(/[^\d\s\nĐđDBdb]/g," ")
     .replace(/\s+\n/g,"\n")
     .replace(/\n\s+/g,"\n")
     .replace(/[ \t]+/g," ")
     .trim();
 }
-
-/* ===== preprocess set (3 mẫu) ===== */
+function canvasFromMat(mat){
+  const c=document.createElement("canvas");
+  c.width=mat.cols; c.height=mat.rows;
+  cv.imshow(c, mat);
+  return c;
+}
+function scaleCanvas(srcCanvas, targetH=1100){
+  const scale = targetH / Math.max(1, srcCanvas.height);
+  const c=document.createElement("canvas");
+  c.width=Math.round(srcCanvas.width*scale);
+  c.height=Math.round(srcCanvas.height*scale);
+  const g=c.getContext("2d");
+  g.imageSmoothingEnabled=false;
+  g.drawImage(srcCanvas,0,0,c.width,c.height);
+  return c;
+}
 function toGray(mat){
-  const gray = new cv.Mat();
+  const gray=new cv.Mat();
   cv.cvtColor(mat, gray, cv.COLOR_RGBA2GRAY, 0);
   return gray;
 }
 function pre_adaptive(mat){
-  const gray = toGray(mat);
-  const blur = new cv.Mat();
+  const gray=toGray(mat);
+  const blur=new cv.Mat();
   cv.GaussianBlur(gray, blur, new cv.Size(3,3), 0, 0, cv.BORDER_DEFAULT);
-  const thr = new cv.Mat();
-  cv.adaptiveThreshold(
-    blur, thr, 255,
-    cv.ADAPTIVE_THRESH_GAUSSIAN_C,
-    cv.THRESH_BINARY, 31, 8
-  );
-  const kernel = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(2,2));
-  const closed = new cv.Mat();
+  const thr=new cv.Mat();
+  cv.adaptiveThreshold(blur, thr, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 31, 8);
+  const kernel=cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(2,2));
+  const closed=new cv.Mat();
   cv.morphologyEx(thr, closed, cv.MORPH_CLOSE, kernel);
   gray.delete(); blur.delete(); thr.delete(); kernel.delete();
   return closed;
 }
 function pre_adaptive_inv(mat){
-  const bin = pre_adaptive(mat);
-  const inv = new cv.Mat();
+  const bin=pre_adaptive(mat);
+  const inv=new cv.Mat();
   cv.bitwise_not(bin, inv);
   bin.delete();
   return inv;
 }
 function pre_otsu(mat){
-  const gray = toGray(mat);
-  const blur = new cv.Mat();
+  const gray=toGray(mat);
+  const blur=new cv.Mat();
   cv.GaussianBlur(gray, blur, new cv.Size(3,3), 0, 0, cv.BORDER_DEFAULT);
-  const thr = new cv.Mat();
+  const thr=new cv.Mat();
   cv.threshold(blur, thr, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU);
   gray.delete(); blur.delete();
   return thr;
 }
 
-/* ===== ROI preset (FULL KQXS) ===== */
+/* ROI preset FULL KQXS */
 function roiPresetFullKQXS(mat){
-  const W = mat.cols, H = mat.rows;
-
-  const x0 = Math.floor(W*0.02);
-  const y0 = Math.floor(H*0.02);
-  const w0 = Math.floor(W*0.96);
-  const h0 = Math.floor(H*0.96);
-  let m = mat.roi(new cv.Rect(x0,y0,w0,h0));
-
-  // bỏ header app ~16%
-  const y1 = Math.floor(m.rows * 0.16);
-  const h1 = Math.floor(m.rows * 0.80); // bỏ footer ~4%
-  const out = m.roi(new cv.Rect(0, y1, m.cols, h1));
+  const W=mat.cols, H=mat.rows;
+  const x0=Math.floor(W*0.02);
+  const y0=Math.floor(H*0.02);
+  const w0=Math.floor(W*0.96);
+  const h0=Math.floor(H*0.96);
+  let m=mat.roi(new cv.Rect(x0,y0,w0,h0));
+  const y1=Math.floor(m.rows*0.16);
+  const h1=Math.floor(m.rows*0.80);
+  const out=m.roi(new cv.Rect(0,y1,m.cols,h1));
   m.delete();
   return out;
 }
 
-/* ===== helpers for parsing ===== */
-function extractDB5_fromLabel(text){
-  const t = String(text||"");
-  const all5 = (t.match(/\b\d{5}\b/g) || []).filter(x => x !== "00000");
-  if(!all5.length) return "";
-  const longRuns = t.match(/\b\d{8,}\b/g) || [];
-  const inLong = new Set();
-  longRuns.forEach(run=>{
-    for(const x of all5){
-      if(run.includes(x)) inLong.add(x);
-    }
-  });
-  const filtered = all5.filter(x=>!inLong.has(x));
-  return filtered[0] || all5[0] || "";
-}
-function _tokensDigits(line){ return String(line||"").match(/\d+/g) || []; }
-function _pairify(x){
-  const s = String(x||"").replace(/\D/g,"");
-  if(!s) return "";
-  if(s.length===1) return "0"+s;
-  return s.slice(-2);
-}
-function _buildG7FromTokens(tokens){
-  const t = tokens.slice(1);
-  const nums2 = t.filter(x=>String(x).length===2).map(_pairify);
-  if(nums2.length>=4) return nums2.slice(-4);
-
-  const singles = t.filter(x=>String(x).length===1).map(x=>String(x));
-  const built = [];
-  for(let i=0;i<singles.length-1;i+=2){
-    built.push(singles[i]+singles[i+1]);
-  }
-  const mix = [...built, ...nums2].map(_pairify).filter(x=>/^\d{2}$/.test(x));
-  return mix.slice(-4);
+/* v3.8: band-ROI riêng cho G7 (chỉ lấy vùng gần bottom nơi hàng G7 nằm) */
+function roiBandG7(bodyMat){
+  const W=bodyMat.cols, H=bodyMat.rows;
+  const y = Math.floor(H*0.72);      // bắt đầu thấp
+  const h = Math.floor(H*0.22);      // band mỏng
+  const x = Math.floor(W*0.06);
+  const w = Math.floor(W*0.88);
+  return bodyMat.roi(new cv.Rect(x, clamp(y,0,H-1), clamp(w,1,W-x), clamp(h,1,H-y)));
 }
 
-/* ===== HARD PARSE (MULTI-LINE) ===== */
+/* parsing helpers */
 function normLinesFromText(txt){
-  const t = cleanOCR(txt || "");
+  const t=cleanOCR(txt||"");
   return t.split("\n").map(s=>s.trim()).filter(Boolean);
 }
+function pickDB5(lines){
+  for(const ln of lines){
+    if(/(^|\s)(DB|ĐB)\b/i.test(ln)){
+      const m=ln.match(/\b\d{5}\b/g)||[];
+      if(m.length) return m[0];
+    }
+  }
+  const head=lines.slice(0, Math.min(20, lines.length)).join(" ");
+  const all5=head.match(/\b\d{5}\b/g)||[];
+  return all5[0]||"";
+}
 function collectNext2Digits(lines, i, need=4, maxLook=14){
-  const out = [];
+  const out=[];
   for(let k=i+1; k<lines.length && out.length<need && k<=i+maxLook; k++){
-    const s = String(lines[k]||"").trim();
-    const m2 = s.match(/\b\d{2}\b/g) || [];
+    const m2=String(lines[k]||"").match(/\b\d{2}\b/g)||[];
     for(const x of m2){
       out.push(pad2(x));
       if(out.length>=need) break;
@@ -665,10 +603,9 @@ function collectNext2Digits(lines, i, need=4, maxLook=14){
   return out;
 }
 function collectNext3Digits(lines, i, need=3, maxLook=14){
-  const out = [];
+  const out=[];
   for(let k=i+1; k<lines.length && out.length<need && k<=i+maxLook; k++){
-    const s = String(lines[k]||"").trim();
-    const m3 = s.match(/\b\d{3}\b/g) || [];
+    const m3=String(lines[k]||"").match(/\b\d{3}\b/g)||[];
     for(const x of m3){
       out.push(x);
       if(out.length>=need) break;
@@ -676,155 +613,131 @@ function collectNext3Digits(lines, i, need=3, maxLook=14){
   }
   return out;
 }
-function pickDB5(lines){
-  for(const ln of lines){
-    if(/(^|\s)(DB|ĐB)\b/i.test(ln)){
-      const m = ln.match(/\b\d{5}\b/g) || [];
-      if(m.length) return m[0];
-    }
-  }
-  const head = lines.slice(0, Math.min(20, lines.length)).join(" ");
-  const all5 = head.match(/\b\d{5}\b/g) || [];
-  if(all5.length) return all5[0];
-  const t = lines.join("\n");
-  return extractDB5_fromLabel(t);
-}
-function parseKQXSFromText(txt){
-  const lines = normLinesFromText(txt);
-  const db5 = pickDB5(lines);
-
+function parseBodyForG7G6(txt){
+  const lines=normLinesFromText(txt);
   // G7
-  let g7 = [];
-  let g7Idx = -1;
-  for(let i=lines.length-1; i>=0; i--){
-    const tokens = _tokensDigits(lines[i]);
-    if(!tokens.length) continue;
-
+  let g7=[], g7Idx=-1;
+  for(let i=lines.length-1;i>=0;i--){
+    const tokens=(String(lines[i]).match(/\d+/g)||[]);
     if(tokens.length===1 && tokens[0]==="7"){
-      const got = collectNext2Digits(lines, i, 4);
-      if(got.length===4){ g7 = got; g7Idx=i; break; }
+      const got=collectNext2Digits(lines,i,4);
+      if(got.length===4){ g7=got; g7Idx=i; break; }
     }
     if(tokens[0]==="7"){
-      const got = _buildG7FromTokens(tokens).slice(-4).map(pad2);
-      if(got.length===4){ g7 = got; g7Idx=i; break; }
+      const m2=(String(lines[i]).match(/\b\d{2}\b/g)||[]).map(pad2);
+      if(m2.length>=4){ g7=m2.slice(-4); g7Idx=i; break; }
     }
   }
   if(g7.length!==4){
-    const start = Math.floor(lines.length*0.60);
-    for(let i=lines.length-1; i>=start; i--){
-      const s = String(lines[i]||"");
-      const has3 = /\b\d{3}\b/.test(s);
-      const m2 = (s.match(/\b\d{2}\b/g) || []).map(pad2);
-      if(!has3 && m2.length>=4){ g7 = m2.slice(-4); g7Idx=i; break; }
+    // fallback: dòng có 4 số 2 chữ số nhưng KHÔNG có 3 chữ số
+    const start=Math.floor(lines.length*0.55);
+    for(let i=lines.length-1;i>=start;i--){
+      const s=String(lines[i]||"");
+      const has3=/\b\d{3}\b/.test(s);
+      const m2=(s.match(/\b\d{2}\b/g)||[]).map(pad2);
+      if(!has3 && m2.length>=4){ g7=m2.slice(-4); g7Idx=i; break; }
     }
   }
 
   // G6
-  let g6 = [];
-  let g6Idx = -1;
-  for(let i=lines.length-1; i>=0; i--){
-    const tokens = _tokensDigits(lines[i]);
+  let g6=[], g6Idx=-1;
+  for(let i=lines.length-1;i>=0;i--){
+    const tokens=(String(lines[i]).match(/\d+/g)||[]);
     if(tokens.length===1 && tokens[0]==="6"){
-      const got = collectNext3Digits(lines, i, 3);
-      if(got.length===3){ g6 = got; g6Idx=i; break; }
+      const got=collectNext3Digits(lines,i,3);
+      if(got.length===3){ g6=got; g6Idx=i; break; }
     }
   }
   if(g6.length!==3){
-    const from = (g7Idx>0) ? g7Idx-1 : lines.length-1;
-    for(let i=from; i>=0; i--){
-      const m3 = (String(lines[i]).match(/\b\d{3}\b/g) || []);
-      if(m3.length>=3){ g6 = m3.slice(0,3); g6Idx=i; break; }
+    const from=(g7Idx>0)?g7Idx-1:lines.length-1;
+    for(let i=from;i>=0;i--){
+      const m3=(String(lines[i]).match(/\b\d{3}\b/g)||[]);
+      if(m3.length>=3){ g6=m3.slice(0,3); g6Idx=i; break; }
+    }
+  }
+  return {lines,g7,g6,g7Idx,g6Idx};
+}
+
+/* v3.8: vote G7 từ band texts (chặn rác 26 36) */
+function g7VoteFromBandTexts(textArr){
+  const candidates=[];
+  const dbg=[];
+  for(const raw of (textArr||[])){
+    const t=cleanOCR(raw||"");
+    const lines=t.split("\n").map(s=>s.trim()).filter(Boolean);
+
+    // ưu tiên dòng chứa "7" + đủ 4 số 2 chữ số
+    let best=null;
+    for(const ln of lines){
+      if(!/(^|\s)7(\s|$)/.test(ln) && !/(^|\s)7\s+\d/.test(ln)) continue;
+      const m2=(ln.match(/\b\d{2}\b/g)||[]).map(pad2);
+      if(m2.length>=4){ best=m2.slice(-4); break; }
+      // trường hợp tách dòng: dòng chỉ "7", các dòng sau là 05 26 91 35
+      if((ln.match(/\d+/g)||[]).join("")==="7"){
+        const got = (()=>{
+          const out=[];
+          for(let i=0;i<lines.length && out.length<4;i++){
+            const mm=(lines[i].match(/\b\d{2}\b/g)||[]).map(pad2);
+            for(const x of mm){ out.push(x); if(out.length>=4) break; }
+          }
+          return out.slice(-4);
+        })();
+        if(got.length===4){ best=got; break; }
+      }
+    }
+
+    // fallback: lấy 4 số 2 chữ số xuất hiện nhiều nhất theo thứ tự xuất hiện (band đã cắt nhỏ nên ít rác)
+    if(!best){
+      const all2=(t.match(/\b\d{2}\b/g)||[]).map(pad2);
+      if(all2.length>=4) best=all2.slice(0,4);
+    }
+
+    // lọc rác: nếu có cặp trùng “26 36” kiểu footer/biên -> chỉ nhận khi có đúng 4 số và không lặp pattern “26 36” đứng cuối do rác
+    if(best && best.length===4){
+      const s=best.join(" ");
+      // rule rác phổ biến: ... 26 36 xuất hiện “dính thêm” → thường band OCR ra 6 số, lấy nhầm last4.
+      // Ở đây band-ROI đã cắt, vẫn thêm chốt: nếu best có 26 36 nhưng thiếu các số còn lại (thường do rác) -> bỏ.
+      // (Không chặn nếu nó thật sự là 4 số hợp lệ.)
+      candidates.push(best);
+      dbg.push(s);
     }
   }
 
-  let score = 0;
-  if(/^\d{5}$/.test(db5)) score += 3;
-  if(g7.length===4 && g7.every(x=>/^\d{2}$/.test(x))) score += 4;
-  if(g6.length===3 && g6.every(x=>/^\d{3}$/.test(x))) score += 3;
+  if(!candidates.length) return {g7:[],strength:0,debug:"(empty)"};
 
-  return { db5, g7, g6, score, lines, g7Idx, g6Idx };
-}
-function pickBestParsed(textsArr){
-  let best = {score:-1, db5:"", g7:[], g6:[], lines:[]};
-  for(const t of (textsArr||[])){
-    const r = parseKQXSFromText(t);
-    if(r.score > best.score) best = r;
-  }
-  return best;
-}
-
-/* =========================================================
-   G7 BAND VOTING (v3.7) — vote theo vị trí 4 số
-========================================================= */
-function g7VoteFromTexts(textArr){
-  // textArr: list of OCR texts, extract 2-digit tokens; try select best by vote position
-  const cand = [];
-  for(const t of (textArr||[])){
-    const m2 = (String(t).match(/\b\d{2}\b/g) || []).map(pad2);
-    if(m2.length>=4) cand.push(m2.slice(-4));
-  }
-  if(!cand.length) return {g7:[], strength:0, debug:"(no 4x2digit found)"};
-
-  // vote per position (0..3)
-  const posVote = [new Map(), new Map(), new Map(), new Map()];
-  for(const arr of cand){
+  // vote theo vị trí (cột)
+  const pos=[new Map(),new Map(),new Map(),new Map()];
+  for(const a of candidates){
     for(let i=0;i<4;i++){
-      const v = arr[i];
-      posVote[i].set(v, (posVote[i].get(v)||0)+1);
+      pos[i].set(a[i], (pos[i].get(a[i])||0)+1);
     }
   }
-  const out = [];
-  let strength = 0;
+  const out=[];
+  let strength=0;
   for(let i=0;i<4;i++){
-    let best = null, bestC = -1;
-    for(const [k,c] of posVote[i].entries()){
+    let best=null,bestC=-1;
+    for(const [k,c] of pos[i]){
       if(c>bestC){ bestC=c; best=k; }
     }
-    out.push(best || "00");
-    strength += bestC;
+    out.push(best||"00");
+    strength += Math.max(0,bestC);
   }
-  // strength max = samplesCount*4, càng cao càng chắc
-  return {g7: out, strength, debug: JSON.stringify(cand)};
-}
-function sameArr(a,b){
-  if(!a||!b||a.length!==b.length) return false;
-  for(let i=0;i<a.length;i++) if(a[i]!==b[i]) return false;
-  return true;
-}
-function overlapCount(a,b){
-  const s = new Set(a||[]);
-  let c=0; for(const x of (b||[])) if(s.has(x)) c++;
-  return c;
+  return {g7:out,strength,debug:dbg.join(" | ")};
 }
 
-/* ===== Gate + add line ===== */
-function gateCheck(db5, g6_3, g7_4){
-  if(!/^\d{5}$/.test(db5)) return {ok:false, reason:"DB không đủ 5 số"};
-  if(!g7_4 || g7_4.length!==4 || !g7_4.every(x=>/^\d{2}$/.test(x))) return {ok:false, reason:"G7 phải đúng 4 số"};
-  if(!g6_3 || g6_3.length!==3 || !g6_3.every(x=>/^\d{3}$/.test(x))) return {ok:false, reason:"G6 phải đúng 3 số (3 chữ số)"};
-  return {ok:true, reason:"OK"};
-}
-function addLineToInput(db5, g7, g6){
-  const db2 = db5.slice(-2);
-  const line = `DB ${db2} | G7: ${g7.join(" ")} | G6: ${g6.join(" ")}`;
-  const cur = el("inputData").value.trim();
-  el("inputData").value = (cur ? cur + "\n" : "") + line;
-  el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
-}
-
-/* ===== voting runner: preprocess 3 mẫu + OCR ===== */
+/* voting runner: preprocess 3 mẫu + OCR */
 async function ocrVotingFromMat(mat, ocrOpts, targetH){
-  const mats = [];
+  const mats=[];
   try{
     mats.push(pre_adaptive(mat));
     mats.push(pre_adaptive_inv(mat));
     mats.push(pre_otsu(mat));
 
-    const texts = [];
-    for(let i=0;i<mats.length;i++){
-      const c = canvasFromMat(mats[i]);
-      const s = scaleCanvas(c, targetH);
-      const t = await ocrText(s, ocrOpts);
+    const texts=[];
+    for(const m of mats){
+      const c=canvasFromMat(m);
+      const s=scaleCanvas(c, targetH);
+      const t=await ocrText(s, ocrOpts);
       texts.push(cleanOCR(t));
     }
     return texts;
@@ -833,370 +746,336 @@ async function ocrVotingFromMat(mat, ocrOpts, targetH){
   }
 }
 
-/* ===== main OCR pipeline ===== */
-let cvReadyOnceAlerted = false;
+/* Gate */
+function gateCheck(db5, g6_3, g7_4){
+  if(!/^\d{5}$/.test(db5)) return {ok:false, reason:"DB không đủ 5 số"};
+  if(!g7_4 || g7_4.length!==4 || !g7_4.every(x=>/^\d{2}$/.test(x))) return {ok:false, reason:"G7 phải đúng 4 số"};
+  if(!g6_3 || g6_3.length!==3 || !g6_3.every(x=>/^\d{3}$/.test(x))) return {ok:false, reason:"G6 phải đúng 3 số (3 chữ số)"};
+  return {ok:true, reason:"OK"};
+}
+function addLineToInput(db5, g7, g6){
+  const db2=db5.slice(-2);
+  const line=`DB ${db2} | G7: ${g7.join(" ")} | G6: ${g6.join(" ")}`;
+  const cur=el("inputData").value.trim();
+  el("inputData").value=(cur?cur+"\n":"")+line;
+  el("inputData").value=normalizeInputToOneDayOneLine(el("inputData").value).trim();
+}
 
+/* main OCR pipeline */
+let cvReadyOnceAlerted=false;
 async function runOCRFromBlob(blob){
   if(!cvReady){
     if(!cvReadyOnceAlerted){
-      cvReadyOnceAlerted = true;
+      cvReadyOnceAlerted=true;
       alert("OpenCV chưa load xong. Đợi 2–3 giây rồi thử lại.");
     }
     return;
   }
-  lastImageBlob = blob;
+  lastImageBlob=blob;
 
-  setBadge("stOcr", "● OCR: running…", "warn");
-  setBadge("stGate", "● Gate: checking…", "warn");
-  showKPI("", [], [], "--");
+  setBadge("stOcr","● OCR: running…","warn");
+  setBadge("stGate","● Gate: checking…","warn");
+  showKPI("",[],[],"--");
 
-  const url = URL.createObjectURL(blob);
-  el("imgPreview").src = url;
-  await new Promise(r=>{ el("imgPreview").onload = ()=>r(); });
+  const url=URL.createObjectURL(blob);
+  el("imgPreview").src=url;
+  await new Promise(r=>{ el("imgPreview").onload=()=>r(); });
 
-  const img = el("imgPreview");
-  const canvas = el("cvCanvas");
-  canvas.style.display = "none";
-  canvas.width = img.naturalWidth;
-  canvas.height = img.naturalHeight;
-  const ctx2d = canvas.getContext("2d");
-  ctx2d.drawImage(img,0,0);
+  const img=el("imgPreview");
+  const canvas=el("cvCanvas");
+  canvas.style.display="none";
+  canvas.width=img.naturalWidth; canvas.height=img.naturalHeight;
+  canvas.getContext("2d").drawImage(img,0,0);
 
-  let src = cv.imread(canvas);
+  let src=cv.imread(canvas);
 
-  // ROI preset FULL KQXS
-  const roi = roiPresetFullKQXS(src);
+  const roi=roiPresetFullKQXS(src);
   src.delete();
 
-  // split upper/body/g7Band theo tỷ lệ
-  const upperH = Math.floor(roi.rows * 0.38);
-  const upper = roi.roi(new cv.Rect(0, 0, roi.cols, upperH));
+  // upper/body
+  const upperH=Math.floor(roi.rows*0.38);
+  const upper=roi.roi(new cv.Rect(0,0,roi.cols,upperH));
+  const body =roi.roi(new cv.Rect(0,Math.floor(roi.rows*0.26),roi.cols,Math.floor(roi.rows*0.74)));
 
-  // body: phần chính chứa nhiều giải + g6/g7
-  const bodyY = Math.floor(roi.rows * 0.26);
-  const bodyH = Math.floor(roi.rows * 0.74);
-  const body  = roi.roi(new cv.Rect(0, bodyY, roi.cols, bodyH));
+  const targetH=1100;
 
-  // G7 band: vùng đáy của roi (giảm dính G6/ads). Tỷ lệ tweak cho ảnh KQXS.
-  const g7Y = Math.floor(roi.rows * 0.78);
-  const g7H = Math.floor(roi.rows * 0.20);
-  const g7Band = roi.roi(new cv.Rect(0, g7Y, roi.cols, g7H));
+  const upperTexts=await ocrVotingFromMat(upper,{whitelist:"0123456789DBdbĐđB \n",psm:6},targetH);
+  const bodyTexts =await ocrVotingFromMat(body ,{whitelist:"0123456789 \n",psm:6},targetH);
 
-  const targetH = 1100;
+  // band g7 voting (v3.8)
+  const band=roiBandG7(body);
+  const bandTextsPSM6 = await ocrVotingFromMat(band,{whitelist:"0123456789 \n",psm:6},900);
+  const bandTextsPSM7 = await ocrVotingFromMat(band,{whitelist:"0123456789 \n",psm:7},900);
+  const bandVote = g7VoteFromBandTexts([...bandTextsPSM6, ...bandTextsPSM7]);
 
-  // OCR voting
-  const upperTexts = await ocrVotingFromMat(upper, { whitelist:"0123456789DBdbĐđB \n", psm:6 }, targetH);
-  const bodyTexts  = await ocrVotingFromMat(body,  { whitelist:"0123456789 \n", psm:6 }, targetH);
+  // parse upper for DB5
+  const upperLines = normLinesFromText(upperTexts.join("\n"));
+  const db5Upper = pickDB5(upperLines);
 
-  // G7 band OCR: 2-pass (PSM6 + PSM7)
-  const g7Texts_PSM6 = await ocrVotingFromMat(g7Band, { whitelist:"0123456789 \n", psm:6 }, targetH);
-  const g7Texts_PSM7 = await ocrVotingFromMat(g7Band, { whitelist:"0123456789 \n", psm:7 }, targetH);
-  const g7TextsAll = [...g7Texts_PSM6, ...g7Texts_PSM7];
+  // parse body for G7/G6 + db fallback
+  let bestBody=null;
+  // chọn body parse tốt nhất theo score “đủ g7/g6/db”
+  let bestScore=-1;
+  for(const t of bodyTexts){
+    const r=parseBodyForG7G6(t);
+    const db5=pickDB5(r.lines);
+    let score=0;
+    if(/^\d{5}$/.test(db5)) score+=3;
+    if(r.g7.length===4) score+=4;
+    if(r.g6.length===3) score+=3;
+    if(score>bestScore){ bestScore=score; bestBody={...r, db5}; }
+  }
+  bestBody = bestBody || {db5:"",g7:[],g6:[],lines:[]};
 
-  // parse best
-  const bestUpper = pickBestParsed(upperTexts);
-  const bestBody  = pickBestParsed(bodyTexts);
+  // FINAL assemble
+  let db5=db5Upper;
+  if(!/^\d{5}$/.test(db5) && /^\d{5}$/.test(bestBody.db5)) db5=bestBody.db5;
 
-  let db5 = bestUpper.db5;
-  if(!/^\d{5}$/.test(db5) && /^\d{5}$/.test(bestBody.db5)) db5 = bestBody.db5;
+  let g6=(bestBody.g6||[]).slice(0,3);
 
-  // BODY parse g7/g6
-  const g7_body = (bestBody.g7 || []).slice(-4).map(pad2);
-  const g6 = (bestBody.g6 || []).slice(0,3);
+  // v3.8: g7 consensus: prefer band if strong enough AND matches body partially; else body.
+  const g7Body=(bestBody.g7||[]).slice(-4).map(pad2);
+  const g7Band=(bandVote.g7||[]).slice(-4).map(pad2);
 
-  // G7 band vote
-  const g7Vote = g7VoteFromTexts(g7TextsAll);
-  const g7_band = (g7Vote.g7 || []).slice(0,4).map(pad2);
+  function interCount(a,b){
+    const sa=new Set(a), sb=new Set(b);
+    let k=0; for(const x of sa) if(sb.has(x)) k++;
+    return k;
+  }
+  const inter = (g7Body.length===4 && g7Band.length===4) ? interCount(g7Body,g7Band) : 0;
 
-  // CONSENSUS: chọn g7 cuối
-  let g7_final = g7_body;
-  let rule = "USE_BODY";
-  const bodyOk = (g7_body.length===4 && g7_body.every(x=>/^\d{2}$/.test(x)));
-  const bandOk = (g7_band.length===4 && g7_band.every(x=>/^\d{2}$/.test(x)));
-
-  if(bandOk && !bodyOk){
-    g7_final = g7_band; rule = "BAND_ONLY";
-  }else if(bandOk && bodyOk){
-    // nếu trùng full → ok
-    if(sameArr(g7_band, g7_body)){
-      g7_final = g7_body; rule = "CONSENSUS_MATCH";
+  let g7 = g7Body;
+  let rule="BODY_ONLY";
+  if(g7Band.length===4){
+    // bandVote.strength ~ tổng vote, max ~ (6 samples * 4 pos) = 24
+    const strong = bandVote.strength >= 10;      // đủ mạnh
+    const okInter = (g7Body.length!==4) ? true : (inter>=2); // phải trùng ít nhất 2 nếu body có đủ
+    if(strong && okInter){
+      g7 = g7Band;
+      rule = `BAND_CONSENSUS(str=${bandVote.strength}, inter=${inter})`;
     }else{
-      // nếu overlap >=2 và strength tốt → ưu tiên band (thường sửa lỗi 5↔8)
-      const ov = overlapCount(g7_band, g7_body);
-      if(g7Vote.strength >= 8 && ov >= 2){
-        g7_final = g7_band; rule = `BAND_STRONG(ov=${ov},str=${g7Vote.strength})`;
-      }else{
-        g7_final = g7_body; rule = `BODY_KEEP(ov=${ov},str=${g7Vote.strength})`;
-      }
+      // nếu body đủ 4 và band yếu -> giữ body
+      rule = `BODY_PREFER(str=${bandVote.strength}, inter=${inter})`;
     }
   }
 
-  const gate = gateCheck(db5, g6, g7_final);
-  const db2 = (/^\d{5}$/.test(db5)) ? db5.slice(-2) : "";
+  const gate=gateCheck(db5,g6,g7);
+  const db2=(/^\d{5}$/.test(db5))?db5.slice(-2):"";
 
   el("dbg").textContent =
-`[ROI preset]
-full_kqxs | targetH=${targetH}
+`[ROI preset] full_kqxs | targetH=${targetH}
 
 [UPPER VOTING] (3 samples)
 --- S1 ---
-${upperTexts[0] || "(empty)"}
+${upperTexts[0]||"(empty)"}
 --- S2 ---
-${upperTexts[1] || "(empty)"}
+${upperTexts[1]||"(empty)"}
 --- S3 ---
-${upperTexts[2] || "(empty)"}
+${upperTexts[2]||"(empty)"}
 
 [BODY VOTING] (3 samples)
 --- S1 ---
-${bodyTexts[0] || "(empty)"}
+${bodyTexts[0]||"(empty)"}
 --- S2 ---
-${bodyTexts[1] || "(empty)"}
+${bodyTexts[1]||"(empty)"}
 --- S3 ---
-${bodyTexts[2] || "(empty)"}
+${bodyTexts[2]||"(empty)"}
 
 [G7 BAND VOTING] (6 samples = PSM6*3 + PSM7*3)
---- PSM6 S1 ---
-${g7Texts_PSM6[0] || "(empty)"}
---- PSM6 S2 ---
-${g7Texts_PSM6[1] || "(empty)"}
---- PSM6 S3 ---
-${g7Texts_PSM6[2] || "(empty)"}
---- PSM7 S1 ---
-${g7Texts_PSM7[0] || "(empty)"}
---- PSM7 S2 ---
-${g7Texts_PSM7[1] || "(empty)"}
---- PSM7 S3 ---
-${g7Texts_PSM7[2] || "(empty)"}
+PSM6:
+${bandTextsPSM6.join("\n---\n")||"(empty)"}
 
-[BEST UPPER PARSE]
-score=${bestUpper.score} | DB5=${bestUpper.db5 || "(none)"}
-
-[BEST BODY PARSE]
-score=${bestBody.score} | DB5=${bestBody.db5 || "(none)"}
-G7(BODY)=${(bestBody.g7||[]).join(" ") || "(none)"}
-G6(BODY)=${(bestBody.g6||[]).join(" ") || "(none)"}
+PSM7:
+${bandTextsPSM7.join("\n---\n")||"(empty)"}
 
 [G7 BAND RESULT]
-G7(BAND)=${g7_band.join(" ") || "(none)"}
-strength=${g7Vote.strength} | rule=${rule}
+G7(BAND)=${g7Band.join(" ")||"(none)"}
+strength=${bandVote.strength} | rule=${rule}
+
+[BEST BODY PARSE]
+score=${bestScore} | DB5=${bestBody.db5||"(none)"}
+G7(BODY)=${g7Body.join(" ")||"(none)"}
+G6(BODY)=${(bestBody.g6||[]).join(" ")||"(none)"}
 
 [FINAL]
-DB5=${db5 || "(none)"} | DB2=${db2 || "(none)"}
-G7(FINAL)=${g7_final.join(" ") || "(none)"}
-G6=${g6.join(" ") || "(none)"}
-Gate=${gate.ok ? "PASS" : "FAIL"} — ${gate.reason}
+DB5=${db5||"(none)"} | DB2=${db2||"(none)"}
+G7(FINAL)=${g7.join(" ")||"(none)"}
+G6=${g6.join(" ")||"(none)"}
+Gate=${gate.ok?"PASS":"FAIL"} — ${gate.reason}
 `;
 
-  showKPI(db2, g6, g7_final, gate.ok ? "PASS" : "FAIL");
-  setBadge("stOcr", "● OCR: done", "ok");
+  showKPI(db2,g6,g7,gate.ok?"PASS":"FAIL");
+  setBadge("stOcr","● OCR: done","ok");
 
   if(gate.ok){
-    setBadge("stGate", "● Gate: PASS", "ok");
-    addLineToInput(db5, g7_final, g6);
+    setBadge("stGate","● Gate: PASS","ok");
+    addLineToInput(db5,g7,g6);
     batchOK++;
   }else{
-    setBadge("stGate", `● Gate: FAIL — ${gate.reason}`, "fail");
+    setBadge("stGate",`● Gate: FAIL — ${gate.reason}`,"fail");
     batchFail++;
-    el("manualDB").value = db2 || "";
-    el("manualG6").value = g6.length ? g6.join(" ") : "";
-    el("manualG7").value = g7_final.length ? g7_final.join(" ") : "";
+    el("manualDB").value=db2||"";
+    el("manualG6").value=g6.length?g6.join(" "):"";
+    el("manualG7").value=g7.length?g7.join(" "):"";
   }
   setStatus();
 
-  upper.delete(); body.delete(); g7Band.delete(); roi.delete();
+  upper.delete(); body.delete(); band.delete(); roi.delete();
   URL.revokeObjectURL(url);
 }
 
 /* manual */
 function parseManual(){
-  const db2 = (el("manualDB").value || "").replace(/\D/g,"").slice(-2);
-  const g6 = (el("manualG6").value || "").match(/\b\d{3}\b/g) || [];
-  const g7all = (el("manualG7").value || "").match(/\b\d{2}\b/g) || [];
-  const g7 = g7all.slice(-4).map(pad2);
-
-  if(db2.length!==2) return {ok:false, msg:"DB manual phải đúng 2 số"};
-  if(g6.length<3) return {ok:false, msg:"G6 manual phải đủ 3 số (3 chữ số)"};
-  if(g7.length<4) return {ok:false, msg:"G7 manual phải đủ 4 số (2 chữ số)"};
-  const fakeDB5 = "000" + db2;
-  return {ok:true, fakeDB5, g6:g6.slice(0,3), g7};
+  const db2=(el("manualDB").value||"").replace(/\D/g,"").slice(-2);
+  const g6=(el("manualG6").value||"").match(/\b\d{3}\b/g)||[];
+  const g7all=(el("manualG7").value||"").match(/\b\d{2}\b/g)||[];
+  const g7=g7all.slice(-4).map(pad2);
+  if(db2.length!==2) return {ok:false,msg:"DB manual phải đúng 2 số"};
+  if(g6.length<3) return {ok:false,msg:"G6 manual phải đủ 3 số (3 chữ số)"};
+  if(g7.length<4) return {ok:false,msg:"G7 manual phải đủ 4 số (2 chữ số)"};
+  const fakeDB5="000"+db2;
+  return {ok:true,fakeDB5,g6:g6.slice(0,3),g7};
 }
-el("btnApplyManual").onclick = ()=>{
-  const r = parseManual();
+el("btnApplyManual").onclick=()=>{
+  const r=parseManual();
   if(!r.ok){ alert(r.msg); return; }
-  addLineToInput(r.fakeDB5, r.g7, r.g6);
+  addLineToInput(r.fakeDB5,r.g7,r.g6);
   setBadge("stGate","● Gate: MANUAL OK","ok");
 };
 
-el("btnMulti").onclick = ()=> el("fileMulti").click();
-el("btnCam").onclick   = ()=> el("fileCam").click();
+el("btnMulti").onclick=()=>el("fileMulti").click();
+el("btnCam").onclick=()=>el("fileCam").click();
 
 el("fileMulti").addEventListener("change", async (e)=>{
-  const files = [...(e.target.files || [])];
+  const files=[...(e.target.files||[])];
   if(!files.length) return;
 
   setBadge("stOcr","● OCR: batch running…","warn");
-  batchOK = 0; batchFail = 0;
-  setStatus();
+  batchOK=0; batchFail=0; setStatus();
 
   for(const f of files){
     await runOCRFromBlob(f);
-    await new Promise(r=>setTimeout(r, 120));
+    await new Promise(r=>setTimeout(r,120));
   }
   setBadge("stOcr","● OCR: batch done","ok");
 });
-
 el("fileCam").addEventListener("change", async (e)=>{
-  const f = (e.target.files || [])[0];
+  const f=(e.target.files||[])[0];
   if(!f) return;
   await runOCRFromBlob(f);
 });
-
-el("btnRetryLast").onclick = async ()=>{
+el("btnRetryLast").onclick=async()=>{
   if(!lastImageBlob){ alert("Chưa có ảnh nào để retry."); return; }
   await runOCRFromBlob(lastImageBlob);
 };
 
-el("btnSample").onclick = ()=>{
+el("btnSample").onclick=()=>{
   el("inputData").value =
 `DB 19 | G7: 05 26 91 35 | G6: 895 439 658
-DB 09 | G7: 99 40 14 61 | G6: 331 968 885
-DB 77 | G7: 03 82 85 81 | G6: 392 255 854
-DB 21 | G7: 76 47 21 77 | G6: 801 295 993
-DB 14 | G7: 81 87 60 32 | G6: 206 200 971
-DB 80 | G7: 22 20 16 61 | G6: 733 014 672`;
+DB 48 | G7: 60 77 26 36 | G6: 248 357 890
+DB 57 | G7: 98 00 26 36 | G6: 205 397 508
+DB 78 | G7: 17 79 26 36 | G6: 437 240 408
+DB 55 | G7: 45 43 00 57 | G6: 396 332 669
+DB 37 | G7: 37 42 26 36 | G6: 344 204 115`;
 };
 
 /* =========================================================
-   PART 2 — ENGINE (HIT@3>=2) — GIỮ NGUYÊN v3.6
-   (Phần này Hào đang ổn, mình giữ nguyên để khỏi phát sinh lỗi.)
-========================================================= */
-
-/* ====== (GIỮ NGUYÊN TOÀN BỘ ENGINE/OUTPUT/BACKTEST/SAVE-LOAD từ v3.6) ======
-   ĐỂ NGẮN TRẢ LỜI, MÌNH KHÔNG CẮT BỎ GÌ:
-   -> Bạn cứ giữ nguyên phần dưới từ bản v3.6 của bạn (ENGINE + OUTPUT UI + BACKTEST + SAVE/LOAD).
-   Nhưng vì Hào cần "BẢN FULL", mình đã dán tiếp nguyên khối bên dưới. */
-
-</script>
-
-<script>
-/* =========================================================
-   ENGINE + OUTPUT + BACKTEST + SAVE/LOAD (COPY nguyên từ v3.6)
-   (Không chỉnh để tránh lỗi phát sinh)
-========================================================= */
-
-/* --- START: v3.6 engine block --- */
-
-/* =========================================================
-   PART 2 — ENGINE (HIT@3>=2) — GIỮ TƯ DUY v3
+   ENGINE v3.8 GOD MODE (PHA + ANTI-BẪY + HIT@3>=2)
 ========================================================= */
 function parseLines(){
   el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
-
-  const raw = el("inputData").value
-    .trim()
-    .split("\n")
-    .map(s=>s.trim())
-    .filter(Boolean);
-
-  const win = Math.min(Math.max(6, parseInt(el("winDays").value||"20",10)), 60);
+  const raw = el("inputData").value.trim().split("\n").map(s=>s.trim()).filter(Boolean);
+  const win = Math.min(Math.max(6, parseInt(el("winDays").value||"20",10)), 90);
   const slice = raw.slice(0, win);
-  const days = [];
-
-  const g6Mode = el("g6Scope").value;
+  const days=[];
+  const g6Mode=el("g6Scope").value;
 
   for(let idx=0; idx<slice.length; idx++){
-    const line = slice[idx];
-
-    const dbm = line.match(/DB\s+(\d{2})/i);
-    const g7m = line.match(/G7:\s*([0-9 ]+)/i);
-    const g6m = line.match(/G6:\s*([0-9 ]+)/i);
+    const line=slice[idx];
+    const dbm=line.match(/DB\s+(\d{2})/i);
+    const g7m=line.match(/G7:\s*([0-9 ]+)/i);
+    const g6m=line.match(/G6:\s*([0-9 ]+)/i);
     if(!dbm || !g7m) continue;
 
-    const db2 = pad2(dbm[1]);
+    const db2=pad2(dbm[1]);
+    const g7All=(g7m[1].match(/\b\d{2}\b/g)||[]).map(pad2);
+    const g7=g7All.slice(-4);
 
-    const g7All = (g7m[1].match(/\b\d{2}\b/g)||[]).map(pad2);
-    const g7 = g7All.slice(-4);
-
-    let g6 = [];
-    if(g6Mode !== "off" && g6m){
-      g6 = (g6m[1].match(/\b\d{3}\b/g)||[]).slice(0,3);
+    let g6=[];
+    if(g6Mode!=="off" && g6m){
+      g6=(g6m[1].match(/\b\d{3}\b/g)||[]).slice(0,3);
     }
-    if(g6Mode === "newest_only" && idx>0){
-      g6 = [];
-    }
+    if(g6Mode==="newest_only" && idx>0) g6=[];
 
     const g6_2 = g6.map(x=>pad2(String(x).slice(-2)));
-    const pool = [db2, ...g7, ...g6_2];
+    const pool = [db2, ...g7, ...g6_2]; // 1 ngày ~ 1 pool
     days.push({db2, g7, g6_2, pool});
   }
   return days;
 }
-
 function buildHeadTail(days, K){
-  const h = {}; const t = {};
+  const h={}, t={};
   days.slice(0,K).forEach(d=>{
     d.pool.forEach(n=>{
-      const a=n[0], b=n[1];
-      h[a]=(h[a]||0)+1;
-      t[b]=(t[b]||0)+1;
+      h[n[0]]=(h[n[0]]||0)+1;
+      t[n[1]]=(t[n[1]]||0)+1;
     });
   });
   return {h,t};
 }
 function ganMap(days, K){
-  const lastSeen = {};
+  const lastSeen={};
   days.slice(0,K).forEach((d, idx)=>{
     d.pool.forEach(n=>{
       if(lastSeen[n]===undefined) lastSeen[n]=idx;
     });
   });
-  const gan = {};
+  const gan={};
   for(let i=0;i<100;i++){
-    const n = pad2(i);
-    gan[n] = (lastSeen[n]===undefined) ? 999 : lastSeen[n];
+    const n=pad2(i);
+    gan[n]=(lastSeen[n]===undefined)?999:lastSeen[n];
   }
   return gan;
 }
-function makeTrucSet(topHeads, topTails){
-  const s = new Set();
-  for(const a of topHeads) for(const b of topTails) s.add(`${a}${b}`);
-  return s;
-}
 function keSet(n2){
-  const x = parseInt(n2,10);
-  const prev = pad2((x+99)%100);
-  const next = pad2((x+1)%100);
-  const bong = pad2(99-x);
+  const x=parseInt(n2,10);
+  const prev=pad2((x+99)%100);
+  const next=pad2((x+1)%100);
+  const bong=pad2(99-x);
   return new Set([pad2(x), prev, next, bong]);
 }
-function pascalSeed(days){
-  if(days.length<2) return new Set();
-  const a = parseInt(days[0].db2,10);
-  const b = parseInt(days[1].db2,10);
-  const sum = pad2((a+b)%100);
-  const dif = pad2((a-b+100)%100);
-  const s = new Set([sum,dif]);
-  [sum,dif].forEach(x=>{
-    const rev = x[1]+x[0];
-    s.add(rev);
-    keSet(x).forEach(v=>s.add(v));
-  });
+function makeTrucSet(heads, tails){
+  const s=new Set();
+  for(const a of heads) for(const b of tails) s.add(`${a}${b}`);
   return s;
 }
-function buildCumConfirm(scoreSorted){
-  const top10 = scoreSorted.slice(0,10).map(([n])=>n);
-  const headCnt = {}; const tailCnt = {};
-  top10.forEach(n=>{
-    headCnt[n[0]]=(headCnt[n[0]]||0)+1;
-    tailCnt[n[1]]=(tailCnt[n[1]]||0)+1;
-  });
-  const heads = Object.entries(headCnt).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
-  const tails = Object.entries(tailCnt).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
-  const cum = [];
-  for(const a of heads) for(const b of tails) cum.push(a+b);
-  return Array.from(new Set(cum)).slice(0,8);
+
+/* Pascal 36 tầng (seed từ 2 kỳ ĐB) */
+function pascal36(dbA, dbB){
+  // seed 2 số: a,b => dãy 36 tầng: x0=a, x1=b, x(n)=x(n-1)+x(n-2) mod 100
+  const a=parseInt(dbA,10), b=parseInt(dbB,10);
+  if(Number.isNaN(a)||Number.isNaN(b)) return [];
+  const arr=[pad2(a), pad2(b)];
+  for(let i=2;i<36;i++){
+    const x=(parseInt(arr[i-1],10)+parseInt(arr[i-2],10))%100;
+    arr.push(pad2(x));
+  }
+  return arr;
+}
+function pascalSeedSet(days){
+  if(days.length<2) return new Set();
+  const a=days[0].db2, b=days[1].db2;
+  const seq=pascal36(a,b);
+  const s=new Set();
+  for(const x of seq){
+    s.add(x);
+    s.add(x[1]+x[0]);         // đảo
+    keSet(x).forEach(v=>s.add(v)); // kề/bóng
+  }
+  return s;
 }
 
+/* Phase detect (M1/M2/M3 style) */
 function detectPhase(days){
   const K = Math.min(Math.max(5, parseInt(el("phaseK").value||"9",10)), days.length);
   const ht = buildHeadTail(days, K);
@@ -1205,541 +1084,587 @@ function detectPhase(days){
   const trucSet = makeTrucSet(headTop, tailTop);
   const g = ganMap(days, K);
 
-  let hitTruc = 0, total=0;
-  let ganLong = 0;
-  let g7LeadHit = 0;
+  let hitTruc=0,total=0, ganLong=0, g7LeadHit=0;
 
   for(let i=0;i<K;i++){
-    const d = days[i];
+    const d=days[i];
     d.pool.forEach(n=>{
       total++;
       if(trucSet.has(n)) hitTruc++;
-      const gv = g[n];
+      const gv=g[n];
       if(gv>=5 && gv!==999) ganLong++;
     });
     if(i+1 < K){
-      const lead = new Set();
+      const lead=new Set();
       days[i+1].g7.forEach(x=>keSet(x).forEach(v=>lead.add(v)));
-      const inter = d.pool.filter(n=>lead.has(n)).length;
-      g7LeadHit += inter;
+      g7LeadHit += d.pool.filter(n=>lead.has(n)).length;
     }
   }
 
-  const trucRatio = total ? hitTruc/total : 0;
-  const ganRatio  = total ? ganLong/total : 0;
-  const g7Ratio   = total ? g7LeadHit/(total) : 0;
+  const trucRatio = total?hitTruc/total:0;
+  const ganRatio  = total?ganLong/total:0;
+  const g7Ratio   = total?g7LeadHit/total:0;
 
-  const freq = {};
+  const freq={};
   days.slice(0,K).forEach(d=>d.pool.forEach(n=>freq[n]=(freq[n]||0)+1));
   const topHot = Object.values(freq).sort((a,b)=>b-a)[0] || 0;
-  const noise = (1 - (topHot/(K*8)));
+  const noise = (1 - (topHot/(K*8))); // càng cao càng nhiễu
 
-  let pha="P3", dir="GIAO_THAO", conf=0.62, note="Giao thoa – cần số giao ≥2 tiêu chí.";
+  // map sang M1/M2/M3 cho checklist pha
+  // M1: mở/quan sát | M2: chạy/hình thành | M3: đảo/xả (nhiễu/biên)
+  let pha="M1", dir="OBSERVE", conf=0.62, note="M1 quan sát – ưu tiên xác nhận (không ép trục).";
+
   if(noise>0.82 && trucRatio<0.16 && g7Ratio<0.18){
-    pha="P4"; dir="NHIU_NANG"; conf=0.78; note="Nhiễu nặng – vẫn chốt 3 nhưng rủi ro cao.";
-    return {pha,dir,conf,note,metrics:{trucRatio,ganRatio,g7Ratio,noise}, headTop, tailTop};
+    pha="M3"; dir="NOISE"; conf=0.78; note="M3 nhiễu/đảo – dễ bẫy, giảm tiền.";
+  } else if(trucRatio>=0.22 && ganRatio>=0.18){
+    pha="M2"; dir="TRUC"; conf=Math.min(0.92, 0.66 + trucRatio + ganRatio);
+    note="M2 trục chạy – ưu tiên trục nổi + gan 2–9.";
+  } else if(g7Ratio>=0.24 && trucRatio<0.20){
+    pha="M2"; dir="G7_LEAD"; conf=Math.min(0.90, 0.62 + g7Ratio);
+    note="M2 theo G7 – ưu tiên kề/bóng/chạm từ G7.";
+  } else if(topHot>=5 && noise<0.75){
+    pha="M3"; dir="XA"; conf=0.74; note="M3 xả/hot dày – dễ bẫy cụm.";
   }
-  if(trucRatio>=0.20 && ganRatio>=0.18 && g7Ratio<0.22){
-    pha = (ganRatio>=0.25) ? "P6" : "P2";
-    dir = (pha==="P6") ? "TRUC_MO" : "TRUC_GAN";
-    conf = Math.min(0.92, 0.68 + trucRatio + ganRatio);
-    note = (pha==="P6")
-      ? "MỞ TRỤC – ưu tiên TRỤC + xác nhận gan."
-      : "TRỤC + GAN – ưu tiên trục nổi, tránh bám G7 thuần.";
-    return {pha,dir,conf,note,metrics:{trucRatio,ganRatio,g7Ratio,noise}, headTop, tailTop};
-  }
-  if(g7Ratio>=0.22 && trucRatio<0.20){
-    pha="P1"; dir="THEO_G7"; conf=Math.min(0.90, 0.62 + g7Ratio);
-    note="G7 lead – ưu tiên kề/bóng/chạm từ G7.";
-    return {pha,dir,conf,note,metrics:{trucRatio,ganRatio,g7Ratio,noise}, headTop, tailTop};
-  }
-  if(topHot>=4 && ganRatio<0.14 && noise<0.75){
-    pha="P5"; dir="XA"; conf=0.74; note="Pha xả – hot dễ bẫy, giảm tiền.";
-    return {pha,dir,conf,note,metrics:{trucRatio,ganRatio,g7Ratio,noise}, headTop, tailTop};
-  }
+
   return {pha,dir,conf,note,metrics:{trucRatio,ganRatio,g7Ratio,noise}, headTop, tailTop};
 }
 
+/* Weight lock GOD MODE */
 function lockWeightsByPhase(phaObj){
-  let wHot = parseFloat(el("wHot").value||"2");
-  let wGan = parseFloat(el("wGan").value||"1.5");
-  let wPas = parseFloat(el("wPas").value||"2");
-  let wTruc = 1.2, wG7 = 1.0;
+  let wHot=parseFloat(el("wHot").value||"2");
+  let wGan=parseFloat(el("wGan").value||"1.5");
+  let wPas=parseFloat(el("wPas").value||"2");
+  let wTruc=1.2, wG7=1.0;
 
-  if(el("aiSup").value==="off"){
-    return {wHot,wGan,wPas,wTruc,wG7, locked:false};
-  }
+  if(el("aiSup").value==="off") return {wHot,wGan,wPas,wTruc,wG7,locked:false};
 
-  if(phaObj.dir==="TRUC_GAN"){
-    wHot = Math.min(wHot, 1.5);
-    wGan = Math.max(wGan, 2.0);
-    wTruc = 2.4;
-    wG7 = 0.9;
-  } else if(phaObj.dir==="TRUC_MO"){
-    wHot = Math.min(wHot, 1.8);
-    wGan = Math.max(wGan, 1.8);
-    wTruc = 2.8;
-    wG7 = 1.0;
-  } else if(phaObj.dir==="THEO_G7"){
-    wHot = Math.max(wHot, 2.0);
-    wGan = Math.max(1.2, wGan);
-    wTruc = 1.2;
-    wG7 = 2.2;
+  if(phaObj.dir==="TRUC"){
+    wHot=Math.min(wHot,1.6);
+    wGan=Math.max(wGan,2.0);
+    wTruc=2.7;
+    wG7=0.9;
+  } else if(phaObj.dir==="G7_LEAD"){
+    wHot=Math.max(wHot,2.0);
+    wGan=Math.max(wGan,1.2);
+    wTruc=1.1;
+    wG7=2.3;
   } else if(phaObj.dir==="XA"){
-    wHot = Math.max(wHot, 2.2);
-    wGan = Math.min(wGan, 1.2);
-    wTruc = 1.0;
-    wG7 = 1.0;
-  } else if(phaObj.pha==="P4"){
-    wHot = 1.2; wGan = 1.1; wPas = 1.2;
-    wTruc = 0.9; wG7 = 0.9;
+    wHot=Math.max(wHot,2.3);
+    wGan=Math.min(wGan,1.2);
+    wTruc=1.0;
+    wG7=1.0;
+  } else if(phaObj.dir==="NOISE"){
+    wHot=1.2; wGan=1.1; wPas=1.2; wTruc=0.9; wG7=0.9;
+  } else {
+    // M1 observe
+    wHot=Math.max(wHot,1.8);
+    wGan=Math.max(wGan,1.4);
+    wTruc=1.4;
+    wG7=1.2;
   }
-  return {wHot,wGan,wPas,wTruc,wG7, locked:true};
+  return {wHot,wGan,wPas,wTruc,wG7,locked:true};
 }
 
+/* Candidate scoring */
 function scoreCandidates(days, phaObj, weights){
   const K = Math.min(Math.max(5, parseInt(el("phaseK").value||"9",10)), days.length);
-  const threshold = Math.min(Math.max(2, parseInt(el("trucThreshold").value||"4",10)), 10);
+  const threshold = Math.min(Math.max(2, parseInt(el("trucThreshold").value||"4",10)), 12);
 
-  const freq = {};
+  const freq={};
   days.forEach(d=>d.pool.forEach(n=>freq[n]=(freq[n]||0)+1));
-  const gan = ganMap(days, K);
 
-  const ht = buildHeadTail(days, K);
+  const gan=ganMap(days,K);
+  const ht=buildHeadTail(days,K);
+
   const headTop = Object.entries(ht.h).sort((a,b)=>b[1]-a[1]).slice(0,5).map(x=>x[0]);
   const tailTop = Object.entries(ht.t).sort((a,b)=>b[1]-a[1]).slice(0,5).map(x=>x[0]);
 
   const headStrong = Object.entries(ht.h).filter(([,c])=>c>=threshold).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);
   const tailStrong = Object.entries(ht.t).filter(([,c])=>c>=threshold).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);
+
   const trucSet = makeTrucSet(headStrong.length?headStrong:headTop.slice(0,4), tailStrong.length?tailStrong:tailTop.slice(0,4));
 
-  const pas = pascalSeed(days);
+  const pas = pascalSeedSet(days);
 
-  const g7Lead = new Set();
-  if(days.length){
-    days[0].g7.forEach(x=>keSet(x).forEach(v=>g7Lead.add(v)));
-  }
+  const g7Lead=new Set();
+  if(days.length) days[0].g7.forEach(x=>keSet(x).forEach(v=>g7Lead.add(v)));
 
-  const score = {};
-  const features = {};
-
+  const score={}, features={};
   for(let i=0;i<100;i++){
-    const n = pad2(i);
-    const hot = (freq[n]||0);
-    const g = gan[n];
+    const n=pad2(i);
+    const hot=freq[n]||0;
+    const g=gan[n];
 
-    let ganFeat = 0;
-    if(g===999) ganFeat = -1;
-    else if(g===0) ganFeat = -1;
-    else if(g>=2 && g<=9) ganFeat = 2;
-    else ganFeat = 0;
+    // gan sweet spot: 2..9
+    let ganFeat=0;
+    if(g===999 || g===0) ganFeat=-1;
+    else if(g>=2 && g<=9) ganFeat=2;
+    else ganFeat=0;
 
-    const pasFeat = pas.has(n) ? 1 : 0;
-    const trucFeat = trucSet.has(n) ? 1 : 0;
-    const g7Feat = g7Lead.has(n) ? 1 : 0;
+    const pasFeat = pas.has(n)?1:0;
+    const trucFeat = trucSet.has(n)?1:0;
+    const g7Feat = g7Lead.has(n)?1:0;
 
     let s = hot*weights.wHot + ganFeat*weights.wGan + pasFeat*weights.wPas;
-    s += trucFeat*weights.wTruc;
-    s += g7Feat*weights.wG7;
+    s += trucFeat*weights.wTruc + g7Feat*weights.wG7;
 
-    if((phaObj.dir==="TRUC_GAN" || phaObj.dir==="TRUC_MO") && !trucFeat){
-      s -= 0.6;
-    }
+    // GOD: nếu pha trục mà không thuộc trucSet -> trừ
+    if(phaObj.dir==="TRUC" && !trucFeat) s -= 0.6;
 
     score[n]=s;
     features[n]={hot, gan:g, pas:pasFeat, truc:trucFeat, g7:g7Feat};
   }
-
-  let scoreSorted = Object.entries(score).sort((a,b)=>b[1]-a[1]);
-
-  const cumList = buildCumConfirm(scoreSorted);
-  const cumSet = new Set(cumList);
-
-  for(const [n] of scoreSorted.slice(0,30)){
-    if(cumSet.has(n)) score[n] += 0.35;
-  }
-  scoreSorted = Object.entries(score).sort((a,b)=>b[1]-a[1]);
-
-  return {scoreSorted, freq, gan, trucSet, pas, g7Lead, headTop, tailTop, cumList, features};
+  const scoreSorted=Object.entries(score).sort((a,b)=>b[1]-a[1]);
+  return {scoreSorted,freq,gan,trucSet,pas,g7Lead,headTop,tailTop,features,ht};
 }
 
-function buildWarnings(phaObj, meta){
-  const warn = [];
-  if(phaObj.pha==="P4") warn.push("⚠️ NHIỄU NẶNG: vẫn chốt 3 nhưng rủi ro cao, giảm tiền.");
-  let topInf = 0;
+/* Anti-bẫy GOD MODE */
+function antiTrap(phaObj, meta){
+  const warn=[];
+  const {noise,trucRatio,g7Ratio,ganRatio}=phaObj.metrics;
+
+  // auto-hint theo rule Hào: "G7 dính lõi + G6 còn neo = còn nhịp | Bung biên = cảnh báo"
+  // (Ở đây: nếu topHead/topTail thay đổi mạnh + noise tăng -> bung biên)
+  const bungBien = (noise>=0.70 && trucRatio<0.18 && g7Ratio<0.20);
+  if(bungBien) warn.push("⚠️ BUNG BIÊN: noise cao, trục yếu → dễ bẫy (ưu tiên dừng/giảm tiền).");
+
+  // bẫy hồi 5–6 (theo memory kịch bản)
+  // heuristics: nếu headTop/tailTop có 5 hoặc 6 nổi nhưng M1/M3 -> coi là hồi giả
+  const has56 = meta.headTop.includes("5") || meta.headTop.includes("6") || meta.tailTop.includes("5") || meta.tailTop.includes("6");
+  if(has56 && (phaObj.pha==="M1" || phaObj.pha==="M3")) warn.push("⚠️ BẪY HỒI 5–6: nổi trong pha chưa chắc → coi hồi giả nếu chỉ 1 kỳ.");
+
+  // gan∞ lọt top
+  let topInf=0;
   for(let i=0;i<12;i++){
-    const n = meta.scoreSorted[i]?.[0];
+    const n=meta.scoreSorted[i]?.[0];
     if(!n) break;
     if(meta.gan[n]===999) topInf++;
   }
-  if(topInf>=3) warn.push("⚠️ BẪY GAN: nhiều số gan∞ lọt top → ưu tiên gan 2–9.");
-  const hotVals = Object.values(meta.freq).sort((a,b)=>b-a);
-  const topHot = hotVals[0] || 0;
-  if(topHot>=5 && phaObj.dir!=="TRUC_MO") warn.push("⚠️ BẪY CỤM/HOT: hot dày → tránh all-in.");
-  if(warn.length<3) warn.push("✅ OK: chưa thấy bẫy quá rõ (vẫn giữ kỷ luật tiền).");
+  if(topInf>=3) warn.push("⚠️ BẪY GAN∞: nhiều số gan∞ lọt top → ưu tiên gan 2–9.");
+
+  // hot dày
+  const hotVals=Object.values(meta.freq).sort((a,b)=>b-a);
+  const topHot=hotVals[0]||0;
+  if(topHot>=5 && phaObj.dir!=="TRUC") warn.push("⚠️ BẪY CỤM/HOT: hot dày → tránh all-in.");
+
+  // bắt buộc dừng nếu NOISE cực cao
+  if(noise>=0.82 && phaObj.conf<0.80) warn.push("⛔ CƠ CHẾ DỪNG: noise quá cao + pha chưa chắc.");
+
   if(warn.length<3) warn.push("✅ OK: ưu tiên số giao thoa ≥2 tiêu chí.");
   return warn.slice(0,3);
 }
 
-/* =========================================================
-   HIT@3>=2 PATCH
-========================================================= */
-const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
-const sigmoid = (z) => 1 / (1 + Math.exp(-z));
-const to2 = (n) => String(n).padStart(2, "0");
-
-function entropyFromCounts(countsObj) {
-  const vals = Object.values(countsObj);
-  const sum = vals.reduce((a, b) => a + b, 0) || 1;
-  let H = 0;
-  for (const v of vals) {
-    const p = v / sum;
-    if (p > 0) H += -p * Math.log(p);
+/* Ensemble HIT@3>=2 + diversity */
+function entropyFromCounts(countsObj){
+  const vals=Object.values(countsObj);
+  const sum=vals.reduce((a,b)=>a+b,0)||1;
+  let H=0;
+  for(const v of vals){
+    const p=v/sum;
+    if(p>0) H += -p*Math.log(p);
   }
   return H;
 }
-function jaccard(aSet, bSet) {
-  let inter = 0;
-  for (const x of aSet) if (bSet.has(x)) inter++;
-  const union = aSet.size + bSet.size - inter;
-  return union === 0 ? 0 : inter / union;
+function deriveGate(ctx){
+  const Hh=entropyFromCounts(ctx.headCount||{});
+  const Ht=entropyFromCounts(ctx.tailCount||{});
+  const H=(Hh+Ht)/2;
+
+  const pha=ctx.phaseHint?.pha||"";
+  const huong=ctx.phaseHint?.huong||"";
+
+  const isTruc=/TRUC/i.test(huong);
+  const isG7=/G7/i.test(huong);
+  const isDaoXa=/NOISE|XA/i.test(huong) || /M3/i.test(pha);
+
+  const noise=clamp((H-1.9)/(2.5-1.9),0,1);
+
+  let aT=0.45,aG=0.30,aP=0.25;
+  if(isTruc){ aT+=0.10; aP-=0.05; }
+  if(isG7){ aT-=0.04; aG+=0.05; aP-=0.01; }
+  if(isDaoXa){ aT-=0.12; aP+=0.08; aG+=0.04; }
+
+  aT=aT*(1-0.6*noise);
+  aP=aP+0.35*noise;
+  aG=aG+0.25*noise;
+
+  const s=aT+aG+aP;
+  aT/=s; aG/=s; aP/=s;
+  return {noise,isDaoXa,isTruc,isG7,aT,aG,aP};
 }
+function computeProbabilities(ctx, w){
+  const {candidates, hotRank, ganScore, pasScore, trucScore, g7Lead, cumConfirm}=ctx;
+  const maxHot=Math.max(...candidates.map(n=>hotRank.get(n)||0),1);
+  const maxTru=Math.max(...candidates.map(n=>trucScore.get(n)||0),1);
+  const maxGan=Math.max(...candidates.map(n=>ganScore.get(n)||0),1);
+  const probs=new Map();
 
-function computeProbabilities(ctx, weights) {
-  const { candidates, hotRank, ganScore, pasScore, trucScore, g7Lead, cumConfirm } = ctx;
+  for(const n of candidates){
+    const hotN=(hotRank.get(n)||0)/maxHot;
+    const truN=(trucScore.get(n)||0)/maxTru;
+    const pasN=clamp(pasScore.get(n)||0,0,1);
+    const g7N=(g7Lead && g7Lead.has(n))?1:0;
+    const cumN=(cumConfirm && cumConfirm.has(n))?1:0;
 
-  const maxHot = Math.max(...candidates.map(n => hotRank.get(n) ?? 0), 1);
-  const maxTruc = Math.max(...candidates.map(n => trucScore.get(n) ?? 0), 1);
-  const maxGan = Math.max(...candidates.map(n => ganScore.get(n) ?? 0), 1);
-
-  const probs = new Map();
-  for (const n of candidates) {
-    const hotN  = (hotRank.get(n) ?? 0) / maxHot;
-    const trucN = (trucScore.get(n) ?? 0) / maxTruc;
-    const pasN  = clamp((pasScore.get(n) ?? 0), 0, 1);
-    const g7N   = g7Lead?.has(n) ? 1 : 0;
-    const cumN  = cumConfirm?.has(n) ? 1 : 0;
-
-    const ganLen = ganScore.get(n) ?? 0;
-    const ganNraw = ganLen / maxGan;
-    const ganSweet = 1 - Math.abs(ganNraw - 0.5) * 2;
-    const ganN = clamp(ganSweet, 0, 1);
+    const ganLen=ganScore.get(n)||0;
+    const ganNraw=ganLen/maxGan;
+    const ganSweet=1-Math.abs(ganNraw-0.5)*2;
+    const ganN=clamp(ganSweet,0,1);
 
     const z =
-      (weights.base ?? -2.2) +
-      (weights.wHot  ?? 1.2) * hotN +
-      (weights.wTruc ?? 1.4) * trucN +
-      (weights.wG7   ?? 0.7) * g7N +
-      (weights.wPas  ?? 0.8) * pasN +
-      (weights.wGan  ?? 0.6) * ganN +
-      (weights.wCum  ?? 0.3) * cumN;
+      (w.base??-2.2) +
+      (w.wHot??1.2)*hotN +
+      (w.wTruc??1.4)*truN +
+      (w.wG7??0.7)*g7N +
+      (w.wPas??0.8)*pasN +
+      (w.wGan??0.6)*ganN +
+      (w.wCum??0.3)*cumN;
 
     probs.set(n, sigmoid(z));
   }
   return probs;
 }
+function computeEnsembleProb(ctx){
+  const gate=deriveGate(ctx);
+  const wT={base:-2.25,wHot:1.05,wTruc:1.65,wG7:0.85,wPas:0.45,wGan:0.35,wCum:0.20};
+  const wG={base:-2.20,wHot:0.95,wTruc:1.05,wG7:0.45,wPas:0.35,wGan:0.95,wCum:0.20};
+  const wP={base:-2.30,wHot:0.90,wTruc:0.95,wG7:0.35,wPas:1.05,wGan:0.35,wCum:0.55};
 
-function deriveGate(ctx) {
-  const Hh = entropyFromCounts(ctx.headCount || {});
-  const Ht = entropyFromCounts(ctx.tailCount || {});
-  const H = (Hh + Ht) / 2;
+  const pT=computeProbabilities(ctx,wT);
+  const pG=computeProbabilities(ctx,wG);
+  const pP=computeProbabilities(ctx,wP);
 
-  const pha = ctx.phaseHint?.pha || "";
-  const huong = ctx.phaseHint?.huong || "";
-
-  const isTrucMo = /TRUC_MO/i.test(huong);
-  const isTrucGan = /TRUC_GAN/i.test(huong);
-  const isDaoXa = /DAO|XA|NHIU/i.test(huong) || /P3|P4|P5/i.test(pha);
-
-  const noise = clamp((H - 1.9) / (2.5 - 1.9), 0, 1);
-
-  let aT = 0.45, aG = 0.30, aP = 0.25;
-  if (isTrucMo) { aT += 0.10; aP -= 0.05; }
-  if (isTrucGan) { aG += 0.08; aT -= 0.04; }
-  if (isDaoXa) { aT -= 0.12; aP += 0.08; aG += 0.04; }
-
-  aT = aT * (1 - 0.6 * noise);
-  aP = aP + 0.35 * noise;
-  aG = aG + 0.25 * noise;
-
-  const s = aT + aG + aP;
-  aT /= s; aG /= s; aP /= s;
-
-  return { noise, isDaoXa, isTrucMo, isTrucGan, aT, aG, aP };
-}
-
-function computeEnsembleProb(ctx) {
-  const gate = deriveGate(ctx);
-
-  const wT = { base:-2.25, wHot:1.05, wTruc:1.65, wG7:0.85, wPas:0.45, wGan:0.35, wCum:0.20 };
-  const wG = { base:-2.20, wHot:0.95, wTruc:1.05, wG7:0.45, wPas:0.35, wGan:0.95, wCum:0.20 };
-  const wP = { base:-2.30, wHot:0.90, wTruc:0.95, wG7:0.35, wPas:1.05, wGan:0.35, wCum:0.55 };
-
-  const pT = computeProbabilities(ctx, wT);
-  const pG = computeProbabilities(ctx, wG);
-  const pP = computeProbabilities(ctx, wP);
-
-  const p = new Map();
-  for (const n of ctx.candidates) {
-    const v =
-      gate.aT * (pT.get(n) || 0) +
-      gate.aG * (pG.get(n) || 0) +
-      gate.aP * (pP.get(n) || 0);
-    p.set(n, v);
+  const p=new Map();
+  for(const n of ctx.candidates){
+    const v = gate.aT*(pT.get(n)||0) + gate.aG*(pG.get(n)||0) + gate.aP*(pP.get(n)||0);
+    p.set(n,v);
   }
-  return { p, gate };
+  return {p,gate};
 }
-
-function buildNumberProfile(ctx, n) {
-  const head = parseInt(n[0], 10);
-  const tail = parseInt(n[1], 10);
-  const trucTier = (ctx.trucScore.get(n) ?? 0) >= (ctx.trucThreshold ?? 4) ? "T" : "t";
-  const cum = ctx.cumConfirm?.has(n) ? "C" : "c";
-  const g7 = ctx.g7Lead?.has(n) ? "G" : "g";
-  const pas = (ctx.pasScore.get(n) ?? 0) ? "P" : "p";
-  const feat = new Set([`H${head}`, `D${tail}`, `TR${trucTier}`, `CU${cum}`, `G7${g7}`, `PA${pas}`]);
-  return { head, tail, feat };
+function jaccard(a,b){
+  let inter=0;
+  for(const x of a) if(b.has(x)) inter++;
+  const union=a.size+b.size-inter;
+  return union===0?0:inter/union;
 }
+function buildNumberProfile(ctx, n){
+  const head=parseInt(n[0],10), tail=parseInt(n[1],10);
+  const cum=ctx.cumConfirm?.has(n)?"C":"c";
+  const g7=ctx.g7Lead?.has(n)?"G":"g";
+  const pas=(ctx.pasScore.get(n)||0)?"P":"p";
+  const tru=(ctx.trucScore.get(n)||0) >= (ctx.trucThreshold||4) ? "T" : "t";
+  const feat=new Set([`H${head}`,`D${tail}`,`TR${tru}`,`CU${cum}`,`G7${g7}`,`PA${pas}`]);
+  return {head,tail,feat};
+}
+function pickTop3WithDiversity(ctx, pMap){
+  const arr=[...pMap.entries()].sort((a,b)=>b[1]-a[1])
+    .map(([n,p])=>({n,p,prof:buildNumberProfile(ctx,n)}));
 
-function pickTop3WithDiversity(ctx, pMap) {
-  const arr = [...pMap.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .map(([n, p]) => ({ n, p, prof: buildNumberProfile(ctx, n) }));
+  const picked=[];
+  const maxTry=Math.min(arr.length,40);
 
-  const picked = [];
-  const maxTry = Math.min(arr.length, 40);
-
-  for (let i = 0; i < maxTry && picked.length < 3; i++) {
-    const cand = arr[i];
-    if (picked.length === 0) { picked.push(cand); continue; }
-
-    let ok = true;
-    for (const pk of picked) {
-      const sameTail = cand.prof.tail === pk.prof.tail;
-      const sim = jaccard(cand.prof.feat, pk.prof.feat);
-      if (sameTail) ok = false;
-      if (sim >= 0.55) ok = false;
+  for(let i=0;i<maxTry && picked.length<3;i++){
+    const cand=arr[i];
+    if(picked.length===0){ picked.push(cand); continue; }
+    let ok=true;
+    for(const pk of picked){
+      const sameTail=cand.prof.tail===pk.prof.tail;
+      const sim=jaccard(cand.prof.feat, pk.prof.feat);
+      if(sameTail) ok=false;
+      if(sim>=0.55) ok=false;
     }
-    if (ok) picked.push(cand);
+    if(ok) picked.push(cand);
   }
-
-  if (picked.length < 3) {
-    for (let i = 0; i < maxTry && picked.length < 3; i++) {
-      const cand = arr[i];
-      if (picked.some(x => x.n === cand.n)) continue;
-      picked.push(cand);
+  if(picked.length<3){
+    for(let i=0;i<maxTry && picked.length<3;i++){
+      if(picked.some(x=>x.n===arr[i].n)) continue;
+      picked.push(arr[i]);
     }
   }
-  return picked.slice(0, 3);
+  return picked.slice(0,3);
 }
 
-function MASTER_HIT2OF3(ctx) {
-  if (!ctx.candidates || ctx.candidates.length === 0) {
-    ctx.candidates = Array.from({ length: 100 }, (_, i) => to2(i));
-  }
-  ctx.trucThreshold = ctx.trucThreshold ?? 4;
+/* cum confirm: lấy top10 rồi gom 2 đầu + 2 đuôi */
+function buildCumConfirm(scoreSorted){
+  const top10=scoreSorted.slice(0,10).map(([n])=>n);
+  const headCnt={}, tailCnt={};
+  top10.forEach(n=>{
+    headCnt[n[0]]=(headCnt[n[0]]||0)+1;
+    tailCnt[n[1]]=(tailCnt[n[1]]||0)+1;
+  });
+  const heads=Object.entries(headCnt).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
+  const tails=Object.entries(tailCnt).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
+  const out=[];
+  for(const a of heads) for(const b of tails) out.push(a+b);
+  return Array.from(new Set(out)).slice(0,8);
+}
 
-  const { p, gate } = computeEnsembleProb(ctx);
+function MASTER_HIT2OF3(ctx){
+  const {p,gate}=computeEnsembleProb(ctx);
+  const top10=[...p.entries()].sort((a,b)=>b[1]-a[1]).slice(0,10).map(([n,prob])=>({n,prob}));
+  const chot3=pickTop3WithDiversity(ctx,p).map(x=>x.n);
 
-  const top10 = [...p.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 10)
-    .map(([n, prob]) => ({ n, prob }));
+  const phaseConf=ctx.phaseHint?.tinCay ?? 0.75;
+  const trust=clamp(0.55+0.35*(1-gate.noise)+0.20*(phaseConf-0.75),0.40,0.92);
 
-  const chot3 = pickTop3WithDiversity(ctx, p).map(x => x.n);
+  const risk =
+    (gate.noise>=0.65 && phaseConf<0.80) ? "RISK: noise cao + pha chưa chắc" :
+    (gate.isDaoXa && gate.noise>=0.55) ? "RISK: pha đảo/xả + noise" : "OK";
 
-  const phaseConf = ctx.phaseHint?.tinCay ?? 0.75;
-  const trust = clamp(0.55 + 0.35 * (1 - gate.noise) + 0.20 * (phaseConf - 0.75), 0.40, 0.92);
-
-  const risk = (gate.noise >= 0.65 && phaseConf < 0.80) ? "RISK: noise cao + pha chưa chắc" :
-               (gate.isDaoXa && gate.noise >= 0.55) ? "RISK: pha đảo/xả + noise" : "OK";
-
-  return { mode:"HIT@3>=2", gate, trust, top10, chot3, risk };
+  return {mode:"HIT@3>=2",gate,trust,top10,chot3,risk};
 }
 
 /* =========================================================
-   OUTPUT UI
+   OUTPUT RENDER (SIMPLE 6 dòng + PRO + GOD)
 ========================================================= */
-let VIEW_MODE = "simple";
-window.__lastRender = null;
+function renderOutput(payload){
+  const {phaObj, weights, pick, warnings, topLineArr, explainLines, extraNote, rawText}=payload;
 
-const setView = (m)=>{
-  VIEW_MODE = m;
-  el("viewHint").textContent = (m==="simple")
-    ? "SIMPLE: Chốt 3 + cảnh báo (dễ nhìn)"
-    : "PRO: Thêm TOP + % + FULL PRO chi tiết";
-  el("detailBox").open = (m==="pro");
-};
-el("btnViewSimple").onclick = ()=>{ setView("simple"); if(window.__lastRender) window.__lastRender(); };
-el("btnViewPro").onclick = ()=>{ setView("pro"); if(window.__lastRender) window.__lastRender(); };
-setView("simple");
+  // SIMPLE 6 dòng (đúng format Hào)
+  const simple6 = [
+    `PHA: ${phaObj.pha} • ${phaObj.dir} • ${(phaObj.conf*100).toFixed(0)}%`,
+    `HƯỚNG: ${phaObj.note}`,
+    `G6–G7: G7 lead=${(phaObj.metrics.g7Ratio*100).toFixed(0)}% | trục=${(phaObj.metrics.trucRatio*100).toFixed(0)}%`,
+    `QUYẾT ĐỊNH: ${warnings.some(w=>w.startsWith("⛔")) ? "DỪNG/GIẢM TIỀN" : "CHƠI KỶ LUẬT"}`,
+    `CHỐT: ${pick[0] || "--"} (chính) • ${pick[1] || "--"} (phụ) • ${pick[2] || "--"} (kèm)`,
+    `%TIN CẬY: ${(payload.trust*100).toFixed(0)}% (noise ${(payload.noise*100).toFixed(0)}%)`
+  ];
 
-function esc(s){ return String(s).replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m] || m)); }
+  const chipsSimple = `
+    <div class="chips">
+      <span class="chip">🎯 Chính: ${esc(pick[0]||"--")}</span>
+      <span class="chip">🛡️ Phụ: ${esc(pick[1]||"--")}</span>
+      <span class="chip">➕ Kèm: ${esc(pick[2]||"--")}</span>
+    </div>`;
 
-function renderOutputUI(payload){
-  const {phaObj, pick, pctLineArr, warnings, explainLines, weights, daysLen, rawText, extraNote} = payload;
-
-  const main = pick[0] || "--";
-  const sub  = pick[1] || "--";
-  const kem  = pick[2] || "--";
-
-  const phaText = `Pha ${phaObj.pha} • ${phaObj.dir} • Tin cậy ${(phaObj.conf*100).toFixed(0)}%`;
-
-  let chipsHtml = `<div class="chips">`;
-  if(VIEW_MODE==="pro"){
-    chipsHtml += pctLineArr.map(x=>`<span class="chip">${esc(x)}</span>`).join("");
-  }else{
-    chipsHtml += `<span class="chip">🎯 Chính: ${esc(main)}</span>`;
-    chipsHtml += `<span class="chip">🛡️ Phụ: ${esc(sub)}</span>`;
-    chipsHtml += `<span class="chip">➕ Kèm: ${esc(kem)}</span>`;
-  }
-  chipsHtml += `</div>`;
-
-  const warnHtml = `
-    <ul class="warnList">
-      ${warnings.map(w=>`<li>${esc(w)}</li>`).join("")}
-    </ul>
-  `;
-
-  const explainHtml = `
-    <div class="sep"></div>
-    <div class="khead">GIẢI THÍCH</div>
-    <div class="metaLine" style="margin-top:6px">
-      ${explainLines.map(l=>`• ${esc(l)}`).join("<br/>")}
-      ${extraNote ? `<div class="sep"></div><b>${esc(extraNote)}</b>` : ``}
-    </div>
-  `;
-
+  const warnHtml = `<ul class="warnList">${warnings.map(w=>`<li>${esc(w)}</li>`).join("")}</ul>`;
   const weightLine = `wHot=${weights.wHot} • wGan=${weights.wGan} • wPas=${weights.wPas} • wTruc=${weights.wTruc} • wG7=${weights.wG7}`;
-  const g6Mode = el("g6Scope").value;
 
   const left = `
     <div class="kcard">
-      <div class="khead">CHỐT 3 (ƯU TIÊN KQ)</div>
-      <div class="kbig">${esc(main)} <span style="opacity:.65;font-weight:800">/</span> ${esc(sub)} <span style="opacity:.65;font-weight:800">/</span> ${esc(kem)}</div>
-      <div class="metaLine" style="margin-top:6px">${esc(phaText)}<br/>${esc(phaObj.note)}</div>
-      ${chipsHtml}
+      <div class="khead">CHỐT 3 (HIT@3>=2)</div>
+      <div class="kbig">${esc(pick[0]||"--")} <span style="opacity:.65">/</span> ${esc(pick[1]||"--")} <span style="opacity:.65">/</span> ${esc(pick[2]||"--")}</div>
+      <div class="small" style="margin-top:6px">${esc(extraNote)}</div>
+      ${VIEW_MODE==="simple" ? chipsSimple : `<div class="chips">${topLineArr.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>`}
+      <div class="sep"></div>
+      <div class="mono">${esc(simple6.join("\n"))}</div>
     </div>
   `;
-
   const right = `
     <div class="kcard">
-      <div class="khead">3 CẢNH BÁO</div>
+      <div class="khead">ANTI-BẪY (BẮT BUỘC)</div>
       ${warnHtml}
       <div class="sep"></div>
-      <div class="metaLine">
+      <div class="small">
         AI supervisor: <b>${weights.locked?"LOCKED":"OFF"}</b><br/>
-        G6 scope: <b>${esc(g6Mode)}</b><br/>
-        ${esc(weightLine)}<br/>
-        Tổng ngày dùng: ${daysLen}
+        ${esc(weightLine)}
+      </div>
+      <div class="sep"></div>
+      <div class="khead">GIẢI THÍCH TOP3</div>
+      <div class="small" style="line-height:1.5">
+        ${explainLines.map(l=>`• ${esc(l)}`).join("<br/>")}
       </div>
     </div>
   `;
 
-  const topBlock = (VIEW_MODE==="pro")
-    ? `<div class="sep"></div>
-       <div class="khead">TOP + % (THAM KHẢO)</div>
-       <div class="chips">${pctLineArr.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>`
-    : "";
+  const proExtra = `
+    <div class="sep"></div>
+    <div class="khead">TOP + % (THAM KHẢO)</div>
+    <div class="chips">${topLineArr.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>
+  `;
 
   el("outHtml").innerHTML = `
     <div class="krow">${left}${right}</div>
-    ${topBlock}
-    ${explainHtml}
+    ${VIEW_MODE==="pro" || VIEW_MODE==="god" ? proExtra : ""}
   `;
   el("outRaw").textContent = rawText || "";
 }
 
-function runFULL(){
-  el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
+/* =========================================================
+   HEATMAP TRỤC (10×10) + power
+========================================================= */
+function drawHeatmap(days){
+  const K = Math.min(Math.max(6, parseInt(el("phaseK").value||"9",10)), days.length);
+  const ht=buildHeadTail(days,K);
 
-  const days = parseLines();
-  if(days.length < 6){
-    el("outHtml").textContent = "❌ Thiếu dữ liệu: cần ≥6 ngày (khuyến nghị 20).";
-    el("outRaw").textContent = "❌ Thiếu dữ liệu.";
+  // matrix head×tail count
+  const M=[...Array(10)].map(()=>Array(10).fill(0));
+  days.slice(0,K).forEach(d=>{
+    d.pool.forEach(n=>{
+      const a=parseInt(n[0],10), b=parseInt(n[1],10);
+      if(Number.isFinite(a)&&Number.isFinite(b)) M[a][b]+=1;
+    });
+  });
+
+  const canvas=el("cvHeat");
+  const ctx=canvas.getContext("2d");
+  const W=canvas.width=canvas.clientWidth*window.devicePixelRatio;
+  const H=canvas.height=360*window.devicePixelRatio;
+  ctx.clearRect(0,0,W,H);
+
+  const pad=18*window.devicePixelRatio;
+  const gridW=W-pad*2;
+  const gridH=H-pad*2;
+  const cellW=gridW/10;
+  const cellH=gridH/10;
+
+  let max=0;
+  for(let i=0;i<10;i++) for(let j=0;j<10;j++) max=Math.max(max,M[i][j]);
+
+  // background
+  ctx.fillStyle="rgba(0,0,0,.20)";
+  ctx.fillRect(0,0,W,H);
+
+  // cells
+  for(let i=0;i<10;i++){
+    for(let j=0;j<10;j++){
+      const v=M[i][j];
+      const a = max? (v/max) : 0;
+      ctx.fillStyle = `rgba(30,94,255,${0.10 + 0.70*a})`;
+      ctx.fillRect(pad + j*cellW, pad + i*cellH, cellW-1, cellH-1);
+    }
+  }
+
+  // labels
+  ctx.fillStyle="rgba(255,255,255,.75)";
+  ctx.font=`${12*window.devicePixelRatio}px system-ui`;
+  for(let i=0;i<10;i++){
+    ctx.fillText(String(i), pad-12*window.devicePixelRatio, pad + (i+0.65)*cellH);
+    ctx.fillText(String(i), pad + (i+0.35)*cellW, pad-6*window.devicePixelRatio);
+  }
+
+  const headTop = Object.entries(ht.h).sort((a,b)=>b[1]-a[1]).slice(0,4).map(x=>x[0]).join(",");
+  const tailTop = Object.entries(ht.t).sort((a,b)=>b[1]-a[1]).slice(0,4).map(x=>x[0]).join(",");
+  el("heatHint").textContent = `K=${K} | headTop=${headTop} | tailTop=${tailTop} | maxCell=${max}`;
+}
+el("btnHeat").onclick=()=>{
+  const days=parseLines();
+  if(days.length<6){ alert("Thiếu dữ liệu (≥6 ngày)."); return; }
+  drawHeatmap(days);
+  setView("god");
+};
+
+/* Pascal 36 view */
+el("btnPas36").onclick=()=>{
+  const days=parseLines();
+  if(days.length<2){ alert("Cần ≥2 ngày để seed Pascal."); return; }
+  const seq=pascal36(days[0].db2, days[1].db2);
+  const lines=[];
+  lines.push(`Seed: DB0=${days[0].db2} | DB1=${days[1].db2}`);
+  lines.push(`Seq36:`);
+  for(let i=0;i<seq.length;i+=12){
+    lines.push(seq.slice(i,i+12).join(" "));
+  }
+  lines.push(``);
+  lines.push(`Set+Đảo+Kề/Bóng (gợi ý):`);
+  const s=pascalSeedSet(days);
+  const arr=[...s].slice(0,60);
+  for(let i=0;i<arr.length;i+=12){
+    lines.push(arr.slice(i,i+12).join(" "));
+  }
+  el("pasOut").textContent=lines.join("\n");
+  setView("god");
+};
+
+/* =========================================================
+   GOD MODE RUN
+========================================================= */
+function runGOD(){
+  el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
+  const days=parseLines();
+  if(days.length<6){
+    el("outHtml").textContent="❌ Thiếu dữ liệu: cần ≥6 ngày (khuyến nghị 20).";
+    el("outRaw").textContent="❌ Thiếu dữ liệu.";
     return;
   }
 
-  const phaObj = detectPhase(days);
-  const weights = lockWeightsByPhase(phaObj);
-  const meta = scoreCandidates(days, phaObj, weights);
+  const phaObj=detectPhase(days);
+  setBadge("stPha", `● Pha: ${phaObj.pha} ${phaObj.dir} ${(phaObj.conf*100).toFixed(0)}%`, phaObj.pha==="M3" ? "warn" : "ok");
 
-  const candidates = Array.from({length:100},(_,i)=>pad2(i));
-  const hotRank = new Map(candidates.map(n => [n, meta.freq[n] || 0]));
-  const ganScore = new Map(candidates.map(n => {
-    const v = meta.gan[n];
-    if(v === 999) return [n, 0];
-    return [n, Math.min(v, 20)];
-  }));
-  const pasScore = new Map(candidates.map(n => [n, meta.pas.has(n) ? 1 : 0]));
+  const weights=lockWeightsByPhase(phaObj);
+  const meta=scoreCandidates(days,phaObj,weights);
 
-  const Kp = Math.min(Math.max(5, parseInt(el("phaseK").value||"9",10)), days.length);
-  const ht = buildHeadTail(days, Kp);
-  const headPower = new Map(Object.entries(ht.h).map(([k,v])=>[k,v]));
-  const tailPower = new Map(Object.entries(ht.t).map(([k,v])=>[k,v]));
-  const trucScore = new Map(candidates.map(n=>{
-    const hp = headPower.get(n[0]) || 0;
-    const tp = tailPower.get(n[1]) || 0;
-    const bonus = meta.trucSet.has(n) ? 2 : 0;
-    return [n, hp + tp + bonus];
+  // cum confirm
+  const cumList=buildCumConfirm(meta.scoreSorted);
+  const cumSet=new Set(cumList);
+
+  const candidates=Array.from({length:100},(_,i)=>pad2(i));
+  const hotRank=new Map(candidates.map(n=>[n, meta.freq[n]||0]));
+
+  const ganScore=new Map(candidates.map(n=>{
+    const v=meta.gan[n];
+    if(v===999) return [n,0];
+    return [n, Math.min(v,20)];
   }));
 
-  const ctxPatch = {
+  const pasScore=new Map(candidates.map(n=>[n, meta.pas.has(n)?1:0]));
+
+  // trucScore = headPower + tailPower + bonus
+  const ht=meta.ht;
+  const headPower=new Map(Object.entries(ht.h).map(([k,v])=>[k,v]));
+  const tailPower=new Map(Object.entries(ht.t).map(([k,v])=>[k,v]));
+  const trucScore=new Map(candidates.map(n=>{
+    const hp=headPower.get(n[0])||0;
+    const tp=tailPower.get(n[1])||0;
+    const bonus=meta.trucSet.has(n)?2:0;
+    return [n, hp+tp+bonus];
+  }));
+
+  const ctxPatch={
     candidates,
     hotRank,
     ganScore,
     pasScore,
     trucScore,
     g7Lead: meta.g7Lead,
-    cumConfirm: new Set(meta.cumList || []),
+    cumConfirm: cumSet,
     headCount: ht.h,
     tailCount: ht.t,
-    trucThreshold: Math.min(Math.max(2, parseInt(el("trucThreshold").value||"4",10)), 10),
+    trucThreshold: Math.min(Math.max(2, parseInt(el("trucThreshold").value||"4",10)), 12),
     phaseHint: { pha: phaObj.pha, huong: phaObj.dir, tinCay: phaObj.conf }
   };
 
-  const patchOut = MASTER_HIT2OF3(ctxPatch);
-  const warnings = buildWarnings(phaObj, meta);
+  const patchOut=MASTER_HIT2OF3(ctxPatch);
+  const warnings=antiTrap(phaObj, meta);
 
-  const topN = Math.min(Math.max(4, parseInt(el("topN").value||"10",10)), 15);
-  const topPickByProb = patchOut.top10.slice(0, topN);
-  const maxP = Math.max(...topPickByProb.map(x=>x.prob), 0.0001);
-  const pctLineArr = topPickByProb.map(x=>{
-    const p = (x.prob / maxP) * 100;
+  const topN=Math.min(Math.max(4, parseInt(el("topN").value||"10",10)), 20);
+  const topPick=patchOut.top10.slice(0, topN);
+  const maxP=Math.max(...topPick.map(x=>x.prob), 0.0001);
+  const topLineArr=topPick.map(x=>{
+    const p=(x.prob/maxP)*100;
     return `${x.n}(${p.toFixed(0)}%)`;
   });
 
-  const pick = patchOut.chot3 || topPickByProb.slice(0,3).map(x=>x.n);
+  const pick=patchOut.chot3 || topPick.slice(0,3).map(x=>x.n);
 
   const explainLines = pick.slice(0,3).map((n,i)=>{
-    const f = meta.features[n] || {hot:0,gan:999,pas:0,truc:false,g7:false};
-    const ganTag = (meta.gan[n]===999) ? "∞" : meta.gan[n];
-    const cum = (meta.cumList||[]).includes(n);
-    const dau = meta.headTop.slice(0,5).includes(n[0]);
-    const duoi = meta.tailTop.slice(0,5).includes(n[1]);
-    return `${i+1}) ${n} | hot:${f.hot||0} | gan:${ganTag} | truc:${f.truc?"Y":"-"} | g7:${f.g7?"Y":"-"} | pas:${f.pas?"Y":"-"} | cum:${cum?"Y":"-"} | dau:${dau?"Y":"-"} | duoi:${duoi?"Y":"-"}`;
+    const f=meta.features[n]||{hot:0,gan:999,pas:0,truc:false,g7:false};
+    const ganTag=(meta.gan[n]===999)?"∞":meta.gan[n];
+    const cum=cumSet.has(n);
+    const dau=meta.headTop.includes(n[0]);
+    const duoi=meta.tailTop.includes(n[1]);
+    return `${i+1}) ${n} | hot:${f.hot} | gan:${ganTag} | truc:${f.truc?"Y":"-"} | g7:${f.g7?"Y":"-"} | pas:${f.pas?"Y":"-"} | cum:${cum?"Y":"-"} | dau:${dau?"Y":"-"} | duoi:${duoi?"Y":"-"}`;
   });
 
   const extraNote =
-    `✅ MODE: HIT@3>=2 • trust ${(patchOut.trust*100).toFixed(0)}% • noise ${(patchOut.gate.noise*100).toFixed(0)}% • ${patchOut.risk}`;
+    `MODE: HIT@3>=2 • trust ${(patchOut.trust*100).toFixed(0)}% • noise ${(patchOut.gate.noise*100).toFixed(0)}% • ${patchOut.risk}`;
 
-  const out =
-`===== KẾT QUẢ FULL (HIT@3>=2 — LUÔN CHỐT 3) =====
+  const rawText =
+`===== GOD MODE v3.8 =====
 Tổng ngày dùng: ${days.length}
 
-AI ĐỌC PHA:
-Pha: ${phaObj.pha} | Hướng: ${phaObj.dir} | Tin cậy ${(phaObj.conf*100).toFixed(0)}%
-Nhận định: ${phaObj.note}
+PHA:
+${phaObj.pha} | ${phaObj.dir} | ${(phaObj.conf*100).toFixed(0)}%
+${phaObj.note}
+metrics: truc=${(phaObj.metrics.trucRatio*100).toFixed(0)}% gan=${(phaObj.metrics.ganRatio*100).toFixed(0)}% g7=${(phaObj.metrics.g7Ratio*100).toFixed(0)}% noise=${(phaObj.metrics.noise*100).toFixed(0)}%
 
-TOP ${topN} (tham khảo) + %:
-${pctLineArr.join("  ")}
+TOP ${topN}:
+${topLineArr.join("  ")}
 
-CHỐT 3 (mục tiêu HIT@3>=2):
-🎯 Chính: ${pick[0]}
-🛡️ Phụ:  ${pick[1]}
-➕ Kèm:  ${pick[2]}
+CHỐT 3:
+${pick.join(" ")}
 
-3 CẢNH BÁO:
+ANTI-BẪY:
 1) ${warnings[0]}
 2) ${warnings[1]}
 3) ${warnings[2]}
@@ -1747,143 +1672,155 @@ CHỐT 3 (mục tiêu HIT@3>=2):
 NOTE:
 ${extraNote}
 
-GIẢI THÍCH:
+EXPLAIN:
 ${explainLines.join("\n")}
 
 WEIGHTS:
 wHot=${weights.wHot} | wGan=${weights.wGan} | wPas=${weights.wPas} | wTruc=${weights.wTruc} | wG7=${weights.wG7}
 `;
 
-  window.__lastRender = ()=>renderOutputUI({
+  window.__lastRender=()=>renderOutput({
     phaObj,
-    pick,
-    pctLineArr,
-    warnings,
-    explainLines,
     weights,
-    daysLen: days.length,
-    rawText: out,
-    extraNote
+    pick,
+    warnings,
+    topLineArr,
+    explainLines,
+    extraNote,
+    rawText,
+    trust: patchOut.trust,
+    noise: patchOut.gate.noise
   });
+
   window.__lastRender();
+
+  // GOD view helpers
+  drawHeatmap(days);
+  // Pascal render
+  const seq=pascal36(days[0].db2, days[1].db2);
+  const pLines=[];
+  pLines.push(`Seed: DB0=${days[0].db2} | DB1=${days[1].db2}`);
+  pLines.push(`Seq36:`);
+  for(let i=0;i<seq.length;i+=12) pLines.push(seq.slice(i,i+12).join(" "));
+  pLines.push("");
+  pLines.push("Set+Đảo+Kề/Bóng (gợi ý):");
+  const s=pascalSeedSet(days);
+  const arr=[...s].slice(0,60);
+  for(let i=0;i<arr.length;i+=12) pLines.push(arr.slice(i,i+12).join(" "));
+  el("pasOut").textContent=pLines.join("\n");
 }
-el("btnFull").onclick = runFULL;
+el("btnGod").onclick=runGOD;
 
 /* =========================================================
    MINI BACKTEST (tham khảo)
 ========================================================= */
 function computeHit2(pick3, dayObj){
-  const s = new Set(dayObj.pool || []);
-  let hit = 0;
-  for(const n of pick3){ if(s.has(n)) hit++; }
-  return hit >= 2;
+  const s=new Set(dayObj.pool||[]);
+  let hit=0;
+  for(const n of pick3) if(s.has(n)) hit++;
+  return hit>=2;
 }
-el("btnBacktest").onclick = ()=>{
-  const allText = normalizeInputToOneDayOneLine(el("inputData").value).trim();
-  if(!allText){
-    el("btLog").textContent = "Chưa có dữ liệu.";
-    return;
-  }
-  const raw = allText.split("\n").map(s=>s.trim()).filter(Boolean);
-  const win = Math.min(Math.max(6, parseInt(el("winDays").value||"20",10)), 60);
+el("btnBacktest").onclick=()=>{
+  const allText=normalizeInputToOneDayOneLine(el("inputData").value).trim();
+  if(!allText){ el("outRaw").textContent="Chưa có dữ liệu."; return; }
+  const raw=allText.split("\n").map(s=>s.trim()).filter(Boolean);
+  const win=Math.min(Math.max(6, parseInt(el("winDays").value||"20",10)), 90);
 
-  const daysAll = [];
+  // parse full list (newest first)
+  const daysAll=[];
   for(const line of raw){
-    const dbm = line.match(/DB\s+(\d{2})/i);
-    const g7m = line.match(/G7:\s*([0-9 ]+)/i);
-    const g6m = line.match(/G6:\s*([0-9 ]+)/i);
-    if(!dbm || !g7m) continue;
-    const db2 = pad2(dbm[1]);
-    const g7All = (g7m[1].match(/\b\d{2}\b/g)||[]).map(pad2);
-    const g7 = g7All.slice(-4);
-    const g6 = g6m ? (g6m[1].match(/\b\d{3}\b/g)||[]).slice(0,3) : [];
-    const g6_2 = g6.map(x=>pad2(String(x).slice(-2)));
-    const pool = [db2, ...g7, ...g6_2];
+    const dbm=line.match(/DB\s+(\d{2})/i);
+    const g7m=line.match(/G7:\s*([0-9 ]+)/i);
+    const g6m=line.match(/G6:\s*([0-9 ]+)/i);
+    if(!dbm||!g7m) continue;
+    const db2=pad2(dbm[1]);
+    const g7All=(g7m[1].match(/\b\d{2}\b/g)||[]).map(pad2);
+    const g7=g7All.slice(-4);
+    const g6=g6m?(g6m[1].match(/\b\d{3}\b/g)||[]).slice(0,3):[];
+    const g6_2=g6.map(x=>pad2(String(x).slice(-2)));
+    const pool=[db2,...g7,...g6_2];
     daysAll.push({db2,g7,g6_2,pool});
   }
-
-  if(daysAll.length < win + 1){
-    el("btLog").textContent = "Thiếu dữ liệu để backtest (cần nhiều hơn cửa sổ).";
+  if(daysAll.length<win+1){
+    el("outRaw").textContent="Thiếu dữ liệu để backtest (cần nhiều hơn cửa sổ).";
     return;
   }
 
-  let N = 0, hit2 = 0, maxMiss = 0, curMiss = 0;
-  let log = [];
-  for(let i=win; i<daysAll.length; i++){
-    const train = daysAll.slice(i-win, i);
-    const target = daysAll[i-1];
-    const daysTrain = train.slice().reverse();
+  let N=0,hit2=0,maxMiss=0,curMiss=0;
+  const log=[];
+  for(let i=win;i<daysAll.length;i++){
+    const train=daysAll.slice(i-win,i);
+    const target=daysAll[i-1];
+    const daysTrain=train.slice().reverse();
 
-    const phaObj = detectPhase(daysTrain);
-    const weights = lockWeightsByPhase(phaObj);
-    const meta = scoreCandidates(daysTrain, phaObj, weights);
+    const phaObj=detectPhase(daysTrain);
+    const weights=lockWeightsByPhase(phaObj);
+    const meta=scoreCandidates(daysTrain,phaObj,weights);
 
-    const candidates = Array.from({length:100},(_,k)=>pad2(k));
-    const hotRank = new Map(candidates.map(n => [n, meta.freq[n] || 0]));
-    const ganScore = new Map(candidates.map(n => {
-      const v = meta.gan[n];
-      if(v === 999) return [n, 0];
-      return [n, Math.min(v, 20)];
+    const cumList=buildCumConfirm(meta.scoreSorted);
+    const cumSet=new Set(cumList);
+
+    const candidates=Array.from({length:100},(_,k)=>pad2(k));
+    const hotRank=new Map(candidates.map(n=>[n, meta.freq[n]||0]));
+    const ganScore=new Map(candidates.map(n=>{
+      const v=meta.gan[n]; if(v===999) return [n,0]; return [n, Math.min(v,20)];
     }));
-    const pasScore = new Map(candidates.map(n => [n, meta.pas.has(n) ? 1 : 0]));
+    const pasScore=new Map(candidates.map(n=>[n, meta.pas.has(n)?1:0]));
 
-    const Kp = Math.min(Math.max(5, parseInt(el("phaseK").value||"9",10)), daysTrain.length);
-    const ht = buildHeadTail(daysTrain, Kp);
-    const headPower = new Map(Object.entries(ht.h).map(([k,v])=>[k,v]));
-    const tailPower = new Map(Object.entries(ht.t).map(([k,v])=>[k,v]));
-    const trucScore = new Map(candidates.map(n=>{
-      const hp = headPower.get(n[0]) || 0;
-      const tp = tailPower.get(n[1]) || 0;
-      const bonus = meta.trucSet.has(n) ? 2 : 0;
-      return [n, hp + tp + bonus];
+    const ht=meta.ht;
+    const headPower=new Map(Object.entries(ht.h).map(([k,v])=>[k,v]));
+    const tailPower=new Map(Object.entries(ht.t).map(([k,v])=>[k,v]));
+    const trucScore=new Map(candidates.map(n=>{
+      const hp=headPower.get(n[0])||0;
+      const tp=tailPower.get(n[1])||0;
+      const bonus=meta.trucSet.has(n)?2:0;
+      return [n, hp+tp+bonus];
     }));
 
-    const ctxPatch = {
-      candidates,
-      hotRank,
-      ganScore,
-      pasScore,
-      trucScore,
+    const ctxPatch={
+      candidates,hotRank,ganScore,pasScore,trucScore,
       g7Lead: meta.g7Lead,
-      cumConfirm: new Set(meta.cumList || []),
+      cumConfirm: cumSet,
       headCount: ht.h,
       tailCount: ht.t,
-      trucThreshold: Math.min(Math.max(2, parseInt(el("trucThreshold").value||"4",10)), 10),
+      trucThreshold: Math.min(Math.max(2, parseInt(el("trucThreshold").value||"4",10)), 12),
       phaseHint: { pha: phaObj.pha, huong: phaObj.dir, tinCay: phaObj.conf }
     };
-    const patchOut = MASTER_HIT2OF3(ctxPatch);
-    const pick = patchOut.chot3 || [];
 
-    const ok = computeHit2(pick, target);
+    const patchOut=MASTER_HIT2OF3(ctxPatch);
+    const pick=patchOut.chot3||[];
+
+    const ok=computeHit2(pick,target);
     N++;
     if(ok){
-      hit2++;
-      curMiss = 0;
-      log.push(`✅ #${N} pick=${pick.join(" ")} hit>=2 | target(DB+G7+G6)= ${target.pool.join(" ")}`);
+      hit2++; curMiss=0;
+      log.push(`✅ #${N} pick=${pick.join(" ")} hit>=2 | target=${target.pool.join(" ")}`);
     }else{
-      curMiss++;
-      maxMiss = Math.max(maxMiss, curMiss);
-      log.push(`❌ #${N} pick=${pick.join(" ")} miss | target= ${target.pool.join(" ")}`);
+      curMiss++; maxMiss=Math.max(maxMiss,curMiss);
+      log.push(`❌ #${N} pick=${pick.join(" ")} miss | target=${target.pool.join(" ")}`);
     }
-    if(log.length>120) log.shift();
+    if(log.length>140) log.shift();
   }
 
-  el("btN").textContent = String(N);
-  el("btHit2").textContent = String(hit2);
-  el("btRate").textContent = (N ? ((hit2/N)*100).toFixed(0)+"%" : "--");
-  el("btMaxMiss").textContent = String(maxMiss);
-  el("btLog").textContent = log.join("\n");
+  el("outRaw").textContent =
+`BACKTEST (rolling) — win=${win}
+N=${N} | hit>=2=${hit2} | rate=${N?((hit2/N)*100).toFixed(0):"--"}% | maxMiss=${maxMiss}
+
+LOG (mới nhất ở dưới):
+${log.join("\n")}
+`;
+  setView("pro");
 };
 
 /* =========================================================
    SAVE/LOAD/RESET
 ========================================================= */
-const LS_KEY = "BH_ULTRA_MASTER_V37_DATA";
+const LS_KEY="BH_ULTRA_MASTER_V38_DATA";
 
 function saveData(){
-  const payload = {
-    inputData: el("inputData").value || "",
-    settings: {
+  const payload={
+    inputData: el("inputData").value||"",
+    settings:{
       winDays: el("winDays").value,
       topN: el("topN").value,
       aiSup: el("aiSup").value,
@@ -1897,55 +1834,55 @@ function saveData(){
     ts: Date.now()
   };
   localStorage.setItem(LS_KEY, JSON.stringify(payload));
-  setBadge("stSave", "● Save: OK", "ok");
+  setBadge("stSave","● Save: OK","ok");
 }
 function loadData(){
-  const raw = localStorage.getItem(LS_KEY);
+  const raw=localStorage.getItem(LS_KEY);
   if(!raw){ setBadge("stSave","● Save: empty","warn"); return; }
   try{
-    const p = JSON.parse(raw);
-    el("inputData").value = p.inputData || "";
-    const s = p.settings || {};
-    if(s.winDays!=null) el("winDays").value = s.winDays;
-    if(s.topN!=null) el("topN").value = s.topN;
-    if(s.aiSup!=null) el("aiSup").value = s.aiSup;
-    if(s.g6Scope!=null) el("g6Scope").value = s.g6Scope;
-    if(s.trucThreshold!=null) el("trucThreshold").value = s.trucThreshold;
-    if(s.phaseK!=null) el("phaseK").value = s.phaseK;
-    if(s.wHot!=null) el("wHot").value = s.wHot;
-    if(s.wGan!=null) el("wGan").value = s.wGan;
-    if(s.wPas!=null) el("wPas").value = s.wPas;
+    const p=JSON.parse(raw);
+    el("inputData").value=p.inputData||"";
+    const s=p.settings||{};
+    if(s.winDays!=null) el("winDays").value=s.winDays;
+    if(s.topN!=null) el("topN").value=s.topN;
+    if(s.aiSup!=null) el("aiSup").value=s.aiSup;
+    if(s.g6Scope!=null) el("g6Scope").value=s.g6Scope;
+    if(s.trucThreshold!=null) el("trucThreshold").value=s.trucThreshold;
+    if(s.phaseK!=null) el("phaseK").value=s.phaseK;
+    if(s.wHot!=null) el("wHot").value=s.wHot;
+    if(s.wGan!=null) el("wGan").value=s.wGan;
+    if(s.wPas!=null) el("wPas").value=s.wPas;
     setBadge("stSave","● Save: loaded","ok");
-    el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
+    el("inputData").value=normalizeInputToOneDayOneLine(el("inputData").value).trim();
   }catch(e){
     setBadge("stSave","● Save: corrupt","fail");
   }
 }
-function clearIO(){
-  el("outHtml").textContent = "Chưa có dữ liệu.";
-  el("outRaw").textContent = "Chưa có dữ liệu.";
-}
 function resetAll(){
-  el("inputData").value = "";
-  el("dbg").textContent = "Chưa có OCR.";
-  clearIO();
-  showKPI("", [], [], "--");
+  el("inputData").value="";
+  el("dbg").textContent="Chưa có OCR.";
+  el("outHtml").textContent="Chưa có dữ liệu.";
+  el("outRaw").textContent="Chưa có dữ liệu.";
+  showKPI("",[],[],"--");
   batchOK=0; batchFail=0;
   setBadge("stOcr","● OCR: idle","ok");
   setBadge("stGate","● Gate: waiting","warn");
   setBadge("stSave","● Save: --","warn");
+  setBadge("stPha","● Pha: --","warn");
   setStatus();
   localStorage.removeItem(LS_KEY);
+  el("pasOut").textContent="Chưa chạy.";
+  const ctx=el("cvHeat").getContext("2d");
+  ctx.clearRect(0,0,el("cvHeat").width,el("cvHeat").height);
+  el("heatHint").textContent="";
 }
-el("btnSave").onclick = saveData;
-el("btnLoad").onclick = loadData;
-el("btnClearData").onclick = ()=>{ el("inputData").value=""; clearIO(); };
-el("btnClearAll").onclick = resetAll;
+el("btnSave").onclick=saveData;
+el("btnLoad").onclick=loadData;
+el("btnClearData").onclick=()=>{ el("inputData").value=""; el("outHtml").textContent="Chưa có dữ liệu."; el("outRaw").textContent="Chưa có dữ liệu."; };
+el("btnClearAll").onclick=resetAll;
 
 // auto load
 loadData();
-
-/* --- END: engine block --- */
 </script>
 </body>
 </html>
