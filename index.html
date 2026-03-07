@@ -3,37 +3,33 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-  <title>ULTRA MASTER v10.1 AI CROP</title>
+  <title>OCR Gate AI Focus FINAL</title>
   <meta name="theme-color" content="#09111f"/>
   <style>
     :root{
       --bg:#07101d; --card:#0c1830; --card2:#101d38; --line:rgba(255,255,255,.08);
       --txt:#eaf1ff; --muted:#9db0d3; --blue:#2f6bff; --blue2:#1e4fd6;
-      --good:#26c281; --warn:#ffb020; --bad:#ff6666; --shadow:0 12px 30px rgba(0,0,0,.28);
-      --radius:18px;
+      --good:#27c281; --warn:#ffb020; --bad:#ff6666; --cyan:#39c9ff; --shadow:0 12px 30px rgba(0,0,0,.28);
     }
     *{box-sizing:border-box}
     body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--txt);
+      margin:0;color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:
         radial-gradient(900px 500px at 10% -10%, rgba(47,107,255,.16), transparent 55%),
         radial-gradient(900px 500px at 110% 0%, rgba(57,201,255,.08), transparent 50%),
         linear-gradient(180deg,#07101d,#081321 40%,#050c15 100%);
     }
-    .app{max-width:1180px;margin:0 auto;padding:14px}
+    .app{max-width:1320px;margin:0 auto;padding:14px}
     .hero,.card{
-      border:1px solid var(--line);
-      border-radius:22px;
+      border:1px solid var(--line);border-radius:22px;
       background:linear-gradient(180deg,var(--card),var(--card2));
       box-shadow:var(--shadow);
     }
     .hero{padding:18px;margin-bottom:14px}
     .hero h1{margin:0 0 6px;font-size:28px}
     .hero p{margin:0;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+    .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}
+    @media (max-width:1050px){.grid{grid-template-columns:1fr}}
     .card{padding:14px}
     .card h2{margin:0 0 12px;font-size:18px}
     .label{display:block;font-size:13px;color:var(--muted);margin:8px 0 6px}
@@ -41,10 +37,11 @@
       width:100%;padding:12px;border-radius:14px;border:1px solid var(--line);
       background:#091427;color:var(--txt);outline:none;
     }
-    textarea{min-height:140px;resize:vertical}
+    textarea{min-height:120px;resize:vertical}
     .row{display:flex;gap:10px;flex-wrap:wrap}
     .split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:700px){.split{grid-template-columns:1fr}}
+    .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media (max-width:760px){.split,.tri{grid-template-columns:1fr}}
     .btn{
       border:none;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer;
       background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;
@@ -55,73 +52,73 @@
     .btn.warn{background:linear-gradient(180deg,#ffb020,#dd8f00)}
     .btn.bad{background:linear-gradient(180deg,#ff6767,#dd4646)}
     .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
-    .thumb{
-      border:1px solid var(--line);border-radius:16px;background:#071221;overflow:hidden
-    }
+    .thumb{border:1px solid var(--line);border-radius:16px;background:#071221;overflow:hidden}
     .thumb img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;background:#050b14}
     .cap{padding:8px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
-    .resultBox{
-      margin-top:10px;padding:12px;border-radius:16px;background:#081120;border:1px solid var(--line)
-    }
-    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
-    @media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
-    .kpi{padding:12px;border-radius:16px;background:#0a1427;border:1px solid var(--line)}
-    .kpi .t{font-size:12px;color:var(--muted);margin-bottom:8px}
-    .kpi .v{font-size:22px;font-weight:900}
-    .tag{
-      display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;margin-right:6px
-    }
-    .tag.good{background:rgba(38,194,129,.12);color:var(--good)}
-    .tag.warn{background:rgba(255,176,32,.12);color:var(--warn)}
-    .tag.bad{background:rgba(255,102,102,.12);color:var(--bad)}
-    .tag.blue{background:rgba(47,107,255,.12);color:#89adff}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
-    th{color:var(--muted);font-weight:600}
+    .resultBox{margin-top:10px;padding:12px;border-radius:16px;background:#081120;border:1px solid var(--line)}
     .mini{font-size:12px;color:var(--muted)}
-    canvas{max-width:100%}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
+      background:#0a1427;border:1px solid var(--line);font-size:13px;margin:4px 6px 0 0
+    }
+    .ok{color:var(--good);font-weight:800}
+    .no{color:var(--bad);font-weight:800}
+    .warnText{color:var(--warn)}
     .cropGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    @media (max-width:700px){.cropGrid{grid-template-columns:1fr}}
+    @media (max-width:760px){.cropGrid{grid-template-columns:1fr}}
+    canvas{max-width:100%;width:100%;border-radius:12px;background:#06101d}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px;vertical-align:top}
+    th{color:var(--muted);font-weight:600}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800}
+    .badge.good{background:rgba(39,194,129,.12);color:var(--good)}
+    .badge.bad{background:rgba(255,102,102,.12);color:var(--bad)}
+    .badge.warn{background:rgba(255,176,32,.12);color:var(--warn)}
+    .badge.blue{background:rgba(47,107,255,.12);color:#82a8ff}
   </style>
 </head>
 <body>
 <div class="app">
   <section class="hero">
-    <h1>ULTRA MASTER v10.1 AI CROP</h1>
-    <p>Bám layout ảnh chụp app XSMB như ảnh Hào gửi • auto tìm bảng • crop riêng ĐB / G6 / G7 • OCR từng vùng</p>
+    <h1>OCR Gate AI Focus FINAL</h1>
+    <p>Chỉ tập trung đọc bảng: detect → crop DB/G1/G6/G7 → OCR vote → gate → xuất 1 ngày / 1 dòng</p>
   </section>
 
   <div class="grid">
     <div class="card">
-      <h2>1) Ảnh đầu vào + AI Crop</h2>
+      <h2>1) Input + Flow</h2>
 
-      <label class="label">Chọn ảnh</label>
+      <label class="label">Upload nhiều ảnh</label>
       <input id="fileInput" type="file" accept="image/*" multiple>
 
-      <div class="split" style="margin-top:12px">
+      <div class="tri" style="margin-top:12px">
         <div>
-          <label class="label">Kiểu ảnh</label>
+          <label class="label">Profile</label>
           <select id="profileMode">
-            <option value="xoso_app">Ảnh app kết quả kiểu như mẫu</option>
+            <option value="xoso_app">Ảnh app XSMB</option>
             <option value="generic">Ảnh chung</option>
           </select>
         </div>
         <div>
-          <label class="label">OCR mode</label>
-          <select id="ocrMode">
-            <option value="digits">Digits only</option>
-            <option value="mixed">Mixed</option>
+          <label class="label">Vote mode</label>
+          <select id="voteMode">
+            <option value="full">Vote đầy đủ</option>
+            <option value="fast">Vote nhanh</option>
           </select>
+        </div>
+        <div>
+          <label class="label">Ngày</label>
+          <input id="drawDate" type="text" placeholder="2026-03-06">
         </div>
       </div>
 
       <div class="row" style="margin-top:12px">
-        <button class="btn" id="btnDetect">1. Detect + Crop</button>
-        <button class="btn good" id="btnOCR">2. OCR vùng crop</button>
-        <button class="btn secondary" id="btnParse">3. Parse</button>
-        <button class="btn secondary" id="btnAnalyze">4. Analyze</button>
-        <button class="btn warn" id="btnDemo">Demo ảnh mẫu</button>
+        <button class="btn" id="btnDetect">1. Detect ảnh đầu</button>
+        <button class="btn good" id="btnReadCurrent">2. Read ảnh đầu</button>
+        <button class="btn warn" id="btnReadBatch">3. Read batch</button>
+        <button class="btn secondary" id="btnGate">Gate</button>
+        <button class="btn secondary" id="btnMakeLine">Ra 1 dòng</button>
         <button class="btn bad" id="btnReset">Reset</button>
       </div>
 
@@ -133,105 +130,97 @@
       <div class="thumbs" id="thumbs" style="margin-top:10px"></div>
 
       <div class="resultBox">
-        <div><strong>Raw OCR</strong></div>
-        <textarea id="ocrText" class="mono" placeholder="OCR từng vùng sẽ hiện ở đây..."></textarea>
-      </div>
-
-      <div class="split">
-        <div>
-          <label class="label">Ngày</label>
-          <input id="drawDate" type="text" placeholder="2026-03-06">
+        <div><strong>Kết quả chuẩn hóa</strong></div>
+        <div class="split" style="margin-top:10px">
+          <div>
+            <label class="label">ĐB</label>
+            <input id="dbInput" type="text" placeholder="49">
+          </div>
+          <div>
+            <label class="label">G1</label>
+            <input id="g1Input" type="text" placeholder="50">
+          </div>
         </div>
-        <div>
-          <label class="label">Ghi chú</label>
-          <input id="noteText" type="text" placeholder="AI crop app screenshot">
-        </div>
-      </div>
-
-      <div class="split" style="margin-top:12px">
-        <div>
-          <label class="label">ĐB</label>
-          <input id="dbInput" type="text" placeholder="49">
-        </div>
-        <div>
-          <label class="label">G1</label>
-          <input id="g1Input" type="text" placeholder="50">
+        <div class="split" style="margin-top:12px">
+          <div>
+            <label class="label">G6</label>
+            <input id="g6Input" type="text" placeholder="54,10,40">
+          </div>
+          <div>
+            <label class="label">G7</label>
+            <input id="g7Input" type="text" placeholder="14,71,85,01">
+          </div>
         </div>
       </div>
 
-      <div class="split" style="margin-top:12px">
-        <div>
-          <label class="label">G6</label>
-          <input id="g6Input" type="text" placeholder="54,10,40">
-        </div>
-        <div>
-          <label class="label">G7</label>
-          <input id="g7Input" type="text" placeholder="14,71,85,01">
-        </div>
+      <div class="resultBox">
+        <div><strong>1 ngày / 1 dòng</strong></div>
+        <textarea id="oneLine" class="mono" placeholder="Ví dụ: 2026-03-06|49|50|54,10,40|14,71,85,01"></textarea>
       </div>
 
-      <div class="row" style="margin-top:12px">
-        <button class="btn good" id="btnSave">Lưu kỳ</button>
-        <button class="btn secondary" id="btnExport">Xuất JSON</button>
-        <button class="btn secondary" id="btnImport">Nhập JSON</button>
-        <input id="importFile" type="file" accept=".json" style="display:none">
+      <div class="resultBox">
+        <div><strong>Gate result</strong></div>
+        <div id="gateBox" style="margin-top:8px"></div>
+      </div>
+
+      <div class="resultBox">
+        <div><strong>Raw OCR / Vote log</strong></div>
+        <textarea id="ocrLog" class="mono" placeholder="Log OCR vote sẽ hiện ở đây..."></textarea>
+      </div>
+
+      <div class="resultBox">
+        <div><strong>Batch result</strong></div>
+        <textarea id="batchOutput" class="mono" placeholder="Kết quả nhiều ảnh sẽ hiện ở đây..."></textarea>
       </div>
     </div>
 
     <div class="card">
-      <h2>2) Crop preview</h2>
+      <h2>2) Detect + Crop Debug</h2>
 
       <div class="cropGrid">
         <div class="resultBox">
-          <div><strong>Full detect</strong></div>
+          <div><strong>Preview detect</strong></div>
           <canvas id="previewCanvas"></canvas>
         </div>
         <div class="resultBox">
-          <div><strong>DB crop</strong></div>
+          <div><strong>Table</strong></div>
+          <canvas id="tableCanvas"></canvas>
+        </div>
+        <div class="resultBox">
+          <div><strong>DB</strong></div>
           <canvas id="dbCanvas"></canvas>
         </div>
         <div class="resultBox">
-          <div><strong>G6 crop</strong></div>
+          <div><strong>G1</strong></div>
+          <canvas id="g1Canvas"></canvas>
+        </div>
+        <div class="resultBox">
+          <div><strong>G6</strong></div>
           <canvas id="g6Canvas"></canvas>
         </div>
         <div class="resultBox">
-          <div><strong>G7 crop</strong></div>
+          <div><strong>G7</strong></div>
           <canvas id="g7Canvas"></canvas>
         </div>
       </div>
 
-      <div class="kpis">
-        <div class="kpi"><div class="t">PHA</div><div class="v" id="kpiPhase">--</div></div>
-        <div class="kpi"><div class="t">TRỤC</div><div class="v" id="kpiAxis">--</div></div>
-        <div class="kpi"><div class="t">HƯỚNG</div><div class="v" id="kpiFlow">--</div></div>
-        <div class="kpi"><div class="t">TIN CẬY</div><div class="v" id="kpiConf">0%</div></div>
+      <div class="resultBox">
+        <div><strong>Thông tin detect</strong></div>
+        <div id="debugInfo" class="mini" style="margin-top:8px"></div>
       </div>
 
       <div class="resultBox">
-        <div><span class="tag good">Main</span> <span id="mainPick">--</span></div>
-        <div style="margin-top:8px"><span class="tag blue">Sub</span> <span id="subPick">--</span></div>
-        <div style="margin-top:8px"><span class="tag bad">Anti</span> <span id="antiPick">--</span></div>
+        <div><strong>Vote chi tiết</strong></div>
+        <div id="voteBox" class="mini" style="margin-top:8px"></div>
       </div>
 
       <div class="resultBox">
-        <div><strong>Checklist 6 dòng</strong></div>
-        <div id="sixLine" style="margin-top:8px"></div>
-      </div>
-
-      <div class="resultBox">
-        <div><strong>Lịch sử</strong></div>
-        <div style="overflow:auto;margin-top:8px">
-          <table>
-            <thead>
-              <tr>
-                <th>Ngày</th>
-                <th>ĐB</th>
-                <th>G6</th>
-                <th>G7</th>
-              </tr>
-            </thead>
-            <tbody id="historyBody"></tbody>
-          </table>
+        <div><strong>Mẹo</strong></div>
+        <div class="mini" style="margin-top:8px">
+          • DB/G7 ưu tiên redmask<br>
+          • G1/G6 ưu tiên darkmask<br>
+          • G7 có 2-pass riêng để giảm nhầm<br>
+          • Gate fail thì sửa tay ngay ở 4 ô rồi bấm Gate lại
         </div>
       </div>
     </div>
@@ -241,14 +230,14 @@
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script>
 const $ = (id)=>document.getElementById(id);
-const STORAGE_KEY = 'ultra_master_v101_history';
 
 const state = {
   files: [],
-  history: [],
   currentImage: null,
   currentBitmap: null,
-  cropBoxes: null
+  cropBoxes: null,
+  worker: null,
+  lastVotes: null
 };
 
 function setStatus(a,b=''){
@@ -260,64 +249,27 @@ function safeNum2(v){
   const s = String(v||'').replace(/\D/g,'');
   return s ? s.slice(-2).padStart(2,'0') : '';
 }
-function split2List(v){
-  return String(v||'').split(/[,\n;| ]+/).map(safeNum2).filter(Boolean);
-}
 function unique(a){ return [...new Set(a)] }
-function getHead(n){ return safeNum2(n).slice(0,1) }
-function getTail(n){ return safeNum2(n).slice(1) }
-function rev(n){ const s=safeNum2(n); return s? s[1]+s[0] : '' }
-function sumRoot(n){ const s=safeNum2(n); return ((+s[0]||0)+(+s[1]||0))%10 }
-function diff2(n){ const s=safeNum2(n); return Math.abs((+s[0]||0)-(+s[1]||0)) }
-function pad2(n){ return String(n).padStart(2,'0') }
-
-function loadHistory(){
-  try{
-    state.history = JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
-    if(!Array.isArray(state.history)) state.history = [];
-  }catch{ state.history = [] }
-  renderHistory();
+function normalizeCommon(t){
+  return String(t||'')
+    .replace(/[Oo]/g,'0')
+    .replace(/[Il|]/g,'1')
+    .replace(/[Ss]/g,'5')
+    .replace(/[B]/g,'8');
 }
-function saveHistory(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state.history));
-  renderHistory();
+function split2List(v, maxLen){
+  return String(v||'').split(/[,\n;| ]+/).map(safeNum2).filter(Boolean).slice(0, maxLen);
 }
-function renderHistory(){
-  const body = $('historyBody');
-  body.innerHTML = '';
-  [...state.history].reverse().forEach(d=>{
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${d.date||''}</td>
-      <td>${d.DB||''}</td>
-      <td>${(d.G6||[]).join(', ')}</td>
-      <td>${(d.G7||[]).join(', ')}</td>
-    `;
-    body.appendChild(tr);
-  });
+function isRed(r,g,b){
+  return r > 160 && g < 125 && b < 125 && (r-g) > 35;
 }
-
-function drawImageToCanvas(canvas, img, maxW=520){
-  const ratio = img.height / img.width;
-  canvas.width = Math.min(maxW, img.width);
-  canvas.height = canvas.width * ratio;
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.drawImage(img,0,0,canvas.width,canvas.height);
+function isDark(r,g,b){
+  const v = 0.299*r + 0.587*g + 0.114*b;
+  return v < 115;
 }
-
-async function loadCurrentImageFromFile(file){
-  const url = URL.createObjectURL(file);
-  const img = new Image();
-  img.src = url;
-  await img.decode();
-  state.currentImage = img;
-  if ('createImageBitmap' in window) {
-    state.currentBitmap = await createImageBitmap(file);
-  } else {
-    state.currentBitmap = img;
-  }
-  return img;
+function isLightGray(r,g,b){
+  const avg = (r+g+b)/3;
+  return avg > 190 && Math.abs(r-g)<18 && Math.abs(g-b)<18;
 }
 
 function renderThumbs(){
@@ -332,6 +284,32 @@ function renderThumbs(){
   });
 }
 
+async function ensureWorker(){
+  if(state.worker) return state.worker;
+  state.worker = await Tesseract.createWorker('eng', 1, {
+    logger: m => {
+      if(m.status) $('progressText').textContent = `${m.status} ${m.progress ? Math.round(m.progress*100)+'%' : ''}`;
+    }
+  });
+  return state.worker;
+}
+
+async function destroyWorker(){
+  if(state.worker){
+    try{ await state.worker.terminate(); }catch(e){}
+    state.worker = null;
+  }
+}
+
+async function loadBitmapFromFile(file){
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.src = url;
+  await img.decode();
+  const bitmap = ('createImageBitmap' in window) ? await createImageBitmap(file) : img;
+  return {img, bitmap};
+}
+
 function imageDataFromBitmap(bitmap){
   const canvas = document.createElement('canvas');
   canvas.width = bitmap.width || bitmap.naturalWidth;
@@ -341,110 +319,100 @@ function imageDataFromBitmap(bitmap){
   return {canvas, ctx, data: ctx.getImageData(0,0,canvas.width,canvas.height)};
 }
 
-function isRed(r,g,b){
-  return r > 160 && g < 120 && b < 120 && (r-g) > 40;
-}
-function isDark(r,g,b){
-  const v = 0.299*r + 0.587*g + 0.114*b;
-  return v < 120;
-}
-
 function smartCropXSMBLikeScreenshot(bitmap){
-  const {canvas, ctx, data} = imageDataFromBitmap(bitmap);
+  const {canvas, data} = imageDataFromBitmap(bitmap);
   const w = canvas.width, h = canvas.height, d = data.data;
 
   const rowDark = new Array(h).fill(0);
   const rowRed = new Array(h).fill(0);
+  const rowLight = new Array(h).fill(0);
   const colDark = new Array(w).fill(0);
 
   for(let y=0;y<h;y++){
-    let darkCount = 0;
-    let redCount = 0;
+    let darkCount = 0, redCount = 0, lightCount = 0;
     for(let x=0;x<w;x++){
       const i = (y*w + x)*4;
       const r=d[i], g=d[i+1], b=d[i+2];
-      if(isDark(r,g,b)) darkCount++;
+      if(isDark(r,g,b)){ darkCount++; colDark[x]++; }
       if(isRed(r,g,b)) redCount++;
-      if(isDark(r,g,b)) colDark[x]++;
+      if(isLightGray(r,g,b)) lightCount++;
     }
     rowDark[y] = darkCount / w;
     rowRed[y] = redCount / w;
+    rowLight[y] = lightCount / w;
   }
 
   let left = Math.floor(w*0.03), right = Math.floor(w*0.97);
-  const darkColThreshold = h * 0.07;
+  const threshold = h * 0.07;
   for(let x=0;x<w;x++){
-    if(colDark[x] > darkColThreshold){ left = Math.max(0, x-6); break; }
+    if(colDark[x] > threshold){ left = Math.max(0, x-6); break; }
   }
   for(let x=w-1;x>=0;x--){
-    if(colDark[x] > darkColThreshold){ right = Math.min(w, x+6); break; }
+    if(colDark[x] > threshold){ right = Math.min(w-1, x+6); break; }
   }
 
   let tableTop = Math.floor(h*0.20);
-  const topSearchStart = Math.floor(h*0.18);
-  const topSearchEnd = Math.floor(h*0.55);
-  for(let y=topSearchStart;y<topSearchEnd;y++){
-    if(rowDark[y] > 0.18){
+  for(let y=Math.floor(h*0.18); y<Math.floor(h*0.55); y++){
+    if(rowDark[y] > 0.16 || rowLight[y] > 0.35){
       tableTop = Math.max(0, y-10);
       break;
     }
   }
 
-  let g7CenterY = Math.floor(h*0.83);
-  let maxRed = 0;
-  for(let y=Math.floor(h*0.65); y<Math.floor(h*0.95); y++){
-    if(rowRed[y] > maxRed){
-      maxRed = rowRed[y];
+  let g7CenterY = Math.floor(h*0.83), maxRedBottom = 0;
+  for(let y=Math.floor(h*0.68); y<Math.floor(h*0.96); y++){
+    if(rowRed[y] > maxRedBottom){
+      maxRedBottom = rowRed[y];
       g7CenterY = y;
     }
   }
 
-  let dbCenterY = Math.floor(h*0.43);
-  let bestDbRed = 0;
+  let dbCenterY = Math.floor(h*0.43), maxRedMid = 0;
   for(let y=tableTop; y<Math.floor(h*0.65); y++){
-    if(rowRed[y] > bestDbRed){
-      bestDbRed = rowRed[y];
+    if(rowRed[y] > maxRedMid){
+      maxRedMid = rowRed[y];
       dbCenterY = y;
     }
   }
 
-  const tableBottom = Math.min(h-1, g7CenterY + Math.floor(h*0.045));
+  const tableBottom = Math.min(h-1, g7CenterY + Math.floor(h*0.05));
   const tableWidth = right - left;
   const tableHeight = tableBottom - tableTop;
-
-  const labelCol = Math.max(26, Math.floor(tableWidth*0.12));
+  const labelCol = Math.max(26, Math.floor(tableWidth * 0.12));
   const dataX = left + labelCol + 6;
-  const dataW = Math.max(40, tableWidth - labelCol - 12);
+  const dataW = Math.max(60, tableWidth - labelCol - 12);
 
-  const dbH = Math.max(40, Math.floor(h*0.065));
-  const g7H = Math.max(46, Math.floor(h*0.06));
-  const g6Y = g7CenterY - Math.floor(tableHeight*0.14);
+  const dbH = Math.max(42, Math.floor(tableHeight*0.10));
+  const g1CenterY = dbCenterY + Math.floor(tableHeight*0.12);
+  const g1H = Math.max(40, Math.floor(tableHeight*0.09));
+  const g6CenterY = g7CenterY - Math.floor(tableHeight*0.145);
   const g6H = Math.max(42, Math.floor(tableHeight*0.09));
+  const g7H = Math.max(44, Math.floor(tableHeight*0.08));
 
-  const boxes = {
-    table: {
-      x:left, y:tableTop, w:tableWidth, h:tableHeight
-    },
-    db: {
-      x:dataX, y:Math.max(tableTop, dbCenterY - Math.floor(dbH/2)),
-      w:dataW, h:dbH
-    },
-    g6: {
-      x:dataX, y:Math.max(tableTop, g6Y - Math.floor(g6H/2)),
-      w:dataW, h:g6H
-    },
-    g7: {
-      x:dataX, y:Math.max(tableTop, g7CenterY - Math.floor(g7H/2)),
-      w:dataW, h:g7H
-    }
+  return {
+    table:{x:left,y:tableTop,w:tableWidth,h:tableHeight},
+    db:{x:dataX,y:Math.max(tableTop, dbCenterY - Math.floor(dbH/2)),w:dataW,h:dbH},
+    g1:{x:dataX,y:Math.max(tableTop, g1CenterY - Math.floor(g1H/2)),w:dataW,h:g1H},
+    g6:{x:dataX,y:Math.max(tableTop, g6CenterY - Math.floor(g6H/2)),w:dataW,h:g6H},
+    g7:{x:dataX,y:Math.max(tableTop, g7CenterY - Math.floor(g7H/2)),w:dataW,h:g7H},
+    debug:{left,right,tableTop,tableBottom,dbCenterY,g1CenterY,g6CenterY,g7CenterY,maxRedMid,maxRedBottom}
   };
+}
 
-  return boxes;
+function genericBoxes(img){
+  return {
+    table:{x:Math.floor(img.width*0.04), y:Math.floor(img.height*0.22), w:Math.floor(img.width*0.92), h:Math.floor(img.height*0.66)},
+    db:{x:Math.floor(img.width*0.20), y:Math.floor(img.height*0.38), w:Math.floor(img.width*0.72), h:Math.floor(img.height*0.08)},
+    g1:{x:Math.floor(img.width*0.20), y:Math.floor(img.height*0.46), w:Math.floor(img.width*0.72), h:Math.floor(img.height*0.07)},
+    g6:{x:Math.floor(img.width*0.20), y:Math.floor(img.height*0.73), w:Math.floor(img.width*0.72), h:Math.floor(img.height*0.07)},
+    g7:{x:Math.floor(img.width*0.20), y:Math.floor(img.height*0.81), w:Math.floor(img.width*0.72), h:Math.floor(img.height*0.06)},
+    debug:{mode:'generic'}
+  };
 }
 
 function drawDetectPreview(bitmap, boxes){
   const cvs = $('previewCanvas');
-  const maxW = 520;
+  const maxW = 620;
   const scale = Math.min(maxW / (bitmap.width || bitmap.naturalWidth), 1);
   cvs.width = Math.floor((bitmap.width || bitmap.naturalWidth) * scale);
   cvs.height = Math.floor((bitmap.height || bitmap.naturalHeight) * scale);
@@ -460,38 +428,54 @@ function drawDetectPreview(bitmap, boxes){
     ctx.font = 'bold 14px Arial';
     ctx.fillText(label, b.x*scale + 6, b.y*scale + 18);
   }
-
   box(boxes.table, '#39c9ff', 'TABLE');
   box(boxes.db, '#ff6666', 'DB');
-  box(boxes.g6, '#26c281', 'G6');
+  box(boxes.g1, '#82a8ff', 'G1');
+  box(boxes.g6, '#27c281', 'G6');
   box(boxes.g7, '#ffb020', 'G7');
 }
 
-function cropToCanvas(bitmap, box, canvasId, preprocess='bw'){
+function drawCropRaw(bitmap, box, canvasId){
   const cvs = $(canvasId);
-  const srcW = bitmap.width || bitmap.naturalWidth;
-  const srcH = bitmap.height || bitmap.naturalHeight;
+  cvs.width = box.w;
+  cvs.height = box.h;
+  const ctx = cvs.getContext('2d');
+  ctx.clearRect(0,0,box.w,box.h);
+  ctx.drawImage(bitmap, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
+}
+
+function drawCropProcessed(bitmap, box, canvasId, mode){
+  const cvs = $(canvasId);
   cvs.width = box.w;
   cvs.height = box.h;
   const ctx = cvs.getContext('2d', {willReadFrequently:true});
   ctx.clearRect(0,0,box.w,box.h);
   ctx.drawImage(bitmap, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
 
-  if(preprocess !== 'none'){
-    const img = ctx.getImageData(0,0,cvs.width,cvs.height);
-    const d = img.data;
-    for(let i=0;i<d.length;i+=4){
-      const r=d[i],g=d[i+1],b=d[i+2];
-      let gray = 0.299*r + 0.587*g + 0.114*b;
-      if(preprocess === 'bw'){
-        gray = gray > 150 ? 255 : 0;
-      }else if(preprocess === 'gray'){
-        gray = gray;
-      }
+  const img = ctx.getImageData(0,0,cvs.width,cvs.height);
+  const d = img.data;
+  for(let i=0;i<d.length;i+=4){
+    const r=d[i], g=d[i+1], b=d[i+2];
+    const gray = 0.299*r + 0.587*g + 0.114*b;
+
+    if(mode === 'bw'){
+      const v = gray > 150 ? 255 : 0;
+      d[i]=d[i+1]=d[i+2]=v;
+    }else if(mode === 'gray'){
       d[i]=d[i+1]=d[i+2]=gray;
+    }else if(mode === 'redmask'){
+      const v = isRed(r,g,b) ? 0 : 255;
+      d[i]=d[i+1]=d[i+2]=v;
+    }else if(mode === 'darkmask'){
+      const v = isDark(r,g,b) ? 0 : 255;
+      d[i]=d[i+1]=d[i+2]=v;
+    }else if(mode === 'contrast'){
+      let v = (gray - 128) * 1.8 + 128;
+      v = Math.max(0, Math.min(255, v));
+      d[i]=d[i+1]=d[i+2]=v;
     }
-    ctx.putImageData(img,0,0);
   }
+  ctx.putImageData(img,0,0);
 }
 
 function canvasToBlobURL(canvas){
@@ -500,331 +484,311 @@ function canvasToBlobURL(canvas){
   });
 }
 
-function normalizeOcrText(t){
-  return String(t||'')
-    .replace(/[Oo]/g,'0')
-    .replace(/[Il|]/g,'1')
-    .replace(/[Ss]/g,'5')
-    .replace(/[B]/g,'8');
+async function ocrCanvas(canvasId){
+  const worker = await ensureWorker();
+  const url = await canvasToBlobURL($(canvasId));
+  const result = await worker.recognize(url);
+  return normalizeCommon(result.data.text || '');
 }
 
-async function runOCRForCanvas(canvasId, label){
-  const canvas = $(canvasId);
-  const ocrMode = $('ocrMode').value;
-  const url = await canvasToBlobURL(canvas);
+function parseDBCandidate(text){
+  const nums = normalizeCommon(text).match(/\d{2,5}/g) || [];
+  return nums.length ? safeNum2(nums[0]) : '';
+}
+function parseG1Candidate(text){
+  const nums = normalizeCommon(text).match(/\d{2,5}/g) || [];
+  return nums.length ? safeNum2(nums[0]) : '';
+}
+function parseG6Candidate(text){
+  const nums = normalizeCommon(text).match(/\d{2,3}/g) || [];
+  return unique(nums.map(safeNum2)).slice(0,3);
+}
+function parseG7Candidate(text){
+  const nums = normalizeCommon(text).match(/\d{2}/g) || [];
+  return unique(nums.map(safeNum2)).slice(0,4);
+}
+function scoreDB(v){ return /^\d{2}$/.test(v) ? 3 : 0; }
+function scoreG1(v){ return /^\d{2}$/.test(v) ? 3 : 0; }
+function scoreG6(v){ return Array.isArray(v) && v.length === 3 ? 4 : (Array.isArray(v) && v.length >= 2 ? 2 : 0); }
+function scoreG7(v){ return Array.isArray(v) && v.length === 4 ? 5 : (Array.isArray(v) && v.length >= 3 ? 2 : 0); }
 
-  const result = await Tesseract.recognize(url, 'eng', {
-    logger: m => {
-      if(m.status === 'recognizing text'){
-        $('progressText').textContent = `${label} ${Math.round((m.progress||0)*100)}%`;
-      }
+async function voteRow(bitmap, boxes, rowName, canvasId, preprocessList, parser, scorer){
+  const results = [];
+  const log = [];
+  for(const mode of preprocessList){
+    drawCropProcessed(bitmap, boxes[rowName], canvasId, mode);
+    const txt = await ocrCanvas(canvasId);
+    const parsed = parser(txt);
+    const score = scorer(parsed);
+    results.push({mode, txt, parsed, score});
+    log.push(`[${rowName}] ${mode} | score=${score} | txt="${txt.replace(/\n/g,' ')}" | parsed=${JSON.stringify(parsed)}`);
+  }
+  results.sort((a,b)=>b.score-a.score);
+  return {best:results[0], results, log};
+}
+
+async function voteG7TwoPass(bitmap, boxes){
+  const pass1Modes = $('voteMode').value === 'full'
+    ? ['redmask','bw','contrast','gray']
+    : ['redmask','bw'];
+
+  const pass1 = await voteRow(bitmap, boxes, 'g7', 'g7Canvas', pass1Modes, parseG7Candidate, scoreG7);
+
+  let pass2Results = [];
+  if(Array.isArray(pass1.best.parsed) && pass1.best.parsed.length >= 3){
+    const extraModes = ['redmask','darkmask','contrast'];
+    for(const mode of extraModes){
+      drawCropProcessed(bitmap, boxes.g7, 'g7Canvas', mode);
+      const txt = await ocrCanvas('g7Canvas');
+      const parsed = parseG7Candidate(txt);
+      const score = scoreG7(parsed) + (parsed.length === 4 ? 1 : 0);
+      pass2Results.push({mode:'pass2-'+mode, txt, parsed, score});
     }
-  });
-
-  let text = normalizeOcrText(result.data.text || '');
-  if(ocrMode === 'digits'){
-    text = text.replace(/[^\d\s]/g,' ');
-  }
-  return text;
-}
-
-function parseFromCropText(raw){
-  const lines = String(raw||'').split('\n').map(s=>s.trim()).filter(Boolean);
-
-  const dbBlock = raw.match(/DB[\s\S]*?([\d\s]{2,20})/i);
-  const g6Block = raw.match(/G6[\s\S]*?([\d\s]{2,30})/i);
-  const g7Block = raw.match(/G7[\s\S]*?([\d\s]{2,30})/i);
-
-  let DB = '';
-  let G6 = [];
-  let G7 = [];
-
-  if(dbBlock){
-    const nums = dbBlock[1].match(/\d{2,5}/g) || [];
-    if(nums[0]) DB = safeNum2(nums[0]);
-  }
-  if(g6Block){
-    G6 = (g6Block[1].match(/\d{2,3}/g) || []).map(safeNum2).slice(0,3);
-  }
-  if(g7Block){
-    G7 = (g7Block[1].match(/\d{2}/g) || []).map(safeNum2).slice(0,4);
   }
 
-  if(!DB){
-    const nums = raw.match(/\d{2,5}/g) || [];
-    if(nums[0]) DB = safeNum2(nums[0]);
-  }
-  if(!G6.length){
-    const g6Raw = raw.match(/G6:([^\n]+)/i);
-    if(g6Raw) G6 = (g6Raw[1].match(/\d{2,3}/g) || []).map(safeNum2).slice(0,3);
-  }
-  if(!G7.length){
-    const g7Raw = raw.match(/G7:([^\n]+)/i);
-    if(g7Raw) G7 = (g7Raw[1].match(/\d{2}/g) || []).map(safeNum2).slice(0,4);
-  }
-
-  return { DB, G6: unique(G6), G7: unique(G7) };
-}
-
-function detectPhase(history){
-  if(history.length < 2) return 'mở';
-  const last = history[history.length-1];
-  const prev = history[history.length-2];
-  const a = +safeNum2(prev.DB), b = +safeNum2(last.DB);
-  if(rev(prev.DB) === last.DB) return 'đảo';
-  if(Math.abs(a-b) <= 6) return 'chạy';
-  if(Math.abs(a-b) >= 30) return 'xả';
-  return 'mở';
-}
-
-function calcAxis(day){
-  const pool = [day.DB, ...(day.G6||[]), ...(day.G7||[])].filter(Boolean);
-  const H={}, T={};
-  pool.forEach(n=>{
-    H[getHead(n)] = (H[getHead(n)]||0)+1;
-    T[getTail(n)] = (T[getTail(n)]||0)+1;
-  });
-  const h = Object.entries(H).sort((a,b)=>b[1]-a[1])[0]?.[0] ?? '-';
-  const t = Object.entries(T).sort((a,b)=>b[1]-a[1])[0]?.[0] ?? '-';
-  return `${h}-${t}`;
-}
-
-function detectNeo(day){
-  const db = safeNum2(day.DB);
-  const g6 = day.G6||[], g7 = day.G7||[];
-  let neo = 0;
-  const dbH = getHead(db), dbT = getTail(db);
-  const g6Hit = g6.some(x=>getHead(x)===dbH || getTail(x)===dbT);
-  const g7Hit = g7.some(x=>getHead(x)===dbH || getTail(x)===dbT);
-  if(g6Hit) neo += 3;
-  if(g7Hit) neo += 2;
-  return {neo, g6Hit, g7Hit};
-}
-
-function analyzeDay(day, history){
-  const phase = detectPhase(history);
-  const axis = calcAxis(day);
-  const neo = detectNeo(day);
-
-  const score = {};
-  const add = (n,s)=>{
-    n = safeNum2(n);
-    if(!n) return;
-    score[n] = (score[n]||0)+s;
-  };
-
-  (day.G6||[]).forEach(n=>add(n,3));
-  (day.G7||[]).forEach(n=>add(n,2));
-  add(rev(day.DB),2);
-  add(pad2((+day.DB+1)%100),1.5);
-  add(pad2((+day.DB+99)%100),1.5);
-  add(`${sumRoot(day.DB)}${diff2(day.DB)}`,1.2);
-  add(`${diff2(day.DB)}${sumRoot(day.DB)}`,1.0);
-
-  if(phase === 'đảo') add(rev(day.DB),1.8);
-  if(phase === 'chạy') (day.G6||[]).forEach(n=>add(n,.8));
-  if(phase === 'xả'){
-    add(pad2((+day.DB+10)%100),1.2);
-    add(pad2((+day.DB+90)%100),1.2);
-  }
-
-  const ranked = Object.entries(score).sort((a,b)=>b[1]-a[1]).map(([n,s])=>({n,s:+s.toFixed(2)}));
-  const main = ranked[0]?.n || '--';
-  const sub = ranked.find(x=>x.n!==main)?.n || '--';
-
-  let anti='--';
-  if(neo.neo <= 2) anti = safeNum2(day.DB) || '--';
-  else anti = rev(day.DB) || '--';
-
-  const conf = Math.max(35, Math.min(92, Math.round((ranked[0]?.s||0)*10 + neo.neo*4)));
-  const flow = (+getHead(day.DB) >= 5) ? 'đầu cao' : 'đầu thấp';
-
-  return {phase,axis,flow,main,sub,anti,conf};
-}
-
-function renderAnalysis(day, rs){
-  $('kpiPhase').textContent = rs.phase;
-  $('kpiAxis').textContent = rs.axis;
-  $('kpiFlow').textContent = rs.flow;
-  $('kpiConf').textContent = rs.conf + '%';
-  $('mainPick').textContent = rs.main;
-  $('subPick').textContent = rs.sub;
-  $('antiPick').textContent = rs.anti;
-
-  const lines = [
-    `1. Pha ngày: ${rs.phase}`,
-    `2. Hướng chính: ${rs.flow}`,
-    `3. Vai trò G6–G7: ${(day.G6||[]).length ? 'G6 đang neo' : 'G6 mờ'}`,
-    `4. Quyết định: ${rs.conf >= 65 ? 'có thể vào nhẹ theo kịch bản' : 'ưu tiên đứng ngoài / chờ thêm'}`,
-    `5. Chốt tối đa 1 cặp: ${rs.main}`,
-    `6. Tin cậy: ${rs.conf}%`
+  const all = [...pass1.results, ...pass2Results].sort((a,b)=>b.score-a.score);
+  const log = [
+    ...pass1.log,
+    ...pass2Results.map(r=>`[g7] ${r.mode} | score=${r.score} | txt="${r.txt.replace(/\n/g,' ')}" | parsed=${JSON.stringify(r.parsed)}`)
   ];
-  $('sixLine').innerHTML = lines.map(x=>`<div style="padding:6px 0">${x}</div>`).join('');
+
+  return {best:all[0], results:all, log};
 }
 
-function currentDayFromInputs(){
+function gateResult(data){
+  const issues = [];
+  if(!/^\d{2}$/.test(data.DB||'')) issues.push('ĐB sai format');
+  if(!/^\d{2}$/.test(data.G1||'')) issues.push('G1 sai format');
+  if(!Array.isArray(data.G6) || data.G6.length !== 3) issues.push('G6 chưa đủ 3 số');
+  if(!Array.isArray(data.G7) || data.G7.length !== 4) issues.push('G7 chưa đủ 4 số');
+
+  if(Array.isArray(data.G6)){
+    data.G6.forEach((n,i)=>{ if(!/^\d{2}$/.test(n)) issues.push(`G6[${i}] sai`) });
+  }
+  if(Array.isArray(data.G7)){
+    data.G7.forEach((n,i)=>{ if(!/^\d{2}$/.test(n)) issues.push(`G7[${i}] sai`) });
+  }
+
+  return {pass: issues.length === 0, issues};
+}
+
+function currentDataFromInputs(){
   return {
-    date: $('drawDate').value.trim() || new Date().toISOString().slice(0,10),
-    note: $('noteText').value.trim(),
+    date: $('drawDate').value.trim() || '',
     DB: safeNum2($('dbInput').value),
     G1: safeNum2($('g1Input').value),
-    G6: split2List($('g6Input').value).slice(0,3),
-    G7: split2List($('g7Input').value).slice(0,4)
+    G6: split2List($('g6Input').value, 3),
+    G7: split2List($('g7Input').value, 4)
   };
 }
 
-async function doDetectCrop(){
+function renderGate(data, gate){
+  $('gateBox').innerHTML = `
+    <div class="pill"><strong>ĐB</strong> <span class="${/^\d{2}$/.test(data.DB||'') ? 'ok':'no'}">${data.DB || '--'}</span></div>
+    <div class="pill"><strong>G1</strong> <span class="${/^\d{2}$/.test(data.G1||'') ? 'ok':'no'}">${data.G1 || '--'}</span></div>
+    <div class="pill"><strong>G6</strong> <span class="${Array.isArray(data.G6)&&data.G6.length===3 ? 'ok':'no'}">${(data.G6||[]).join(', ') || '--'}</span></div>
+    <div class="pill"><strong>G7</strong> <span class="${Array.isArray(data.G7)&&data.G7.length===4 ? 'ok':'no'}">${(data.G7||[]).join(', ') || '--'}</span></div>
+    <div style="margin-top:10px">${gate.pass ? '<span class="badge good">PASS</span>' : '<span class="badge bad">FAIL</span>'}</div>
+    ${gate.issues.length ? `<div style="margin-top:8px">${gate.issues.map(x=>`<div class="warnText">• ${x}</div>`).join('')}</div>` : ''}
+  `;
+}
+
+function renderVoteBox(votes){
+  const parts = [];
+  for(const key of ['db','g1','g6','g7']){
+    const v = votes[key];
+    if(!v) continue;
+    parts.push(`<div style="margin-bottom:8px"><strong>${key.toUpperCase()}</strong></div>`);
+    v.results.slice(0,6).forEach(r=>{
+      parts.push(`<div>• ${r.mode} | score=${r.score} | parsed=${JSON.stringify(r.parsed)} | txt=${r.txt.replace(/\n/g,' ')}</div>`);
+    });
+  }
+  $('voteBox').innerHTML = parts.join('');
+}
+
+function renderDebugInfo(boxes){
+  const d = boxes.debug || {};
+  $('debugInfo').innerHTML = Object.entries(d).map(([k,v])=>`<div>${k}: ${typeof v === 'number' ? v.toFixed ? v.toFixed(2) : v : v}</div>`).join('');
+}
+
+function makeOneLine(data){
+  const date = data.date || '';
+  return `${date}|${data.DB||''}|${data.G1||''}|${(data.G6||[]).join(',')}|${(data.G7||[]).join(',')}`;
+}
+
+async function detectFromFile(file, drawPreview=false){
+  const {img, bitmap} = await loadBitmapFromFile(file);
+  const boxes = $('profileMode').value === 'xoso_app'
+    ? smartCropXSMBLikeScreenshot(bitmap)
+    : genericBoxes(img);
+
+  if(drawPreview){
+    state.currentImage = img;
+    state.currentBitmap = bitmap;
+    state.cropBoxes = boxes;
+    drawDetectPreview(bitmap, boxes);
+    drawCropRaw(bitmap, boxes.table, 'tableCanvas');
+    drawCropRaw(bitmap, boxes.db, 'dbCanvas');
+    drawCropRaw(bitmap, boxes.g1, 'g1Canvas');
+    drawCropRaw(bitmap, boxes.g6, 'g6Canvas');
+    drawCropRaw(bitmap, boxes.g7, 'g7Canvas');
+    renderDebugInfo(boxes);
+  }
+
+  return {img, bitmap, boxes};
+}
+
+async function readOneFile(file, drawPreview=false){
+  const {bitmap, boxes} = await detectFromFile(file, drawPreview);
+
+  setStatus(`Đang đọc ${file.name}`, 'DB');
+  const dbModes = $('voteMode').value === 'full' ? ['redmask','bw','contrast','gray'] : ['redmask','bw'];
+  const g1Modes = $('voteMode').value === 'full' ? ['darkmask','bw','contrast','gray'] : ['darkmask','bw'];
+  const g6Modes = $('voteMode').value === 'full' ? ['darkmask','bw','contrast','gray'] : ['darkmask','bw'];
+
+  const dbVote = await voteRow(bitmap, boxes, 'db', 'dbCanvas', dbModes, parseDBCandidate, scoreDB);
+  setStatus(`Đang đọc ${file.name}`, 'G1');
+  const g1Vote = await voteRow(bitmap, boxes, 'g1', 'g1Canvas', g1Modes, parseG1Candidate, scoreG1);
+  setStatus(`Đang đọc ${file.name}`, 'G6');
+  const g6Vote = await voteRow(bitmap, boxes, 'g6', 'g6Canvas', g6Modes, parseG6Candidate, scoreG6);
+  setStatus(`Đang đọc ${file.name}`, 'G7');
+  const g7Vote = await voteG7TwoPass(bitmap, boxes);
+
+  const data = {
+    date: $('drawDate').value.trim() || '',
+    DB: dbVote.best?.parsed || '',
+    G1: g1Vote.best?.parsed || '',
+    G6: g6Vote.best?.parsed || [],
+    G7: g7Vote.best?.parsed || []
+  };
+
+  const gate = gateResult(data);
+  const votes = {db:dbVote,g1:g1Vote,g6:g6Vote,g7:g7Vote};
+
+  return {data, gate, votes, boxes};
+}
+
+async function doDetect(){
   if(!state.files.length){
     alert('Chưa chọn ảnh');
     return;
   }
-  setStatus('Đang detect crop...', 'Load ảnh đầu tiên');
-  const img = await loadCurrentImageFromFile(state.files[0]);
-
-  const mode = $('profileMode').value;
-  let boxes;
-  if(mode === 'xoso_app'){
-    boxes = smartCropXSMBLikeScreenshot(state.currentBitmap);
-  } else {
-    boxes = {
-      table:{x:Math.floor(img.width*0.05), y:Math.floor(img.height*0.22), w:Math.floor(img.width*0.9), h:Math.floor(img.height*0.65)},
-      db:{x:Math.floor(img.width*0.22), y:Math.floor(img.height*0.37), w:Math.floor(img.width*0.68), h:Math.floor(img.height*0.08)},
-      g6:{x:Math.floor(img.width*0.22), y:Math.floor(img.height*0.73), w:Math.floor(img.width*0.68), h:Math.floor(img.height*0.07)},
-      g7:{x:Math.floor(img.width*0.22), y:Math.floor(img.height*0.81), w:Math.floor(img.width*0.68), h:Math.floor(img.height*0.06)}
-    };
-  }
-
-  state.cropBoxes = boxes;
-  drawDetectPreview(state.currentBitmap, boxes);
-  cropToCanvas(state.currentBitmap, boxes.db, 'dbCanvas', 'bw');
-  cropToCanvas(state.currentBitmap, boxes.g6, 'g6Canvas', 'bw');
-  cropToCanvas(state.currentBitmap, boxes.g7, 'g7Canvas', 'bw');
-  setStatus('Detect crop xong', 'Đã cắt DB / G6 / G7');
+  setStatus('Đang detect...', 'Ảnh đầu tiên');
+  await detectFromFile(state.files[0], true);
+  setStatus('Detect xong', 'Đã cắt TABLE / DB / G1 / G6 / G7');
 }
 
-async function doOCR(){
-  if(!state.cropBoxes){
-    alert('Hãy detect crop trước');
+async function doReadCurrent(){
+  if(!state.files.length){
+    alert('Chưa chọn ảnh');
     return;
   }
-  setStatus('Đang OCR DB...', '');
-  const dbText = await runOCRForCanvas('dbCanvas', 'DB');
-  setStatus('Đang OCR G6...', '');
-  const g6Text = await runOCRForCanvas('g6Canvas', 'G6');
-  setStatus('Đang OCR G7...', '');
-  const g7Text = await runOCRForCanvas('g7Canvas', 'G7');
+  await ensureWorker();
+  const rs = await readOneFile(state.files[0], true);
+  state.lastVotes = rs.votes;
 
-  $('ocrText').value = `DB:\n${dbText}\n\nG6:\n${g6Text}\n\nG7:\n${g7Text}`;
-  setStatus('OCR xong', 'Có thể parse');
+  $('dbInput').value = rs.data.DB || '';
+  $('g1Input').value = rs.data.G1 || '';
+  $('g6Input').value = (rs.data.G6 || []).join(',');
+  $('g7Input').value = (rs.data.G7 || []).join(',');
+  $('oneLine').value = makeOneLine(rs.data);
+
+  $('ocrLog').value = [
+    ...rs.votes.db.log,
+    ...rs.votes.g1.log,
+    ...rs.votes.g6.log,
+    ...rs.votes.g7.log
+  ].join('\n');
+
+  renderGate(rs.data, rs.gate);
+  renderVoteBox(rs.votes);
+  setStatus('Đọc ảnh đầu xong', rs.gate.pass ? 'Gate PASS' : 'Gate FAIL');
 }
 
-function doParse(){
-  const raw = $('ocrText').value.trim();
-  if(!raw){
-    alert('Chưa có raw OCR');
+async function doReadBatch(){
+  if(!state.files.length){
+    alert('Chưa chọn ảnh');
     return;
   }
-  const parsed = parseFromCropText(raw);
-  $('dbInput').value = parsed.DB || '';
-  $('g6Input').value = (parsed.G6||[]).join(',');
-  $('g7Input').value = (parsed.G7||[]).join(',');
-  setStatus('Parse xong', `DB ${parsed.DB || '--'}`);
-}
+  await ensureWorker();
 
-function doAnalyze(){
-  const day = currentDayFromInputs();
-  if(!day.DB){
-    alert('Thiếu ĐB');
-    return;
-  }
-  const temp = [...state.history];
-  const idx = temp.findIndex(x=>x.date===day.date);
-  if(idx>=0) temp[idx]=day; else temp.push(day);
-  temp.sort((a,b)=>a.date.localeCompare(b.date));
+  let lines = [];
+  let logs = [];
+  let ok = 0, fail = 0;
 
-  const rs = analyzeDay(day,temp);
-  renderAnalysis(day, rs);
-  setStatus('Analyze xong', `Main ${rs.main} • Sub ${rs.sub} • Anti ${rs.anti}`);
-}
-
-function doSave(){
-  const day = currentDayFromInputs();
-  if(!day.DB){
-    alert('Thiếu ĐB');
-    return;
-  }
-  const idx = state.history.findIndex(x=>x.date===day.date);
-  if(idx>=0) state.history[idx]=day; else state.history.push(day);
-  state.history.sort((a,b)=>a.date.localeCompare(b.date));
-  saveHistory();
-  setStatus('Đã lưu kỳ', day.date);
-}
-
-function doExport(){
-  const blob = new Blob([JSON.stringify(state.history,null,2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'ultra-master-v101-history.json';
-  a.click();
-}
-function doImport(file){
-  const r = new FileReader();
-  r.onload = ()=>{
+  for(let i=0;i<state.files.length;i++){
+    const f = state.files[i];
+    setStatus(`Batch ${i+1}/${state.files.length}`, f.name);
     try{
-      const arr = JSON.parse(r.result);
-      if(!Array.isArray(arr)) throw new Error('Sai JSON');
-      state.history = arr;
-      saveHistory();
-      setStatus('Nhập JSON xong', `Tổng ${state.history.length} kỳ`);
-    }catch(e){
-      alert('Lỗi JSON: ' + e.message);
+      const rs = await readOneFile(f, i === 0);
+      const line = makeOneLine(rs.data);
+      lines.push(`${rs.gate.pass ? 'OK' : 'FAIL'} | ${f.name} | ${line}`);
+      logs.push(`===== ${f.name} =====\n${[
+        ...rs.votes.db.log,
+        ...rs.votes.g1.log,
+        ...rs.votes.g6.log,
+        ...rs.votes.g7.log
+      ].join('\n')}`);
+      if(rs.gate.pass) ok++; else fail++;
+
+      if(i === 0){
+        $('dbInput').value = rs.data.DB || '';
+        $('g1Input').value = rs.data.G1 || '';
+        $('g6Input').value = (rs.data.G6 || []).join(',');
+        $('g7Input').value = (rs.data.G7 || []).join(',');
+        $('oneLine').value = makeOneLine(rs.data);
+        renderGate(rs.data, rs.gate);
+        renderVoteBox(rs.votes);
+      }
+    }catch(err){
+      fail++;
+      lines.push(`FAIL | ${f.name} | ERROR`);
+      logs.push(`===== ${f.name} =====\nERROR: ${err.message}`);
     }
-  };
-  r.readAsText(file);
+  }
+
+  $('batchOutput').value = lines.join('\n');
+  $('ocrLog').value = logs.join('\n\n');
+  setStatus('Batch xong', `OK ${ok} | FAIL ${fail}`);
 }
 
-function doDemo(){
-  $('drawDate').value = '2026-03-06';
-  $('noteText').value = 'demo theo ảnh mẫu';
-  $('dbInput').value = '49';
-  $('g1Input').value = '50';
-  $('g6Input').value = '54,10,40';
-  $('g7Input').value = '14,71,85,01';
-  state.history = [
-    {date:'2026-03-04',DB:'91',G1:'',G6:['36','62','48'],G7:['14','39','80','55']},
-    {date:'2026-03-05',DB:'48',G1:'',G6:['40','90','44'],G7:['45','43','12','67']},
-    {date:'2026-03-06',DB:'49',G1:'50',G6:['54','10','40'],G7:['14','71','85','01']}
-  ];
-  saveHistory();
-  doAnalyze();
-  setStatus('Đã nạp demo', 'Demo đúng theo ảnh Hào gửi');
+function doGate(){
+  const data = currentDataFromInputs();
+  renderGate(data, gateResult(data));
 }
 
-function doReset(){
+function doMakeLine(){
+  const data = currentDataFromInputs();
+  $('oneLine').value = makeOneLine(data);
+}
+
+function clearCanvas(id){
+  const c = $(id);
+  const ctx = c.getContext('2d');
+  ctx.clearRect(0,0,c.width,c.height);
+}
+
+async function doReset(){
   state.files = [];
   state.currentImage = null;
   state.currentBitmap = null;
   state.cropBoxes = null;
+  state.lastVotes = null;
+  await destroyWorker();
   $('fileInput').value = '';
-  $('ocrText').value = '';
   $('drawDate').value = '';
-  $('noteText').value = '';
   $('dbInput').value = '';
   $('g1Input').value = '';
   $('g6Input').value = '';
   $('g7Input').value = '';
+  $('oneLine').value = '';
+  $('ocrLog').value = '';
+  $('batchOutput').value = '';
   $('thumbs').innerHTML = '';
-  ['previewCanvas','dbCanvas','g6Canvas','g7Canvas'].forEach(id=>{
-    const c = $(id), x = c.getContext('2d'); x.clearRect(0,0,c.width,c.height);
-  });
-  $('kpiPhase').textContent='--';
-  $('kpiAxis').textContent='--';
-  $('kpiFlow').textContent='--';
-  $('kpiConf').textContent='0%';
-  $('mainPick').textContent='--';
-  $('subPick').textContent='--';
-  $('antiPick').textContent='--';
-  $('sixLine').innerHTML='';
+  $('gateBox').innerHTML = '';
+  $('voteBox').innerHTML = '';
+  $('debugInfo').innerHTML = '';
+  ['previewCanvas','tableCanvas','dbCanvas','g1Canvas','g6Canvas','g7Canvas'].forEach(clearCanvas);
   setStatus('Reset xong', 'Sẵn sàng');
 }
 
@@ -833,22 +797,14 @@ $('fileInput').addEventListener('change', e=>{
   renderThumbs();
   setStatus('Đã chọn ảnh', `${state.files.length} ảnh`);
 });
-$('btnDetect').addEventListener('click', doDetectCrop);
-$('btnOCR').addEventListener('click', doOCR);
-$('btnParse').addEventListener('click', doParse);
-$('btnAnalyze').addEventListener('click', doAnalyze);
-$('btnSave').addEventListener('click', doSave);
-$('btnExport').addEventListener('click', doExport);
-$('btnImport').addEventListener('click', ()=>$('importFile').click());
-$('importFile').addEventListener('change', e=>{
-  const f = e.target.files?.[0];
-  if(f) doImport(f);
-});
-$('btnDemo').addEventListener('click', doDemo);
+$('btnDetect').addEventListener('click', doDetect);
+$('btnReadCurrent').addEventListener('click', doReadCurrent);
+$('btnReadBatch').addEventListener('click', doReadBatch);
+$('btnGate').addEventListener('click', doGate);
+$('btnMakeLine').addEventListener('click', doMakeLine);
 $('btnReset').addEventListener('click', doReset);
 
-loadHistory();
-setStatus('Sẵn sàng', 'v10.1 AI crop đã nạp');
+setStatus('Sẵn sàng', 'Dán là chạy');
 </script>
 </body>
 </html>
