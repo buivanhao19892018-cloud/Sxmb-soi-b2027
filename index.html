@@ -3,808 +3,1727 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-  <title>OCR Gate AI Focus FINAL</title>
-  <meta name="theme-color" content="#09111f"/>
+  <title>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3 • GOD MODE • HIT@3>=2)</title>
+  <meta name="theme-color" content="#0b1220"/>
   <style>
     :root{
-      --bg:#07101d; --card:#0c1830; --card2:#101d38; --line:rgba(255,255,255,.08);
-      --txt:#eaf1ff; --muted:#9db0d3; --blue:#2f6bff; --blue2:#1e4fd6;
-      --good:#27c281; --warn:#ffb020; --bad:#ff6666; --cyan:#39c9ff; --shadow:0 12px 30px rgba(0,0,0,.28);
+      --bg:#07101d;
+      --card:#0b1730;
+      --card2:#0a1427;
+      --text:#e8f0ff;
+      --muted:#a8b7d6;
+      --line:rgba(255,255,255,.08);
+      --good:#32d583;
+      --warn:#fdb022;
+      --bad:#ff4d4f;
+      --btn:#1e5eff;
+      --btn2:#1a3fa8;
     }
     *{box-sizing:border-box}
     body{
-      margin:0;color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       background:
-        radial-gradient(900px 500px at 10% -10%, rgba(47,107,255,.16), transparent 55%),
-        radial-gradient(900px 500px at 110% 0%, rgba(57,201,255,.08), transparent 50%),
-        linear-gradient(180deg,#07101d,#081321 40%,#050c15 100%);
+        radial-gradient(1200px 600px at 10% -20%, rgba(30,94,255,.25), transparent 60%),
+        radial-gradient(900px 500px at 110% 10%, rgba(50,213,131,.18), transparent 55%),
+        linear-gradient(180deg, #06101f, #050b16 45%, #050a13);
+      color:var(--text);
+      padding:18px;
     }
-    .app{max-width:1320px;margin:0 auto;padding:14px}
-    .hero,.card{
-      border:1px solid var(--line);border-radius:22px;
+    .wrap{max-width:980px;margin:0 auto}
+    .card{
       background:linear-gradient(180deg,var(--card),var(--card2));
-      box-shadow:var(--shadow);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      margin-bottom:14px;
     }
-    .hero{padding:18px;margin-bottom:14px}
-    .hero h1{margin:0 0 6px;font-size:28px}
-    .hero p{margin:0;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}
-    @media (max-width:1050px){.grid{grid-template-columns:1fr}}
-    .card{padding:14px}
-    .card h2{margin:0 0 12px;font-size:18px}
-    .label{display:block;font-size:13px;color:var(--muted);margin:8px 0 6px}
-    input[type="file"], input[type="text"], textarea, select{
-      width:100%;padding:12px;border-radius:14px;border:1px solid var(--line);
-      background:#091427;color:var(--txt);outline:none;
-    }
-    textarea{min-height:120px;resize:vertical}
-    .row{display:flex;gap:10px;flex-wrap:wrap}
-    .split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    @media (max-width:760px){.split,.tri{grid-template-columns:1fr}}
-    .btn{
-      border:none;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer;
-      background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;
-      box-shadow:0 8px 18px rgba(47,107,255,.25);
-    }
-    .btn.secondary{background:#162643;border:1px solid var(--line);box-shadow:none}
-    .btn.good{background:linear-gradient(180deg,#2bcd8a,#1ba66d)}
-    .btn.warn{background:linear-gradient(180deg,#ffb020,#dd8f00)}
-    .btn.bad{background:linear-gradient(180deg,#ff6767,#dd4646)}
-    .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
-    .thumb{border:1px solid var(--line);border-radius:16px;background:#071221;overflow:hidden}
-    .thumb img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;background:#050b14}
-    .cap{padding:8px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
-    .resultBox{margin-top:10px;padding:12px;border-radius:16px;background:#081120;border:1px solid var(--line)}
-    .mini{font-size:12px;color:var(--muted)}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    h1{margin:0 0 8px;font-size:22px;letter-spacing:.2px}
+    .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
     .pill{
-      display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
-      background:#0a1427;border:1px solid var(--line);font-size:13px;margin:4px 6px 0 0
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
     }
-    .ok{color:var(--good);font-weight:800}
-    .no{color:var(--bad);font-weight:800}
-    .warnText{color:var(--warn)}
-    .cropGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    @media (max-width:760px){.cropGrid{grid-template-columns:1fr}}
-    canvas{max-width:100%;width:100%;border-radius:12px;background:#06101d}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px;vertical-align:top}
-    th{color:var(--muted);font-weight:600}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800}
-    .badge.good{background:rgba(39,194,129,.12);color:var(--good)}
-    .badge.bad{background:rgba(255,102,102,.12);color:var(--bad)}
-    .badge.warn{background:rgba(255,176,32,.12);color:var(--warn)}
-    .badge.blue{background:rgba(47,107,255,.12);color:#82a8ff}
+    .dot{display:inline-block;width:8px;height:8px;border-radius:99px;margin-right:6px;vertical-align:middle}
+    .g{background:var(--good)} .y{background:var(--warn)} .r{background:var(--bad)}
+    .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+    .btn{
+      appearance:none;border:0;cursor:pointer;
+      background:linear-gradient(180deg,var(--btn),var(--btn2));
+      color:white;font-weight:800;
+      padding:12px 14px;border-radius:14px;
+      box-shadow:0 10px 18px rgba(30,94,255,.25);
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.ghost{
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      box-shadow:none;
+      color:var(--text);
+    }
+    .btn.danger{
+      background:linear-gradient(180deg,#ff4d4f,#b42318);
+      box-shadow:0 10px 18px rgba(255,77,79,.18);
+    }
+    .hint{color:var(--muted);line-height:1.45;font-size:13px;margin-top:6px}
+    .small{font-size:12px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+    @media(min-width:860px){ .grid{grid-template-columns:1.2fr .8fr} }
+    .preview{
+      width:100%;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:#060b13;
+      overflow:hidden;
+    }
+    canvas, img{display:block;width:100%;height:auto}
+    .status{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .badge{
+      padding:8px 10px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      font-weight:800;font-size:12px
+    }
+    .badge.ok{color:var(--good)}
+    .badge.fail{color:var(--bad)}
+    .badge.warn{color:var(--warn)}
+    .sectionTitle{font-size:18px;margin:0 0 6px}
+    .mono{
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12.5px;
+      color:#d7e2ff;
+      background:rgba(0,0,0,.25);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      overflow:auto;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+    .inputs{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+    @media(min-width:700px){ .inputs{grid-template-columns:1fr 1fr} }
+    .field{
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px;
+    }
+    .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    .field input, .field textarea, .field select{
+      width:100%;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      font-size:14px;
+      padding:6px 0;
+    }
+    textarea{min-height:150px;resize:vertical}
+    .split{display:flex;gap:10px;flex-wrap:wrap}
+    .split .field{flex:1;min-width:180px}
+    .kpi{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+    @media(min-width:700px){ .kpi{grid-template-columns:repeat(4,minmax(0,1fr))} }
+    .kpi .box{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      border-radius:14px;
+      padding:10px;
+    }
+    .kpi .box .t{font-size:12px;color:var(--muted)}
+    .kpi .box .v{font-size:16px;font-weight:900;margin-top:4px}
+
+    .god{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    @media(min-width:860px){ .god{grid-template-columns:1fr 1fr} }
+    .callout{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.22);
+      border-radius:14px;
+      padding:10px;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.45;
+    }
+
+    .krow{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .kcard{
+      flex:1;min-width:220px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      border-radius:14px;
+      padding:12px;
+    }
+    .khead{font-weight:900;font-size:12px;color:var(--muted);letter-spacing:.2px}
+    .kbig{font-size:22px;font-weight:1000;margin-top:6px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      border-radius:999px;
+      padding:7px 10px;
+      font-weight:900;
+      font-size:14px;
+    }
+    .warnList{margin:10px 0 0;padding-left:18px;color:var(--text)}
+    .warnList li{margin:6px 0}
+    .sep{height:1px;background:var(--line);margin:12px 0}
+    .metaLine{color:var(--muted);font-size:12px;line-height:1.45}
   </style>
 </head>
+
 <body>
-<div class="app">
-  <section class="hero">
-    <h1>OCR Gate AI Focus FINAL</h1>
-    <p>Chỉ tập trung đọc bảng: detect → crop DB/G1/G6/G7 → OCR vote → gate → xuất 1 ngày / 1 dòng</p>
-  </section>
+<div class="wrap">
 
-  <div class="grid">
-    <div class="card">
-      <h2>1) Input + Flow</h2>
-
-      <label class="label">Upload nhiều ảnh</label>
-      <input id="fileInput" type="file" accept="image/*" multiple>
-
-      <div class="tri" style="margin-top:12px">
-        <div>
-          <label class="label">Profile</label>
-          <select id="profileMode">
-            <option value="xoso_app">Ảnh app XSMB</option>
-            <option value="generic">Ảnh chung</option>
-          </select>
-        </div>
-        <div>
-          <label class="label">Vote mode</label>
-          <select id="voteMode">
-            <option value="full">Vote đầy đủ</option>
-            <option value="fast">Vote nhanh</option>
-          </select>
-        </div>
-        <div>
-          <label class="label">Ngày</label>
-          <input id="drawDate" type="text" placeholder="2026-03-06">
-        </div>
-      </div>
-
-      <div class="row" style="margin-top:12px">
-        <button class="btn" id="btnDetect">1. Detect ảnh đầu</button>
-        <button class="btn good" id="btnReadCurrent">2. Read ảnh đầu</button>
-        <button class="btn warn" id="btnReadBatch">3. Read batch</button>
-        <button class="btn secondary" id="btnGate">Gate</button>
-        <button class="btn secondary" id="btnMakeLine">Ra 1 dòng</button>
-        <button class="btn bad" id="btnReset">Reset</button>
-      </div>
-
-      <div class="resultBox">
-        <div><strong>Trạng thái:</strong> <span id="statusText">Sẵn sàng</span></div>
-        <div class="mini" id="progressText">Chưa chạy</div>
-      </div>
-
-      <div class="thumbs" id="thumbs" style="margin-top:10px"></div>
-
-      <div class="resultBox">
-        <div><strong>Kết quả chuẩn hóa</strong></div>
-        <div class="split" style="margin-top:10px">
-          <div>
-            <label class="label">ĐB</label>
-            <input id="dbInput" type="text" placeholder="49">
-          </div>
-          <div>
-            <label class="label">G1</label>
-            <input id="g1Input" type="text" placeholder="50">
-          </div>
-        </div>
-        <div class="split" style="margin-top:12px">
-          <div>
-            <label class="label">G6</label>
-            <input id="g6Input" type="text" placeholder="54,10,40">
-          </div>
-          <div>
-            <label class="label">G7</label>
-            <input id="g7Input" type="text" placeholder="14,71,85,01">
-          </div>
-        </div>
-      </div>
-
-      <div class="resultBox">
-        <div><strong>1 ngày / 1 dòng</strong></div>
-        <textarea id="oneLine" class="mono" placeholder="Ví dụ: 2026-03-06|49|50|54,10,40|14,71,85,01"></textarea>
-      </div>
-
-      <div class="resultBox">
-        <div><strong>Gate result</strong></div>
-        <div id="gateBox" style="margin-top:8px"></div>
-      </div>
-
-      <div class="resultBox">
-        <div><strong>Raw OCR / Vote log</strong></div>
-        <textarea id="ocrLog" class="mono" placeholder="Log OCR vote sẽ hiện ở đây..."></textarea>
-      </div>
-
-      <div class="resultBox">
-        <div><strong>Batch result</strong></div>
-        <textarea id="batchOutput" class="mono" placeholder="Kết quả nhiều ảnh sẽ hiện ở đây..."></textarea>
-      </div>
+  <div class="card">
+    <h1>Bùi Hào — Lotto ULTRA MASTER (OCR Gate FINAL v3 • GOD MODE • HIT@3>=2)</h1>
+    <div class="pillrow">
+      <div class="pill"><span class="dot g"></span>OpenCV (preprocess)</div>
+      <div class="pill"><span class="dot g"></span>Tesseract OCR (worker reuse)</div>
+      <div class="pill"><span class="dot y"></span>Batch nhiều ảnh</div>
+      <div class="pill"><span class="dot y"></span>Crop + Scale ổn định</div>
+      <div class="pill"><span class="dot y"></span>DB theo nhãn “ĐB/DB” + 5 số</div>
+      <div class="pill"><span class="dot y"></span>G7/G6 theo pattern</div>
+      <div class="pill"><span class="dot g"></span>✅ Không “né ngày” để trống</div>
+      <div class="pill"><span class="dot g"></span>✅ Auto “1 ngày / 1 dòng”</div>
     </div>
 
-    <div class="card">
-      <h2>2) Detect + Crop Debug</h2>
+    <div class="hint">
+      Luồng: <b>Upload nhiều ảnh</b> → tự cắt vùng bảng → <b>DB: tìm 5 số (lọc số dài quảng cáo)</b> →
+      <b>G7: ưu tiên dòng bắt đầu bằng 7</b> (LUÔN lấy <b>4 số CUỐI</b>) → <b>G6: 3 số 3 chữ số</b> →
+      pass thì đổ dữ liệu → <b>Chạy FULL</b>.
+      <br/><b>* Tool thống kê hỗ trợ phân tích, không đảm bảo kết quả.</b>
+    </div>
 
-      <div class="cropGrid">
-        <div class="resultBox">
-          <div><strong>Preview detect</strong></div>
-          <canvas id="previewCanvas"></canvas>
+    <div class="row">
+      <button class="btn" id="btnMulti">📸 Upload nhiều ảnh</button>
+      <button class="btn ghost" id="btnCam">📷 Camera</button>
+      <button class="btn ghost" id="btnSample">Dán mẫu</button>
+      <button class="btn danger" id="btnClearAll">RESET SẠCH</button>
+      <input id="fileMulti" type="file" accept="image/*" multiple hidden />
+      <input id="fileCam" type="file" accept="image/*" capture="environment" hidden />
+    </div>
+
+    <div class="status">
+      <div class="badge warn" id="stCv">● OpenCV: loading…</div>
+      <div class="badge ok" id="stOcr">● OCR: idle</div>
+      <div class="badge warn" id="stGate">● Gate: waiting</div>
+      <div class="badge warn" id="stBatch">● Batch: 0</div>
+      <div class="badge warn" id="stSave">● Save: --</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="grid">
+      <div>
+        <h2 class="sectionTitle">Ảnh → OCR → Gate</h2>
+        <div class="hint">
+          Mẹo: crop sát phần bảng (từ “ĐB” tới “7”). Tránh dính footer tab (Miền Bắc/Trung/Nam) và header quảng cáo.
+          Nếu ảnh “dính” nhiều thứ, Gate dễ fail → dùng Manual.
         </div>
-        <div class="resultBox">
-          <div><strong>Table</strong></div>
-          <canvas id="tableCanvas"></canvas>
+
+        <div class="preview" style="margin-top:10px">
+          <img id="imgPreview" alt="preview" />
+          <canvas id="cvCanvas" style="display:none"></canvas>
         </div>
-        <div class="resultBox">
-          <div><strong>DB</strong></div>
-          <canvas id="dbCanvas"></canvas>
+
+        <div class="kpi">
+          <div class="box"><div class="t">DB (2 số)</div><div class="v" id="kDB">--</div></div>
+          <div class="box"><div class="t">G6 (3 số)</div><div class="v" id="kG6">--</div></div>
+          <div class="box"><div class="t">G7 (4 số)</div><div class="v" id="kG7">--</div></div>
+          <div class="box"><div class="t">Gate</div><div class="v" id="kGate">--</div></div>
         </div>
-        <div class="resultBox">
-          <div><strong>G1</strong></div>
-          <canvas id="g1Canvas"></canvas>
+
+        <div class="inputs">
+          <div class="field">
+            <label>Manual (khi Gate fail) — DB (2 số)</label>
+            <input id="manualDB" placeholder="VD: 57" />
+          </div>
+          <div class="field">
+            <label>Manual — G6 (3 số 3 chữ số)</label>
+            <input id="manualG6" placeholder="VD: 205 397 508" />
+          </div>
+          <div class="field">
+            <label>Manual — G7 (4 số 2 chữ số)</label>
+            <input id="manualG7" placeholder="VD: 45 61 98 00" />
+          </div>
+          <div class="field">
+            <label>Hành động</label>
+            <div class="split">
+              <button class="btn ghost" id="btnApplyManual">Áp manual → thêm dòng</button>
+              <button class="btn ghost" id="btnRetryLast">Thử OCR lại ảnh cuối</button>
+            </div>
+          </div>
         </div>
-        <div class="resultBox">
-          <div><strong>G6</strong></div>
-          <canvas id="g6Canvas"></canvas>
-        </div>
-        <div class="resultBox">
-          <div><strong>G7</strong></div>
-          <canvas id="g7Canvas"></canvas>
-        </div>
+
       </div>
 
-      <div class="resultBox">
-        <div><strong>Thông tin detect</strong></div>
-        <div id="debugInfo" class="mini" style="margin-top:8px"></div>
-      </div>
-
-      <div class="resultBox">
-        <div><strong>Vote chi tiết</strong></div>
-        <div id="voteBox" class="mini" style="margin-top:8px"></div>
-      </div>
-
-      <div class="resultBox">
-        <div><strong>Mẹo</strong></div>
-        <div class="mini" style="margin-top:8px">
-          • DB/G7 ưu tiên redmask<br>
-          • G1/G6 ưu tiên darkmask<br>
-          • G7 có 2-pass riêng để giảm nhầm<br>
-          • Gate fail thì sửa tay ngay ở 4 ô rồi bấm Gate lại
-        </div>
+      <div>
+        <h2 class="sectionTitle">Debug OCR</h2>
+        <div class="mono" id="dbg">Chưa có OCR.</div>
       </div>
     </div>
   </div>
+
+  <div class="card">
+    <h2 class="sectionTitle">Dữ liệu đầu vào (mỗi dòng = 1 ngày)</h2>
+    <div class="hint">
+      Format chuẩn: <b>DB xx | G7: a b c d | G6: xxx yyy zzz</b> (newest ở trên).
+      <br/>✅ Tool sẽ tự <b>gom 1 ngày / 1 dòng</b> trước khi chạy FULL.
+    </div>
+
+    <div class="row" style="margin-top:10px">
+      <button class="btn ghost" id="btnNormalize">🧹 Chuẩn hoá 1 ngày/1 dòng</button>
+      <button class="btn ghost" id="btnFixFormat">🛠️ Sửa format (DB/G7/G6) theo số</button>
+    </div>
+
+    <div class="field" style="margin-top:10px">
+      <textarea id="inputData" placeholder="Sau batch scan, tool tự đổ vào đây..."></textarea>
+    </div>
+
+    <div class="split" style="margin-top:10px">
+      <div class="field">
+        <label>Cửa sổ ngày (khuyến nghị 20)</label>
+        <input id="winDays" type="number" value="20" min="6" max="60" />
+      </div>
+      <div class="field">
+        <label>Top hiển thị (tham khảo)</label>
+        <input id="topN" type="number" value="10" min="4" max="15" />
+      </div>
+      <div class="field">
+        <label>AI giám sát</label>
+        <select id="aiSup">
+          <option value="on" selected>ON (khóa theo pha)</option>
+          <option value="off">OFF</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Thu hẹp G6 (trong tính toán)</label>
+        <select id="g6Scope">
+          <option value="full" selected>FULL (G6 mọi ngày)</option>
+          <option value="newest_only">CHỈ ngày mới nhất</option>
+          <option value="off">TẮT G6</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="split" style="margin-top:10px">
+      <div class="field">
+        <label>Ngưỡng TRỤC nổi (>=)</label>
+        <input id="trucThreshold" type="number" value="4" min="2" max="10" />
+      </div>
+      <div class="field">
+        <label>K đọc pha (ngày gần nhất)</label>
+        <input id="phaseK" type="number" value="9" min="5" max="20" />
+      </div>
+      <div class="field">
+        <label>Trọng số Hot</label>
+        <input id="wHot" type="number" value="2" step="0.5" />
+      </div>
+      <div class="field">
+        <label>Trọng số Gan</label>
+        <input id="wGan" type="number" value="1.5" step="0.5" />
+      </div>
+    </div>
+
+    <div class="split" style="margin-top:10px">
+      <div class="field">
+        <label>Trọng số Pascal</label>
+        <input id="wPas" type="number" value="2" step="0.5" />
+      </div>
+      <div class="field">
+        <label>(ghi nhớ) Newest luôn ở trên</label>
+        <input value="OK" disabled />
+      </div>
+    </div>
+
+    <div class="god">
+      <div class="callout">
+        <b>GOD MODE (MASTER+++):</b><br/>
+        App sẽ <b>ĐỌC PHA trước</b> → chọn hướng trọng số → rồi mới <b>CHỐT 3 SỐ</b> theo mục tiêu <b>HIT@3>=2</b>.
+        <br/><b>Quan trọng:</b> Bản này <b>KHÔNG “né ngày” để trống</b>. Ngày nhiễu vẫn chốt 3 nhưng sẽ gắn cảnh báo rủi ro.
+      </div>
+      <div class="callout">
+        <b>Mẹo dữ liệu:</b><br/>
+        • OCR hay làm vỡ dòng → bấm <b>🧹 Chuẩn hoá 1 ngày/1 dòng</b><br/>
+        • Nếu G6 hay gây nhiễu → chọn <b>CHỈ ngày mới nhất</b> hoặc <b>TẮT G6</b>
+      </div>
+    </div>
+
+    <div class="row">
+      <button class="btn" id="btnFull">🚀 Chạy FULL (Pha → HIT@3>=2 → Anti-bẫy)</button>
+      <button class="btn ghost" id="btnSave">💾 Lưu dữ liệu</button>
+      <button class="btn ghost" id="btnLoad">📥 Tải dữ liệu</button>
+      <button class="btn ghost" id="btnClearData">🧹 Clear input/output</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="sectionTitle">KẾT QUẢ FULL</h2>
+
+    <div class="row" style="margin-top:6px">
+      <button class="btn ghost" id="btnViewSimple">SIMPLE</button>
+      <button class="btn ghost" id="btnViewPro">PRO</button>
+      <span class="small" id="viewHint" style="opacity:.85"></span>
+    </div>
+
+    <div id="outBox" class="field" style="margin-top:10px">
+      <div id="outHtml" style="padding:10px 6px;color:var(--text)">Chưa có dữ liệu.</div>
+    </div>
+
+    <details id="detailBox" style="margin-top:10px">
+      <summary class="pill" style="cursor:pointer">Xem chi tiết FULL PRO</summary>
+      <div class="mono" id="outRaw" style="margin-top:10px">Chưa có dữ liệu.</div>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="small">© Bùi Hào — Tool thống kê hỗ trợ phân tích. Không đảm bảo kết quả.</div>
+  </div>
+
 </div>
 
+<!-- Load libs -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-<script>
-const $ = (id)=>document.getElementById(id);
+<script async src="https://docs.opencv.org/4.x/opencv.js" onload="onOpenCvReady()"></script>
 
-const state = {
-  files: [],
-  currentImage: null,
-  currentBitmap: null,
-  cropBoxes: null,
-  worker: null,
-  lastVotes: null
+<script>
+/* =========================================================
+   UTIL
+========================================================= */
+const el = (id)=>document.getElementById(id);
+function pad2(n){ return String(n).padStart(2,"0"); }
+function setBadge(id, text, cls){
+  const e = el(id);
+  e.textContent = text;
+  e.classList.remove("ok","warn","fail");
+  e.classList.add(cls);
+}
+function showKPI(db2, g6, g7, gate){
+  el("kDB").textContent = db2 || "--";
+  el("kG6").textContent = g6?.length ? g6.join(" ") : "--";
+  el("kG7").textContent = g7?.length ? g7.join(" ") : "--";
+  el("kGate").textContent = gate;
+}
+
+/* =========================================================
+   INPUT NORMALIZE — 1 NGÀY / 1 DÒNG
+========================================================= */
+function normalizeInputToOneDayOneLine(rawText){
+  const lines = String(rawText||"")
+    .replace(/\r/g,"")
+    .split("\n")
+    .map(s=>s.trim())
+    .filter(Boolean);
+
+  const out = [];
+  for(const ln of lines){
+    const isNew = /(^|\s)(DB|ĐB)\s*\d{1,2}\b/i.test(ln);
+    const hasG7 = /\bG7\s*:/i.test(ln);
+    const hasG6 = /\bG6\s*:/i.test(ln);
+
+    if(isNew && (hasG7 || hasG6)){
+      out.push(ln);
+    }else{
+      if(out.length===0) out.push(ln);
+      else out[out.length-1] = (out[out.length-1] + " " + ln).replace(/\s+/g," ").trim();
+    }
+  }
+  return out.join("\n");
+}
+
+function normalizeRecordByDigits(line){
+  const db2 = (line.match(/DB\s*([0-9]{1,2})/i)?.[1] || "").replace(/\D/g,"").slice(-2);
+  const g7 = (line.match(/G7\s*:\s*([^|]+)/i)?.[1] || "").match(/\b\d{2}\b/g) || [];
+  const g6 = (line.match(/G6\s*:\s*([^|]+)/i)?.[1] || "").match(/\b\d{3}\b/g) || [];
+
+  if(db2.length!==2 || g7.length<4 || g6.length<3){
+    return line.replace(/\s+/g," ").trim();
+  }
+  const g7Last4 = g7.slice(-4).map(pad2);
+  return `DB ${pad2(db2)} | G7: ${g7Last4.join(" ")} | G6: ${g6.slice(0,3).join(" ")}`;
+}
+
+function fixInputFormat(){
+  const merged = normalizeInputToOneDayOneLine(el("inputData").value);
+  const fixed = merged
+    .split("\n")
+    .map(s=>normalizeRecordByDigits(s))
+    .join("\n");
+  el("inputData").value = fixed.trim();
+}
+
+el("btnNormalize").onclick = ()=>{
+  el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
+};
+el("btnFixFormat").onclick = ()=> fixInputFormat();
+
+/* =========================================================
+   PART 1 — OCR GATE
+========================================================= */
+let cvReady = false;
+let lastImageBlob = null;
+let batchOK = 0, batchFail = 0;
+
+function setStatus(){
+  setBadge("stCv", `● OpenCV: ${cvReady ? "OK" : "loading…"}`, cvReady ? "ok" : "warn");
+  setBadge("stBatch", `● Batch: OK ${batchOK} | FAIL ${batchFail}`, (batchFail>0) ? "warn" : "ok");
+}
+function onOpenCvReady(){ cvReady = true; setStatus(); }
+setStatus();
+
+let __worker = null;
+async function getWorker(){
+  if(__worker) return __worker;
+  __worker = await Tesseract.createWorker("eng");
+  await __worker.setParameters({ preserve_interword_spaces: "1" });
+  return __worker;
+}
+async function ocrText(canvas, opts = {}){
+  const worker = await getWorker();
+  const whitelist = opts.whitelist || "0123456789DBdbĐđB";
+  const psm = (opts.psm ?? 6);
+  await worker.setParameters({
+    tessedit_char_whitelist: whitelist,
+    tessedit_pageseg_mode: String(psm),
+  });
+  const { data } = await worker.recognize(canvas);
+  return (data?.text || "");
+}
+
+function canvasFromMat(mat){
+  const canvas = document.createElement("canvas");
+  canvas.width = mat.cols;
+  canvas.height = mat.rows;
+  cv.imshow(canvas, mat);
+  return canvas;
+}
+
+function preprocess(mat){
+  const gray = new cv.Mat();
+  cv.cvtColor(mat, gray, cv.COLOR_RGBA2GRAY, 0);
+
+  const blur = new cv.Mat();
+  cv.GaussianBlur(gray, blur, new cv.Size(3,3), 0, 0, cv.BORDER_DEFAULT);
+
+  const thr = new cv.Mat();
+  cv.adaptiveThreshold(
+    blur, thr, 255,
+    cv.ADAPTIVE_THRESH_GAUSSIAN_C,
+    cv.THRESH_BINARY, 31, 8
+  );
+
+  const kernel = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(2,2));
+  const closed = new cv.Mat();
+  cv.morphologyEx(thr, closed, cv.MORPH_CLOSE, kernel);
+
+  gray.delete(); blur.delete(); thr.delete(); kernel.delete();
+  return closed;
+}
+
+function cleanOCR(txt){
+  return String(txt)
+    .replace(/[Oo]/g,"0")
+    .replace(/[Il|]/g,"1")
+    .replace(/S/g,"5")
+    .replace(/[^\d\s\nĐđDBdb]/g," ")
+    .replace(/\s+\n/g,"\n")
+    .replace(/\n\s+/g,"\n")
+    .replace(/[ \t]+/g," ")
+    .trim();
+}
+
+function extractDB5_fromLabel(text){
+  const t = String(text||"");
+  const all5 = (t.match(/\b\d{5}\b/g) || []).filter(x => x !== "00000");
+  if(!all5.length) return "";
+
+  const longRuns = t.match(/\b\d{8,}\b/g) || [];
+  const inLong = new Set();
+  longRuns.forEach(run=>{
+    for(const x of all5){
+      if(run.includes(x)) inLong.add(x);
+    }
+  });
+  const filtered = all5.filter(x=>!inLong.has(x));
+  return filtered[0] || all5[0] || "";
+}
+
+function _tokensDigits(line){ return String(line||"").match(/\d+/g) || []; }
+function _pairify(x){
+  const s = String(x||"").replace(/\D/g,"");
+  if(!s) return "";
+  if(s.length===1) return "0"+s;
+  return s.slice(-2);
+}
+
+function fixG7Digits(arr){
+  return (arr||[])
+    .map(x=>String(x).replace(/\D/g,""))
+    .filter(Boolean)
+    .map(s=>pad2(s.slice(-2)));
+}
+
+function _buildG7FromTokens(tokens){
+  const t = tokens.slice(1);
+  const nums2 = t.filter(x=>String(x).length===2).map(_pairify);
+  if(nums2.length>=4) return nums2.slice(-4);
+
+  const singles = t.filter(x=>String(x).length===1).map(x=>String(x));
+  const built = [];
+  for(let i=0;i<singles.length-1;i+=2){
+    built.push(singles[i]+singles[i+1]);
+  }
+  const mix = [...built, ...nums2].map(_pairify).filter(x=>/^\d{2}$/.test(x));
+  return mix.slice(-4);
+}
+
+function findG7Line(lines){
+  for(let i=lines.length-1;i>=0;i--){
+    const line = String(lines[i]||"").trim();
+    const tokens = _tokensDigits(line);
+    if(!tokens.length) continue;
+    if(tokens[0]==="7"){
+      const g7Raw = _buildG7FromTokens(tokens);
+      if(g7Raw.length>=4){
+        return {arr: g7Raw.slice(-4).map(pad2), idx:i, line};
+      }
+    }
+  }
+
+  const start = Math.floor(lines.length * 0.7);
+  for(let i=lines.length-1;i>=start;i--){
+    const line = String(lines[i]||"").trim();
+    const nums2 = (line.match(/\b\d{2}\b/g) || []);
+    const has3 = /\b\d{3}\b/.test(line);
+    if(nums2.length >= 4 && !has3){
+      return {arr: nums2.slice(-4).map(pad2), idx:i, line};
+    }
+  }
+  return {arr:[], idx:-1, line:""};
+}
+
+function findG6Line(lines, g7Index){
+  for(let i=g7Index-1;i>=0;i--){
+    const tokens = _tokensDigits(lines[i]);
+    if(tokens[0]==="7") continue;
+    const nums3 = (String(lines[i]).match(/\b\d{3}\b/g) || []);
+    if(nums3.length >= 3){
+      return {arr: nums3.slice(0,3), idx:i, line:lines[i]};
+    }
+  }
+  for(let i=lines.length-1;i>=0;i--){
+    const tokens = _tokensDigits(lines[i]);
+    if(tokens[0]==="7") continue;
+    const nums3 = (String(lines[i]).match(/\b\d{3}\b/g) || []);
+    if(nums3.length >= 3){
+      return {arr: nums3.slice(0,3), idx:i, line:lines[i]};
+    }
+  }
+  return {arr:[], idx:-1, line:""};
+}
+
+function gateCheck(db5, g6_3, g7_4){
+  if(!/^\d{5}$/.test(db5)) return {ok:false, reason:"DB không đủ 5 số"};
+  if(!g7_4 || g7_4.length!==4 || !g7_4.every(x=>/^\d{2}$/.test(x))) return {ok:false, reason:"G7 phải đúng 4 số (2 chữ số)"};
+  if(!g6_3 || g6_3.length!==3 || !g6_3.every(x=>/^\d{3}$/.test(x))) return {ok:false, reason:"G6 phải đúng 3 số (3 chữ số)"};
+  return {ok:true, reason:"OK"};
+}
+
+function addLineToInput(db5, g7, g6){
+  const db2 = db5.slice(-2);
+  const line = `DB ${db2} | G7: ${g7.join(" ")} | G6: ${g6.join(" ")}`;
+  const cur = el("inputData").value.trim();
+  el("inputData").value = (cur ? cur + "\n" : "") + line;
+  el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
+}
+
+function scaleCanvas(srcCanvas, scale = 2){
+  const c = document.createElement("canvas");
+  c.width = Math.round(srcCanvas.width * scale);
+  c.height = Math.round(srcCanvas.height * scale);
+  const g = c.getContext("2d");
+  g.imageSmoothingEnabled = false;
+  g.drawImage(srcCanvas, 0, 0, c.width, c.height);
+  return c;
+}
+
+async function ocrBottomForG7(matSrc, startFrac = 0.60){
+  const y = Math.floor(matSrc.rows * startFrac);
+  const h = Math.max(10, Math.floor(matSrc.rows * (1 - startFrac)));
+  const bottom = matSrc.roi(new cv.Rect(0, y, matSrc.cols, h));
+
+  const bin = preprocess(bottom);
+  const inv = new cv.Mat();
+  cv.bitwise_not(bin, inv);
+
+  const c1 = canvasFromMat(bin);
+  const c2 = canvasFromMat(inv);
+
+  const s1 = scaleCanvas(c1, 2.5);
+  const s2 = scaleCanvas(c2, 2.5);
+
+  const t1 = cleanOCR(await ocrText(s1, { whitelist: "0123456789 \n", psm: 6 }));
+  const t2 = cleanOCR(await ocrText(s2, { whitelist: "0123456789 \n", psm: 6 }));
+  const t3 = cleanOCR(await ocrText(s1, { whitelist: "0123456789 \n", psm: 7 }));
+  const t4 = cleanOCR(await ocrText(s2, { whitelist: "0123456789 \n", psm: 7 }));
+  const t5 = cleanOCR(await ocrText(s1, { whitelist: "0123456789 \n", psm: 11 }));
+  const t6 = cleanOCR(await ocrText(s2, { whitelist: "0123456789 \n", psm: 11 }));
+
+  bottom.delete(); bin.delete(); inv.delete();
+
+  const all = [t1,t2,t3,t4,t5,t6].filter(Boolean).join("\n");
+  const lines = all.split("\n").map(s=>s.trim()).filter(Boolean);
+  const g7Found = findG7Line(lines);
+
+  g7Found.arr = fixG7Digits(g7Found.arr).slice(-4);
+
+  return { allText: all, lines, g7Found };
+}
+
+let cvReadyOnceAlerted = false;
+async function runOCRFromBlob(blob){
+  if(!cvReady){
+    if(!cvReadyOnceAlerted){
+      cvReadyOnceAlerted = true;
+      alert("OpenCV chưa load xong. Đợi 2–3 giây rồi thử lại.");
+    }
+    return;
+  }
+  lastImageBlob = blob;
+
+  setBadge("stOcr", "● OCR: running…", "warn");
+  setBadge("stGate", "● Gate: checking…", "warn");
+  showKPI("", [], [], "--");
+
+  const url = URL.createObjectURL(blob);
+  el("imgPreview").src = url;
+  await new Promise(r=>{ el("imgPreview").onload = ()=>r(); });
+
+  const img = el("imgPreview");
+  const canvas = el("cvCanvas");
+  canvas.style.display = "none";
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  const ctx2d = canvas.getContext("2d");
+  ctx2d.drawImage(img,0,0);
+
+  let src = cv.imread(canvas);
+  const W = src.cols, H = src.rows;
+
+  const x = Math.floor(W*0.02);
+  const y = Math.floor(H*0.02);
+  const w = Math.floor(W*0.96);
+  const h = Math.floor(H*0.96);
+  const crop = src.roi(new cv.Rect(x,y,w,h));
+  src.delete(); src = crop;
+
+  const upH = Math.floor(src.rows * 0.55);
+  const upper = src.roi(new cv.Rect(0,0, src.cols, upH));
+  const body  = src.roi(new cv.Rect(0, Math.floor(src.rows*0.35), src.cols, Math.floor(src.rows*0.65)));
+
+  const upperBin = preprocess(upper);
+  const upperCanvas = canvasFromMat(upperBin);
+  const upperTxt1 = await ocrText(upperCanvas);
+
+  const upperInv = new cv.Mat(); cv.bitwise_not(upperBin, upperInv);
+  const upperCanvas2 = canvasFromMat(upperInv);
+  const upperTxt2 = await ocrText(upperCanvas2);
+
+  const upperTxt = cleanOCR((upperTxt1||"") + "\n" + (upperTxt2||""));
+  const db5 = extractDB5_fromLabel(upperTxt);
+
+  upper.delete(); upperBin.delete(); upperInv.delete();
+
+  const bodyBin = preprocess(body);
+  const bodyCanvas = canvasFromMat(bodyBin);
+  const bodyTxt1 = await ocrText(bodyCanvas, { whitelist: "0123456789 \n", psm: 6 });
+
+  const bodyInv = new cv.Mat(); cv.bitwise_not(bodyBin, bodyInv);
+  const bodyCanvas2 = canvasFromMat(bodyInv);
+  const bodyTxt2 = await ocrText(bodyCanvas2, { whitelist: "0123456789 \n", psm: 6 });
+
+  const bodyTxt = cleanOCR((bodyTxt1||"") + "\n" + (bodyTxt2||""));
+  const lines = bodyTxt.split("\n").map(s=>s.trim()).filter(Boolean);
+
+  let g7Found = findG7Line(lines);
+  let bottomDebug = "";
+
+  if(!g7Found.arr || g7Found.arr.length !== 4){
+    const r1 = await ocrBottomForG7(body, 0.60);
+    bottomDebug += `\n--- ROI 0.60 ---\n${r1.allText || "(empty)"}`;
+    if(r1.g7Found?.arr?.length === 4) g7Found = r1.g7Found;
+  }
+
+  if(!g7Found.arr || g7Found.arr.length !== 4){
+    const r2 = await ocrBottomForG7(body, 0.78);
+    bottomDebug += `\n--- ROI 0.78 ---\n${r2.allText || "(empty)"}`;
+    if(r2.g7Found?.arr?.length === 4) g7Found = r2.g7Found;
+  }
+
+  const g6Found = findG6Line(lines, g7Found.idx);
+
+  const g7 = fixG7Digits(g7Found.arr).slice(-4);
+  const g6 = g6Found.arr;
+
+  body.delete(); bodyBin.delete(); bodyInv.delete();
+  src.delete();
+  URL.revokeObjectURL(url);
+
+  const gate = gateCheck(db5, g6, g7);
+  const db2 = (/^\d{5}$/.test(db5)) ? db5.slice(-2) : "";
+
+  el("dbg").textContent =
+`[UPPER_OCR]
+${upperTxt || "(empty)"}
+
+[DB_5DIG]
+${db5 || "(none)"}
+
+[LOWER_OCR]
+${bodyTxt || "(empty)"}
+
+[OCR_BOTTOM_RESCUE]
+${bottomDebug || "(empty)"}
+
+[G7_LINE]
+${g7Found.line || "(none)"}
+
+[G6_LINE]
+${g6Found.line || "(none)"}
+`;
+
+  showKPI(db2, g6, g7, gate.ok ? "PASS" : "FAIL");
+  setBadge("stOcr", "● OCR: done", "ok");
+
+  if(gate.ok){
+    setBadge("stGate", "● Gate: PASS", "ok");
+    addLineToInput(db5, g7, g6);
+    batchOK++;
+  }else{
+    setBadge("stGate", `● Gate: FAIL — ${gate.reason}`, "fail");
+    batchFail++;
+    el("manualDB").value = db2 || "";
+    el("manualG6").value = g6.length ? g6.join(" ") : "";
+    el("manualG7").value = g7.length ? g7.join(" ") : "";
+  }
+  setStatus();
+}
+
+function parseManual(){
+  const db2 = (el("manualDB").value || "").replace(/\D/g,"").slice(-2);
+  const g6 = (el("manualG6").value || "").match(/\b\d{3}\b/g) || [];
+  const g7all = (el("manualG7").value || "").match(/\b\d{2}\b/g) || [];
+  const g7 = g7all.slice(-4).map(pad2);
+
+  if(db2.length!==2) return {ok:false, msg:"DB manual phải đúng 2 số"};
+  if(g6.length<3) return {ok:false, msg:"G6 manual phải đủ 3 số (3 chữ số)"};
+  if(g7.length<4) return {ok:false, msg:"G7 manual phải đủ 4 số (2 chữ số)"};
+  const fakeDB5 = "000" + db2;
+  return {ok:true, fakeDB5, g6:g6.slice(0,3), g7};
+}
+el("btnApplyManual").onclick = ()=>{
+  const r = parseManual();
+  if(!r.ok){ alert(r.msg); return; }
+  addLineToInput(r.fakeDB5, r.g7, r.g6);
+  setBadge("stGate","● Gate: MANUAL OK","ok");
 };
 
-function setStatus(a,b=''){
-  $('statusText').textContent = a;
-  $('progressText').textContent = b;
-}
+el("btnMulti").onclick = ()=> el("fileMulti").click();
+el("btnCam").onclick   = ()=> el("fileCam").click();
 
-function safeNum2(v){
-  const s = String(v||'').replace(/\D/g,'');
-  return s ? s.slice(-2).padStart(2,'0') : '';
-}
-function unique(a){ return [...new Set(a)] }
-function normalizeCommon(t){
-  return String(t||'')
-    .replace(/[Oo]/g,'0')
-    .replace(/[Il|]/g,'1')
-    .replace(/[Ss]/g,'5')
-    .replace(/[B]/g,'8');
-}
-function split2List(v, maxLen){
-  return String(v||'').split(/[,\n;| ]+/).map(safeNum2).filter(Boolean).slice(0, maxLen);
-}
-function isRed(r,g,b){
-  return r > 160 && g < 125 && b < 125 && (r-g) > 35;
-}
-function isDark(r,g,b){
-  const v = 0.299*r + 0.587*g + 0.114*b;
-  return v < 115;
-}
-function isLightGray(r,g,b){
-  const avg = (r+g+b)/3;
-  return avg > 190 && Math.abs(r-g)<18 && Math.abs(g-b)<18;
-}
+el("fileMulti").addEventListener("change", async (e)=>{
+  const files = [...(e.target.files || [])];
+  if(!files.length) return;
 
-function renderThumbs(){
-  const box = $('thumbs');
-  box.innerHTML = '';
-  state.files.forEach((f,idx)=>{
-    const url = URL.createObjectURL(f);
-    const div = document.createElement('div');
-    div.className = 'thumb';
-    div.innerHTML = `<img src="${url}"><div class="cap">Ảnh ${idx+1}</div>`;
-    box.appendChild(div);
-  });
-}
+  setBadge("stOcr","● OCR: batch running…","warn");
+  batchOK = 0; batchFail = 0;
+  setStatus();
 
-async function ensureWorker(){
-  if(state.worker) return state.worker;
-  state.worker = await Tesseract.createWorker('eng', 1, {
-    logger: m => {
-      if(m.status) $('progressText').textContent = `${m.status} ${m.progress ? Math.round(m.progress*100)+'%' : ''}`;
-    }
-  });
-  return state.worker;
-}
-
-async function destroyWorker(){
-  if(state.worker){
-    try{ await state.worker.terminate(); }catch(e){}
-    state.worker = null;
+  for(const f of files){
+    await runOCRFromBlob(f);
+    await new Promise(r=>setTimeout(r, 120));
   }
-}
-
-async function loadBitmapFromFile(file){
-  const url = URL.createObjectURL(file);
-  const img = new Image();
-  img.src = url;
-  await img.decode();
-  const bitmap = ('createImageBitmap' in window) ? await createImageBitmap(file) : img;
-  return {img, bitmap};
-}
-
-function imageDataFromBitmap(bitmap){
-  const canvas = document.createElement('canvas');
-  canvas.width = bitmap.width || bitmap.naturalWidth;
-  canvas.height = bitmap.height || bitmap.naturalHeight;
-  const ctx = canvas.getContext('2d', {willReadFrequently:true});
-  ctx.drawImage(bitmap,0,0);
-  return {canvas, ctx, data: ctx.getImageData(0,0,canvas.width,canvas.height)};
-}
-
-function smartCropXSMBLikeScreenshot(bitmap){
-  const {canvas, data} = imageDataFromBitmap(bitmap);
-  const w = canvas.width, h = canvas.height, d = data.data;
-
-  const rowDark = new Array(h).fill(0);
-  const rowRed = new Array(h).fill(0);
-  const rowLight = new Array(h).fill(0);
-  const colDark = new Array(w).fill(0);
-
-  for(let y=0;y<h;y++){
-    let darkCount = 0, redCount = 0, lightCount = 0;
-    for(let x=0;x<w;x++){
-      const i = (y*w + x)*4;
-      const r=d[i], g=d[i+1], b=d[i+2];
-      if(isDark(r,g,b)){ darkCount++; colDark[x]++; }
-      if(isRed(r,g,b)) redCount++;
-      if(isLightGray(r,g,b)) lightCount++;
-    }
-    rowDark[y] = darkCount / w;
-    rowRed[y] = redCount / w;
-    rowLight[y] = lightCount / w;
-  }
-
-  let left = Math.floor(w*0.03), right = Math.floor(w*0.97);
-  const threshold = h * 0.07;
-  for(let x=0;x<w;x++){
-    if(colDark[x] > threshold){ left = Math.max(0, x-6); break; }
-  }
-  for(let x=w-1;x>=0;x--){
-    if(colDark[x] > threshold){ right = Math.min(w-1, x+6); break; }
-  }
-
-  let tableTop = Math.floor(h*0.20);
-  for(let y=Math.floor(h*0.18); y<Math.floor(h*0.55); y++){
-    if(rowDark[y] > 0.16 || rowLight[y] > 0.35){
-      tableTop = Math.max(0, y-10);
-      break;
-    }
-  }
-
-  let g7CenterY = Math.floor(h*0.83), maxRedBottom = 0;
-  for(let y=Math.floor(h*0.68); y<Math.floor(h*0.96); y++){
-    if(rowRed[y] > maxRedBottom){
-      maxRedBottom = rowRed[y];
-      g7CenterY = y;
-    }
-  }
-
-  let dbCenterY = Math.floor(h*0.43), maxRedMid = 0;
-  for(let y=tableTop; y<Math.floor(h*0.65); y++){
-    if(rowRed[y] > maxRedMid){
-      maxRedMid = rowRed[y];
-      dbCenterY = y;
-    }
-  }
-
-  const tableBottom = Math.min(h-1, g7CenterY + Math.floor(h*0.05));
-  const tableWidth = right - left;
-  const tableHeight = tableBottom - tableTop;
-  const labelCol = Math.max(26, Math.floor(tableWidth * 0.12));
-  const dataX = left + labelCol + 6;
-  const dataW = Math.max(60, tableWidth - labelCol - 12);
-
-  const dbH = Math.max(42, Math.floor(tableHeight*0.10));
-  const g1CenterY = dbCenterY + Math.floor(tableHeight*0.12);
-  const g1H = Math.max(40, Math.floor(tableHeight*0.09));
-  const g6CenterY = g7CenterY - Math.floor(tableHeight*0.145);
-  const g6H = Math.max(42, Math.floor(tableHeight*0.09));
-  const g7H = Math.max(44, Math.floor(tableHeight*0.08));
-
-  return {
-    table:{x:left,y:tableTop,w:tableWidth,h:tableHeight},
-    db:{x:dataX,y:Math.max(tableTop, dbCenterY - Math.floor(dbH/2)),w:dataW,h:dbH},
-    g1:{x:dataX,y:Math.max(tableTop, g1CenterY - Math.floor(g1H/2)),w:dataW,h:g1H},
-    g6:{x:dataX,y:Math.max(tableTop, g6CenterY - Math.floor(g6H/2)),w:dataW,h:g6H},
-    g7:{x:dataX,y:Math.max(tableTop, g7CenterY - Math.floor(g7H/2)),w:dataW,h:g7H},
-    debug:{left,right,tableTop,tableBottom,dbCenterY,g1CenterY,g6CenterY,g7CenterY,maxRedMid,maxRedBottom}
-  };
-}
-
-function genericBoxes(img){
-  return {
-    table:{x:Math.floor(img.width*0.04), y:Math.floor(img.height*0.22), w:Math.floor(img.width*0.92), h:Math.floor(img.height*0.66)},
-    db:{x:Math.floor(img.width*0.20), y:Math.floor(img.height*0.38), w:Math.floor(img.width*0.72), h:Math.floor(img.height*0.08)},
-    g1:{x:Math.floor(img.width*0.20), y:Math.floor(img.height*0.46), w:Math.floor(img.width*0.72), h:Math.floor(img.height*0.07)},
-    g6:{x:Math.floor(img.width*0.20), y:Math.floor(img.height*0.73), w:Math.floor(img.width*0.72), h:Math.floor(img.height*0.07)},
-    g7:{x:Math.floor(img.width*0.20), y:Math.floor(img.height*0.81), w:Math.floor(img.width*0.72), h:Math.floor(img.height*0.06)},
-    debug:{mode:'generic'}
-  };
-}
-
-function drawDetectPreview(bitmap, boxes){
-  const cvs = $('previewCanvas');
-  const maxW = 620;
-  const scale = Math.min(maxW / (bitmap.width || bitmap.naturalWidth), 1);
-  cvs.width = Math.floor((bitmap.width || bitmap.naturalWidth) * scale);
-  cvs.height = Math.floor((bitmap.height || bitmap.naturalHeight) * scale);
-  const ctx = cvs.getContext('2d');
-  ctx.clearRect(0,0,cvs.width,cvs.height);
-  ctx.drawImage(bitmap,0,0,cvs.width,cvs.height);
-
-  function box(b,color,label){
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 3;
-    ctx.strokeRect(b.x*scale, b.y*scale, b.w*scale, b.h*scale);
-    ctx.fillStyle = color;
-    ctx.font = 'bold 14px Arial';
-    ctx.fillText(label, b.x*scale + 6, b.y*scale + 18);
-  }
-  box(boxes.table, '#39c9ff', 'TABLE');
-  box(boxes.db, '#ff6666', 'DB');
-  box(boxes.g1, '#82a8ff', 'G1');
-  box(boxes.g6, '#27c281', 'G6');
-  box(boxes.g7, '#ffb020', 'G7');
-}
-
-function drawCropRaw(bitmap, box, canvasId){
-  const cvs = $(canvasId);
-  cvs.width = box.w;
-  cvs.height = box.h;
-  const ctx = cvs.getContext('2d');
-  ctx.clearRect(0,0,box.w,box.h);
-  ctx.drawImage(bitmap, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
-}
-
-function drawCropProcessed(bitmap, box, canvasId, mode){
-  const cvs = $(canvasId);
-  cvs.width = box.w;
-  cvs.height = box.h;
-  const ctx = cvs.getContext('2d', {willReadFrequently:true});
-  ctx.clearRect(0,0,box.w,box.h);
-  ctx.drawImage(bitmap, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
-
-  const img = ctx.getImageData(0,0,cvs.width,cvs.height);
-  const d = img.data;
-  for(let i=0;i<d.length;i+=4){
-    const r=d[i], g=d[i+1], b=d[i+2];
-    const gray = 0.299*r + 0.587*g + 0.114*b;
-
-    if(mode === 'bw'){
-      const v = gray > 150 ? 255 : 0;
-      d[i]=d[i+1]=d[i+2]=v;
-    }else if(mode === 'gray'){
-      d[i]=d[i+1]=d[i+2]=gray;
-    }else if(mode === 'redmask'){
-      const v = isRed(r,g,b) ? 0 : 255;
-      d[i]=d[i+1]=d[i+2]=v;
-    }else if(mode === 'darkmask'){
-      const v = isDark(r,g,b) ? 0 : 255;
-      d[i]=d[i+1]=d[i+2]=v;
-    }else if(mode === 'contrast'){
-      let v = (gray - 128) * 1.8 + 128;
-      v = Math.max(0, Math.min(255, v));
-      d[i]=d[i+1]=d[i+2]=v;
-    }
-  }
-  ctx.putImageData(img,0,0);
-}
-
-function canvasToBlobURL(canvas){
-  return new Promise(resolve=>{
-    canvas.toBlob(blob=>resolve(URL.createObjectURL(blob)), 'image/png');
-  });
-}
-
-async function ocrCanvas(canvasId){
-  const worker = await ensureWorker();
-  const url = await canvasToBlobURL($(canvasId));
-  const result = await worker.recognize(url);
-  return normalizeCommon(result.data.text || '');
-}
-
-function parseDBCandidate(text){
-  const nums = normalizeCommon(text).match(/\d{2,5}/g) || [];
-  return nums.length ? safeNum2(nums[0]) : '';
-}
-function parseG1Candidate(text){
-  const nums = normalizeCommon(text).match(/\d{2,5}/g) || [];
-  return nums.length ? safeNum2(nums[0]) : '';
-}
-function parseG6Candidate(text){
-  const nums = normalizeCommon(text).match(/\d{2,3}/g) || [];
-  return unique(nums.map(safeNum2)).slice(0,3);
-}
-function parseG7Candidate(text){
-  const nums = normalizeCommon(text).match(/\d{2}/g) || [];
-  return unique(nums.map(safeNum2)).slice(0,4);
-}
-function scoreDB(v){ return /^\d{2}$/.test(v) ? 3 : 0; }
-function scoreG1(v){ return /^\d{2}$/.test(v) ? 3 : 0; }
-function scoreG6(v){ return Array.isArray(v) && v.length === 3 ? 4 : (Array.isArray(v) && v.length >= 2 ? 2 : 0); }
-function scoreG7(v){ return Array.isArray(v) && v.length === 4 ? 5 : (Array.isArray(v) && v.length >= 3 ? 2 : 0); }
-
-async function voteRow(bitmap, boxes, rowName, canvasId, preprocessList, parser, scorer){
-  const results = [];
-  const log = [];
-  for(const mode of preprocessList){
-    drawCropProcessed(bitmap, boxes[rowName], canvasId, mode);
-    const txt = await ocrCanvas(canvasId);
-    const parsed = parser(txt);
-    const score = scorer(parsed);
-    results.push({mode, txt, parsed, score});
-    log.push(`[${rowName}] ${mode} | score=${score} | txt="${txt.replace(/\n/g,' ')}" | parsed=${JSON.stringify(parsed)}`);
-  }
-  results.sort((a,b)=>b.score-a.score);
-  return {best:results[0], results, log};
-}
-
-async function voteG7TwoPass(bitmap, boxes){
-  const pass1Modes = $('voteMode').value === 'full'
-    ? ['redmask','bw','contrast','gray']
-    : ['redmask','bw'];
-
-  const pass1 = await voteRow(bitmap, boxes, 'g7', 'g7Canvas', pass1Modes, parseG7Candidate, scoreG7);
-
-  let pass2Results = [];
-  if(Array.isArray(pass1.best.parsed) && pass1.best.parsed.length >= 3){
-    const extraModes = ['redmask','darkmask','contrast'];
-    for(const mode of extraModes){
-      drawCropProcessed(bitmap, boxes.g7, 'g7Canvas', mode);
-      const txt = await ocrCanvas('g7Canvas');
-      const parsed = parseG7Candidate(txt);
-      const score = scoreG7(parsed) + (parsed.length === 4 ? 1 : 0);
-      pass2Results.push({mode:'pass2-'+mode, txt, parsed, score});
-    }
-  }
-
-  const all = [...pass1.results, ...pass2Results].sort((a,b)=>b.score-a.score);
-  const log = [
-    ...pass1.log,
-    ...pass2Results.map(r=>`[g7] ${r.mode} | score=${r.score} | txt="${r.txt.replace(/\n/g,' ')}" | parsed=${JSON.stringify(r.parsed)}`)
-  ];
-
-  return {best:all[0], results:all, log};
-}
-
-function gateResult(data){
-  const issues = [];
-  if(!/^\d{2}$/.test(data.DB||'')) issues.push('ĐB sai format');
-  if(!/^\d{2}$/.test(data.G1||'')) issues.push('G1 sai format');
-  if(!Array.isArray(data.G6) || data.G6.length !== 3) issues.push('G6 chưa đủ 3 số');
-  if(!Array.isArray(data.G7) || data.G7.length !== 4) issues.push('G7 chưa đủ 4 số');
-
-  if(Array.isArray(data.G6)){
-    data.G6.forEach((n,i)=>{ if(!/^\d{2}$/.test(n)) issues.push(`G6[${i}] sai`) });
-  }
-  if(Array.isArray(data.G7)){
-    data.G7.forEach((n,i)=>{ if(!/^\d{2}$/.test(n)) issues.push(`G7[${i}] sai`) });
-  }
-
-  return {pass: issues.length === 0, issues};
-}
-
-function currentDataFromInputs(){
-  return {
-    date: $('drawDate').value.trim() || '',
-    DB: safeNum2($('dbInput').value),
-    G1: safeNum2($('g1Input').value),
-    G6: split2List($('g6Input').value, 3),
-    G7: split2List($('g7Input').value, 4)
-  };
-}
-
-function renderGate(data, gate){
-  $('gateBox').innerHTML = `
-    <div class="pill"><strong>ĐB</strong> <span class="${/^\d{2}$/.test(data.DB||'') ? 'ok':'no'}">${data.DB || '--'}</span></div>
-    <div class="pill"><strong>G1</strong> <span class="${/^\d{2}$/.test(data.G1||'') ? 'ok':'no'}">${data.G1 || '--'}</span></div>
-    <div class="pill"><strong>G6</strong> <span class="${Array.isArray(data.G6)&&data.G6.length===3 ? 'ok':'no'}">${(data.G6||[]).join(', ') || '--'}</span></div>
-    <div class="pill"><strong>G7</strong> <span class="${Array.isArray(data.G7)&&data.G7.length===4 ? 'ok':'no'}">${(data.G7||[]).join(', ') || '--'}</span></div>
-    <div style="margin-top:10px">${gate.pass ? '<span class="badge good">PASS</span>' : '<span class="badge bad">FAIL</span>'}</div>
-    ${gate.issues.length ? `<div style="margin-top:8px">${gate.issues.map(x=>`<div class="warnText">• ${x}</div>`).join('')}</div>` : ''}
-  `;
-}
-
-function renderVoteBox(votes){
-  const parts = [];
-  for(const key of ['db','g1','g6','g7']){
-    const v = votes[key];
-    if(!v) continue;
-    parts.push(`<div style="margin-bottom:8px"><strong>${key.toUpperCase()}</strong></div>`);
-    v.results.slice(0,6).forEach(r=>{
-      parts.push(`<div>• ${r.mode} | score=${r.score} | parsed=${JSON.stringify(r.parsed)} | txt=${r.txt.replace(/\n/g,' ')}</div>`);
-    });
-  }
-  $('voteBox').innerHTML = parts.join('');
-}
-
-function renderDebugInfo(boxes){
-  const d = boxes.debug || {};
-  $('debugInfo').innerHTML = Object.entries(d).map(([k,v])=>`<div>${k}: ${typeof v === 'number' ? v.toFixed ? v.toFixed(2) : v : v}</div>`).join('');
-}
-
-function makeOneLine(data){
-  const date = data.date || '';
-  return `${date}|${data.DB||''}|${data.G1||''}|${(data.G6||[]).join(',')}|${(data.G7||[]).join(',')}`;
-}
-
-async function detectFromFile(file, drawPreview=false){
-  const {img, bitmap} = await loadBitmapFromFile(file);
-  const boxes = $('profileMode').value === 'xoso_app'
-    ? smartCropXSMBLikeScreenshot(bitmap)
-    : genericBoxes(img);
-
-  if(drawPreview){
-    state.currentImage = img;
-    state.currentBitmap = bitmap;
-    state.cropBoxes = boxes;
-    drawDetectPreview(bitmap, boxes);
-    drawCropRaw(bitmap, boxes.table, 'tableCanvas');
-    drawCropRaw(bitmap, boxes.db, 'dbCanvas');
-    drawCropRaw(bitmap, boxes.g1, 'g1Canvas');
-    drawCropRaw(bitmap, boxes.g6, 'g6Canvas');
-    drawCropRaw(bitmap, boxes.g7, 'g7Canvas');
-    renderDebugInfo(boxes);
-  }
-
-  return {img, bitmap, boxes};
-}
-
-async function readOneFile(file, drawPreview=false){
-  const {bitmap, boxes} = await detectFromFile(file, drawPreview);
-
-  setStatus(`Đang đọc ${file.name}`, 'DB');
-  const dbModes = $('voteMode').value === 'full' ? ['redmask','bw','contrast','gray'] : ['redmask','bw'];
-  const g1Modes = $('voteMode').value === 'full' ? ['darkmask','bw','contrast','gray'] : ['darkmask','bw'];
-  const g6Modes = $('voteMode').value === 'full' ? ['darkmask','bw','contrast','gray'] : ['darkmask','bw'];
-
-  const dbVote = await voteRow(bitmap, boxes, 'db', 'dbCanvas', dbModes, parseDBCandidate, scoreDB);
-  setStatus(`Đang đọc ${file.name}`, 'G1');
-  const g1Vote = await voteRow(bitmap, boxes, 'g1', 'g1Canvas', g1Modes, parseG1Candidate, scoreG1);
-  setStatus(`Đang đọc ${file.name}`, 'G6');
-  const g6Vote = await voteRow(bitmap, boxes, 'g6', 'g6Canvas', g6Modes, parseG6Candidate, scoreG6);
-  setStatus(`Đang đọc ${file.name}`, 'G7');
-  const g7Vote = await voteG7TwoPass(bitmap, boxes);
-
-  const data = {
-    date: $('drawDate').value.trim() || '',
-    DB: dbVote.best?.parsed || '',
-    G1: g1Vote.best?.parsed || '',
-    G6: g6Vote.best?.parsed || [],
-    G7: g7Vote.best?.parsed || []
-  };
-
-  const gate = gateResult(data);
-  const votes = {db:dbVote,g1:g1Vote,g6:g6Vote,g7:g7Vote};
-
-  return {data, gate, votes, boxes};
-}
-
-async function doDetect(){
-  if(!state.files.length){
-    alert('Chưa chọn ảnh');
-    return;
-  }
-  setStatus('Đang detect...', 'Ảnh đầu tiên');
-  await detectFromFile(state.files[0], true);
-  setStatus('Detect xong', 'Đã cắt TABLE / DB / G1 / G6 / G7');
-}
-
-async function doReadCurrent(){
-  if(!state.files.length){
-    alert('Chưa chọn ảnh');
-    return;
-  }
-  await ensureWorker();
-  const rs = await readOneFile(state.files[0], true);
-  state.lastVotes = rs.votes;
-
-  $('dbInput').value = rs.data.DB || '';
-  $('g1Input').value = rs.data.G1 || '';
-  $('g6Input').value = (rs.data.G6 || []).join(',');
-  $('g7Input').value = (rs.data.G7 || []).join(',');
-  $('oneLine').value = makeOneLine(rs.data);
-
-  $('ocrLog').value = [
-    ...rs.votes.db.log,
-    ...rs.votes.g1.log,
-    ...rs.votes.g6.log,
-    ...rs.votes.g7.log
-  ].join('\n');
-
-  renderGate(rs.data, rs.gate);
-  renderVoteBox(rs.votes);
-  setStatus('Đọc ảnh đầu xong', rs.gate.pass ? 'Gate PASS' : 'Gate FAIL');
-}
-
-async function doReadBatch(){
-  if(!state.files.length){
-    alert('Chưa chọn ảnh');
-    return;
-  }
-  await ensureWorker();
-
-  let lines = [];
-  let logs = [];
-  let ok = 0, fail = 0;
-
-  for(let i=0;i<state.files.length;i++){
-    const f = state.files[i];
-    setStatus(`Batch ${i+1}/${state.files.length}`, f.name);
-    try{
-      const rs = await readOneFile(f, i === 0);
-      const line = makeOneLine(rs.data);
-      lines.push(`${rs.gate.pass ? 'OK' : 'FAIL'} | ${f.name} | ${line}`);
-      logs.push(`===== ${f.name} =====\n${[
-        ...rs.votes.db.log,
-        ...rs.votes.g1.log,
-        ...rs.votes.g6.log,
-        ...rs.votes.g7.log
-      ].join('\n')}`);
-      if(rs.gate.pass) ok++; else fail++;
-
-      if(i === 0){
-        $('dbInput').value = rs.data.DB || '';
-        $('g1Input').value = rs.data.G1 || '';
-        $('g6Input').value = (rs.data.G6 || []).join(',');
-        $('g7Input').value = (rs.data.G7 || []).join(',');
-        $('oneLine').value = makeOneLine(rs.data);
-        renderGate(rs.data, rs.gate);
-        renderVoteBox(rs.votes);
-      }
-    }catch(err){
-      fail++;
-      lines.push(`FAIL | ${f.name} | ERROR`);
-      logs.push(`===== ${f.name} =====\nERROR: ${err.message}`);
-    }
-  }
-
-  $('batchOutput').value = lines.join('\n');
-  $('ocrLog').value = logs.join('\n\n');
-  setStatus('Batch xong', `OK ${ok} | FAIL ${fail}`);
-}
-
-function doGate(){
-  const data = currentDataFromInputs();
-  renderGate(data, gateResult(data));
-}
-
-function doMakeLine(){
-  const data = currentDataFromInputs();
-  $('oneLine').value = makeOneLine(data);
-}
-
-function clearCanvas(id){
-  const c = $(id);
-  const ctx = c.getContext('2d');
-  ctx.clearRect(0,0,c.width,c.height);
-}
-
-async function doReset(){
-  state.files = [];
-  state.currentImage = null;
-  state.currentBitmap = null;
-  state.cropBoxes = null;
-  state.lastVotes = null;
-  await destroyWorker();
-  $('fileInput').value = '';
-  $('drawDate').value = '';
-  $('dbInput').value = '';
-  $('g1Input').value = '';
-  $('g6Input').value = '';
-  $('g7Input').value = '';
-  $('oneLine').value = '';
-  $('ocrLog').value = '';
-  $('batchOutput').value = '';
-  $('thumbs').innerHTML = '';
-  $('gateBox').innerHTML = '';
-  $('voteBox').innerHTML = '';
-  $('debugInfo').innerHTML = '';
-  ['previewCanvas','tableCanvas','dbCanvas','g1Canvas','g6Canvas','g7Canvas'].forEach(clearCanvas);
-  setStatus('Reset xong', 'Sẵn sàng');
-}
-
-$('fileInput').addEventListener('change', e=>{
-  state.files = [...e.target.files];
-  renderThumbs();
-  setStatus('Đã chọn ảnh', `${state.files.length} ảnh`);
+  setBadge("stOcr","● OCR: batch done","ok");
 });
-$('btnDetect').addEventListener('click', doDetect);
-$('btnReadCurrent').addEventListener('click', doReadCurrent);
-$('btnReadBatch').addEventListener('click', doReadBatch);
-$('btnGate').addEventListener('click', doGate);
-$('btnMakeLine').addEventListener('click', doMakeLine);
-$('btnReset').addEventListener('click', doReset);
 
-setStatus('Sẵn sàng', 'Dán là chạy');
+el("fileCam").addEventListener("change", async (e)=>{
+  const f = (e.target.files || [])[0];
+  if(!f) return;
+  await runOCRFromBlob(f);
+});
+
+el("btnRetryLast").onclick = async ()=>{
+  if(!lastImageBlob){ alert("Chưa có ảnh nào để retry."); return; }
+  await runOCRFromBlob(lastImageBlob);
+};
+
+el("btnSample").onclick = ()=>{
+  el("inputData").value =
+`DB 77 | G7: 03 82 85 81 | G6: 392 255 854
+DB 21 | G7: 76 47 21 77 | G6: 801 295 993
+DB 14 | G7: 81 87 60 32 | G6: 206 200 971
+DB 80 | G7: 22 20 16 61 | G6: 733 014 672
+DB 45 | G7: 18 62 05 74 | G6: 615 901 330
+DB 09 | G7: 90 11 27 63 | G6: 402 578 119`;
+};
+
+/* =========================================================
+   PART 2 — ENGINE
+========================================================= */
+function parseLines(){
+  el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
+
+  const raw = el("inputData").value
+    .trim()
+    .split("\n")
+    .map(s=>s.trim())
+    .filter(Boolean);
+
+  const win = Math.min(Math.max(6, parseInt(el("winDays").value||"20",10)), 60);
+  const slice = raw.slice(0, win);
+  const days = [];
+
+  const g6Mode = el("g6Scope").value;
+
+  for(let idx=0; idx<slice.length; idx++){
+    const line = slice[idx];
+
+    const dbm = line.match(/DB\s+(\d{2})/i);
+    const g7m = line.match(/G7:\s*([0-9 ]+)/i);
+    const g6m = line.match(/G6:\s*([0-9 ]+)/i);
+    if(!dbm || !g7m) continue;
+
+    const db2 = pad2(dbm[1]);
+
+    const g7All = (g7m[1].match(/\b\d{2}\b/g)||[]).map(pad2);
+    const g7 = g7All.slice(-4);
+
+    let g6 = [];
+    if(g6Mode !== "off" && g6m){
+      g6 = (g6m[1].match(/\b\d{3}\b/g)||[]).slice(0,3);
+    }
+    if(g6Mode === "newest_only" && idx>0){
+      g6 = [];
+    }
+
+    const g6_2 = g6.map(x=>pad2(String(x).slice(-2)));
+    const pool = [db2, ...g7, ...g6_2];
+    days.push({db2, g7, g6_2, pool});
+  }
+  return days;
+}
+
+function buildHeadTail(days, K){
+  const h = {}; const t = {};
+  days.slice(0,K).forEach(d=>{
+    d.pool.forEach(n=>{
+      const a=n[0], b=n[1];
+      h[a]=(h[a]||0)+1;
+      t[b]=(t[b]||0)+1;
+    });
+  });
+  return {h,t};
+}
+function ganMap(days, K){
+  const lastSeen = {};
+  days.slice(0,K).forEach((d, idx)=>{
+    d.pool.forEach(n=>{
+      if(lastSeen[n]===undefined) lastSeen[n]=idx;
+    });
+  });
+  const gan = {};
+  for(let i=0;i<100;i++){
+    const n = pad2(i);
+    gan[n] = (lastSeen[n]===undefined) ? 999 : lastSeen[n];
+  }
+  return gan;
+}
+function makeTrucSet(topHeads, topTails){
+  const s = new Set();
+  for(const a of topHeads) for(const b of topTails) s.add(`${a}${b}`);
+  return s;
+}
+function keSet(n2){
+  const x = parseInt(n2,10);
+  const prev = pad2((x+99)%100);
+  const next = pad2((x+1)%100);
+  const bong = pad2(99-x);
+  return new Set([pad2(x), prev, next, bong]);
+}
+function pascalSeed(days){
+  if(days.length<2) return new Set();
+  const a = parseInt(days[0].db2,10);
+  const b = parseInt(days[1].db2,10);
+  const sum = pad2((a+b)%100);
+  const dif = pad2((a-b+100)%100);
+  const s = new Set([sum,dif]);
+  [sum,dif].forEach(x=>{
+    const rev = x[1]+x[0];
+    s.add(rev);
+    keSet(x).forEach(v=>s.add(v));
+  });
+  return s;
+}
+function buildCumConfirm(scoreSorted){
+  const top10 = scoreSorted.slice(0,10).map(([n])=>n);
+  const headCnt = {}; const tailCnt = {};
+  top10.forEach(n=>{
+    headCnt[n[0]]=(headCnt[n[0]]||0)+1;
+    tailCnt[n[1]]=(tailCnt[n[1]]||0)+1;
+  });
+  const heads = Object.entries(headCnt).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
+  const tails = Object.entries(tailCnt).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
+  const cum = [];
+  for(const a of heads) for(const b of tails) cum.push(a+b);
+  return Array.from(new Set(cum)).slice(0,8);
+}
+
+function detectPhase(days){
+  const K = Math.min(Math.max(5, parseInt(el("phaseK").value||"9",10)), days.length);
+  const ht = buildHeadTail(days, K);
+  const headTop = Object.entries(ht.h).sort((a,b)=>b[1]-a[1]).slice(0,4).map(x=>x[0]);
+  const tailTop = Object.entries(ht.t).sort((a,b)=>b[1]-a[1]).slice(0,4).map(x=>x[0]);
+  const trucSet = makeTrucSet(headTop, tailTop);
+  const g = ganMap(days, K);
+
+  let hitTruc = 0, total=0;
+  let ganLong = 0;
+  let g7LeadHit = 0;
+
+  for(let i=0;i<K;i++){
+    const d = days[i];
+    d.pool.forEach(n=>{
+      total++;
+      if(trucSet.has(n)) hitTruc++;
+      const gv = g[n];
+      if(gv>=5 && gv!==999) ganLong++;
+    });
+    if(i+1 < K){
+      const lead = new Set();
+      days[i+1].g7.forEach(x=>keSet(x).forEach(v=>lead.add(v)));
+      const inter = d.pool.filter(n=>lead.has(n)).length;
+      g7LeadHit += inter;
+    }
+  }
+
+  const trucRatio = total ? hitTruc/total : 0;
+  const ganRatio  = total ? ganLong/total : 0;
+  const g7Ratio   = total ? g7LeadHit/(total) : 0;
+
+  const freq = {};
+  days.slice(0,K).forEach(d=>d.pool.forEach(n=>freq[n]=(freq[n]||0)+1));
+  const topHot = Object.values(freq).sort((a,b)=>b-a)[0] || 0;
+  const noise = (1 - (topHot/(K*8)));
+
+  let pha="P3", dir="GIAO_THAO", conf=0.62, note="Giao thoa – cần số giao ≥2 tiêu chí.";
+  if(noise>0.82 && trucRatio<0.16 && g7Ratio<0.18){
+    pha="P4"; dir="NHIU_NANG"; conf=0.78; note="Nhiễu nặng – vẫn chốt 3 nhưng rủi ro cao.";
+    return {pha,dir,conf,note,metrics:{trucRatio,ganRatio,g7Ratio,noise}, headTop, tailTop};
+  }
+  if(trucRatio>=0.20 && ganRatio>=0.18 && g7Ratio<0.22){
+    pha = (ganRatio>=0.25) ? "P6" : "P2";
+    dir = (pha==="P6") ? "TRUC_MO" : "TRUC_GAN";
+    conf = Math.min(0.92, 0.68 + trucRatio + ganRatio);
+    note = (pha==="P6")
+      ? "MỞ TRỤC – ưu tiên TRỤC + xác nhận gan."
+      : "TRỤC + GAN – ưu tiên trục nổi, tránh bám G7 thuần.";
+    return {pha,dir,conf,note,metrics:{trucRatio,ganRatio,g7Ratio,noise}, headTop, tailTop};
+  }
+  if(g7Ratio>=0.22 && trucRatio<0.20){
+    pha="P1"; dir="THEO_G7"; conf=Math.min(0.90, 0.62 + g7Ratio);
+    note="G7 lead – ưu tiên kề/bóng/chạm từ G7.";
+    return {pha,dir,conf,note,metrics:{trucRatio,ganRatio,g7Ratio,noise}, headTop, tailTop};
+  }
+  if(topHot>=4 && ganRatio<0.14 && noise<0.75){
+    pha="P5"; dir="XA"; conf=0.74; note="Pha xả – hot dễ bẫy, giảm tiền.";
+    return {pha,dir,conf,note,metrics:{trucRatio,ganRatio,g7Ratio,noise}, headTop, tailTop};
+  }
+  return {pha,dir,conf,note,metrics:{trucRatio,ganRatio,g7Ratio,noise}, headTop, tailTop};
+}
+
+function lockWeightsByPhase(phaObj){
+  let wHot = parseFloat(el("wHot").value||"2");
+  let wGan = parseFloat(el("wGan").value||"1.5");
+  let wPas = parseFloat(el("wPas").value||"2");
+  let wTruc = 1.2, wG7 = 1.0;
+
+  if(el("aiSup").value==="off"){
+    return {wHot,wGan,wPas,wTruc,wG7, locked:false};
+  }
+
+  if(phaObj.dir==="TRUC_GAN"){
+    wHot = Math.min(wHot, 1.5);
+    wGan = Math.max(wGan, 2.0);
+    wTruc = 2.4;
+    wG7 = 0.9;
+  } else if(phaObj.dir==="TRUC_MO"){
+    wHot = Math.min(wHot, 1.8);
+    wGan = Math.max(wGan, 1.8);
+    wTruc = 2.8;
+    wG7 = 1.0;
+  } else if(phaObj.dir==="THEO_G7"){
+    wHot = Math.max(wHot, 2.0);
+    wGan = Math.max(1.2, wGan);
+    wTruc = 1.2;
+    wG7 = 2.2;
+  } else if(phaObj.dir==="XA"){
+    wHot = Math.max(wHot, 2.2);
+    wGan = Math.min(wGan, 1.2);
+    wTruc = 1.0;
+    wG7 = 1.0;
+  } else if(phaObj.pha==="P4"){
+    wHot = 1.2; wGan = 1.1; wPas = 1.2;
+    wTruc = 0.9; wG7 = 0.9;
+  }
+  return {wHot,wGan,wPas,wTruc,wG7, locked:true};
+}
+
+function scoreCandidates(days, phaObj, weights){
+  const K = Math.min(Math.max(5, parseInt(el("phaseK").value||"9",10)), days.length);
+  const threshold = Math.min(Math.max(2, parseInt(el("trucThreshold").value||"4",10)), 10);
+
+  const freq = {};
+  days.forEach(d=>d.pool.forEach(n=>freq[n]=(freq[n]||0)+1));
+  const gan = ganMap(days, K);
+
+  const ht = buildHeadTail(days, K);
+  const headTop = Object.entries(ht.h).sort((a,b)=>b[1]-a[1]).slice(0,5).map(x=>x[0]);
+  const tailTop = Object.entries(ht.t).sort((a,b)=>b[1]-a[1]).slice(0,5).map(x=>x[0]);
+
+  const headStrong = Object.entries(ht.h).filter(([,c])=>c>=threshold).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);
+  const tailStrong = Object.entries(ht.t).filter(([,c])=>c>=threshold).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);
+  const trucSet = makeTrucSet(headStrong.length?headStrong:headTop.slice(0,4), tailStrong.length?tailStrong:tailTop.slice(0,4));
+
+  const pas = pascalSeed(days);
+
+  const g7Lead = new Set();
+  if(days.length){
+    days[0].g7.forEach(x=>keSet(x).forEach(v=>g7Lead.add(v)));
+  }
+
+  const score = {};
+  const features = {};
+
+  for(let i=0;i<100;i++){
+    const n = pad2(i);
+    const hot = (freq[n]||0);
+    const g = gan[n];
+
+    let ganFeat = 0;
+    if(g===999) ganFeat = -1;
+    else if(g===0) ganFeat = -1;
+    else if(g>=2 && g<=9) ganFeat = 2;
+    else ganFeat = 0;
+
+    const pasFeat = pas.has(n) ? 1 : 0;
+    const trucFeat = trucSet.has(n) ? 1 : 0;
+    const g7Feat = g7Lead.has(n) ? 1 : 0;
+
+    let s = hot*weights.wHot + ganFeat*weights.wGan + pasFeat*weights.wPas;
+    s += trucFeat*weights.wTruc;
+    s += g7Feat*weights.wG7;
+
+    if((phaObj.dir==="TRUC_GAN" || phaObj.dir==="TRUC_MO") && !trucFeat){
+      s -= 0.6;
+    }
+
+    score[n]=s;
+    features[n]={hot, gan:g, pas:pasFeat, truc:trucFeat, g7:g7Feat};
+  }
+
+  let scoreSorted = Object.entries(score).sort((a,b)=>b[1]-a[1]);
+
+  const cumList = buildCumConfirm(scoreSorted);
+  const cumSet = new Set(cumList);
+
+  for(const [n] of scoreSorted.slice(0,30)){
+    if(cumSet.has(n)) score[n] += 0.35;
+  }
+  scoreSorted = Object.entries(score).sort((a,b)=>b[1]-a[1]);
+
+  return {scoreSorted, freq, gan, trucSet, pas, g7Lead, headTop, tailTop, cumList, features};
+}
+
+function buildWarnings(phaObj, meta){
+  const warn = [];
+  if(phaObj.pha==="P4") warn.push("⚠️ NHIỄU NẶNG: vẫn chốt 3 nhưng rủi ro cao, giảm tiền.");
+  let topInf = 0;
+  for(let i=0;i<12;i++){
+    const n = meta.scoreSorted[i]?.[0];
+    if(!n) break;
+    if(meta.gan[n]===999) topInf++;
+  }
+  if(topInf>=3) warn.push("⚠️ BẪY GAN: nhiều số gan∞ lọt top → ưu tiên gan 2–9.");
+  const hotVals = Object.values(meta.freq).sort((a,b)=>b-a);
+  const topHot = hotVals[0] || 0;
+  if(topHot>=5 && phaObj.dir!=="TRUC_MO") warn.push("⚠️ BẪY CỤM/HOT: hot dày → tránh all-in.");
+  if(warn.length<3) warn.push("✅ OK: chưa thấy bẫy quá rõ (vẫn giữ kỷ luật tiền).");
+  if(warn.length<3) warn.push("✅ OK: ưu tiên số giao thoa ≥2 tiêu chí.");
+  return warn.slice(0,3);
+}
+
+/* =========================================================
+   HIT@3>=2 REAL ENGINE
+========================================================= */
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const sigmoid = (z) => 1 / (1 + Math.exp(-z));
+const to2 = (n) => String(n).padStart(2, "0");
+
+function entropyFromCounts(countsObj) {
+  const vals = Object.values(countsObj);
+  const sum = vals.reduce((a, b) => a + b, 0) || 1;
+  let H = 0;
+  for (const v of vals) {
+    const p = v / sum;
+    if (p > 0) H += -p * Math.log(p);
+  }
+  return H;
+}
+function jaccard(aSet, bSet) {
+  let inter = 0;
+  for (const x of aSet) if (bSet.has(x)) inter++;
+  const union = aSet.size + bSet.size - inter;
+  return union === 0 ? 0 : inter / union;
+}
+
+function computeProbabilities(ctx, weights) {
+  const { candidates, hotRank, ganScore, pasScore, trucScore, g7Lead, cumConfirm } = ctx;
+
+  const maxHot = Math.max(...candidates.map(n => hotRank.get(n) ?? 0), 1);
+  const maxTruc = Math.max(...candidates.map(n => trucScore.get(n) ?? 0), 1);
+  const maxGan = Math.max(...candidates.map(n => ganScore.get(n) ?? 0), 1);
+
+  const probs = new Map();
+  for (const n of candidates) {
+    const hotN  = (hotRank.get(n) ?? 0) / maxHot;
+    const trucN = (trucScore.get(n) ?? 0) / maxTruc;
+    const pasN  = clamp((pasScore.get(n) ?? 0), 0, 1);
+    const g7N   = g7Lead?.has(n) ? 1 : 0;
+    const cumN  = cumConfirm?.has(n) ? 1 : 0;
+
+    const ganLen = ganScore.get(n) ?? 0;
+    const ganNraw = ganLen / maxGan;
+    const ganSweet = 1 - Math.abs(ganNraw - 0.5) * 2;
+    const ganN = clamp(ganSweet, 0, 1);
+
+    const z =
+      (weights.base ?? -2.2) +
+      (weights.wHot  ?? 1.2) * hotN +
+      (weights.wTruc ?? 1.4) * trucN +
+      (weights.wG7   ?? 0.7) * g7N +
+      (weights.wPas  ?? 0.8) * pasN +
+      (weights.wGan  ?? 0.6) * ganN +
+      (weights.wCum  ?? 0.3) * cumN;
+
+    probs.set(n, sigmoid(z));
+  }
+  return probs;
+}
+
+function deriveGate(ctx) {
+  const Hh = entropyFromCounts(ctx.headCount || {});
+  const Ht = entropyFromCounts(ctx.tailCount || {});
+  const H = (Hh + Ht) / 2;
+
+  const pha = ctx.phaseHint?.pha || "";
+  const huong = ctx.phaseHint?.huong || "";
+
+  const isTrucMo = /TRUC_MO/i.test(huong);
+  const isTrucGan = /TRUC_GAN/i.test(huong);
+  const isDaoXa = /DAO|XA|NHIU/i.test(huong) || /P3|P4|P5/i.test(pha);
+
+  const noise = clamp((H - 1.9) / (2.5 - 1.9), 0, 1);
+
+  let aT = 0.45, aG = 0.30, aP = 0.25;
+  if (isTrucMo) { aT += 0.10; aP -= 0.05; }
+  if (isTrucGan) { aG += 0.08; aT -= 0.04; }
+  if (isDaoXa) { aT -= 0.12; aP += 0.08; aG += 0.04; }
+
+  aT = aT * (1 - 0.6 * noise);
+  aP = aP + 0.35 * noise;
+  aG = aG + 0.25 * noise;
+
+  const s = aT + aG + aP;
+  aT /= s; aG /= s; aP /= s;
+
+  return { noise, isDaoXa, isTrucMo, isTrucGan, aT, aG, aP };
+}
+
+function computeEnsembleProb(ctx) {
+  const gate = deriveGate(ctx);
+
+  const wT = { base:-2.25, wHot:1.05, wTruc:1.65, wG7:0.85, wPas:0.45, wGan:0.35, wCum:0.20 };
+  const wG = { base:-2.20, wHot:0.95, wTruc:1.05, wG7:0.45, wPas:0.35, wGan:0.95, wCum:0.20 };
+  const wP = { base:-2.30, wHot:0.90, wTruc:0.95, wG7:0.35, wPas:1.05, wGan:0.35, wCum:0.55 };
+
+  const pT = computeProbabilities(ctx, wT);
+  const pG = computeProbabilities(ctx, wG);
+  const pP = computeProbabilities(ctx, wP);
+
+  const p = new Map();
+  for (const n of ctx.candidates) {
+    const v =
+      gate.aT * (pT.get(n) || 0) +
+      gate.aG * (pG.get(n) || 0) +
+      gate.aP * (pP.get(n) || 0);
+    p.set(n, v);
+  }
+  return { p, gate };
+}
+
+function buildNumberProfile(ctx, n) {
+  const head = parseInt(n[0], 10);
+  const tail = parseInt(n[1], 10);
+  const trucTier = (ctx.trucScore.get(n) ?? 0) >= (ctx.trucThreshold ?? 4) ? "T" : "t";
+  const cum = ctx.cumConfirm?.has(n) ? "C" : "c";
+  const g7 = ctx.g7Lead?.has(n) ? "G" : "g";
+  const pas = (ctx.pasScore.get(n) ?? 0) ? "P" : "p";
+
+  const feat = new Set([
+    `H${head}`,
+    `D${tail}`,
+    `TR${trucTier}`,
+    `CU${cum}`,
+    `G7${g7}`,
+    `PA${pas}`
+  ]);
+
+  return { head, tail, feat };
+}
+
+function scoreTripleHit2(p1, p2, p3){
+  return (p1*p2 + p1*p3 + p2*p3 - 2*p1*p2*p3);
+}
+
+function tripleDiversityPenalty(a, b, c){
+  let pen = 0;
+
+  if(a.prof.tail === b.prof.tail) pen += 0.18;
+  if(a.prof.tail === c.prof.tail) pen += 0.18;
+  if(b.prof.tail === c.prof.tail) pen += 0.18;
+
+  if(a.prof.head === b.prof.head) pen += 0.07;
+  if(a.prof.head === c.prof.head) pen += 0.07;
+  if(b.prof.head === c.prof.head) pen += 0.07;
+
+  const ab = jaccard(a.prof.feat, b.prof.feat);
+  const ac = jaccard(a.prof.feat, c.prof.feat);
+  const bc = jaccard(b.prof.feat, c.prof.feat);
+
+  if(ab >= 0.60) pen += 0.10;
+  if(ac >= 0.60) pen += 0.10;
+  if(bc >= 0.60) pen += 0.10;
+
+  return pen;
+}
+
+function tripleSynergyBonus(ctx, a, b, c){
+  let bonus = 0;
+  const arr = [a.n, b.n, c.n];
+
+  let cumCnt = 0;
+  arr.forEach(n => { if(ctx.cumConfirm?.has(n)) cumCnt++; });
+  if(cumCnt >= 2) bonus += 0.03;
+
+  let g7Cnt = 0;
+  arr.forEach(n => { if(ctx.g7Lead?.has(n)) g7Cnt++; });
+  if(g7Cnt >= 1) bonus += 0.025;
+
+  let trucCnt = 0;
+  arr.forEach(n => {
+    if((ctx.trucScore.get(n) ?? 0) >= (ctx.trucThreshold ?? 4)) trucCnt++;
+  });
+  if(trucCnt >= 1) bonus += 0.03;
+
+  return bonus;
+}
+
+function pickTop3WithDiversity(ctx, pMap) {
+  const arr = [...pMap.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([n, p]) => ({ n, p, prof: buildNumberProfile(ctx, n) }));
+
+  const pool = arr.slice(0, 18);
+
+  let best = null;
+
+  for(let i=0; i<pool.length; i++){
+    for(let j=i+1; j<pool.length; j++){
+      for(let k=j+1; k<pool.length; k++){
+        const a = pool[i], b = pool[j], c = pool[k];
+
+        const hit2 = scoreTripleHit2(a.p, b.p, c.p);
+        const avgP = (a.p + b.p + c.p) / 3;
+        const pen = tripleDiversityPenalty(a, b, c);
+        const bonus = tripleSynergyBonus(ctx, a, b, c);
+
+        const finalScore = hit2 + avgP * 0.12 + bonus - pen;
+
+        if(!best || finalScore > best.finalScore){
+          best = {
+            finalScore,
+            hit2,
+            avgP,
+            bonus,
+            pen,
+            picks: [a, b, c]
+          };
+        }
+      }
+    }
+  }
+
+  if(best && best.picks?.length === 3){
+    return best.picks;
+  }
+
+  return arr.slice(0, 3);
+}
+
+function MASTER_HIT2OF3(ctx) {
+  if (!ctx.candidates || ctx.candidates.length === 0) {
+    ctx.candidates = Array.from({ length: 100 }, (_, i) => to2(i));
+  }
+  ctx.trucThreshold = ctx.trucThreshold ?? 4;
+
+  const { p, gate } = computeEnsembleProb(ctx);
+
+  const top10 = [...p.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([n, prob]) => ({ n, prob }));
+
+  const picked = pickTop3WithDiversity(ctx, p);
+  const chot3 = picked.map(x => x.n);
+
+  let tripleHit2 = 0;
+  if(picked.length === 3){
+    tripleHit2 = scoreTripleHit2(picked[0].p, picked[1].p, picked[2].p);
+  }
+
+  const phaseConf = ctx.phaseHint?.tinCay ?? 0.75;
+  const trust = clamp(
+    0.50 + tripleHit2 * 1.15 + 0.16 * (phaseConf - 0.70) + 0.10 * (1 - gate.noise),
+    0.40,
+    0.93
+  );
+
+  const risk =
+    (gate.noise >= 0.65 && phaseConf < 0.80)
+      ? "RISK: noise cao + pha chưa chắc"
+      : (gate.isDaoXa && gate.noise >= 0.55)
+        ? "RISK: pha đảo/xả + noise"
+        : (tripleHit2 < 0.18)
+          ? "RISK: bộ 3 chưa đủ mạnh cho hit>=2"
+          : "OK";
+
+  return {
+    mode: "HIT@3>=2",
+    gate,
+    trust,
+    top10,
+    chot3,
+    risk,
+    tripleHit2
+  };
+}
+
+/* =========================================================
+   OUTPUT UI
+========================================================= */
+let VIEW_MODE = "simple";
+window.__lastRender = null;
+
+const setView = (m)=>{
+  VIEW_MODE = m;
+  el("viewHint").textContent = (m==="simple")
+    ? "SIMPLE: Chốt 3 + cảnh báo (dễ nhìn)"
+    : "PRO: Thêm TOP + % + FULL PRO chi tiết";
+  el("detailBox").open = (m==="pro");
+};
+el("btnViewSimple").onclick = ()=>{ setView("simple"); if(window.__lastRender) window.__lastRender(); };
+el("btnViewPro").onclick = ()=>{ setView("pro"); if(window.__lastRender) window.__lastRender(); };
+setView("simple");
+
+function esc(s){ return String(s).replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m] || m)); }
+
+function renderOutputUI(payload){
+  const {phaObj, pick, pctLineArr, warnings, explainLines, weights, daysLen, rawText, extraNote} = payload;
+
+  const main = pick[0] || "--";
+  const sub  = pick[1] || "--";
+  const kem  = pick[2] || "--";
+
+  const phaText = `Pha ${phaObj.pha} • ${phaObj.dir} • Tin cậy ${(phaObj.conf*100).toFixed(0)}%`;
+
+  let chipsHtml = `<div class="chips">`;
+  if(VIEW_MODE==="pro"){
+    chipsHtml += pctLineArr.map(x=>`<span class="chip">${esc(x)}</span>`).join("");
+  }else{
+    chipsHtml += `<span class="chip">🎯 Chính: ${esc(main)}</span>`;
+    chipsHtml += `<span class="chip">🛡️ Phụ: ${esc(sub)}</span>`;
+    chipsHtml += `<span class="chip">➕ Kèm: ${esc(kem)}</span>`;
+  }
+  chipsHtml += `</div>`;
+
+  const warnHtml = `
+    <ul class="warnList">
+      ${warnings.map(w=>`<li>${esc(w)}</li>`).join("")}
+    </ul>
+  `;
+
+  const explainHtml = `
+    <div class="sep"></div>
+    <div class="khead">GIẢI THÍCH</div>
+    <div class="metaLine" style="margin-top:6px">
+      ${explainLines.map(l=>`• ${esc(l)}`).join("<br/>")}
+      ${extraNote ? `<div class="sep"></div><b>${esc(extraNote)}</b>` : ``}
+    </div>
+  `;
+
+  const weightLine = `wHot=${weights.wHot} • wGan=${weights.wGan} • wPas=${weights.wPas} • wTruc=${weights.wTruc} • wG7=${weights.wG7}`;
+  const g6Mode = el("g6Scope").value;
+
+  const left = `
+    <div class="kcard">
+      <div class="khead">CHỐT 3 (ƯU TIÊN KQ)</div>
+      <div class="kbig">${esc(main)} <span style="opacity:.65;font-weight:800">/</span> ${esc(sub)} <span style="opacity:.65;font-weight:800">/</span> ${esc(kem)}</div>
+      <div class="metaLine" style="margin-top:6px">${esc(phaText)}<br/>${esc(phaObj.note)}</div>
+      ${chipsHtml}
+    </div>
+  `;
+
+  const right = `
+    <div class="kcard">
+      <div class="khead">3 CẢNH BÁO</div>
+      ${warnHtml}
+      <div class="sep"></div>
+      <div class="metaLine">
+        AI supervisor: <b>${weights.locked?"LOCKED":"OFF"}</b><br/>
+        G6 scope: <b>${esc(g6Mode)}</b><br/>
+        ${esc(weightLine)}<br/>
+        Tổng ngày dùng: ${daysLen}
+      </div>
+    </div>
+  `;
+
+  const topBlock = (VIEW_MODE==="pro")
+    ? `<div class="sep"></div>
+       <div class="khead">TOP + % (THAM KHẢO)</div>
+       <div class="chips">${pctLineArr.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>`
+    : "";
+
+  el("outHtml").innerHTML = `
+    <div class="krow">${left}${right}</div>
+    ${topBlock}
+    ${explainHtml}
+  `;
+  el("outRaw").textContent = rawText || "";
+}
+
+function runFULL(){
+  el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
+
+  const days = parseLines();
+  if(days.length < 6){
+    el("outHtml").textContent = "❌ Thiếu dữ liệu: cần ≥6 ngày (khuyến nghị 20).";
+    el("outRaw").textContent = "❌ Thiếu dữ liệu.";
+    return;
+  }
+
+  const phaObj = detectPhase(days);
+  const weights = lockWeightsByPhase(phaObj);
+  const meta = scoreCandidates(days, phaObj, weights);
+
+  const candidates = Array.from({length:100},(_,i)=>pad2(i));
+  const hotRank = new Map(candidates.map(n => [n, meta.freq[n] || 0]));
+  const ganScore = new Map(candidates.map(n => {
+    const v = meta.gan[n];
+    if(v === 999) return [n, 0];
+    return [n, Math.min(v, 20)];
+  }));
+  const pasScore = new Map(candidates.map(n => [n, meta.pas.has(n) ? 1 : 0]));
+
+  const Kp = Math.min(Math.max(5, parseInt(el("phaseK").value||"9",10)), days.length);
+  const ht = buildHeadTail(days, Kp);
+  const headPower = new Map(Object.entries(ht.h).map(([k,v])=>[k,v]));
+  const tailPower = new Map(Object.entries(ht.t).map(([k,v])=>[k,v]));
+  const trucScore = new Map(candidates.map(n=>{
+    const hp = headPower.get(n[0]) || 0;
+    const tp = tailPower.get(n[1]) || 0;
+    const bonus = meta.trucSet.has(n) ? 2 : 0;
+    return [n, hp + tp + bonus];
+  }));
+
+  const ctxPatch = {
+    candidates,
+    hotRank,
+    ganScore,
+    pasScore,
+    trucScore,
+    g7Lead: meta.g7Lead,
+    cumConfirm: new Set(meta.cumList || []),
+    headCount: ht.h,
+    tailCount: ht.t,
+    trucThreshold: Math.min(Math.max(2, parseInt(el("trucThreshold").value||"4",10)), 10),
+    phaseHint: { pha: phaObj.pha, huong: phaObj.dir, tinCay: phaObj.conf }
+  };
+
+  const patchOut = MASTER_HIT2OF3(ctxPatch);
+  const warnings = buildWarnings(phaObj, meta);
+
+  const topN = Math.min(Math.max(4, parseInt(el("topN").value||"10",10)), 15);
+  const topPickByProb = patchOut.top10.slice(0, topN);
+  const maxP = Math.max(...topPickByProb.map(x=>x.prob), 0.0001);
+  const pctLineArr = topPickByProb.map(x=>{
+    const p = (x.prob / maxP) * 100;
+    return `${x.n}(${p.toFixed(0)}%)`;
+  });
+
+  const pick = patchOut.chot3 || topPickByProb.slice(0,3).map(x=>x.n);
+
+  const explainLines = pick.slice(0,3).map((n,i)=>{
+    const f = meta.features[n] || {hot:0,gan:999,pas:0,truc:false,g7:false};
+    const ganTag = (meta.gan[n]===999) ? "∞" : meta.gan[n];
+    const cum = (meta.cumList||[]).includes(n);
+    const dau = meta.headTop.slice(0,5).includes(n[0]);
+    const duoi = meta.tailTop.slice(0,5).includes(n[1]);
+    return `${i+1}) ${n} | hot:${f.hot||0} | gan:${ganTag} | truc:${f.truc?"Y":"-"} | g7:${f.g7?"Y":"-"} | pas:${f.pas?"Y":"-"} | cum:${cum?"Y":"-"} | dau:${dau?"Y":"-"} | duoi:${duoi?"Y":"-"}`;
+  });
+
+  const extraNote =
+    `✅ MODE: HIT@3>=2 • P(hit>=2) ${(patchOut.tripleHit2*100).toFixed(0)}% • trust ${(patchOut.trust*100).toFixed(0)}% • noise ${(patchOut.gate.noise*100).toFixed(0)}% • ${patchOut.risk}`;
+
+  const out =
+`===== KẾT QUẢ FULL (HIT@3>=2 — LUÔN CHỐT 3) =====
+Tổng ngày dùng: ${days.length}
+
+AI ĐỌC PHA:
+Pha: ${phaObj.pha} | Hướng: ${phaObj.dir} | Tin cậy ${(phaObj.conf*100).toFixed(0)}%
+Nhận định: ${phaObj.note}
+
+TOP ${topN} (tham khảo) + %:
+${pctLineArr.join("  ")}
+
+CHỐT 3 (mục tiêu HIT@3>=2):
+🎯 Chính: ${pick[0]}
+🛡️ Phụ:  ${pick[1]}
+➕ Kèm:  ${pick[2]}
+
+3 CẢNH BÁO:
+1) ${warnings[0]}
+2) ${warnings[1]}
+3) ${warnings[2]}
+
+NOTE:
+${extraNote}
+Xác suất tổ hợp hit>=2 (xấp xỉ): ${(patchOut.tripleHit2*100).toFixed(1)}%
+
+GIẢI THÍCH:
+${explainLines.join("\n")}
+
+WEIGHTS:
+wHot=${weights.wHot} | wGan=${weights.wGan} | wPas=${weights.wPas} | wTruc=${weights.wTruc} | wG7=${weights.wG7}
+`;
+
+  window.__lastRender = ()=>renderOutputUI({
+    phaObj,
+    pick,
+    pctLineArr,
+    warnings,
+    explainLines,
+    weights,
+    daysLen: days.length,
+    rawText: out,
+    extraNote
+  });
+  window.__lastRender();
+}
+el("btnFull").onclick = runFULL;
+
+/* =========================================================
+   SAVE/LOAD/RESET
+========================================================= */
+const LS_KEY = "BH_ULTRA_MASTER_V3_DATA";
+
+function saveData(){
+  const payload = {
+    inputData: el("inputData").value || "",
+    settings: {
+      winDays: el("winDays").value,
+      topN: el("topN").value,
+      aiSup: el("aiSup").value,
+      g6Scope: el("g6Scope").value,
+      trucThreshold: el("trucThreshold").value,
+      phaseK: el("phaseK").value,
+      wHot: el("wHot").value,
+      wGan: el("wGan").value,
+      wPas: el("wPas").value,
+    },
+    ts: Date.now()
+  };
+  localStorage.setItem(LS_KEY, JSON.stringify(payload));
+  setBadge("stSave", "● Save: OK", "ok");
+}
+function loadData(){
+  const raw = localStorage.getItem(LS_KEY);
+  if(!raw){ setBadge("stSave","● Save: empty","warn"); return; }
+  try{
+    const p = JSON.parse(raw);
+    el("inputData").value = p.inputData || "";
+    const s = p.settings || {};
+    if(s.winDays!=null) el("winDays").value = s.winDays;
+    if(s.topN!=null) el("topN").value = s.topN;
+    if(s.aiSup!=null) el("aiSup").value = s.aiSup;
+    if(s.g6Scope!=null) el("g6Scope").value = s.g6Scope;
+    if(s.trucThreshold!=null) el("trucThreshold").value = s.trucThreshold;
+    if(s.phaseK!=null) el("phaseK").value = s.phaseK;
+    if(s.wHot!=null) el("wHot").value = s.wHot;
+    if(s.wGan!=null) el("wGan").value = s.wGan;
+    if(s.wPas!=null) el("wPas").value = s.wPas;
+    setBadge("stSave","● Save: loaded","ok");
+    el("inputData").value = normalizeInputToOneDayOneLine(el("inputData").value).trim();
+  }catch(e){
+    setBadge("stSave","● Save: corrupt","fail");
+  }
+}
+function clearIO(){
+  el("outHtml").textContent = "Chưa có dữ liệu.";
+  el("outRaw").textContent = "Chưa có dữ liệu.";
+}
+function resetAll(){
+  el("inputData").value = "";
+  el("dbg").textContent = "Chưa có OCR.";
+  clearIO();
+  showKPI("", [], [], "--");
+  batchOK=0; batchFail=0;
+  setBadge("stOcr","● OCR: idle","ok");
+  setBadge("stGate","● Gate: waiting","warn");
+  setBadge("stSave","● Save: --","warn");
+  setStatus();
+  localStorage.removeItem(LS_KEY);
+}
+el("btnSave").onclick = saveData;
+el("btnLoad").onclick = loadData;
+el("btnClearData").onclick = ()=>{ el("inputData").value=""; clearIO(); };
+el("btnClearAll").onclick = resetAll;
+
+loadData();
 </script>
 </body>
 </html>
