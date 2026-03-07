@@ -1,433 +1,854 @@
-<!DOCTYPE html><html lang="vi">
+<!doctype html>
+<html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ULTRA MASTER v8.3 • AI Crop + Engine</title>
-  <meta name="theme-color" content="#0b1220" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+  <title>ULTRA MASTER v10.1 AI CROP</title>
+  <meta name="theme-color" content="#09111f"/>
   <style>
     :root{
-      --bg:#07101d; --card:#0f1a30; --card2:#0b1426; --text:#e8f0ff; --muted:#9fb0d4;
-      --line:rgba(255,255,255,.08); --good:#32d583; --warn:#fdb022; --bad:#ff4d4f;
-      --btn:#2e5bff; --btn2:#1d43c4; --chip:rgba(255,255,255,.06);
+      --bg:#07101d; --card:#0c1830; --card2:#101d38; --line:rgba(255,255,255,.08);
+      --txt:#eaf1ff; --muted:#9db0d3; --blue:#2f6bff; --blue2:#1e4fd6;
+      --good:#26c281; --warn:#ffb020; --bad:#ff6666; --shadow:0 12px 30px rgba(0,0,0,.28);
+      --radius:18px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#08101d,#07101d 40%,#050b16);color:var(--text);padding:16px}
-    .wrap{max-width:1180px;margin:0 auto}
-    .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 12px 32px rgba(0,0,0,.28)}
-    h1{margin:0 0 8px;font-size:24px} h2{margin:0 0 8px;font-size:18px}
-    .hint,.small{color:var(--muted)} .hint{font-size:13px;line-height:1.45}
-    .row,.chips,.toolbar,.status{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-    .chip,.badge{padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:var(--chip);font-size:12px;color:var(--muted);font-weight:700}
-    .badge.ok{color:var(--good)} .badge.warn{color:var(--warn)} .badge.fail{color:var(--bad)}
-    .btn{appearance:none;border:0;border-radius:12px;padding:11px 14px;font-weight:900;color:#fff;cursor:pointer;background:linear-gradient(180deg,var(--btn),var(--btn2));box-shadow:0 8px 18px rgba(46,91,255,.22)}
-    .btn.ghost{background:rgba(255,255,255,.06);border:1px solid var(--line);box-shadow:none;color:var(--text)}
-    .btn.danger{background:linear-gradient(180deg,#ff4d4f,#b42318)}
-    .grid-2{display:grid;grid-template-columns:1fr;gap:12px} @media(min-width:960px){.grid-2{grid-template-columns:1.15fr .85fr}}
-    .grid-3{display:grid;grid-template-columns:1fr;gap:12px} @media(min-width:960px){.grid-3{grid-template-columns:1fr 1fr 1fr}}
-    .field{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:10px}
-    .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
-    input,select,textarea{width:100%;background:#09111d;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px 12px;outline:none}
-    textarea{min-height:180px;resize:vertical}
-    .preview{border:1px solid var(--line);border-radius:16px;background:#060b13;overflow:hidden}
-    img,canvas{display:block;width:100%;height:auto}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.5;white-space:pre-wrap;word-break:break-word;background:#09111d;border:1px solid var(--line);border-radius:14px;padding:12px;color:#dbe6ff;overflow:auto}
-    .kpi{display:grid;grid-template-columns:repeat(2,1fr);gap:10px} @media(min-width:760px){.kpi{grid-template-columns:repeat(4,1fr)}}
-    .box{border:1px solid var(--line);background:rgba(255,255,255,.05);border-radius:14px;padding:10px}
-    .t{font-size:12px;color:var(--muted)} .v{font-size:18px;font-weight:1000;margin-top:4px}
-    .result{font-size:28px;font-weight:1000;text-align:center;padding:16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.05)}
-    .warnList{margin:8px 0 0;padding-left:18px} .warnList li{margin:6px 0}
-    .tabs{display:flex;gap:8px;flex-wrap:wrap}.tab{padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);font-size:12px;font-weight:900;color:var(--muted);cursor:pointer}.tab.active{color:var(--text)}
-    .sep{height:1px;background:var(--line);margin:12px 0}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--txt);
+      background:
+        radial-gradient(900px 500px at 10% -10%, rgba(47,107,255,.16), transparent 55%),
+        radial-gradient(900px 500px at 110% 0%, rgba(57,201,255,.08), transparent 50%),
+        linear-gradient(180deg,#07101d,#081321 40%,#050c15 100%);
+    }
+    .app{max-width:1180px;margin:0 auto;padding:14px}
+    .hero,.card{
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:linear-gradient(180deg,var(--card),var(--card2));
+      box-shadow:var(--shadow);
+    }
+    .hero{padding:18px;margin-bottom:14px}
+    .hero h1{margin:0 0 6px;font-size:28px}
+    .hero p{margin:0;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+    .card{padding:14px}
+    .card h2{margin:0 0 12px;font-size:18px}
+    .label{display:block;font-size:13px;color:var(--muted);margin:8px 0 6px}
+    input[type="file"], input[type="text"], textarea, select{
+      width:100%;padding:12px;border-radius:14px;border:1px solid var(--line);
+      background:#091427;color:var(--txt);outline:none;
+    }
+    textarea{min-height:140px;resize:vertical}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:700px){.split{grid-template-columns:1fr}}
+    .btn{
+      border:none;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer;
+      background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;
+      box-shadow:0 8px 18px rgba(47,107,255,.25);
+    }
+    .btn.secondary{background:#162643;border:1px solid var(--line);box-shadow:none}
+    .btn.good{background:linear-gradient(180deg,#2bcd8a,#1ba66d)}
+    .btn.warn{background:linear-gradient(180deg,#ffb020,#dd8f00)}
+    .btn.bad{background:linear-gradient(180deg,#ff6767,#dd4646)}
+    .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+    .thumb{
+      border:1px solid var(--line);border-radius:16px;background:#071221;overflow:hidden
+    }
+    .thumb img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;background:#050b14}
+    .cap{padding:8px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+    .resultBox{
+      margin-top:10px;padding:12px;border-radius:16px;background:#081120;border:1px solid var(--line)
+    }
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+    @media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
+    .kpi{padding:12px;border-radius:16px;background:#0a1427;border:1px solid var(--line)}
+    .kpi .t{font-size:12px;color:var(--muted);margin-bottom:8px}
+    .kpi .v{font-size:22px;font-weight:900}
+    .tag{
+      display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;margin-right:6px
+    }
+    .tag.good{background:rgba(38,194,129,.12);color:var(--good)}
+    .tag.warn{background:rgba(255,176,32,.12);color:var(--warn)}
+    .tag.bad{background:rgba(255,102,102,.12);color:var(--bad)}
+    .tag.blue{background:rgba(47,107,255,.12);color:#89adff}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
+    th{color:var(--muted);font-weight:600}
+    .mini{font-size:12px;color:var(--muted)}
+    canvas{max-width:100%}
+    .cropGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media (max-width:700px){.cropGrid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="card">
-    <h1>ULTRA MASTER v8.3 • AI Crop + Engine</h1>
-    <div class="chips">
-      <span class="chip">Multi-image</span>
-      <span class="chip">AI Crop Architecture</span>
-      <span class="chip">OCR Local Gate</span>
-      <span class="chip">Hybrid Read</span>
-      <span class="chip">Engine chốt 3</span>
-      <span class="chip">Backtest demo</span>
-    </div>
-    <div class="hint" style="margin-top:8px">
-      Trọng tâm bản v8 là: <b>đọc dữ liệu đầu vào sạch hơn</b> rồi mới <b>engine ra KQ</b>.
-      Luồng: nhiều ảnh → crop DB/G7/G6 → vote → gate → input chuẩn → engine top + chốt 3.
-    </div>
-    <div class="status" style="margin-top:10px">
-      <div class="badge warn" id="stMode">● Mode: LOCAL</div>
-      <div class="badge warn" id="stCrop">● Crop: idle</div>
-      <div class="badge warn" id="stRead">● Read: idle</div>
-      <div class="badge warn" id="stGate">● Gate: waiting</div>
-      <div class="badge warn" id="stEngine">● Engine: idle</div>
-    </div>
-  </div>  <div class="card grid-2">
-    <div>
-      <h2>Ảnh đầu vào</h2>
-      <div class="hint">Bản này mô phỏng đầy đủ pipeline crop + read + vote. Chưa gọi AI ngoài, nhưng đã chừa chỗ cắm AI crop/AI read.</div>
-      <div class="toolbar" style="margin-top:10px">
-        <button class="btn" id="btnMulti">📸 Upload nhiều ảnh</button>
-        <button class="btn ghost" id="btnCam">📷 Camera</button>
-        <button class="btn ghost" id="btnMock">Mock 3 ảnh</button>
-        <button class="btn danger" id="btnReset">Reset</button>
-        <input id="fileMulti" type="file" accept="image/*" multiple hidden>
-        <input id="fileCam" type="file" accept="image/*" capture="environment" hidden>
-      </div>
-      <div class="preview" style="margin-top:10px"><img id="imgPreview" alt="preview"></div>
-    </div>
-    <div>
-      <h2>Thiết lập đọc</h2>
-      <div class="grid-3">
-        <div class="field">
-          <label>Crop mode</label>
-          <select id="cropMode">
-            <option value="local_preset" selected>Local preset</option>
-            <option value="ai_crop">AI crop (placeholder)</option>
-            <option value="hybrid_crop">Hybrid crop</option>
+<div class="app">
+  <section class="hero">
+    <h1>ULTRA MASTER v10.1 AI CROP</h1>
+    <p>Bám layout ảnh chụp app XSMB như ảnh Hào gửi • auto tìm bảng • crop riêng ĐB / G6 / G7 • OCR từng vùng</p>
+  </section>
+
+  <div class="grid">
+    <div class="card">
+      <h2>1) Ảnh đầu vào + AI Crop</h2>
+
+      <label class="label">Chọn ảnh</label>
+      <input id="fileInput" type="file" accept="image/*" multiple>
+
+      <div class="split" style="margin-top:12px">
+        <div>
+          <label class="label">Kiểu ảnh</label>
+          <select id="profileMode">
+            <option value="xoso_app">Ảnh app kết quả kiểu như mẫu</option>
+            <option value="generic">Ảnh chung</option>
           </select>
         </div>
-        <div class="field">
-          <label>Read mode</label>
-          <select id="readMode">
-            <option value="local_ocr" selected>Local OCR</option>
-            <option value="ai_read">AI read (placeholder)</option>
-            <option value="hybrid_read">Hybrid read</option>
+        <div>
+          <label class="label">OCR mode</label>
+          <select id="ocrMode">
+            <option value="digits">Digits only</option>
+            <option value="mixed">Mixed</option>
           </select>
         </div>
-        <div class="field">
-          <label>Vote threshold</label>
-          <input id="voteTh" type="number" value="2" min="1" max="5">
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <button class="btn" id="btnDetect">1. Detect + Crop</button>
+        <button class="btn good" id="btnOCR">2. OCR vùng crop</button>
+        <button class="btn secondary" id="btnParse">3. Parse</button>
+        <button class="btn secondary" id="btnAnalyze">4. Analyze</button>
+        <button class="btn warn" id="btnDemo">Demo ảnh mẫu</button>
+        <button class="btn bad" id="btnReset">Reset</button>
+      </div>
+
+      <div class="resultBox">
+        <div><strong>Trạng thái:</strong> <span id="statusText">Sẵn sàng</span></div>
+        <div class="mini" id="progressText">Chưa chạy</div>
+      </div>
+
+      <div class="thumbs" id="thumbs" style="margin-top:10px"></div>
+
+      <div class="resultBox">
+        <div><strong>Raw OCR</strong></div>
+        <textarea id="ocrText" class="mono" placeholder="OCR từng vùng sẽ hiện ở đây..."></textarea>
+      </div>
+
+      <div class="split">
+        <div>
+          <label class="label">Ngày</label>
+          <input id="drawDate" type="text" placeholder="2026-03-06">
+        </div>
+        <div>
+          <label class="label">Ghi chú</label>
+          <input id="noteText" type="text" placeholder="AI crop app screenshot">
         </div>
       </div>
-      <div class="kpi" style="margin-top:10px">
-        <div class="box"><div class="t">DB</div><div class="v" id="kDB">--</div></div>
-        <div class="box"><div class="t">G7</div><div class="v" id="kG7">--</div></div>
-        <div class="box"><div class="t">G6</div><div class="v" id="kG6">--</div></div>
-        <div class="box"><div class="t">Gate</div><div class="v" id="kGate">--</div></div>
+
+      <div class="split" style="margin-top:12px">
+        <div>
+          <label class="label">ĐB</label>
+          <input id="dbInput" type="text" placeholder="49">
+        </div>
+        <div>
+          <label class="label">G1</label>
+          <input id="g1Input" type="text" placeholder="50">
+        </div>
       </div>
-      <div class="field" style="margin-top:10px">
-        <label>Dòng vừa đọc</label>
-        <input id="lineRead" placeholder="DB xx | G7: a b c d | G6: xxx yyy zzz">
+
+      <div class="split" style="margin-top:12px">
+        <div>
+          <label class="label">G6</label>
+          <input id="g6Input" type="text" placeholder="54,10,40">
+        </div>
+        <div>
+          <label class="label">G7</label>
+          <input id="g7Input" type="text" placeholder="14,71,85,01">
+        </div>
       </div>
-      <div class="toolbar" style="margin-top:10px">
-        <button class="btn ghost" id="btnApplyLine">Áp vào input</button>
-        <button class="btn ghost" id="btnRunRead">Chạy đọc mock</button>
-      </div>
-    </div>
-  </div>  <div class="card grid-2">
-    <div>
-      <h2>Dữ liệu đầu vào</h2>
-      <div class="hint">Format chuẩn: <b>DB xx | G7: a b c d | G6: xxx yyy zzz</b> (newest ở trên)</div>
-      <div class="toolbar" style="margin-top:10px">
-        <button class="btn ghost" id="btnSample">Dán mẫu</button>
-        <button class="btn ghost" id="btnNormalize">Chuẩn hoá</button>
-        <button class="btn ghost" id="btnSave">Lưu</button>
-        <button class="btn ghost" id="btnLoad">Tải</button>
-        <button class="btn ghost" id="btnClearInput">Clear</button>
-      </div>
-      <textarea id="inputData" style="margin-top:10px" placeholder="DB 48 | G7: 45 61 98 00 | G6: 248 357 890"></textarea>
-      <div class="grid-3" style="margin-top:10px">
-        <div class="field"><label>Window</label><input id="winDays" type="number" value="20" min="6" max="90"></div>
-        <div class="field"><label>Top N</label><input id="topN" type="number" value="10" min="4" max="20"></div>
-        <div class="field"><label>Mode engine</label><select id="engMode"><option value="quick" selected>Quick</option><option value="pro">Pro</option></select></div>
+
+      <div class="row" style="margin-top:12px">
+        <button class="btn good" id="btnSave">Lưu kỳ</button>
+        <button class="btn secondary" id="btnExport">Xuất JSON</button>
+        <button class="btn secondary" id="btnImport">Nhập JSON</button>
+        <input id="importFile" type="file" accept=".json" style="display:none">
       </div>
     </div>
-    <div>
-      <h2>Debug crop/read</h2>
-      <div class="mono" id="dbgBox">Chưa có dữ liệu.</div>
-    </div>
-  </div>  <div class="card">
-    <h2>Engine ra KQ</h2>
-    <div class="tabs">
-      <div class="tab active" id="tabSimple">SIMPLE</div>
-      <div class="tab" id="tabPro">PRO</div>
-    </div>
-    <div class="result" id="pickBox" style="margin-top:10px">-- / -- / --</div>
-    <div class="toolbar" style="margin-top:10px">
-      <button class="btn" id="btnRunEngine">RUN ENGINE</button>
-      <button class="btn ghost" id="btnBacktest">BACKTEST</button>
-    </div>
-    <div class="grid-2" style="margin-top:10px">
-      <div class="field">
-        <div class="mono" id="outBox">Chưa có dữ liệu.</div>
+
+    <div class="card">
+      <h2>2) Crop preview</h2>
+
+      <div class="cropGrid">
+        <div class="resultBox">
+          <div><strong>Full detect</strong></div>
+          <canvas id="previewCanvas"></canvas>
+        </div>
+        <div class="resultBox">
+          <div><strong>DB crop</strong></div>
+          <canvas id="dbCanvas"></canvas>
+        </div>
+        <div class="resultBox">
+          <div><strong>G6 crop</strong></div>
+          <canvas id="g6Canvas"></canvas>
+        </div>
+        <div class="resultBox">
+          <div><strong>G7 crop</strong></div>
+          <canvas id="g7Canvas"></canvas>
+        </div>
       </div>
-      <div class="field">
-        <h2 style="font-size:16px">Anti-bẫy</h2>
-        <ul class="warnList" id="warnList"><li>Chưa có dữ liệu.</li></ul>
+
+      <div class="kpis">
+        <div class="kpi"><div class="t">PHA</div><div class="v" id="kpiPhase">--</div></div>
+        <div class="kpi"><div class="t">TRỤC</div><div class="v" id="kpiAxis">--</div></div>
+        <div class="kpi"><div class="t">HƯỚNG</div><div class="v" id="kpiFlow">--</div></div>
+        <div class="kpi"><div class="t">TIN CẬY</div><div class="v" id="kpiConf">0%</div></div>
+      </div>
+
+      <div class="resultBox">
+        <div><span class="tag good">Main</span> <span id="mainPick">--</span></div>
+        <div style="margin-top:8px"><span class="tag blue">Sub</span> <span id="subPick">--</span></div>
+        <div style="margin-top:8px"><span class="tag bad">Anti</span> <span id="antiPick">--</span></div>
+      </div>
+
+      <div class="resultBox">
+        <div><strong>Checklist 6 dòng</strong></div>
+        <div id="sixLine" style="margin-top:8px"></div>
+      </div>
+
+      <div class="resultBox">
+        <div><strong>Lịch sử</strong></div>
+        <div style="overflow:auto;margin-top:8px">
+          <table>
+            <thead>
+              <tr>
+                <th>Ngày</th>
+                <th>ĐB</th>
+                <th>G6</th>
+                <th>G7</th>
+              </tr>
+            </thead>
+            <tbody id="historyBody"></tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-</div><script>
-const LS_KEY = 'ULTRA_MASTER_V83_AI_CROP_ENGINE';
-const el = (id)=>document.getElementById(id);
-const pad2 = (n)=>String(n).padStart(2,'0');
-let VIEW_MODE='simple';
-let mockImages = [];
+</div>
 
-function setBadge(id, text, cls){ const e=el(id); e.textContent=text; e.className='badge '+cls; }
-function normalizeInput(raw){
-  const lines=String(raw||'').replace(/\r/g,'').split('\n').map(s=>s.trim()).filter(Boolean);
-  const out=[];
-  for(const ln of lines){
-    const isNew=/(^|\s)(DB|ĐB)\s*\d{1,2}\b/i.test(ln);
-    const hasG7=/\bG7\s*:/i.test(ln);
-    const hasG6=/\bG6\s*:/i.test(ln);
-    if(isNew&&(hasG7||hasG6)) out.push(ln);
-    else if(!out.length) out.push(ln); else out[out.length-1]=(out[out.length-1]+' '+ln).replace(/\s+/g,' ').trim();
-  }
-  return out.join('\n');
-}
-function parseLines(){
-  el('inputData').value=normalizeInput(el('inputData').value);
-  const raw=el('inputData').value.split('\n').map(s=>s.trim()).filter(Boolean);
-  const win=Math.min(Math.max(6,parseInt(el('winDays').value||'20',10)),90);
-  const slice=raw.slice(0,win);
-  const days=[];
-  for(const line of slice){
-    const db=line.match(/DB\s+(\d{2})/i)?.[1]||null;
-    const g7=(line.match(/G7:\s*([0-9 ]+)/i)?.[1]||'').match(/\b\d{2}\b/g)||[];
-    const g6=(line.match(/G6:\s*([0-9 ]+)/i)?.[1]||'').match(/\b\d{3}\b/g)||[];
-    if(db&&g7.length>=4) days.push({db:pad2(db),g7:g7.slice(0,4).map(pad2),g6:g6.slice(0,3),pool:[pad2(db),...g7.slice(0,4).map(pad2),...g6.slice(0,3).map(x=>pad2(String(x).slice(-2)))]});
-  }
-  return days;
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script>
+const $ = (id)=>document.getElementById(id);
+const STORAGE_KEY = 'ultra_master_v101_history';
+
+const state = {
+  files: [],
+  history: [],
+  currentImage: null,
+  currentBitmap: null,
+  cropBoxes: null
+};
+
+function setStatus(a,b=''){
+  $('statusText').textContent = a;
+  $('progressText').textContent = b;
 }
 
-function mockCropReadBatch(){
-  // mô phỏng 3 ảnh đã qua crop/read, có sai số nhẹ để vote
-  return [
-    {db:'48', g7:['45','61','98','00'], g6:['248','357','890'], conf:0.92, src:'img1'},
-    {db:'48', g7:['45','61','98','08'], g6:['248','357','890'], conf:0.73, src:'img2'},
-    {db:'48', g7:['45','61','98','00'], g6:['248','357','890'], conf:0.89, src:'img3'},
-  ];
+function safeNum2(v){
+  const s = String(v||'').replace(/\D/g,'');
+  return s ? s.slice(-2).padStart(2,'0') : '';
 }
-function voteByPos(arrays){
-  const pos=[new Map(),new Map(),new Map(),new Map()];
-  arrays.forEach(a=>a.forEach((v,i)=>pos[i].set(v,(pos[i].get(v)||0)+1)));
-  const out=[]; let strength=0;
-  for(let i=0;i<4;i++){
-    let best='', cnt=-1;
-    for(const [k,c] of pos[i]) if(c>cnt){best=k;cnt=c;}
-    out.push(best||'00'); strength+=Math.max(0,cnt);
+function split2List(v){
+  return String(v||'').split(/[,\n;| ]+/).map(safeNum2).filter(Boolean);
+}
+function unique(a){ return [...new Set(a)] }
+function getHead(n){ return safeNum2(n).slice(0,1) }
+function getTail(n){ return safeNum2(n).slice(1) }
+function rev(n){ const s=safeNum2(n); return s? s[1]+s[0] : '' }
+function sumRoot(n){ const s=safeNum2(n); return ((+s[0]||0)+(+s[1]||0))%10 }
+function diff2(n){ const s=safeNum2(n); return Math.abs((+s[0]||0)-(+s[1]||0)) }
+function pad2(n){ return String(n).padStart(2,'0') }
+
+function loadHistory(){
+  try{
+    state.history = JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+    if(!Array.isArray(state.history)) state.history = [];
+  }catch{ state.history = [] }
+  renderHistory();
+}
+function saveHistory(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state.history));
+  renderHistory();
+}
+function renderHistory(){
+  const body = $('historyBody');
+  body.innerHTML = '';
+  [...state.history].reverse().forEach(d=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${d.date||''}</td>
+      <td>${d.DB||''}</td>
+      <td>${(d.G6||[]).join(', ')}</td>
+      <td>${(d.G7||[]).join(', ')}</td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+function drawImageToCanvas(canvas, img, maxW=520){
+  const ratio = img.height / img.width;
+  canvas.width = Math.min(maxW, img.width);
+  canvas.height = canvas.width * ratio;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(img,0,0,canvas.width,canvas.height);
+}
+
+async function loadCurrentImageFromFile(file){
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.src = url;
+  await img.decode();
+  state.currentImage = img;
+  if ('createImageBitmap' in window) {
+    state.currentBitmap = await createImageBitmap(file);
+  } else {
+    state.currentBitmap = img;
   }
-  return {out,strength};
+  return img;
 }
-function voteText(batch){
-  const dbMap=new Map(), g6a=[], g7a=[];
-  batch.forEach(r=>{ dbMap.set(r.db,(dbMap.get(r.db)||0)+1); g7a.push(r.g7); g6a.push(r.g6); });
-  let db=''; let dbc=-1; for(const [k,c] of dbMap) if(c>dbc){db=k;dbc=c;}
-  const g7v=voteByPos(g7a);
-  const g6 = g6a.sort((a,b)=>0)[0] || ['000','000','000'];
-  return {db,g7:g7v.out,g6,strength:g7v.strength};
+
+function renderThumbs(){
+  const box = $('thumbs');
+  box.innerHTML = '';
+  state.files.forEach((f,idx)=>{
+    const url = URL.createObjectURL(f);
+    const div = document.createElement('div');
+    div.className = 'thumb';
+    div.innerHTML = `<img src="${url}"><div class="cap">Ảnh ${idx+1}</div>`;
+    box.appendChild(div);
+  });
 }
-function gateCheck(o){
-  if(!/^\d{2}$/.test(o.db)) return {ok:false,reason:'DB fail'};
-  if(!o.g7||o.g7.length!==4||!o.g7.every(x=>/^\d{2}$/.test(x))) return {ok:false,reason:'G7 fail'};
-  if(!o.g6||o.g6.length!==3||!o.g6.every(x=>/^\d{3}$/.test(x))) return {ok:false,reason:'G6 fail'};
-  return {ok:true,reason:'OK'};
+
+function imageDataFromBitmap(bitmap){
+  const canvas = document.createElement('canvas');
+  canvas.width = bitmap.width || bitmap.naturalWidth;
+  canvas.height = bitmap.height || bitmap.naturalHeight;
+  const ctx = canvas.getContext('2d', {willReadFrequently:true});
+  ctx.drawImage(bitmap,0,0);
+  return {canvas, ctx, data: ctx.getImageData(0,0,canvas.width,canvas.height)};
 }
-function applyLineRead(){
-  const line=el('lineRead').value.trim();
-  if(!line) return;
-  const cur=el('inputData').value.trim();
-  el('inputData').value=(cur?line+'\n'+cur:line);
-  el('inputData').value=normalizeInput(el('inputData').value);
+
+function isRed(r,g,b){
+  return r > 160 && g < 120 && b < 120 && (r-g) > 40;
 }
-function normText(s){
-  return String(s||'')
+function isDark(r,g,b){
+  const v = 0.299*r + 0.587*g + 0.114*b;
+  return v < 120;
+}
+
+function smartCropXSMBLikeScreenshot(bitmap){
+  const {canvas, ctx, data} = imageDataFromBitmap(bitmap);
+  const w = canvas.width, h = canvas.height, d = data.data;
+
+  const rowDark = new Array(h).fill(0);
+  const rowRed = new Array(h).fill(0);
+  const colDark = new Array(w).fill(0);
+
+  for(let y=0;y<h;y++){
+    let darkCount = 0;
+    let redCount = 0;
+    for(let x=0;x<w;x++){
+      const i = (y*w + x)*4;
+      const r=d[i], g=d[i+1], b=d[i+2];
+      if(isDark(r,g,b)) darkCount++;
+      if(isRed(r,g,b)) redCount++;
+      if(isDark(r,g,b)) colDark[x]++;
+    }
+    rowDark[y] = darkCount / w;
+    rowRed[y] = redCount / w;
+  }
+
+  let left = Math.floor(w*0.03), right = Math.floor(w*0.97);
+  const darkColThreshold = h * 0.07;
+  for(let x=0;x<w;x++){
+    if(colDark[x] > darkColThreshold){ left = Math.max(0, x-6); break; }
+  }
+  for(let x=w-1;x>=0;x--){
+    if(colDark[x] > darkColThreshold){ right = Math.min(w, x+6); break; }
+  }
+
+  let tableTop = Math.floor(h*0.20);
+  const topSearchStart = Math.floor(h*0.18);
+  const topSearchEnd = Math.floor(h*0.55);
+  for(let y=topSearchStart;y<topSearchEnd;y++){
+    if(rowDark[y] > 0.18){
+      tableTop = Math.max(0, y-10);
+      break;
+    }
+  }
+
+  let g7CenterY = Math.floor(h*0.83);
+  let maxRed = 0;
+  for(let y=Math.floor(h*0.65); y<Math.floor(h*0.95); y++){
+    if(rowRed[y] > maxRed){
+      maxRed = rowRed[y];
+      g7CenterY = y;
+    }
+  }
+
+  let dbCenterY = Math.floor(h*0.43);
+  let bestDbRed = 0;
+  for(let y=tableTop; y<Math.floor(h*0.65); y++){
+    if(rowRed[y] > bestDbRed){
+      bestDbRed = rowRed[y];
+      dbCenterY = y;
+    }
+  }
+
+  const tableBottom = Math.min(h-1, g7CenterY + Math.floor(h*0.045));
+  const tableWidth = right - left;
+  const tableHeight = tableBottom - tableTop;
+
+  const labelCol = Math.max(26, Math.floor(tableWidth*0.12));
+  const dataX = left + labelCol + 6;
+  const dataW = Math.max(40, tableWidth - labelCol - 12);
+
+  const dbH = Math.max(40, Math.floor(h*0.065));
+  const g7H = Math.max(46, Math.floor(h*0.06));
+  const g6Y = g7CenterY - Math.floor(tableHeight*0.14);
+  const g6H = Math.max(42, Math.floor(tableHeight*0.09));
+
+  const boxes = {
+    table: {
+      x:left, y:tableTop, w:tableWidth, h:tableHeight
+    },
+    db: {
+      x:dataX, y:Math.max(tableTop, dbCenterY - Math.floor(dbH/2)),
+      w:dataW, h:dbH
+    },
+    g6: {
+      x:dataX, y:Math.max(tableTop, g6Y - Math.floor(g6H/2)),
+      w:dataW, h:g6H
+    },
+    g7: {
+      x:dataX, y:Math.max(tableTop, g7CenterY - Math.floor(g7H/2)),
+      w:dataW, h:g7H
+    }
+  };
+
+  return boxes;
+}
+
+function drawDetectPreview(bitmap, boxes){
+  const cvs = $('previewCanvas');
+  const maxW = 520;
+  const scale = Math.min(maxW / (bitmap.width || bitmap.naturalWidth), 1);
+  cvs.width = Math.floor((bitmap.width || bitmap.naturalWidth) * scale);
+  cvs.height = Math.floor((bitmap.height || bitmap.naturalHeight) * scale);
+  const ctx = cvs.getContext('2d');
+  ctx.clearRect(0,0,cvs.width,cvs.height);
+  ctx.drawImage(bitmap,0,0,cvs.width,cvs.height);
+
+  function box(b,color,label){
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3;
+    ctx.strokeRect(b.x*scale, b.y*scale, b.w*scale, b.h*scale);
+    ctx.fillStyle = color;
+    ctx.font = 'bold 14px Arial';
+    ctx.fillText(label, b.x*scale + 6, b.y*scale + 18);
+  }
+
+  box(boxes.table, '#39c9ff', 'TABLE');
+  box(boxes.db, '#ff6666', 'DB');
+  box(boxes.g6, '#26c281', 'G6');
+  box(boxes.g7, '#ffb020', 'G7');
+}
+
+function cropToCanvas(bitmap, box, canvasId, preprocess='bw'){
+  const cvs = $(canvasId);
+  const srcW = bitmap.width || bitmap.naturalWidth;
+  const srcH = bitmap.height || bitmap.naturalHeight;
+  cvs.width = box.w;
+  cvs.height = box.h;
+  const ctx = cvs.getContext('2d', {willReadFrequently:true});
+  ctx.clearRect(0,0,box.w,box.h);
+  ctx.drawImage(bitmap, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
+
+  if(preprocess !== 'none'){
+    const img = ctx.getImageData(0,0,cvs.width,cvs.height);
+    const d = img.data;
+    for(let i=0;i<d.length;i+=4){
+      const r=d[i],g=d[i+1],b=d[i+2];
+      let gray = 0.299*r + 0.587*g + 0.114*b;
+      if(preprocess === 'bw'){
+        gray = gray > 150 ? 255 : 0;
+      }else if(preprocess === 'gray'){
+        gray = gray;
+      }
+      d[i]=d[i+1]=d[i+2]=gray;
+    }
+    ctx.putImageData(img,0,0);
+  }
+}
+
+function canvasToBlobURL(canvas){
+  return new Promise(resolve=>{
+    canvas.toBlob(blob=>resolve(URL.createObjectURL(blob)), 'image/png');
+  });
+}
+
+function normalizeOcrText(t){
+  return String(t||'')
     .replace(/[Oo]/g,'0')
     .replace(/[Il|]/g,'1')
-    .replace(/S/g,'5')
-    .replace(/[^\d\s:\|A-Z]/gi,' ')
-    .replace(/\s+/g,' ')
-    .trim();
+    .replace(/[Ss]/g,'5')
+    .replace(/[B]/g,'8');
 }
 
-function localBandReadMock(){
-  const cropMode=el('cropMode').value;
-  const readMode=el('readMode').value;
-  const voteNeed=Math.max(1,parseInt(el('voteTh').value||'2',10));
-  const dbBands=['DB 48','DB 48','DB 48'];
-  const g7Bands=['G7 45 61 98 00','G7 45 61 98 08','G7 45 61 98 00'];
-  const g6Bands=['G6 248 357 890','G6 248 357 890','G6 248 357 890'];
+async function runOCRForCanvas(canvasId, label){
+  const canvas = $(canvasId);
+  const ocrMode = $('ocrMode').value;
+  const url = await canvasToBlobURL(canvas);
 
-  const dbVotes=new Map(), g7Rows=[], g6Rows=[];
-  dbBands.forEach(t=>{ const m=normText(t).match(/\b(\d{2})\b/); if(m) dbVotes.set(m[1], (dbVotes.get(m[1])||0)+1); });
-  g7Bands.forEach(t=>{ const arr=(normText(t).match(/\b\d{2}\b/g)||[]).slice(-4); if(arr.length===4) g7Rows.push(arr); });
-  g6Bands.forEach(t=>{ const arr=(normText(t).match(/\b\d{3}\b/g)||[]).slice(0,3); if(arr.length===3) g6Rows.push(arr); });
+  const result = await Tesseract.recognize(url, 'eng', {
+    logger: m => {
+      if(m.status === 'recognizing text'){
+        $('progressText').textContent = `${label} ${Math.round((m.progress||0)*100)}%`;
+      }
+    }
+  });
 
-  let db='', dbc=-1;
-  for(const [k,c] of dbVotes){ if(c>dbc){ db=k; dbc=c; } }
-  const g7v=voteByPos(g7Rows);
-  const g6v=g6Rows[0]||['000','000','000'];
-  const voted={db, g7:g7v.out, g6:g6v, strength:g7v.strength, passVote:(dbc>=voteNeed)};
-  const gate=gateCheck(voted);
-  return {cropMode, readMode, voteNeed, dbBands, g7Bands, g6Bands, voted, gate};
-}
-
-function runReadMock(){
-  setBadge('stCrop','● Crop: running','warn');
-  setBadge('stRead','● Read: running','warn');
-  const r=localBandReadMock();
-  const voted=r.voted;
-  const gate=r.gate;
-  const line=`DB ${voted.db} | G7: ${voted.g7.join(' ')} | G6: ${voted.g6.join(' ')}`;
-  el('kDB').textContent=voted.db||'--';
-  el('kG7').textContent=voted.g7.join(' ');
-  el('kG6').textContent=voted.g6.join(' ');
-  el('kGate').textContent=(gate.ok&&voted.passVote)?'PASS':'FAIL';
-  el('lineRead').value=line;
-  setBadge('stCrop',`● Crop: ${r.cropMode}`,'ok');
-  setBadge('stRead',`● Read: ${r.readMode}`,'ok');
-  setBadge('stGate',`● Gate: ${(gate.ok&&voted.passVote)?'PASS':'FAIL'}`,(gate.ok&&voted.passVote)?'ok':'fail');
-  el('dbgBox').textContent=[
-    `CROP MODE: ${r.cropMode}`,
-    `READ MODE: ${r.readMode}`,
-    `VOTE NEED: ${r.voteNeed}`,
-    '',
-    '[DB BANDS]',
-    ...r.dbBands,
-    '',
-    '[G7 BANDS]',
-    ...r.g7Bands,
-    '',
-    '[G6 BANDS]',
-    ...r.g6Bands,
-    '',
-    `VOTED -> DB ${voted.db} | G7 ${voted.g7.join(' ')} | G6 ${voted.g6.join(' ')}`,
-    `G7 strength: ${voted.strength}`,
-    `DB vote pass: ${voted.passVote}`,
-    `GATE: ${gate.reason}`,
-    '',
-    'v8.3 upgrade:',
-    '- band read riêng DB/G7/G6',
-    '- normalize text trước vote',
-    '- vote threshold riêng',
-    '- gate pass/fail rõ hơn'
-  ].join('
-'');
-}
-
-function freqMap(days){ const f={}; days.forEach(d=>d.pool.forEach(n=>f[n]=(f[n]||0)+1)); return f; }
-function ganMap(days){ const last={}; days.forEach((d,idx)=>d.pool.forEach(n=>{ if(last[n]===undefined) last[n]=idx; })); const g={}; for(let i=0;i<100;i++){ const n=pad2(i); g[n]=last[n]===undefined?999:last[n]; } return g; }
-function keSet(n2){ const x=parseInt(n2,10); return new Set([pad2(x),pad2((x+1)%100),pad2((x+99)%100),pad2(99-x)]); }
-function buildHeadTail(days){ const h={},t={}; days.forEach(d=>d.pool.forEach(n=>{h[n[0]]=(h[n[0]]||0)+1; t[n[1]]=(t[n[1]]||0)+1;})); return {h,t}; }
-function pascalSeed(days){ if(days.length<2) return new Set(); const a=parseInt(days[0].db,10), b=parseInt(days[1].db,10); const s=new Set(); let x=a,y=b; s.add(pad2(x)); s.add(pad2(y)); for(let i=0;i<18;i++){ const z=(x+y)%100; s.add(pad2(z)); keSet(pad2(z)).forEach(v=>s.add(v)); x=y; y=z; } return s; }
-function antiTrap(meta, phase){
-  const warn=[];
-  if(phase.noise>0.80) warn.push('⛔ Noise cao: giảm tiền hoặc dừng');
-  const hotMax=Math.max(...Object.values(meta.freq),0); if(hotMax>=5) warn.push('⚠️ Hot dày: tránh all-in');
-  let inf=0; meta.top12.forEach(n=>{ if(meta.gan[n]===999) inf++; }); if(inf>=3) warn.push('⚠️ Nhiều gan∞ lọt top');
-  if(!warn.length) warn.push('✅ Chưa thấy bẫy quá rõ');
-  while(warn.length<3) warn.push('✅ Ưu tiên số giao thoa >=2 tiêu chí');
-  return warn.slice(0,3);
-}
-function detectPhase(days){
-  const {h,t}=buildHeadTail(days);
-  const headTop=Object.entries(h).sort((a,b)=>b[1]-a[1]).slice(0,4).map(x=>x[0]);
-  const tailTop=Object.entries(t).sort((a,b)=>b[1]-a[1]).slice(0,4).map(x=>x[0]);
-  const freq=freqMap(days); const topHot=Math.max(...Object.values(freq),0); const noise=1-(topHot/Math.max(1,days.length*8));
-  let pha='M1', dir='OBSERVE', conf=0.62, note='Quan sát';
-  if(noise>0.82){ pha='M3'; dir='NOISE'; conf=0.78; note='Nhiễu cao'; }
-  else if((headTop[0]||'')===(days[0]?.db?.[0]||'') || (tailTop[0]||'')===(days[0]?.db?.[1]||'')){ pha='M2'; dir='TRUC'; conf=0.80; note='Có trục chạy'; }
-  else if(days[0]){ pha='M2'; dir='G7_LEAD'; conf=0.74; note='Theo G7 lead'; }
-  return {pha,dir,conf,note,noise,headTop,tailTop};
-}
-function engineScore(days){
-  const freq=freqMap(days), gan=ganMap(days), phase=detectPhase(days), pas=pascalSeed(days), {h,t}=buildHeadTail(days);
-  const topHeads=Object.entries(h).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
-  const topTails=Object.entries(t).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
-  const g7Lead=new Set(); if(days[0]) days[0].g7.forEach(x=>keSet(x).forEach(v=>g7Lead.add(v)));
-  const score={}, features={};
-  for(let i=0;i<100;i++){
-    const n=pad2(i); const hot=freq[n]||0; const g=gan[n];
-    const recent = days[0] && days[0].pool.includes(n) ? 1 : 0;
-    const g7 = g7Lead.has(n)?1:0;
-    const pasF = pas.has(n)?1:0;
-    const truc = topHeads.includes(n[0]) && topTails.includes(n[1]) ? 1 : 0;
-    const headBoost = topHeads.includes(n[0]) ? 1 : 0;
-    const tailBoost = topTails.includes(n[1]) ? 1 : 0;
-    let ganF=0; if(g===999||g===0) ganF=-1; else if(g>=2&&g<=9) ganF=2;
-    let s = hot*3 + recent*2 + g7*4 + pasF*1.5 + truc*2 + ganF*1.2 + headBoost*0.8 + tailBoost*0.8;
-    if(phase.dir==='TRUC'&&!truc) s-=0.5;
-    if(phase.dir==='NOISE'&&hot>=4) s-=0.8;
-    score[n]=s; features[n]={hot,recent,g7,pas:pasF,truc,gan:g,headBoost,tailBoost};
+  let text = normalizeOcrText(result.data.text || '');
+  if(ocrMode === 'digits'){
+    text = text.replace(/[^\d\s]/g,' ');
   }
-  const sorted=Object.entries(score).sort((a,b)=>b[1]-a[1]);
-  const top10=sorted.slice(0,10).map(x=>x[0]);
-  const top12=sorted.slice(0,12).map(x=>x[0]);
-  const pick=[];
-  for(const n of top10){
-    if(pick.some(x=>x[1]===n[1])) continue;
-    if(pick.some(x=>x===n.split('').reverse().join(''))) continue;
-    pick.push(n);
-    if(pick.length>=3) break;
-  }
-  while(pick.length<3){ for(const n of top10){ if(!pick.includes(n)){ pick.push(n); if(pick.length>=3) break; } } }
-  return {phase,freq,gan,features,sorted,top10,top12,pick};
+  return text;
 }
-function renderEngine(){
-  const days=parseLines();
-  if(days.length<4){ el('pickBox').textContent='-- / -- / --'; el('outBox').textContent='Thiếu dữ liệu.'; el('warnList').innerHTML='<li>Chưa đủ dữ liệu.</li>'; return; }
-  const out=engineScore(days); const topN=Math.min(Math.max(4,parseInt(el('topN').value||'10',10)),20);
-  const topLine=out.sorted.slice(0,topN).map(([n,s])=>`${n}(${s.toFixed(1)})`);
-  const warns=antiTrap({freq:out.freq,gan:out.gan,top12:out.top12}, out.phase);
-  el('pickBox').textContent=out.pick.join(' / ');
-  el('warnList').innerHTML=warns.map(w=>`<li>${w}</li>`).join('');
-  setBadge('stEngine',`● Engine: ${out.phase.pha} ${out.phase.dir}`,'ok');
-  const lines=[];
-  lines.push(`PHA: ${out.phase.pha} | ${out.phase.dir} | ${(out.phase.conf*100).toFixed(0)}%`);
-  lines.push(`NOTE: ${out.phase.note}`);
-  lines.push(`NOISE: ${(out.phase.noise*100).toFixed(0)}%`);
-  lines.push('');
-  lines.push(`TOP ${topN}: ${topLine.join('  ')}`);
-  lines.push('');
-  lines.push(`CHỐT 3: ${out.pick.join(' ')}`);
-  lines.push('');
-  lines.push('GIẢI THÍCH TOP3:');
-  out.pick.forEach((n,i)=>{ const f=out.features[n]; lines.push(`${i+1}) ${n} | hot:${f.hot} | recent:${f.recent} | g7:${f.g7} | pas:${f.pas} | truc:${f.truc} | gan:${f.gan===999?'∞':f.gan}`); });
-  if(VIEW_MODE==='pro'){ lines.push(''); lines.push('RAW TOP 20:'); out.sorted.slice(0,20).forEach(([n,s])=>lines.push(`${n} -> ${s.toFixed(2)}`)); }
-  el('outBox').textContent=lines.join('\n');
-}
-function runBacktest(){
-  const all=parseLines(); if(all.length<8){ el('outBox').textContent='Thiếu dữ liệu backtest.'; return; }
-  let N=0, hit1=0, hit2=0, maxMiss=0, curMiss=0; const logs=[];
-  for(let i=1;i<all.length-3;i++){
-    const train=all.slice(i); const target=all[i-1]; if(train.length<4) continue;
-    const out=engineScore(train); const pick=out.pick; const pool=new Set(target.pool); let hit=0; pick.forEach(n=>{ if(pool.has(n)) hit++; });
-    N++; if(hit>=1) hit1++; if(hit>=2){ hit2++; curMiss=0; } else { curMiss++; maxMiss=Math.max(maxMiss,curMiss); }
-    logs.push(`#${N} pick=${pick.join(' ')} | target=${[...pool].join(' ')} | hit=${hit}`);
-  }
-  el('outBox').textContent=[`BACKTEST`,`N=${N}`,`hit>=1=${hit1}`,`hit>=2=${hit2}`,`rate2=${N?((hit2/N)*100).toFixed(0):0}%`,`maxMiss=${maxMiss}`,'',...logs.slice(-80)].join('\n');
-}
-function saveAll(){ const payload={inputData:el('inputData').value, winDays:el('winDays').value, topN:el('topN').value, cropMode:el('cropMode').value, readMode:el('readMode').value, engMode:el('engMode').value}; localStorage.setItem(LS_KEY,JSON.stringify(payload)); }
-function loadAll(){ const raw=localStorage.getItem(LS_KEY); if(!raw) return; try{ const p=JSON.parse(raw); for(const k of ['inputData','winDays','topN','cropMode','readMode','engMode']) if(el(k)&&p[k]!=null) el(k).value=p[k]; }catch(e){} }
-function resetAll(){ el('inputData').value=''; el('dbgBox').textContent='Chưa có dữ liệu.'; el('outBox').textContent='Chưa có dữ liệu.'; el('pickBox').textContent='-- / -- / --'; el('lineRead').value=''; ['kDB','kG7','kG6','kGate'].forEach(id=>el(id).textContent='--'); setBadge('stCrop','● Crop: idle','warn'); setBadge('stRead','● Read: idle','warn'); setBadge('stGate','● Gate: waiting','warn'); setBadge('stEngine','● Engine: idle','warn'); }
 
-el('btnMulti').onclick=()=>el('fileMulti').click();
-el('btnCam').onclick=()=>el('fileCam').click();
-el('btnMock').onclick=()=>{ runReadMock(); };
-el('btnReset').onclick=()=>{ resetAll(); localStorage.removeItem(LS_KEY); };
-el('btnRunRead').onclick=runReadMock;
-el('btnApplyLine').onclick=applyLineRead;
-el('btnSample').onclick=()=>{ el('inputData').value=[
-  'DB 48 | G7: 45 61 98 00 | G6: 248 357 890',
-  'DB 57 | G7: 92 73 60 77 | G6: 205 397 508',
-  'DB 78 | G7: 17 79 26 36 | G6: 437 240 408',
-  'DB 55 | G7: 45 43 00 57 | G6: 396 332 669',
-  'DB 37 | G7: 37 42 26 36 | G6: 344 204 115',
-  'DB 19 | G7: 05 26 91 35 | G6: 895 439 658'
-].join('\n'); };
-el('btnNormalize').onclick=()=>{ el('inputData').value=normalizeInput(el('inputData').value); };
-el('btnSave').onclick=()=>{ saveAll(); };
-el('btnLoad').onclick=()=>{ loadAll(); };
-el('btnClearInput').onclick=()=>{ el('inputData').value=''; };
-el('btnRunEngine').onclick=renderEngine;
-el('btnBacktest').onclick=runBacktest;
-el('tabSimple').onclick=()=>{ VIEW_MODE='simple'; el('tabSimple').classList.add('active'); el('tabPro').classList.remove('active'); renderEngine(); };
-el('tabPro').onclick=()=>{ VIEW_MODE='pro'; el('tabPro').classList.add('active'); el('tabSimple').classList.remove('active'); renderEngine(); };
+function parseFromCropText(raw){
+  const lines = String(raw||'').split('\n').map(s=>s.trim()).filter(Boolean);
 
-loadAll();
-</script></body>
+  const dbBlock = raw.match(/DB[\s\S]*?([\d\s]{2,20})/i);
+  const g6Block = raw.match(/G6[\s\S]*?([\d\s]{2,30})/i);
+  const g7Block = raw.match(/G7[\s\S]*?([\d\s]{2,30})/i);
+
+  let DB = '';
+  let G6 = [];
+  let G7 = [];
+
+  if(dbBlock){
+    const nums = dbBlock[1].match(/\d{2,5}/g) || [];
+    if(nums[0]) DB = safeNum2(nums[0]);
+  }
+  if(g6Block){
+    G6 = (g6Block[1].match(/\d{2,3}/g) || []).map(safeNum2).slice(0,3);
+  }
+  if(g7Block){
+    G7 = (g7Block[1].match(/\d{2}/g) || []).map(safeNum2).slice(0,4);
+  }
+
+  if(!DB){
+    const nums = raw.match(/\d{2,5}/g) || [];
+    if(nums[0]) DB = safeNum2(nums[0]);
+  }
+  if(!G6.length){
+    const g6Raw = raw.match(/G6:([^\n]+)/i);
+    if(g6Raw) G6 = (g6Raw[1].match(/\d{2,3}/g) || []).map(safeNum2).slice(0,3);
+  }
+  if(!G7.length){
+    const g7Raw = raw.match(/G7:([^\n]+)/i);
+    if(g7Raw) G7 = (g7Raw[1].match(/\d{2}/g) || []).map(safeNum2).slice(0,4);
+  }
+
+  return { DB, G6: unique(G6), G7: unique(G7) };
+}
+
+function detectPhase(history){
+  if(history.length < 2) return 'mở';
+  const last = history[history.length-1];
+  const prev = history[history.length-2];
+  const a = +safeNum2(prev.DB), b = +safeNum2(last.DB);
+  if(rev(prev.DB) === last.DB) return 'đảo';
+  if(Math.abs(a-b) <= 6) return 'chạy';
+  if(Math.abs(a-b) >= 30) return 'xả';
+  return 'mở';
+}
+
+function calcAxis(day){
+  const pool = [day.DB, ...(day.G6||[]), ...(day.G7||[])].filter(Boolean);
+  const H={}, T={};
+  pool.forEach(n=>{
+    H[getHead(n)] = (H[getHead(n)]||0)+1;
+    T[getTail(n)] = (T[getTail(n)]||0)+1;
+  });
+  const h = Object.entries(H).sort((a,b)=>b[1]-a[1])[0]?.[0] ?? '-';
+  const t = Object.entries(T).sort((a,b)=>b[1]-a[1])[0]?.[0] ?? '-';
+  return `${h}-${t}`;
+}
+
+function detectNeo(day){
+  const db = safeNum2(day.DB);
+  const g6 = day.G6||[], g7 = day.G7||[];
+  let neo = 0;
+  const dbH = getHead(db), dbT = getTail(db);
+  const g6Hit = g6.some(x=>getHead(x)===dbH || getTail(x)===dbT);
+  const g7Hit = g7.some(x=>getHead(x)===dbH || getTail(x)===dbT);
+  if(g6Hit) neo += 3;
+  if(g7Hit) neo += 2;
+  return {neo, g6Hit, g7Hit};
+}
+
+function analyzeDay(day, history){
+  const phase = detectPhase(history);
+  const axis = calcAxis(day);
+  const neo = detectNeo(day);
+
+  const score = {};
+  const add = (n,s)=>{
+    n = safeNum2(n);
+    if(!n) return;
+    score[n] = (score[n]||0)+s;
+  };
+
+  (day.G6||[]).forEach(n=>add(n,3));
+  (day.G7||[]).forEach(n=>add(n,2));
+  add(rev(day.DB),2);
+  add(pad2((+day.DB+1)%100),1.5);
+  add(pad2((+day.DB+99)%100),1.5);
+  add(`${sumRoot(day.DB)}${diff2(day.DB)}`,1.2);
+  add(`${diff2(day.DB)}${sumRoot(day.DB)}`,1.0);
+
+  if(phase === 'đảo') add(rev(day.DB),1.8);
+  if(phase === 'chạy') (day.G6||[]).forEach(n=>add(n,.8));
+  if(phase === 'xả'){
+    add(pad2((+day.DB+10)%100),1.2);
+    add(pad2((+day.DB+90)%100),1.2);
+  }
+
+  const ranked = Object.entries(score).sort((a,b)=>b[1]-a[1]).map(([n,s])=>({n,s:+s.toFixed(2)}));
+  const main = ranked[0]?.n || '--';
+  const sub = ranked.find(x=>x.n!==main)?.n || '--';
+
+  let anti='--';
+  if(neo.neo <= 2) anti = safeNum2(day.DB) || '--';
+  else anti = rev(day.DB) || '--';
+
+  const conf = Math.max(35, Math.min(92, Math.round((ranked[0]?.s||0)*10 + neo.neo*4)));
+  const flow = (+getHead(day.DB) >= 5) ? 'đầu cao' : 'đầu thấp';
+
+  return {phase,axis,flow,main,sub,anti,conf};
+}
+
+function renderAnalysis(day, rs){
+  $('kpiPhase').textContent = rs.phase;
+  $('kpiAxis').textContent = rs.axis;
+  $('kpiFlow').textContent = rs.flow;
+  $('kpiConf').textContent = rs.conf + '%';
+  $('mainPick').textContent = rs.main;
+  $('subPick').textContent = rs.sub;
+  $('antiPick').textContent = rs.anti;
+
+  const lines = [
+    `1. Pha ngày: ${rs.phase}`,
+    `2. Hướng chính: ${rs.flow}`,
+    `3. Vai trò G6–G7: ${(day.G6||[]).length ? 'G6 đang neo' : 'G6 mờ'}`,
+    `4. Quyết định: ${rs.conf >= 65 ? 'có thể vào nhẹ theo kịch bản' : 'ưu tiên đứng ngoài / chờ thêm'}`,
+    `5. Chốt tối đa 1 cặp: ${rs.main}`,
+    `6. Tin cậy: ${rs.conf}%`
+  ];
+  $('sixLine').innerHTML = lines.map(x=>`<div style="padding:6px 0">${x}</div>`).join('');
+}
+
+function currentDayFromInputs(){
+  return {
+    date: $('drawDate').value.trim() || new Date().toISOString().slice(0,10),
+    note: $('noteText').value.trim(),
+    DB: safeNum2($('dbInput').value),
+    G1: safeNum2($('g1Input').value),
+    G6: split2List($('g6Input').value).slice(0,3),
+    G7: split2List($('g7Input').value).slice(0,4)
+  };
+}
+
+async function doDetectCrop(){
+  if(!state.files.length){
+    alert('Chưa chọn ảnh');
+    return;
+  }
+  setStatus('Đang detect crop...', 'Load ảnh đầu tiên');
+  const img = await loadCurrentImageFromFile(state.files[0]);
+
+  const mode = $('profileMode').value;
+  let boxes;
+  if(mode === 'xoso_app'){
+    boxes = smartCropXSMBLikeScreenshot(state.currentBitmap);
+  } else {
+    boxes = {
+      table:{x:Math.floor(img.width*0.05), y:Math.floor(img.height*0.22), w:Math.floor(img.width*0.9), h:Math.floor(img.height*0.65)},
+      db:{x:Math.floor(img.width*0.22), y:Math.floor(img.height*0.37), w:Math.floor(img.width*0.68), h:Math.floor(img.height*0.08)},
+      g6:{x:Math.floor(img.width*0.22), y:Math.floor(img.height*0.73), w:Math.floor(img.width*0.68), h:Math.floor(img.height*0.07)},
+      g7:{x:Math.floor(img.width*0.22), y:Math.floor(img.height*0.81), w:Math.floor(img.width*0.68), h:Math.floor(img.height*0.06)}
+    };
+  }
+
+  state.cropBoxes = boxes;
+  drawDetectPreview(state.currentBitmap, boxes);
+  cropToCanvas(state.currentBitmap, boxes.db, 'dbCanvas', 'bw');
+  cropToCanvas(state.currentBitmap, boxes.g6, 'g6Canvas', 'bw');
+  cropToCanvas(state.currentBitmap, boxes.g7, 'g7Canvas', 'bw');
+  setStatus('Detect crop xong', 'Đã cắt DB / G6 / G7');
+}
+
+async function doOCR(){
+  if(!state.cropBoxes){
+    alert('Hãy detect crop trước');
+    return;
+  }
+  setStatus('Đang OCR DB...', '');
+  const dbText = await runOCRForCanvas('dbCanvas', 'DB');
+  setStatus('Đang OCR G6...', '');
+  const g6Text = await runOCRForCanvas('g6Canvas', 'G6');
+  setStatus('Đang OCR G7...', '');
+  const g7Text = await runOCRForCanvas('g7Canvas', 'G7');
+
+  $('ocrText').value = `DB:\n${dbText}\n\nG6:\n${g6Text}\n\nG7:\n${g7Text}`;
+  setStatus('OCR xong', 'Có thể parse');
+}
+
+function doParse(){
+  const raw = $('ocrText').value.trim();
+  if(!raw){
+    alert('Chưa có raw OCR');
+    return;
+  }
+  const parsed = parseFromCropText(raw);
+  $('dbInput').value = parsed.DB || '';
+  $('g6Input').value = (parsed.G6||[]).join(',');
+  $('g7Input').value = (parsed.G7||[]).join(',');
+  setStatus('Parse xong', `DB ${parsed.DB || '--'}`);
+}
+
+function doAnalyze(){
+  const day = currentDayFromInputs();
+  if(!day.DB){
+    alert('Thiếu ĐB');
+    return;
+  }
+  const temp = [...state.history];
+  const idx = temp.findIndex(x=>x.date===day.date);
+  if(idx>=0) temp[idx]=day; else temp.push(day);
+  temp.sort((a,b)=>a.date.localeCompare(b.date));
+
+  const rs = analyzeDay(day,temp);
+  renderAnalysis(day, rs);
+  setStatus('Analyze xong', `Main ${rs.main} • Sub ${rs.sub} • Anti ${rs.anti}`);
+}
+
+function doSave(){
+  const day = currentDayFromInputs();
+  if(!day.DB){
+    alert('Thiếu ĐB');
+    return;
+  }
+  const idx = state.history.findIndex(x=>x.date===day.date);
+  if(idx>=0) state.history[idx]=day; else state.history.push(day);
+  state.history.sort((a,b)=>a.date.localeCompare(b.date));
+  saveHistory();
+  setStatus('Đã lưu kỳ', day.date);
+}
+
+function doExport(){
+  const blob = new Blob([JSON.stringify(state.history,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ultra-master-v101-history.json';
+  a.click();
+}
+function doImport(file){
+  const r = new FileReader();
+  r.onload = ()=>{
+    try{
+      const arr = JSON.parse(r.result);
+      if(!Array.isArray(arr)) throw new Error('Sai JSON');
+      state.history = arr;
+      saveHistory();
+      setStatus('Nhập JSON xong', `Tổng ${state.history.length} kỳ`);
+    }catch(e){
+      alert('Lỗi JSON: ' + e.message);
+    }
+  };
+  r.readAsText(file);
+}
+
+function doDemo(){
+  $('drawDate').value = '2026-03-06';
+  $('noteText').value = 'demo theo ảnh mẫu';
+  $('dbInput').value = '49';
+  $('g1Input').value = '50';
+  $('g6Input').value = '54,10,40';
+  $('g7Input').value = '14,71,85,01';
+  state.history = [
+    {date:'2026-03-04',DB:'91',G1:'',G6:['36','62','48'],G7:['14','39','80','55']},
+    {date:'2026-03-05',DB:'48',G1:'',G6:['40','90','44'],G7:['45','43','12','67']},
+    {date:'2026-03-06',DB:'49',G1:'50',G6:['54','10','40'],G7:['14','71','85','01']}
+  ];
+  saveHistory();
+  doAnalyze();
+  setStatus('Đã nạp demo', 'Demo đúng theo ảnh Hào gửi');
+}
+
+function doReset(){
+  state.files = [];
+  state.currentImage = null;
+  state.currentBitmap = null;
+  state.cropBoxes = null;
+  $('fileInput').value = '';
+  $('ocrText').value = '';
+  $('drawDate').value = '';
+  $('noteText').value = '';
+  $('dbInput').value = '';
+  $('g1Input').value = '';
+  $('g6Input').value = '';
+  $('g7Input').value = '';
+  $('thumbs').innerHTML = '';
+  ['previewCanvas','dbCanvas','g6Canvas','g7Canvas'].forEach(id=>{
+    const c = $(id), x = c.getContext('2d'); x.clearRect(0,0,c.width,c.height);
+  });
+  $('kpiPhase').textContent='--';
+  $('kpiAxis').textContent='--';
+  $('kpiFlow').textContent='--';
+  $('kpiConf').textContent='0%';
+  $('mainPick').textContent='--';
+  $('subPick').textContent='--';
+  $('antiPick').textContent='--';
+  $('sixLine').innerHTML='';
+  setStatus('Reset xong', 'Sẵn sàng');
+}
+
+$('fileInput').addEventListener('change', e=>{
+  state.files = [...e.target.files];
+  renderThumbs();
+  setStatus('Đã chọn ảnh', `${state.files.length} ảnh`);
+});
+$('btnDetect').addEventListener('click', doDetectCrop);
+$('btnOCR').addEventListener('click', doOCR);
+$('btnParse').addEventListener('click', doParse);
+$('btnAnalyze').addEventListener('click', doAnalyze);
+$('btnSave').addEventListener('click', doSave);
+$('btnExport').addEventListener('click', doExport);
+$('btnImport').addEventListener('click', ()=>$('importFile').click());
+$('importFile').addEventListener('change', e=>{
+  const f = e.target.files?.[0];
+  if(f) doImport(f);
+});
+$('btnDemo').addEventListener('click', doDemo);
+$('btnReset').addEventListener('click', doReset);
+
+loadHistory();
+setStatus('Sẵn sàng', 'v10.1 AI crop đã nạp');
+</script>
+</body>
 </html>
